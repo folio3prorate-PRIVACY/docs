@@ -1,0 +1,125 @@
+{
+  "brand": {
+    "name": "Octav",
+    "description": "Portfolio Intelligence for Digital Assets",
+    "colors": {
+      "primary": {
+        "coolRed": "#FF1A45",
+        "coolRedRGB": "255, 26, 69",
+        "coolRedCMYK": "0, 97, 68, 0"
+      },
+      "secondary": {
+        "uiBlue": {
+          "hex": "#3F58C7",
+          "rgb": "63, 88, 199",
+          "cmyk": "61, 71, 0, 0"
+        },
+        "skyBlue": {
+          "hex": "#6BCCD1",
+          "rgb": "111, 204, 209",
+          "cmyk": "53, 0, 20, 0"
+        },
+        "mintGreen": {
+          "hex": "#59CE7E",
+          "rgb": "89, 206, 126",
+          "cmyk": "61, 0, 69, 0"
+        },
+        "lightGold": {
+          "hex": "#F4BD4D",
+          "rgb": "244, 189, 77",
+          "cmyk": "4, 28, 81, 0"
+        },
+        "mangoOrange": {
+          "hex": "#F68A54",
+          "rgb": "246, 138, 84",
+          "cmyk": "0, 56, 72, 0"
+        }
+      },
+      "neutral": {
+        "trueWhite": {
+          "hex": "#FFFFFF",
+          "rgb": "255, 255, 255",
+          "cmyk": "0, 0, 0, 0"
+        },
+        "tan": {
+          "hex": "#F9F6F3",
+          "rgb": "249, 246, 243",
+          "cmyk": "2, 2, 3, 0"
+        },
+        "buff": {
+          "hex": "#EFEBE4",
+          "rgb": "239, 232, 228",
+          "cmyk": "5, 7, 8, 0"
+        }
+      },
+      "dark": {
+        "blueCharcoal": {
+          "hex": "#091018",
+          "rgb": "9, 16, 24",
+          "cmyk": "55, 44, 30, 92"
+        },
+        "deepSea": {
+          "hex": "#06323E",
+          "rgb": "6, 50, 62",
+          "cmyk": "94, 67, 54, 53"
+        },
+        "seaGreen": {
+          "hex": "#095762",
+          "rgb": "9, 87, 98",
+          "cmyk": "92, 52, 49, 26"
+        },
+        "seaFoam": {
+          "hex": "#558789",
+          "rgb": "85, 135, 137",
+          "cmyk": "70, 34, 43, 6"
+        }
+      }
+    },
+    "typography": {
+      "headings": {
+        "h1": {
+          "font": "Space Grotesk Medium",
+          "lineHeight": "100%",
+          "letterSpacing": "-2%"
+        },
+        "h2": {
+          "font": "Geist Medium",
+          "lineHeight": "100%",
+          "letterSpacing": "0%"
+        },
+        "h3": {
+          "font": "Geist Mono Regular Caps",
+          "lineHeight": "100%",
+          "letterSpacing": "5%"
+        }
+      },
+      "body": {
+        "header": {
+          "font": "Geist SemiBold",
+          "lineHeight": "100%",
+          "letterSpacing": "5%"
+        },
+        "regular": {
+          "font": "Geist Regular",
+          "lineHeight": "120%",
+          "letterSpacing": "2%"
+        }
+      }
+    },
+    "logos": {
+      "bevel": {
+        "light": "/logo/light.svg",
+        "dark": "/logo/dark.svg"
+      },
+      "solid": {
+        "light": "Octav_locotype_Solid_Light.svg",
+        "dark": "Octav_locotype_Solid_Dark.svg"
+      },
+      "icon": "/favicon.svg",
+      "products": {
+        "pro": "Octav_Pro_light.svg",
+        "api": "Octav_API_light.svg"
+      }
+    }
+  }
+}

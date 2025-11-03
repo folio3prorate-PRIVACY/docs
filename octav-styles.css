@@ -1,0 +1,232 @@
+/**
+ * Octav Brand Styles
+ * Custom CSS variables and styles for Octav branding
+ * Based on Octav Brand Guidelines
+ */
+
+:root {
+  /* Primary Colors */
+  --octav-primary: #3F58C7;
+  --octav-primary-hover: #2F4AA7;
+  --octav-primary-rgb: 63, 88, 199;
+
+  /* Secondary Colors */
+  --octav-ui-blue: #3F58C7;
+  --octav-sky-blue: #6BCCD1;
+  --octav-mint-green: #59CE7E;
+  --octav-light-gold: #F4BD4D;
+  --octav-mango-orange: #F68A54;
+
+  /* Neutral Colors */
+  --octav-white: #FFFFFF;
+  --octav-tan: #F9F6F3;
+  --octav-buff: #EFEBE4;
+
+  /* Dark Colors */
+  --octav-blue-charcoal: #091018;
+  --octav-deep-sea: #06323E;
+  --octav-sea-green: #095762;
+  --octav-sea-foam: #558789;
+
+  /* Typography */
+  --octav-font-heading: 'Space Grotesk', sans-serif;
+  --octav-font-body: 'Geist', sans-serif;
+  --octav-font-mono: 'Geist Mono', monospace;
+}
+
+/* Typography Styles */
+h1, .h1 {
+  font-family: var(--octav-font-heading);
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+}
+
+h2, .h2 {
+  font-family: var(--octav-font-body);
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+
+h3, .h3 {
+  font-family: var(--octav-font-mono);
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+body {
+  font-family: var(--octav-font-body);
+  line-height: 120%;
+  letter-spacing: 0.02em;
+}
+
+/* Button Styles */
+.octav-btn-primary {
+  background-color: var(--octav-primary);
+  color: var(--octav-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.octav-btn-primary:hover {
+  background-color: var(--octav-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 26, 69, 0.3);
+}
+
+.octav-btn-secondary {
+  background-color: var(--octav-ui-blue);
+  color: var(--octav-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.octav-btn-secondary:hover {
+  background-color: #2F4AA7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(63, 88, 199, 0.3);
+}
+
+.octav-btn-outline {
+  border: 2px solid var(--octav-primary);
+  color: var(--octav-primary);
+  background-color: transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.octav-btn-outline:hover {
+  background-color: var(--octav-primary);
+  color: var(--octav-white);
+}
+
+/* Card Styles */
+.octav-card {
+  background: var(--octav-white);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s;
+}
+
+.octav-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--octav-blue-charcoal);
+    --foreground: var(--octav-white);
+  }
+
+  .octav-card {
+    background: var(--octav-deep-sea);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Accent Colors for Data Visualization */
+.octav-accent-1 { color: var(--octav-primary); }
+.octav-accent-2 { color: var(--octav-ui-blue); }
+.octav-accent-3 { color: var(--octav-sky-blue); }
+.octav-accent-4 { color: var(--octav-mint-green); }
+.octav-accent-5 { color: var(--octav-light-gold); }
+.octav-accent-6 { color: var(--octav-mango-orange); }
+
+.octav-bg-accent-1 { background-color: var(--octav-primary); }
+.octav-bg-accent-2 { background-color: var(--octav-ui-blue); }
+.octav-bg-accent-3 { background-color: var(--octav-sky-blue); }
+.octav-bg-accent-4 { background-color: var(--octav-mint-green); }
+.octav-bg-accent-5 { background-color: var(--octav-light-gold); }
+.octav-bg-accent-6 { background-color: var(--octav-mango-orange); }
+
+/* Code Block Styling */
+pre, code {
+  font-family: var(--octav-font-mono);
+}
+
+/* Link Styles */
+a {
+  color: var(--octav-primary);
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--octav-primary-hover);
+}
+
+/* Custom Navbar Button Styling */
+
+/* Target navbar links container */
+nav a[href*="discord"] {
+  /* Discord "Get Help" button - light secondary style */
+  background-color: rgba(63, 88, 199, 0.1) !important;
+  color: var(--octav-ui-blue) !important;
+  border: 1px solid rgba(63, 88, 199, 0.2) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+nav a[href*="discord"]:hover {
+  background-color: rgba(63, 88, 199, 0.15) !important;
+  border-color: rgba(63, 88, 199, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+nav a[href*="data.octav.fi"] {
+  /* Dev Portal button - prominent primary style */
+  background: linear-gradient(135deg, #3F58C7 0%, #2F4AA7 100%) !important;
+  color: white !important;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  box-shadow: 0 2px 8px rgba(63, 88, 199, 0.25) !important;
+  border: none !important;
+}
+
+nav a[href*="data.octav.fi"]:hover {
+  background: linear-gradient(135deg, #2F4AA7 0%, #3F58C7 100%) !important;
+  box-shadow: 0 4px 12px rgba(63, 88, 199, 0.35) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Icon styling within buttons */
+nav a[href*="discord"] svg,
+nav a[href*="data.octav.fi"] svg {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  nav a[href*="discord"] {
+    background-color: rgba(63, 88, 199, 0.15) !important;
+    border-color: rgba(63, 88, 199, 0.3) !important;
+    color: #7B9BFF !important;
+  }
+
+  nav a[href*="discord"]:hover {
+    background-color: rgba(63, 88, 199, 0.25) !important;
+    border-color: rgba(63, 88, 199, 0.4) !important;
+  }
+}

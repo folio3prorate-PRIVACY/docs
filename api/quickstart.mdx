@@ -1,0 +1,145 @@
+---
+title: "API Quickstart"
+description: "Make your first API request to Octav"
+---
+
+import { Alert } from '/snippets/Alert.jsx.mdx'
+import { Button } from '/snippets/Button.jsx.mdx'
+
+# API Quickstart
+
+Get started with the Octav API in minutes.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- An Octav account
+- An API key (see [Authentication](/api/authentication))
+- A tool to make HTTP requests (curl, Postman, or your preferred language)
+
+## Your First Request
+
+Let's fetch your portfolio data:
+
+### Using cURL
+
+```bash
+curl https://api.octav.fi/v1/portfolios \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Using JavaScript
+
+```javascript
+const fetch = require('node-fetch');
+
+const apiKey = process.env.OCTAV_API_KEY;
+
+fetch('https://api.octav.fi/v1/portfolios', {
+  headers: {
+    'Authorization': `Bearer ${apiKey}`
+  }
+})
+  .then(res => res.json())
+  .then(data => console.log(data));
+```
+
+### Using Python
+
+```python
+import requests
+import os
+
+api_key = os.environ.get('OCTAV_API_KEY')
+
+headers = {
+    'Authorization': f'Bearer {api_key}'
+}
+
+response = requests.get(
+    'https://api.octav.fi/v1/portfolios',
+    headers=headers
+)
+
+print(response.json())
+```
+
+## Response Format
+
+All API responses are returned in JSON format:
+
+```json
+{
+  "data": {
+    "portfolios": [
+      {
+        "id": "portfolio_123",
+        "name": "My Portfolio",
+        "total_value": 15231.89,
+        "24h_change": 0.28,
+        "asset_count": 12
+      }
+    ]
+  },
+  "meta": {
+    "timestamp": "2024-11-03T12:00:00Z"
+  }
+}
+```
+
+<Alert type="success" title="Successful Response">
+A successful API call returns a 200 status code with your requested data in the response body.
+</Alert>
+
+## Common Use Cases
+
+### Get Wallet Balance
+
+```bash
+curl https://api.octav.fi/v1/wallets/0xYOUR_WALLET_ADDRESS \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Fetch Transaction History
+
+```bash
+curl "https://api.octav.fi/v1/wallets/0xYOUR_WALLET_ADDRESS/transactions?limit=10" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Query Portfolio Performance
+
+```bash
+curl "https://api.octav.fi/v1/portfolios/portfolio_123/performance?period=30d" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Error Handling
+
+Always check for errors in your API responses:
+
+```javascript
+fetch('https://api.octav.fi/v1/portfolios', {
+  headers: { 'Authorization': `Bearer ${apiKey}` }
+})
+  .then(res => {
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status}`);
+    }
+    return res.json();
+  })
+  .then(data => console.log(data))
+  .catch(err => console.error('Error:', err));
+```
+
+## Next Steps
+
+<Button href="/api/endpoints/wallets">Explore Wallet Endpoints</Button>
+<Button href="/api/sdks/javascript" variant="secondary">Use the JavaScript SDK</Button>
+
+## Need Help?
+
+<Alert type="info" title="Support">
+If you run into issues, check our API Reference or contact support at support@octav.fi
+</Alert>

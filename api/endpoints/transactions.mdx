@@ -1,0 +1,183 @@
+---
+title: "Transactions API"
+description: "Query transaction history and details"
+---
+
+import { Alert } from '/snippets/Alert.jsx.mdx'
+
+# Transactions API
+
+Access transaction history and details for wallets.
+
+## Get Wallet Transactions
+
+Retrieve transaction history for a specific wallet.
+
+### Endpoint
+
+```
+GET /v1/wallets/{address}/transactions
+```
+
+### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `address` | string | Yes | Wallet address |
+| `limit` | integer | No | Number of results (default: 20, max: 100) |
+| `offset` | integer | No | Pagination offset |
+| `chain` | string | No | Filter by blockchain |
+| `type` | string | No | Transaction type filter |
+| `start_date` | string | No | Start date (ISO 8601) |
+| `end_date` | string | No | End date (ISO 8601) |
+
+### Transaction Types
+
+- `send` - Outgoing transfers
+- `receive` - Incoming transfers
+- `swap` - Token swaps
+- `mint` - NFT mints or token creation
+- `burn` - Token burns
+- `stake` - Staking deposits
+- `unstake` - Staking withdrawals
+- `contract` - Smart contract interactions
+
+### Example Request
+
+```bash
+curl "https://api.octav.fi/v1/wallets/0xabcdef1234567890/transactions?limit=10&type=swap" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "transactions": [
+      {
+        "hash": "0x123abc...",
+        "timestamp": "2024-11-03T10:30:00Z",
+        "type": "swap",
+        "chain": "ethereum",
+        "from_token": {
+          "symbol": "USDC",
+          "amount": "1000.00",
+          "value_usd": 1000.00
+        },
+        "to_token": {
+          "symbol": "ETH",
+          "amount": "0.5",
+          "value_usd": 1000.00
+        },
+        "gas_fee": {
+          "amount": "0.002",
+          "value_usd": 4.00
+        },
+        "status": "confirmed"
+      }
+    ]
+  },
+  "meta": {
+    "total": 1234,
+    "limit": 10,
+    "offset": 0
+  }
+}
+```
+
+## Get Transaction Details
+
+Get detailed information about a specific transaction.
+
+### Endpoint
+
+```
+GET /v1/transactions/{hash}
+```
+
+### Example Request
+
+```bash
+curl https://api.octav.fi/v1/transactions/0x123abc... \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "hash": "0x123abc...",
+    "block_number": 18234567,
+    "timestamp": "2024-11-03T10:30:00Z",
+    "from": "0xabcdef...",
+    "to": "0x123456...",
+    "value": "1.5",
+    "gas_used": "21000",
+    "gas_price": "50",
+    "status": "confirmed",
+    "chain": "ethereum",
+    "method": "transfer",
+    "token_transfers": [
+      {
+        "token": "USDC",
+        "from": "0xabcdef...",
+        "to": "0x123456...",
+        "amount": "1000.00"
+      }
+    ]
+  }
+}
+```
+
+## Transaction Analytics
+
+Get analytics for wallet transactions.
+
+### Endpoint
+
+```
+GET /v1/wallets/{address}/transactions/analytics
+```
+
+### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `period` | string | No | Time period (24h, 7d, 30d, 90d, 1y, all) |
+| `group_by` | string | No | Group by: day, week, month |
+
+### Example Request
+
+```bash
+curl "https://api.octav.fi/v1/wallets/0xabcdef.../transactions/analytics?period=30d" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "period": "30d",
+    "total_transactions": 45,
+    "total_volume": 125000.00,
+    "gas_spent": 150.50,
+    "by_type": {
+      "swap": 25,
+      "send": 10,
+      "receive": 8,
+      "stake": 2
+    },
+    "by_chain": {
+      "ethereum": 30,
+      "base": 15
+    }
+  }
+}
+```
+
+<Alert type="tip" title="Performance Tip">
+For large transaction histories, use pagination and date filters to improve response times.
+</Alert>

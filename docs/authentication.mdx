@@ -1,0 +1,362 @@
+---
+title: "Authentication"
+description: "How authentication works in Octav"
+---
+
+# Authentication
+
+Learn about Octav's secure, passwordless authentication system and best practices for protecting your account.
+
+<CardGroup cols={2}>
+
+  <Card title="Magic Link Sign-In" icon="envelope">
+    Passwordless email authentication
+  </Card>
+
+  <Card title="SOC 2 Compliant" icon="shield-check">
+    Industry-leading security standards
+  </Card>
+
+  <Card title="No Private Keys" icon="eye">
+    Read-only platform, your keys stay safe
+  </Card>
+
+  <Card title="Secure Sessions" icon="lock">
+    Encrypted connections and secure storage
+  </Card>
+
+</CardGroup>
+
+---
+
+## How Sign-In Works
+
+Octav uses passwordless authentication via email magic links for a secure, convenient experience.
+
+<Steps>
+  <Step title="Visit Octav" icon="globe">
+    Go to [beta.octav.fi](https://beta.octav.fi)
+  </Step>
+
+  <Step title="Enter Your Email" icon="envelope">
+    Enter your email address on the login page
+  </Step>
+
+  <Step title="Check Your Inbox" icon="inbox">
+    Look for an email from Octav with your magic link (check spam folder if needed)
+  </Step>
+
+  <Step title="Click the Magic Link" icon="arrow-pointer">
+    Click the link in the email to instantly sign in
+  </Step>
+
+  <Step title="You're In!" icon="check">
+    No password needed - you're now signed in securely
+  </Step>
+</Steps>
+
+<Info>
+  **Passwordless Authentication** — Magic links eliminate the need for passwords, reducing the risk of password theft, phishing, and credential reuse.
+</Info>
+
+---
+
+## Why Magic Links?
+
+<Tabs>
+  <Tab title="Security Benefits" icon="shield">
+
+    ### More Secure Than Passwords
+
+    <CardGroup cols={2}>
+      <Card title="No Password Reuse" icon="ban">
+        Can't reuse credentials from breached sites
+      </Card>
+
+      <Card title="No Weak Passwords" icon="lock">
+        No risk of weak or guessable passwords
+      </Card>
+
+      <Card title="Phishing Resistant" icon="shield-check">
+        Harder to phish than traditional credentials
+      </Card>
+
+      <Card title="Email Verification" icon="envelope-circle-check">
+        Proves you control the email address
+      </Card>
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="User Experience" icon="user">
+
+    ### Simpler & Faster
+
+    **Benefits:**
+    - No passwords to remember
+    - No password reset flows
+    - No password complexity rules
+    - Faster sign-in process
+    - Works on any device
+
+    <Tip>
+      **One Click Access** — Magic links provide secure access with just one click from your email.
+    </Tip>
+
+  </Tab>
+
+  <Tab title="How It Works" icon="gear">
+
+    ### Technical Details
+
+    **Magic Link Flow:**
+    1. You enter your email address
+    2. Octav generates a unique, time-limited token
+    3. Token is sent to your email
+    4. You click the link containing the token
+    5. Octav validates the token and creates a session
+    6. You're signed in securely
+
+    **Security Features:**
+    - Tokens expire after 15 minutes
+    - Single-use tokens (can't be reused)
+    - Secure token generation
+    - HTTPS encryption in transit
+
+  </Tab>
+</Tabs>
+
+---
+
+## Magic Link Best Practices
+
+<AccordionGroup>
+
+  <Accordion title="Email Security" icon="envelope" defaultOpen>
+
+    **Protect Your Email Account:**
+    - Use a strong, unique password for your email
+    - Enable two-factor authentication on your email account
+    - Don't share your email credentials
+    - Use a reputable email provider
+
+    <Warning>
+      **Email Access = Account Access** — Anyone with access to your email can sign in to your Octav account. Secure your email with strong authentication.
+    </Warning>
+
+  </Accordion>
+
+  <Accordion title="Link Expiration" icon="clock">
+
+    **Magic Links Expire:**
+    - Links are valid for 15 minutes
+    - Each link can only be used once
+    - Request a new link if yours has expired
+    - Old links become invalid after use
+
+    **If Your Link Expired:**
+    1. Return to [beta.octav.fi](https://beta.octav.fi)
+    2. Enter your email again
+    3. Request a new magic link
+    4. Check your inbox for the new link
+
+  </Accordion>
+
+  <Accordion title="Check the URL" icon="link">
+
+    **Always Verify:**
+    - Official domain: **beta.octav.fi**
+    - Look for HTTPS in the address bar
+    - Check for the padlock icon
+    - Bookmark the official site
+
+    **Red Flags:**
+    - Suspicious domains (octav-login.com, octav.io, etc.)
+    - No HTTPS encryption
+    - Unusual email sender addresses
+    - Unexpected login requests
+
+  </Accordion>
+
+</AccordionGroup>
+
+---
+
+## API Authentication
+
+For developers integrating with the Octav API.
+
+<CardGroup cols={2}>
+
+  <Card title="API Documentation" icon="code" href="/api/authentication">
+    Complete API authentication guide
+  </Card>
+
+  <Card title="Developer Portal" icon="key" href="https://data.octav.fi/">
+    Manage your API keys
+  </Card>
+
+</CardGroup>
+
+**API Authentication Methods:**
+- **API Keys** - For server-to-server communication
+- **JWT Tokens** - For client-side applications
+
+[View complete API documentation →](/api/authentication)
+
+---
+
+## Account Security
+
+### Read-Only Platform
+
+<Info>
+  **Your Keys Stay Safe** — Octav is a read-only portfolio tracker. We never ask for private keys or seed phrases, and we cannot execute transactions on your behalf.
+</Info>
+
+**What Octav Can See:**
+- Your wallet addresses (that you provide)
+- Public blockchain transaction data
+- Token balances and positions
+
+**What Octav Cannot Access:**
+- Your private keys
+- Your seed phrases
+- Your exchange credentials
+- Ability to move your funds
+
+### SOC 2 Compliance
+
+<CardGroup cols={2}>
+
+  <Card title="SOC 2 Type 1" icon="shield-check">
+    **Design Compliance**
+
+    Security controls properly designed
+  </Card>
+
+  <Card title="SOC 2 Type 2" icon="shield-halved">
+    **Operational Compliance**
+
+    Security controls operating effectively over time
+  </Card>
+
+</CardGroup>
+
+**What This Means:**
+- Industry-leading security standards
+- Regular third-party security audits
+- Comprehensive security controls
+- Data protection best practices
+- Continuous monitoring and improvement
+
+---
+
+## Data Protection
+
+<Tabs>
+  <Tab title="Data Encryption" icon="lock">
+
+    ### How We Protect Your Data
+
+    **Encryption:**
+    - Data encrypted in transit (TLS 1.3)
+    - Secure data storage
+    - API keys encrypted at rest
+    - Secure communication protocols
+
+    **Infrastructure:**
+    - SOC 2 Type 1 & Type 2 certified
+    - Regular security audits
+    - Monitored 24/7
+    - Secure hosting infrastructure
+
+  </Tab>
+
+  <Tab title="Privacy" icon="user-shield">
+
+    ### Your Privacy Matters
+
+    **We Never:**
+    - Sell your personal data
+    - Share data with advertisers
+    - Track you across other websites
+    - Ask for private keys or seed phrases
+
+    **We Only Collect:**
+    - Email address for authentication
+    - Wallet addresses you provide
+    - Public blockchain data
+    - Essential account information
+
+  </Tab>
+
+  <Tab title="Your Rights" icon="scale-balanced">
+
+    ### Data Control
+
+    **You Can:**
+    - Access your data anytime
+    - Export your data
+    - Delete your account and data
+    - Control what wallets we track
+
+    **GDPR & CCPA Compliant:**
+    - Right to access
+    - Right to deletion
+    - Right to portability
+    - Right to correction
+
+    [View Privacy Policy →](https://beta.octav.fi/privacy)
+
+  </Tab>
+</Tabs>
+
+---
+
+## Need Help?
+
+### Account Access Issues
+
+If you're having trouble signing in or accessing your account, please contact our support team.
+
+<Steps>
+  <Step title="Check Your Email" icon="inbox">
+    Make sure the magic link hasn't expired (15 minute limit)
+  </Step>
+
+  <Step title="Check Spam Folder" icon="filter">
+    Magic link emails may sometimes end up in spam
+  </Step>
+
+  <Step title="Request New Link" icon="rotate">
+    Try requesting a new magic link if yours expired
+  </Step>
+
+  <Step title="Contact Support" icon="headset">
+    If issues persist, email support@octav.fi
+  </Step>
+</Steps>
+
+<Warning>
+  **Account Recovery** — For account access issues, please contact support@octav.fi with your account email address.
+</Warning>
+
+### Support Options
+
+<CardGroup cols={3}>
+
+  <Card title="Email Support" icon="envelope" href="mailto:support@octav.fi">
+    support@octav.fi
+  </Card>
+
+  <Card title="Join Discord" icon="discord" iconType="brands" href="https://discord.gg/qvcknAz73A">
+    Community support
+  </Card>
+
+  <Card title="Contact Us" icon="circle-question" href="/docs/contact-us">
+    Get help from our team
+  </Card>
+
+</CardGroup>
+

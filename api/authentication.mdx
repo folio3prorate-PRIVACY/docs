@@ -1,0 +1,103 @@
+---
+title: "Authentication"
+description: "Authenticate your API requests with Octav"
+---
+
+import { Alert } from '/snippets/Alert.jsx.mdx'
+
+# Authentication
+
+All Octav API requests require authentication using API keys.
+
+## Getting Your API Key
+
+1. Log in to your Octav account at [octav.fi](https://octav.fi)
+2. Navigate to **Settings** → **API Keys**
+3. Click **Create New API Key**
+4. Give your key a descriptive name
+5. Copy and securely store your API key
+
+<Alert type="error" title="Keep Your Keys Secret">
+Never share your API keys or commit them to version control. Treat them like passwords.
+</Alert>
+
+## Using Your API Key
+
+Include your API key in the `Authorization` header of every request:
+
+```bash
+curl https://api.octav.fi/v1/wallets \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Header Format
+
+```
+Authorization: Bearer <your-api-key>
+```
+
+## API Key Security
+
+### Best Practices
+
+- **Use Environment Variables** - Store keys in environment variables, not in code
+- **Rotate Keys Regularly** - Create new keys periodically and revoke old ones
+- **Limit Key Scope** - Create separate keys for different applications
+- **Monitor Usage** - Regularly review API key usage in your dashboard
+
+### Revoking Keys
+
+If a key is compromised:
+
+1. Go to **Settings** → **API Keys**
+2. Find the compromised key
+3. Click **Revoke**
+4. Create a new key for your application
+
+## Rate Limiting
+
+Authentication also determines your rate limits. Your plan level controls:
+
+- Requests per hour
+- Concurrent connections
+- Data retention period
+
+## Error Responses
+
+### 401 Unauthorized
+
+```json
+{
+  "error": "Unauthorized",
+  "message": "Invalid or missing API key"
+}
+```
+
+**Solution**: Check that your API key is correct and included in the Authorization header.
+
+### 403 Forbidden
+
+```json
+{
+  "error": "Forbidden",
+  "message": "API key does not have access to this resource"
+}
+```
+
+**Solution**: Verify your API key has the necessary permissions.
+
+### 429 Too Many Requests
+
+```json
+{
+  "error": "Rate limit exceeded",
+  "message": "You have exceeded your hourly rate limit",
+  "retry_after": 3600
+}
+```
+
+**Solution**: Wait for the time specified in `retry_after` (seconds) or upgrade your plan.
+
+<Alert type="tip" title="Testing Your Key">
+Use the `/v1/status` endpoint to verify your API key is working correctly.
+</Alert>

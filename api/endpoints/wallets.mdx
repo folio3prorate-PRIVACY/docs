@@ -1,0 +1,173 @@
+---
+title: "Wallets API"
+description: "Manage and query wallet data"
+---
+
+import { Alert } from '/snippets/Alert.jsx.mdx'
+
+# Wallets API
+
+Access wallet balances, positions, and metadata.
+
+## Get Wallet Data
+
+Retrieve comprehensive data for a specific wallet address.
+
+### Endpoint
+
+```
+GET /v1/wallets/{address}
+```
+
+### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `address` | string | Yes | Wallet address to query |
+| `chains` | array | No | Filter by specific chains |
+| `include_nfts` | boolean | No | Include NFT holdings (default: true) |
+
+### Example Request
+
+```bash
+curl https://api.octav.fi/v1/wallets/0xabcdef1234567890 \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "address": "0xabcdef1234567890",
+    "total_value": 15231.89,
+    "24h_change": 0.28,
+    "chains": [
+      {
+        "name": "ethereum",
+        "value": 12500.00,
+        "asset_count": 8
+      },
+      {
+        "name": "base",
+        "value": 2731.89,
+        "asset_count": 4
+      }
+    ],
+    "assets": [
+      {
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "balance": "5.123",
+        "value": 10246.00,
+        "chain": "ethereum"
+      },
+      {
+        "symbol": "USDC",
+        "name": "USD Coin",
+        "balance": "2254.00",
+        "value": 2254.00,
+        "chain": "base"
+      }
+    ]
+  }
+}
+```
+
+## List All Wallets
+
+Get all wallets associated with your account.
+
+### Endpoint
+
+```
+GET /v1/wallets
+```
+
+### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `limit` | integer | No | Number of results (default: 20, max: 100) |
+| `offset` | integer | No | Pagination offset |
+
+### Example Request
+
+```bash
+curl "https://api.octav.fi/v1/wallets?limit=10" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Add Wallet
+
+Add a new wallet to track.
+
+### Endpoint
+
+```
+POST /v1/wallets
+```
+
+### Request Body
+
+```json
+{
+  "address": "0x1234567890abcdef",
+  "label": "My Trading Wallet",
+  "chains": ["ethereum", "base", "arbitrum"]
+}
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "id": "wallet_abc123",
+    "address": "0x1234567890abcdef",
+    "label": "My Trading Wallet",
+    "created_at": "2024-11-03T12:00:00Z"
+  }
+}
+```
+
+## Remove Wallet
+
+Stop tracking a wallet.
+
+### Endpoint
+
+```
+DELETE /v1/wallets/{address}
+```
+
+### Example Request
+
+```bash
+curl -X DELETE https://api.octav.fi/v1/wallets/0xabcdef1234567890 \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+<Alert type="warning" title="Data Retention">
+Removing a wallet from tracking does not delete historical data. Historical snapshots remain available for analysis.
+</Alert>
+
+## Error Responses
+
+### 404 Not Found
+
+```json
+{
+  "error": "Wallet not found",
+  "message": "The specified wallet address was not found"
+}
+```
+
+### 400 Bad Request
+
+```json
+{
+  "error": "Invalid address",
+  "message": "The provided wallet address is not valid"
+}
+```

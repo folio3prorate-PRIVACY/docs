@@ -1,0 +1,52 @@
+export const Alert = ({ type = "info", title, children }) => {
+  const types = {
+    info: {
+      bg: "bg-[#3F58C7]/10",
+      border: "border-[#3F58C7]",
+      icon: "ℹ️",
+      titleColor: "text-[#3F58C7]"
+    },
+    success: {
+      bg: "bg-[#59CE7E]/10",
+      border: "border-[#59CE7E]",
+      icon: "✓",
+      titleColor: "text-[#59CE7E]"
+    },
+    warning: {
+      bg: "bg-[#F4BD4D]/10",
+      border: "border-[#F4BD4D]",
+      icon: "⚠️",
+      titleColor: "text-[#F4BD4D]"
+    },
+    error: {
+      bg: "bg-[#FF1A45]/10",
+      border: "border-[#FF1A45]",
+      icon: "✕",
+      titleColor: "text-[#FF1A45]"
+    },
+    tip: {
+      bg: "bg-[#6BCCD1]/10",
+      border: "border-[#6BCCD1]",
+      icon: "💡",
+      titleColor: "text-[#6BCCD1]"
+    }
+  };
+
+  const config = types[type] || types.info;
+
+  return (
+    <div className={`${config.bg} ${config.border} border-l-4 rounded-r-lg p-4 my-4`}>
+      <div className="flex items-start gap-3">
+        <span className="text-xl">{config.icon}</span>
+        <div className="flex-1">
+          {title && (
+            <h4 className={`${config.titleColor} font-semibold mb-1`}>
+              {title}
+            </h4>
+          )}
+          <div className="text-sm">{children}</div>
+        </div>
+      </div>
+    </div>
+  );
+};

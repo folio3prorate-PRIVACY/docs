@@ -1,0 +1,599 @@
+---
+title: "Build Custom Widgets"
+description: "Create your own custom dashboard widgets for Octav"
+---
+
+import { Alert } from '/snippets/Alert.jsx.mdx'
+import { Button } from '/snippets/Button.jsx.mdx'
+
+# Build Custom Widgets
+
+Create powerful custom widgets using the Octav Widget SDK to extend your dashboard with personalized functionality.
+
+<Alert type="info" title="Coming Soon">
+The Octav Widget SDK is currently in development. Join our early access program to be the first to build custom widgets.
+</Alert>
+
+## Overview
+
+The Widget SDK enables you to:
+- Build custom visualizations
+- Create personalized analytics
+- Integrate external data sources
+- Share widgets with the community
+- Monetize premium widgets
+
+## Getting Started
+
+### Prerequisites
+
+- Basic knowledge of JavaScript/TypeScript
+- Familiarity with React
+- Understanding of blockchain concepts
+- Octav Pro or Team account (for testing)
+
+### Installation
+
+```bash
+npm install @octav/widget-sdk
+```
+
+```bash
+yarn add @octav/widget-sdk
+```
+
+## Widget Structure
+
+### Basic Widget Template
+
+```typescript
+import { Widget, WidgetConfig } from '@octav/widget-sdk';
+
+export const MyCustomWidget: Widget = {
+  id: 'my-custom-widget',
+  name: 'My Custom Widget',
+  description: 'A custom widget that does amazing things',
+  version: '1.0.0',
+  author: 'Your Name',
+
+  // Widget configuration schema
+  config: {
+    title: {
+      type: 'string',
+      default: 'My Widget',
+      label: 'Widget Title'
+    },
+    refreshRate: {
+      type: 'number',
+      default: 30000,
+      label: 'Refresh Rate (ms)'
+    }
+  },
+
+  // Component render function
+  render: (props) => {
+    const { data, config, theme } = props;
+
+    return (
+      <div className="widget-container">
+        <h3>{config.title}</h3>
+        {/* Your widget content */}
+      </div>
+    );
+  },
+
+  // Data fetching function
+  fetchData: async (context) => {
+    const { wallets, portfolios, api } = context;
+    // Fetch and return data
+    return {};
+  }
+};
+```
+
+### Widget Configuration
+
+Define configurable options for your widget:
+
+```typescript
+config: {
+  // Text input
+  title: {
+    type: 'string',
+    default: 'Widget Title',
+    label: 'Title',
+    placeholder: 'Enter title...'
+  },
+
+  // Number input
+  refreshRate: {
+    type: 'number',
+    default: 30,
+    min: 10,
+    max: 300,
+    label: 'Refresh Rate (seconds)'
+  },
+
+  // Dropdown select
+  displayMode: {
+    type: 'select',
+    options: ['compact', 'detailed', 'chart'],
+    default: 'detailed',
+    label: 'Display Mode'
+  },
+
+  // Boolean toggle
+  showLegend: {
+    type: 'boolean',
+    default: true,
+    label: 'Show Legend'
+  },
+
+  // Color picker
+  accentColor: {
+    type: 'color',
+    default: '#3F58C7',
+    label: 'Accent Color'
+  },
+
+  // Multi-select
+  chains: {
+    type: 'multiselect',
+    options: ['ethereum', 'base', 'solana', 'polygon'],
+    default: ['ethereum'],
+    label: 'Chains to Display'
+  }
+}
+```
+
+## Accessing Data
+
+### Wallet Data
+
+```typescript
+fetchData: async (context) => {
+  const { wallets, api } = context;
+
+  // Get selected wallets
+  const selectedWallets = wallets.getSelected();
+
+  // Get all user wallets
+  const allWallets = wallets.getAll();
+
+  // Get specific wallet
+  const wallet = await api.wallets.get('0xabc...');
+
+  return {
+    totalValue: wallet.total_value,
+    assets: wallet.assets
+  };
+}
+```
+
+### Portfolio Data
+
+```typescript
+fetchData: async (context) => {
+  const { portfolios, api } = context;
+
+  // Get active portfolio
+  const portfolio = portfolios.getActive();
+
+  // Get portfolio performance
+  const performance = await api.portfolios.getPerformance(
+    portfolio.id,
+    { period: '30d' }
+  );
+
+  return { performance };
+}
+```
+
+### Transaction Data
+
+```typescript
+fetchData: async (context) => {
+  const { api, wallets } = context;
+
+  const transactions = await api.transactions.list(
+    wallets.getSelected()[0].address,
+    {
+      limit: 50,
+      type: 'swap'
+    }
+  );
+
+  return { transactions };
+}
+```
+
+### External Data
+
+```typescript
+fetchData: async (context) => {
+  // Fetch from external API
+  const response = await fetch('https://api.example.com/data');
+  const externalData = await response.json();
+
+  // Combine with Octav data
+  const { api } = context;
+  const wallet = await api.wallets.get('0xabc...');
+
+  return {
+    octavData: wallet,
+    externalData
+  };
+}
+```
+
+## Building UI Components
+
+### Using Octav Components
+
+```typescript
+import {
+  Card,
+  Chart,
+  Table,
+  Button,
+  Spinner,
+  Alert
+} from '@octav/widget-sdk/components';
+
+render: (props) => {
+  const { data, loading, error } = props;
+
+  if (loading) return <Spinner />;
+  if (error) return <Alert type="error">{error.message}</Alert>;
+
+  return (
+    <Card>
+      <Chart
+        type="line"
+        data={data.chartData}
+        options={{ responsive: true }}
+      />
+
+      <Table
+        columns={[
+          { key: 'symbol', label: 'Token' },
+          { key: 'balance', label: 'Balance' },
+          { key: 'value', label: 'Value' }
+        ]}
+        data={data.assets}
+      />
+
+      <Button onClick={() => console.log('Clicked!')}>
+        View Details
+      </Button>
+    </Card>
+  );
+}
+```
+
+### Custom Styling
+
+```typescript
+import { useTheme } from '@octav/widget-sdk';
+
+render: (props) => {
+  const theme = useTheme();
+  const { config } = props;
+
+  return (
+    <div style={{
+      backgroundColor: theme.colors.background,
+      color: theme.colors.text,
+      padding: theme.spacing.md,
+      borderRadius: theme.borderRadius.lg,
+      border: `1px solid ${theme.colors.border}`
+    }}>
+      <h3 style={{ color: config.accentColor }}>
+        {config.title}
+      </h3>
+      {/* Widget content */}
+    </div>
+  );
+}
+```
+
+### Responsive Design
+
+```typescript
+import { useBreakpoint } from '@octav/widget-sdk';
+
+render: (props) => {
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === 'sm' || breakpoint === 'xs';
+
+  return (
+    <div className={isMobile ? 'widget-mobile' : 'widget-desktop'}>
+      {isMobile ? (
+        <CompactView data={props.data} />
+      ) : (
+        <DetailedView data={props.data} />
+      )}
+    </div>
+  );
+}
+```
+
+## State Management
+
+### Widget State
+
+```typescript
+import { useState, useEffect } from 'react';
+
+render: (props) => {
+  const [selectedAsset, setSelectedAsset] = useState(null);
+  const [viewMode, setViewMode] = useState('chart');
+
+  return (
+    <div>
+      <Select
+        value={selectedAsset}
+        onChange={setSelectedAsset}
+        options={props.data.assets}
+      />
+
+      {viewMode === 'chart' ? (
+        <Chart data={selectedAsset} />
+      ) : (
+        <Table data={selectedAsset} />
+      )}
+    </div>
+  );
+}
+```
+
+### Persisted State
+
+```typescript
+import { useWidgetState } from '@octav/widget-sdk';
+
+render: (props) => {
+  // State persists across page reloads
+  const [favorites, setFavorites] = useWidgetState('favorites', []);
+
+  const addFavorite = (asset) => {
+    setFavorites([...favorites, asset]);
+  };
+
+  return (
+    <div>
+      <FavoritesList items={favorites} />
+      <AssetList onFavorite={addFavorite} />
+    </div>
+  );
+}
+```
+
+## Data Caching
+
+### Cache Strategy
+
+```typescript
+export const MyWidget: Widget = {
+  // ... other config
+
+  caching: {
+    enabled: true,
+    ttl: 300000, // 5 minutes
+    strategy: 'stale-while-revalidate'
+  },
+
+  fetchData: async (context) => {
+    // This will be cached according to strategy
+    return await context.api.wallets.get('0xabc...');
+  }
+};
+```
+
+### Manual Cache Control
+
+```typescript
+import { useCache } from '@octav/widget-sdk';
+
+render: (props) => {
+  const cache = useCache();
+
+  const refreshData = async () => {
+    await cache.invalidate('wallet-data');
+    props.refetch();
+  };
+
+  return (
+    <div>
+      <Button onClick={refreshData}>Refresh</Button>
+      {/* Widget content */}
+    </div>
+  );
+}
+```
+
+## Error Handling
+
+```typescript
+fetchData: async (context) => {
+  try {
+    const data = await context.api.wallets.get('0xabc...');
+    return { data, error: null };
+  } catch (error) {
+    console.error('Widget data fetch error:', error);
+    return {
+      data: null,
+      error: {
+        message: 'Failed to load wallet data',
+        details: error.message
+      }
+    };
+  }
+}
+
+render: (props) => {
+  const { error, data } = props;
+
+  if (error) {
+    return (
+      <Alert type="error" title="Error">
+        {error.message}
+        <Button onClick={props.retry}>Retry</Button>
+      </Alert>
+    );
+  }
+
+  return <div>{/* Normal content */}</div>;
+}
+```
+
+## Testing Widgets
+
+### Local Development
+
+```bash
+# Start widget development server
+npm run widget:dev
+
+# Open widget test environment
+open http://localhost:3000/widget-sandbox
+```
+
+### Widget Testing
+
+```typescript
+import { testWidget } from '@octav/widget-sdk/testing';
+
+describe('MyCustomWidget', () => {
+  it('renders correctly with data', async () => {
+    const { container } = await testWidget(MyCustomWidget, {
+      data: {
+        assets: [
+          { symbol: 'ETH', balance: 10, value: 20000 }
+        ]
+      },
+      config: {
+        title: 'Test Widget'
+      }
+    });
+
+    expect(container).toHaveTextContent('Test Widget');
+    expect(container).toHaveTextContent('ETH');
+  });
+
+  it('handles loading state', async () => {
+    const { container } = await testWidget(MyCustomWidget, {
+      loading: true
+    });
+
+    expect(container).toHaveTextContent('Loading...');
+  });
+});
+```
+
+## Publishing Widgets
+
+### Widget Manifest
+
+```json
+{
+  "name": "@yourusername/my-custom-widget",
+  "version": "1.0.0",
+  "description": "Amazing custom widget for Octav",
+  "author": "Your Name",
+  "license": "MIT",
+  "octav": {
+    "minVersion": "2.0.0",
+    "category": "analytics",
+    "tags": ["defi", "portfolio", "custom"],
+    "preview": "https://example.com/preview.png",
+    "documentation": "https://example.com/docs"
+  }
+}
+```
+
+### Publishing Steps
+
+1. **Test thoroughly** - Use widget sandbox
+2. **Create preview** - Screenshot or demo
+3. **Write documentation** - Usage instructions
+4. **Submit for review** - Octav team review
+5. **Publish** - Make available in marketplace
+
+```bash
+# Build widget for production
+npm run widget:build
+
+# Publish to Octav marketplace
+npx octav-widget publish
+```
+
+## Widget Guidelines
+
+<Alert type="warning" title="Review Requirements">
+All widgets must pass security review before being published to the marketplace.
+</Alert>
+
+### Best Practices
+
+- **Performance** - Optimize data fetching and rendering
+- **Accessibility** - Support keyboard navigation and screen readers
+- **Responsive** - Work on all screen sizes
+- **Error handling** - Graceful error states
+- **Privacy** - Never store sensitive data
+- **Security** - Validate all inputs
+
+### Prohibited Actions
+
+- Accessing user private keys
+- Making unauthorized transactions
+- Tracking user behavior externally
+- Including malicious code
+- Violating user privacy
+
+## Examples
+
+### Simple Balance Widget
+
+```typescript
+export const BalanceWidget: Widget = {
+  id: 'simple-balance',
+  name: 'Simple Balance',
+  description: 'Display total portfolio balance',
+
+  fetchData: async (context) => {
+    const wallets = context.wallets.getSelected();
+    const total = wallets.reduce((sum, w) => sum + w.total_value, 0);
+    return { balance: total };
+  },
+
+  render: ({ data, config }) => (
+    <Card>
+      <h2>{config.title || 'Total Balance'}</h2>
+      <div className="balance">
+        ${data.balance.toLocaleString()}
+      </div>
+    </Card>
+  )
+};
+```
+
+### Advanced Analytics Widget
+
+View complete examples in our [GitHub repository](https://github.com/octav-fi/widget-examples).
+
+## Support
+
+### Resources
+- [Widget SDK Documentation](https://docs.octav.fi/widget-sdk)
+- [Widget Examples](https://github.com/octav-fi/widget-examples)
+- [API Reference](/api/introduction)
+- [Component Library](https://components.octav.fi)
+
+### Community
+- [Discord](https://discord.gg/qvcknAz73A) - #widget-development channel
+- [GitHub Discussions](https://github.com/octav-fi/widgets/discussions)
+- [Developer Forum](https://forum.octav.fi)
+
+<Button href="https://discord.gg/qvcknAz73A">Join Developer Community</Button>
+<Button href="/docs/supported-widgets" variant="secondary">View Supported Widgets</Button>

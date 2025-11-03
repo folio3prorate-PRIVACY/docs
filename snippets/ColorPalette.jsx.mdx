@@ -1,0 +1,66 @@
+export const ColorSwatch = ({ color, name, hex }) => {
+  return (
+    <div className="flex flex-col items-center gap-2 p-4">
+      <div
+        className="w-24 h-24 rounded-lg shadow-md"
+        style={{ backgroundColor: hex }}
+      />
+      <div className="text-center">
+        <p className="font-semibold text-sm">{name}</p>
+        <p className="text-xs text-gray-500">{hex}</p>
+      </div>
+    </div>
+  );
+};
+
+export const ColorPalette = () => {
+  const colors = {
+    primary: [
+      { name: "Cool Red", hex: "#FF1A45" }
+    ],
+    secondary: [
+      { name: "UI Blue", hex: "#3F58C7" },
+      { name: "Sky Blue", hex: "#6BCCD1" },
+      { name: "Mint Green", hex: "#59CE7E" },
+      { name: "Light Gold", hex: "#F4BD4D" },
+      { name: "Mango Orange", hex: "#F68A54" }
+    ],
+    dark: [
+      { name: "Blue Charcoal", hex: "#091018" },
+      { name: "Deep Sea", hex: "#06323E" },
+      { name: "Sea Green", hex: "#095762" },
+      { name: "Sea Foam", hex: "#558789" }
+    ]
+  };
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-xl font-bold mb-4">Primary Color</h3>
+        <div className="flex flex-wrap gap-4">
+          {colors.primary.map((color) => (
+            <ColorSwatch key={color.hex} {...color} />
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-xl font-bold mb-4">Secondary Colors</h3>
+        <div className="flex flex-wrap gap-4">
+          {colors.secondary.map((color) => (
+            <ColorSwatch key={color.hex} {...color} />
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-xl font-bold mb-4">Dark Theme Colors</h3>
+        <div className="flex flex-wrap gap-4">
+          {colors.dark.map((color) => (
+            <ColorSwatch key={color.hex} {...color} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -1,0 +1,762 @@
+---
+title: "Reports"
+description: "Generate tax reports and portfolio analytics"
+---
+
+# Reports
+
+Generate comprehensive tax reports, performance analytics, and custom portfolio reports.
+
+## Overview
+
+Octav Reports provide:
+
+<CardGroup cols={2}>
+  <Card title="Automated Tax Reports" icon="file-invoice-dollar">
+    Generate accurate tax reports for crypto transactions
+  </Card>
+
+  <Card title="Performance Analytics" icon="chart-line">
+    Deep portfolio performance analysis and insights
+  </Card>
+
+  <Card title="Transaction Summaries" icon="list">
+    Comprehensive transaction history reports
+  </Card>
+
+  <Card title="Custom Report Builder" icon="hammer">
+    Build custom reports tailored to your needs
+  </Card>
+
+  <Card title="Multiple Export Formats" icon="download">
+    PDF, CSV, Excel, JSON export options
+  </Card>
+
+  <Card title="Tax Software Integration" icon="plug">
+    Direct integration with popular tax platforms
+  </Card>
+</CardGroup>
+
+## Report Types
+
+<Tabs>
+  <Tab title="Tax Reports" icon="file-invoice-dollar">
+
+    ### Tax Reporting
+
+    <Info>
+      Generate accurate tax reports for your crypto transactions with support for multiple tax methods.
+    </Info>
+
+    **Capital Gains Report**
+
+    <AccordionGroup>
+      <Accordion title="Realized Gains & Losses" icon="chart-mixed" defaultOpen>
+        - Realized gains and losses
+        - Short-term vs long-term capital gains
+        - Cost basis tracking
+        - Disposal methods (FIFO, LIFO, HIFO, Specific ID)
+      </Accordion>
+    </AccordionGroup>
+
+    **Income Report**
+    - Staking rewards
+    - Yield farming income
+    - Airdrops received
+    - Mining income
+    - Interest earned
+    - Other taxable income
+
+    **Transaction Report**
+    - Complete transaction history
+    - Tax categorization
+    - Fiat value at transaction time
+    - Fees and costs
+
+    **8949 Form Export**
+    - IRS Form 8949 compatible format
+    - Capital gains by lot
+    - Ready for tax filing
+    - Multiple year support
+
+  </Tab>
+
+  <Tab title="Performance" icon="chart-line">
+
+    ### Performance Reports
+
+    **Portfolio Performance**
+
+    <CardGroup cols={2}>
+      <Card title="Returns" icon="percent">
+        - Time-weighted returns
+        - Money-weighted returns (IRR)
+        - Benchmark comparison (BTC, ETH, S&P 500)
+        - Risk-adjusted returns
+      </Card>
+
+      <Card title="Risk Metrics" icon="triangle-exclamation">
+        - Sharpe ratio
+        - Maximum drawdown
+        - Volatility analysis
+        - Beta calculations
+      </Card>
+    </CardGroup>
+
+    **Asset Performance**
+    - Individual token performance
+    - Best/worst performers
+    - Holding period analysis
+    - Realized vs unrealized gains
+
+    **Chain Analysis**
+    - Performance by blockchain
+    - Fee analysis per chain
+    - Transaction volume by chain
+    - Chain allocation over time
+
+  </Tab>
+
+  <Tab title="Transaction Reports" icon="list">
+
+    ### Transaction Summaries
+
+    **Transaction Summary**
+    - Total transaction count
+    - Volume by type
+    - Gas fees paid
+    - Average transaction size
+    - Most active periods
+
+    **Counterparty Report**
+    - Top addresses interacted with
+    - Protocol usage statistics
+    - Exchange interactions
+    - DeFi protocol breakdown
+
+    **DeFi Activity Report**
+    - Liquidity provision history
+    - Staking activity
+    - Lending/borrowing summary
+    - Yield earned
+    - Protocol exposure
+
+  </Tab>
+
+  <Tab title="Custom Reports" icon="hammer">
+
+    ### Report Builder
+
+    Build custom reports with:
+
+    <Steps>
+      <Step title="Select Data Sources" icon="database">
+        Choose specific wallets, portfolios, or chains
+      </Step>
+
+      <Step title="Choose Metrics" icon="chart-bar">
+        Select the metrics and data points to include
+      </Step>
+
+      <Step title="Configure Layout" icon="table-layout">
+        Drag-and-drop interface for custom layouts
+      </Step>
+
+      <Step title="Apply Branding" icon="palette">
+        Add custom branding and styling (Pro)
+      </Step>
+    </Steps>
+
+    **Builder Features:**
+    - Drag-and-drop interface
+    - Custom date ranges
+    - Wallet/portfolio selection
+    - Metric selection
+    - Chart types
+    - Branding options
+
+  </Tab>
+</Tabs>
+
+## Generating Reports
+
+### Quick Report Generation
+
+<Steps>
+  <Step title="Navigate to Reports" icon="file">
+    Go to the Reports page from the main navigation
+  </Step>
+
+  <Step title="Select Report Type" icon="list">
+    Choose the type of report you want to generate
+  </Step>
+
+  <Step title="Choose Date Range" icon="calendar">
+    Select the time period for your report
+  </Step>
+
+  <Step title="Select Wallets" icon="wallet">
+    Choose which wallets/portfolios to include
+  </Step>
+
+  <Step title="Configure Options" icon="gear">
+    Set report-specific options and preferences
+  </Step>
+
+  <Step title="Generate Report" icon="bolt">
+    Click Generate Report to create your report
+  </Step>
+</Steps>
+
+### Report Configuration
+
+<Tabs>
+  <Tab title="Date Range" icon="calendar">
+
+    **Date Range Options:**
+    - Tax year (e.g., 2024)
+    - Calendar year
+    - Fiscal year
+    - Custom date range
+    - Quarter (Q1, Q2, Q3, Q4)
+    - Month
+
+  </Tab>
+
+  <Tab title="Wallet Selection" icon="wallet">
+
+    **Selection Options:**
+    - All wallets
+    - Specific wallets
+    - Portfolio-based
+    - Tag-based selection
+
+  </Tab>
+
+  <Tab title="Tax Settings" icon="gear">
+
+    **Tax Configuration:**
+    - Cost basis method (FIFO, LIFO, HIFO, Specific ID)
+    - Country/jurisdiction
+    - Currency for reporting
+    - Include/exclude specific transaction types
+
+  </Tab>
+</Tabs>
+
+### Report Preview
+
+Before finalizing:
+
+<Check>Preview report layout</Check>
+<Check>Review calculations</Check>
+<Check>Check for missing data</Check>
+<Check>Verify transaction categorization</Check>
+<Check>Review flags and warnings</Check>
+
+## Cost Basis Methods
+
+<Warning>
+  Consult with a tax professional to determine the appropriate cost basis method for your situation.
+</Warning>
+
+<Tabs>
+  <Tab title="FIFO" icon="arrow-right">
+
+    ### First In, First Out
+
+    - Assumes oldest assets sold first
+    - Most common method
+    - Often required by default
+
+    **Best For:** Simple tracking and most jurisdictions
+
+  </Tab>
+
+  <Tab title="LIFO" icon="arrow-left">
+
+    ### Last In, First Out
+
+    - Assumes newest assets sold first
+    - May reduce tax burden in bull markets
+
+    **Best For:** Reducing gains in rising markets
+
+  </Tab>
+
+  <Tab title="HIFO" icon="arrow-up">
+
+    ### Highest In, First Out
+
+    - Sells highest cost basis first
+    - Minimizes taxable gains
+    - Requires detailed tracking
+
+    **Best For:** Tax optimization
+
+  </Tab>
+
+  <Tab title="Specific ID" icon="fingerprint">
+
+    ### Specific Identification
+
+    - Manually specify which lots are sold
+    - Maximum control
+    - Most complex to manage
+
+    **Best For:** Advanced users with complex portfolios
+
+  </Tab>
+</Tabs>
+
+## Missing Cost Basis
+
+### Identifying Issues
+
+Reports flag transactions with:
+
+<Warning>
+  **Common Issues:**
+  - Missing acquisition data
+  - Unknown cost basis
+  - Incomplete transfer history
+  - Unmatched deposits/withdrawals
+</Warning>
+
+### Resolving Issues
+
+<Steps>
+  <Step title="Manual Entry" icon="keyboard">
+    Enter cost basis manually for flagged transactions
+  </Step>
+
+  <Step title="Import from Exchange" icon="download">
+    Import missing data from exchange exports
+  </Step>
+
+  <Step title="Link Transactions" icon="link">
+    Connect related transactions to establish cost basis
+  </Step>
+
+  <Step title="Categorize" icon="tag">
+    Mark transactions as gifts, airdrops, or income
+  </Step>
+</Steps>
+
+## Export Formats
+
+<Tabs>
+  <Tab title="PDF Export" icon="file-pdf">
+
+    ### Professional PDF Reports
+
+    <CardGroup cols={2}>
+      <Card title="Report Features" icon="file">
+        - Executive summary
+        - Detailed tables
+        - Charts and graphs
+        - Page numbers and TOC
+      </Card>
+
+      <Card title="Pro Features" icon="star">
+        - Custom branding
+        - Logo placement
+        - Color customization
+        - Watermark removal
+      </Card>
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="CSV Export" icon="file-csv">
+
+    ### Spreadsheet-Compatible Data
+
+    - All transaction details
+    - Custom column selection
+    - Multiple sheets for different data
+    - Import to Excel/Google Sheets
+
+  </Tab>
+
+  <Tab title="Excel (XLSX)" icon="file-excel">
+
+    ### Advanced Excel Export
+
+    - Formatted worksheets
+    - Built-in formulas
+    - Charts and pivot tables
+    - Multiple tabs
+
+  </Tab>
+
+  <Tab title="JSON Export" icon="code">
+
+    ### Developer-Friendly Format
+
+    - Machine-readable format
+    - API integration
+    - Custom processing
+    - Backup and archive
+
+  </Tab>
+
+  <Tab title="Tax Software" icon="plug">
+
+    ### Direct Integration
+
+    **Supported Platforms:**
+
+    <CardGroup cols={3}>
+      <Card title="CoinTracker" icon="link" href="https://cointracker.io">
+        Direct export support
+      </Card>
+
+      <Card title="Koinly" icon="link" href="https://koinly.io">
+        Compatible format
+      </Card>
+
+      <Card title="TaxBit" icon="link" href="https://taxbit.com">
+        Enterprise integration
+      </Card>
+
+      <Card title="TokenTax" icon="link" href="https://tokentax.co">
+        Full integration
+      </Card>
+
+      <Card title="CryptoTaxCalculator" icon="link">
+        Export compatible
+      </Card>
+
+      <Card title="ZenLedger" icon="link" href="https://zenledger.io">
+        Transaction import
+      </Card>
+    </CardGroup>
+
+  </Tab>
+</Tabs>
+
+## Report Scheduling
+
+### Automated Reports
+
+<Info>
+  Schedule recurring reports to be generated and delivered automatically.
+</Info>
+
+**Schedule Options:**
+- Monthly summaries
+- Quarterly performance
+- Annual tax reports
+- Weekly transaction summaries
+
+### Delivery Options
+
+<CardGroup cols={2}>
+  <Card title="Email Delivery" icon="envelope">
+    Reports sent directly to your inbox
+  </Card>
+
+  <Card title="Cloud Storage" icon="cloud">
+    Google Drive, Dropbox integration
+  </Card>
+
+  <Card title="SFTP Upload" icon="server">
+    Automated server uploads
+  </Card>
+
+  <Card title="Webhook Notifications" icon="bell">
+    API webhooks when reports are ready
+  </Card>
+</CardGroup>
+
+## Audit Trail
+
+<Info>
+  Maintain a complete audit trail for tax compliance and audits.
+</Info>
+
+### Transaction Verification
+
+- Blockchain verification links
+- Transaction hash references
+- Block explorer links
+- Timestamped records
+
+### Change Log
+
+Track modifications:
+
+<AccordionGroup>
+  <Accordion title="Cost Basis Adjustments" icon="dollar-sign" defaultOpen>
+    All manual cost basis changes with timestamps
+  </Accordion>
+
+  <Accordion title="Categorization Changes" icon="tag">
+    Transaction type and category modifications
+  </Accordion>
+
+  <Accordion title="Manual Entries" icon="pen">
+    User-added transactions and data
+  </Accordion>
+
+  <Accordion title="User Attribution" icon="user">
+    Track who made each change (Team plans)
+  </Accordion>
+</AccordionGroup>
+
+### Supporting Documents
+
+Attach documentation:
+- Exchange statements
+- Receipts
+- Gift letters
+- Airdrop confirmations
+
+## Multi-Year Reports
+
+### Historical Data
+
+<CardGroup cols={2}>
+  <Card title="Access Past Years" icon="clock-rotate-left">
+    View and regenerate reports from previous tax years
+  </Card>
+
+  <Card title="Year-over-Year" icon="chart-line">
+    Compare performance across multiple years
+  </Card>
+
+  <Card title="Loss Carryover" icon="arrow-right-arrow-left">
+    Track capital loss carryovers automatically
+  </Card>
+
+  <Card title="Cumulative Performance" icon="chart-column">
+    Multi-year portfolio performance tracking
+  </Card>
+</CardGroup>
+
+### Amended Reports
+
+- Regenerate previous years
+- Update with new data
+- Track amendments
+- Version control
+
+## Team Collaboration (Pro)
+
+### Shared Reports
+
+<Tabs>
+  <Tab title="Sharing" icon="share-nodes">
+
+    **Share with:**
+    - Share with accountants
+    - Team access controls
+    - Comment and feedback
+    - Approval workflows
+
+  </Tab>
+
+  <Tab title="Accountant Access" icon="user-tie">
+
+    **Invite Your Accountant:**
+
+    <Steps>
+      <Step title="Send Invitation" icon="envelope">
+        Invite your accountant via email
+      </Step>
+
+      <Step title="Set Permissions" icon="shield">
+        Configure read-only or edit access
+      </Step>
+
+      <Step title="Define Scope" icon="calendar">
+        Limit access to specific date ranges
+      </Step>
+
+      <Step title="Monitor Activity" icon="eye">
+        View audit log of accountant activity
+      </Step>
+    </Steps>
+
+    **Access Features:**
+    - Read-only access
+    - Specific date ranges
+    - Secure sharing
+    - Audit log
+
+  </Tab>
+</Tabs>
+
+## Report Library
+
+### Saved Reports
+
+<CardGroup cols={2}>
+  <Card title="Report History" icon="clock-rotate-left">
+    Access previously generated reports
+  </Card>
+
+  <Card title="Regenerate" icon="rotate">
+    Regenerate reports with updated data
+  </Card>
+
+  <Card title="Version Compare" icon="code-compare">
+    Compare different report versions
+  </Card>
+
+  <Card title="Archive" icon="box-archive">
+    Archive old reports for compliance
+  </Card>
+</CardGroup>
+
+### Templates
+
+- Save report configurations
+- Reuse settings
+- Share templates (team accounts)
+- Import community templates
+
+## Data Accuracy
+
+### Validation Checks
+
+Reports include warnings for:
+
+<Warning>
+  **Validation Alerts:**
+  - Missing transactions
+  - Unusual patterns
+  - High-value transactions
+  - Unverified data
+  - Incomplete records
+</Warning>
+
+### Manual Review
+
+<Steps>
+  <Step title="Flag Transactions" icon="flag">
+    Mark transactions that need review
+  </Step>
+
+  <Step title="Add Notes" icon="note-sticky">
+    Add explanations and context
+  </Step>
+
+  <Step title="Override Calculations" icon="calculator">
+    Override with audit trail maintained
+  </Step>
+
+  <Step title="Lock Periods" icon="lock">
+    Lock reviewed periods to prevent changes
+  </Step>
+</Steps>
+
+## Privacy & Security
+
+### Data Handling
+
+<CardGroup cols={2}>
+  <Card title="On-Demand Generation" icon="bolt">
+    Reports generated on-demand, not stored permanently
+  </Card>
+
+  <Card title="Encrypted Exports" icon="lock">
+    All exports are encrypted in transit
+  </Card>
+
+  <Card title="Secure Sharing" icon="shield">
+    Sharing links with expiration dates
+  </Card>
+
+  <Card title="No Permanent Storage" icon="trash">
+    Sensitive data not stored after generation
+  </Card>
+</CardGroup>
+
+### Compliance
+
+<Check>GDPR compliant</Check>
+<Check>SOC 2 certified</Check>
+<Check>Data retention policies</Check>
+<Check>Right to delete</Check>
+
+## Pricing
+
+<Tabs>
+  <Tab title="Free Tier" icon="gift">
+
+    **Free Features:**
+    - Basic transaction reports
+    - Up to 100 transactions
+    - Current tax year only
+    - PDF and CSV export
+
+  </Tab>
+
+  <Tab title="Pro Tier" icon="star">
+
+    **Pro Features:**
+    - Unlimited transactions
+    - All report types
+    - Historical data (all years)
+    - Tax software integration
+    - Custom branding
+    - Priority support
+
+  </Tab>
+
+  <Tab title="Team Tier" icon="users">
+
+    **Team Features:**
+    - Everything in Pro
+    - Accountant access
+    - Shared templates
+    - Approval workflows
+    - Dedicated support
+
+  </Tab>
+</Tabs>
+
+## Getting Help
+
+<Tip>
+  Need help with reports? Our support team and accountant partners can assist.
+</Tip>
+
+### Resources
+
+<CardGroup cols={2}>
+  <Card title="Tax Guide" icon="book" href="/docs/tax-guide">
+    Comprehensive crypto tax guide (coming soon)
+  </Card>
+
+  <Card title="Report Tutorials" icon="graduation-cap" href="/docs/tutorials">
+    Step-by-step tutorials (coming soon)
+  </Card>
+
+  <Card title="Video Walkthroughs" icon="video">
+    Watch how to generate reports
+  </Card>
+
+  <Card title="FAQ" icon="circle-question">
+    Frequently asked questions
+  </Card>
+</CardGroup>
+
+### Support Options
+
+- Email support
+- Live chat (Pro/Team)
+- Accountant network (referrals)
+- Community forum
+
+<CardGroup cols={2}>
+  <Card title="View Transactions" icon="list" href="/docs/transactions">
+    Learn about transaction tracking
+  </Card>
+
+  <Card title="Contact Support" icon="headset" href="/docs/contact-us">
+    Get help from our team
+  </Card>
+</CardGroup>

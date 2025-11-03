@@ -1,0 +1,69 @@
+---
+title: "API Introduction"
+description: "Get started with the Octav API for programmatic access to portfolio data"
+---
+
+import { Button } from '/snippets/Button.jsx.mdx'
+import { Alert } from '/snippets/Alert.jsx.mdx'
+
+# Octav API
+
+Access real-time and historical data for digital assets through the Octav API.
+
+## Overview
+
+The Octav API provides programmatic access to:
+
+- **Portfolio Data** - Access wallet balances, positions, and performance metrics
+- **Transaction History** - Query historical transactions and transfers
+- **Market Data** - Real-time and historical price data
+- **Analytics** - Portfolio analytics and performance calculations
+
+<Alert type="info" title="RESTful API">
+The Octav API is a RESTful API that returns JSON responses. All requests require authentication via API keys.
+</Alert>
+
+## Base URL
+
+```
+https://api.octav.fi/v1
+```
+
+## Features
+
+### Real-Time Data
+Access up-to-the-minute portfolio and market data.
+
+### Historical Analysis
+Query historical data for backtesting and analysis.
+
+### Multi-Chain Support
+Access data across all supported blockchains through a single API.
+
+### High Performance
+Optimized for speed with caching and efficient data retrieval.
+
+## API Capabilities
+
+- **Wallet Tracking** - Monitor wallet balances and positions
+- **Transaction Queries** - Retrieve transaction history
+- **Portfolio Metrics** - Calculate performance and analytics
+- **Asset Protocols** - Track DeFi positions and protocols
+- **Price Data** - Access real-time and historical prices
+
+## Rate Limits
+
+API rate limits vary by plan:
+
+- **Free**: 100 requests/hour
+- **Pro**: 1,000 requests/hour
+- **Enterprise**: Custom limits
+
+<Alert type="warning" title="Rate Limiting">
+API requests that exceed your rate limit will return a 429 status code. Monitor your usage to stay within limits.
+</Alert>
+
+## Next Steps
+
+<Button href="/api/authentication">Authentication Setup</Button>
+<Button href="/api/quickstart" variant="secondary">API Quickstart</Button>

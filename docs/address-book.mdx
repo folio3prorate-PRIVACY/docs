@@ -1,0 +1,681 @@
+---
+title: "Address Book"
+description: "Organize and manage your wallet addresses"
+---
+
+# Address Book
+
+Keep track of your wallet addresses with custom labels. The Octav Address Book helps you organize all your wallets in one place with easy-to-remember names.
+
+<CardGroup cols={3}>
+
+  <Card title="Custom Labels" icon="tag">
+    Add friendly names to any wallet address
+  </Card>
+
+  <Card title="ENS Resolution" icon="at">
+    Automatic resolution of ENS, SNS, and other naming services
+  </Card>
+
+  <Card title="Multi-Chain Support" icon="link">
+    Track addresses across 90+ blockchains
+  </Card>
+
+</CardGroup>
+
+---
+
+## Overview
+
+The Address Book helps you:
+- Label your wallet addresses with memorable names
+- Organize wallets you track across different chains
+- Auto-resolve ENS, SNS, and other blockchain name services
+- Quickly search and find addresses by label or address
+
+<Tip>
+  **Portfolio Tracking** — All addresses in your Address Book are tracked automatically across 90+ supported blockchains.
+</Tip>
+
+---
+
+## Adding Addresses
+
+<Steps>
+  <Step title="Navigate to Address Book" icon="book">
+    Click **Address Book** in the sidebar navigation
+  </Step>
+
+  <Step title="Click Add Address" icon="plus">
+    Click the **Add Address** button in the top right
+  </Step>
+
+  <Step title="Enter Address" icon="wallet">
+    Paste your wallet address, ENS name, or other naming service identifier
+  </Step>
+
+  <Step title="Add Custom Label" icon="tag">
+    Give it a memorable name like "Main Wallet", "Hardware Wallet", or "Trading Wallet"
+  </Step>
+
+  <Step title="Save" icon="floppy-disk">
+    Click **Save** to add the address to your book
+  </Step>
+</Steps>
+
+---
+
+## Supported Address Formats
+
+<Tabs>
+  <Tab title="EVM Addresses" icon="ethereum" iconType="brands">
+
+    ### Ethereum & EVM Chains
+
+    **Standard Addresses:**
+    - Full address: `0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb`
+    - Automatically tracked across all EVM chains:
+      - Ethereum, Base, Arbitrum, Optimism, Polygon
+      - BSC, Avalanche, Fantom
+      - And 80+ more EVM-compatible chains
+
+    **ENS Names:**
+    - `.eth` domains: `vitalik.eth`
+    - Automatically resolves to address
+    - Shows ENS name in dashboard
+
+  </Tab>
+
+  <Tab title="Solana" icon="https://images.octav.fi/chains/solana_icon.svg">
+
+    ### Solana Addresses
+
+    **Base58 Format:**
+    - Full address: `DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK`
+    - Automatically tracked on Solana blockchain
+
+    **SNS Names:**
+    - `.sol` domains: `example.sol`
+    - Automatically resolves to Solana address
+    - Shows SNS name in dashboard
+
+  </Tab>
+
+  <Tab title="Hyperliquid" icon="https://images.octav.fi/chains/hyperliquid_icon.png">
+
+    ### Hyperliquid Addresses
+
+    **Format:**
+    - Hyperliquid wallet addresses
+    - Tracked automatically for perpetuals positions
+    - Portfolio and trading data
+
+  </Tab>
+
+  <Tab title="Other Naming Services" icon="at">
+
+    ### Additional Name Services
+
+    Octav automatically resolves various blockchain naming services:
+
+    <AccordionGroup>
+
+      <Accordion title="ENS - Ethereum Name Service" icon="ethereum" iconType="brands" defaultOpen>
+        **`.eth` domains**
+        - Most popular Ethereum naming service
+        - Reverse resolution supported
+        - Multi-coin address support
+      </Accordion>
+
+      <Accordion title="SNS - Solana Name Service" icon="https://images.octav.fi/chains/solana_icon.svg">
+        **`.sol` domains**
+        - Solana naming service
+        - Auto-resolution to Solana addresses
+      </Accordion>
+
+      <Accordion title="Other Services" icon="globe">
+        **Additional naming services**
+        - More naming services automatically detected
+        - Auto-resolution where supported
+      </Accordion>
+
+    </AccordionGroup>
+
+  </Tab>
+</Tabs>
+
+---
+
+## Address List
+
+Your Address Book displays all your tracked wallets with key information.
+
+<Tabs>
+  <Tab title="Address Display" icon="list">
+
+    **What You See:**
+
+    <CardGroup cols={2}>
+
+      <Card title="Label" icon="tag">
+        **Custom Name**
+
+        The friendly name you assigned (e.g., "Main Wallet")
+      </Card>
+
+      <Card title="Address" icon="wallet">
+        **Wallet Address**
+
+        Shortened address format (e.g., `0x89d1...ad473a`)
+
+        Full address visible on hover
+      </Card>
+
+      <Card title="Naming Service" icon="at">
+        **ENS/SNS/etc.**
+
+        Shows resolved name if available (e.g., `vitalik.eth`)
+      </Card>
+
+      <Card title="Copy Button" icon="copy">
+        **Quick Copy**
+
+        Click to copy full address to clipboard
+      </Card>
+
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="Actions" icon="ellipsis">
+
+    **Available Actions:**
+
+    <Steps>
+      <Step title="View Dashboard" icon="chart-line">
+        Click address to view full portfolio for that wallet
+      </Step>
+
+      <Step title="Edit Label" icon="pen">
+        Change the custom label name
+      </Step>
+
+      <Step title="Copy Address" icon="copy">
+        Copy full address to clipboard
+      </Step>
+
+      <Step title="Remove Address" icon="trash">
+        Delete address from your Address Book
+      </Step>
+    </Steps>
+
+  </Tab>
+</Tabs>
+
+---
+
+## Search & Find Addresses
+
+<Info>
+  **Quick Search** — Use the search bar to find addresses quickly by label or address.
+</Info>
+
+### Search Options
+
+<Tabs>
+  <Tab title="Search by Label" icon="tag">
+
+    **Find by Custom Name**
+
+    Type any part of the label name:
+    - Search is case-insensitive
+    - Partial matching supported
+    - Results appear instantly
+
+    **Examples:**
+    - Search "main" finds "Main Wallet"
+    - Search "hardware" finds "Hardware Wallet 1" and "Hardware Wallet 2"
+    - Search "trading" finds "Trading Wallet"
+
+  </Tab>
+
+  <Tab title="Search by Address" icon="wallet">
+
+    **Find by Wallet Address**
+
+    Paste or type any part of the address:
+    - Partial address matching
+    - Works with full or shortened addresses
+    - Case-insensitive
+
+    **Examples:**
+    - Search "0x89d1" finds addresses starting with those characters
+    - Search "ad473a" finds addresses ending with those characters
+    - Paste full address for exact match
+
+  </Tab>
+</Tabs>
+
+---
+
+## Editing Addresses
+
+<Steps>
+  <Step title="Find Address" icon="magnifying-glass">
+    Locate the address you want to edit in your Address Book
+  </Step>
+
+  <Step title="Click Edit" icon="pen">
+    Click the edit button next to the address
+  </Step>
+
+  <Step title="Update Label" icon="tag">
+    Change the custom label to a new name
+  </Step>
+
+  <Step title="Save Changes" icon="floppy-disk">
+    Click **Save** to update the address label
+  </Step>
+</Steps>
+
+<Warning>
+  **Address Cannot Be Changed** — You can only edit the label name. To track a different address, add it as a new entry.
+</Warning>
+
+---
+
+## Removing Addresses
+
+<Steps>
+  <Step title="Find Address" icon="magnifying-glass">
+    Locate the address you want to remove
+  </Step>
+
+  <Step title="Click Delete" icon="trash">
+    Click the delete/remove button
+  </Step>
+
+  <Step title="Confirm Deletion" icon="triangle-exclamation">
+    Confirm you want to remove the address
+  </Step>
+
+  <Step title="Address Removed" icon="check">
+    The address is removed from your Address Book
+  </Step>
+</Steps>
+
+<Info>
+  **Historical Data Preserved** — Removing an address from your Address Book doesn't delete historical transaction data. You can add it back anytime to resume tracking.
+</Info>
+
+---
+
+## Automatic Name Resolution
+
+<Tabs>
+  <Tab title="ENS Names" icon="ethereum" iconType="brands">
+
+    ### Ethereum Name Service
+
+    **How ENS Works:**
+
+    When you add an address with an ENS name:
+    1. Enter the ENS name (e.g., `vitalik.eth`)
+    2. Octav automatically resolves to the address
+    3. Both ENS name and address are displayed
+    4. You can still add a custom label
+
+    **Display:**
+    - **Label:** Your custom name (e.g., "Vitalik Wallet")
+    - **ENS:** `vitalik.eth`
+    - **Address:** `0xd8dA...6045`
+
+    <Tip>
+      **Best Practice** — Use custom labels even with ENS names for additional context (e.g., "Partnership - vitalik.eth")
+    </Tip>
+
+  </Tab>
+
+  <Tab title="SNS Names" icon="https://images.octav.fi/chains/solana_icon.svg">
+
+    ### Solana Name Service
+
+    **How SNS Works:**
+
+    When you add a Solana address with SNS:
+    1. Enter the SNS name (e.g., `example.sol`)
+    2. Octav resolves to the Solana address
+    3. Both SNS name and address are shown
+    4. Add custom label for organization
+
+    **Display:**
+    - **Label:** Your custom name (e.g., "Trading SOL")
+    - **SNS:** `example.sol`
+    - **Address:** `DYw8jC...CNSKK`
+
+  </Tab>
+
+  <Tab title="Reverse Resolution" icon="arrows-rotate">
+
+    ### Automatic Name Detection
+
+    **Adding by Address:**
+
+    When you add an address that has an ENS/SNS name:
+    1. Paste the wallet address
+    2. Octav automatically checks for naming service
+    3. If found, the name is displayed alongside address
+    4. You add your custom label
+
+    **Example:**
+    - You paste: `0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`
+    - Octav detects: `vitalik.eth`
+    - You see both address and ENS name
+    - You add label: "Example Wallet"
+
+  </Tab>
+</Tabs>
+
+---
+
+## Multi-Chain Tracking
+
+<Info>
+  **Automatic Cross-Chain Tracking** — When you add an address, Octav automatically tracks it across all 90+ supported blockchains.
+</Info>
+
+### How It Works
+
+<Tabs>
+  <Tab title="EVM Addresses" icon="link">
+
+    **One Address, Multiple Chains**
+
+    When you add an EVM address (0x...):
+    - Automatically tracked on **all EVM chains**
+    - Ethereum, Base, Arbitrum, Optimism, Polygon, BSC, Avalanche
+    - And 80+ more EVM-compatible chains
+    - All balances and transactions across chains appear in your dashboard
+
+    **Example:**
+    - Add address: `0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb`
+    - See balances on Ethereum, Base, Arbitrum simultaneously
+    - Track DeFi positions across all chains
+    - View transactions from any chain
+
+  </Tab>
+
+  <Tab title="Chain-Specific Addresses" icon="network-wired">
+
+    **Native Chain Addresses**
+
+    Some chains have their own address formats:
+
+    <CardGroup cols={2}>
+
+      <Card title="Solana" icon="https://images.octav.fi/chains/solana_icon.svg">
+        **Base58 Format**
+
+        Solana addresses are tracked on Solana blockchain only
+      </Card>
+
+      <Card title="Hyperliquid" icon="https://images.octav.fi/chains/hyperliquid_icon.png">
+        **Native Addresses**
+
+        Hyperliquid addresses tracked for perpetuals and portfolio
+      </Card>
+
+    </CardGroup>
+
+  </Tab>
+</Tabs>
+
+[View all supported blockchains →](/docs/supported-blockchains)
+
+---
+
+## Address Bundles
+
+<Info>
+  **Omnichain Bundles** — Group multiple wallet addresses together to see combined portfolio value across all chains. Bundle works with EVM, Solana, and Hyperliquid addresses simultaneously.
+</Info>
+
+### What are Bundles?
+
+Bundles allow you to group related wallet addresses together to view their cumulative net worth and combined portfolio analytics.
+
+<Tabs>
+  <Tab title="Omnichain Support" icon="link">
+
+    **Mix Any Chains**
+
+    Bundles are chain-agnostic - combine addresses from any blockchain:
+
+    <CardGroup cols={2}>
+
+      <Card title="EVM + Solana" icon="plus">
+        Bundle Ethereum addresses with Solana wallets for total portfolio view
+      </Card>
+
+      <Card title="Cross-L2 Tracking" icon="layer-group">
+        Group Base, Arbitrum, and Optimism wallets together
+      </Card>
+
+      <Card title="Multi-Protocol" icon="vault">
+        Combine DeFi wallets across different chains
+      </Card>
+
+      <Card title="Complete Overview" icon="chart-pie">
+        See cumulative net worth across all bundled addresses
+      </Card>
+
+    </CardGroup>
+
+    **Example Bundle:**
+    - ETH Main Wallet: `0x742d...bEb`
+    - Solana Trading: `DYw8jC...CNSKK`
+    - Base DeFi: `0x89d1...473a`
+    - Hyperliquid Perps: (Hyperliquid address)
+
+    → **Total Net Worth:** Combined value across all 4 addresses
+
+  </Tab>
+
+  <Tab title="Use Cases" icon="lightbulb">
+
+    **Why Use Bundles?**
+
+    <AccordionGroup>
+
+      <Accordion title="Portfolio Separation" icon="folder" defaultOpen>
+        **Organize by Strategy**
+        - "Long-Term Holdings" - Cold storage wallets across chains
+        - "Active Trading" - Trading wallets on Base, Arbitrum, Solana
+        - "DeFi Strategies" - Yield farming positions across protocols
+        - "NFT Portfolio" - NFT collection wallets
+      </Accordion>
+
+      <Accordion title="Entity Tracking" icon="building">
+        **Track by Ownership**
+        - Personal wallets (all your addresses)
+        - Business wallets (company-related addresses)
+        - Family members (spouse/children portfolios)
+        - Partnership addresses (shared project wallets)
+      </Accordion>
+
+      <Accordion title="Cross-Chain Projects" icon="bridge">
+        **Multi-Chain Operations**
+        - Protocol treasuries across multiple chains
+        - DAO assets on different networks
+        - Project allocations spanning L2s
+        - Investment funds with multi-chain exposure
+      </Accordion>
+
+      <Accordion title="Simplified Tracking" icon="eye">
+        **Consolidated Views**
+        - View total net worth across all chains instantly
+        - Track combined portfolio performance
+        - Monitor aggregate positions
+        - Simplified reporting
+      </Accordion>
+
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Creating Bundles" icon="folder-plus">
+
+    ### How to Create a Bundle
+
+    <Steps>
+      <Step title="Navigate to Bundles" icon="folder">
+        Go to Address Book and find the Bundles section
+      </Step>
+
+      <Step title="Create New Bundle" icon="plus">
+        Click **Create Bundle** button
+      </Step>
+
+      <Step title="Name Your Bundle" icon="tag">
+        Give it a descriptive name (e.g., "DeFi Portfolio", "Trading Accounts")
+      </Step>
+
+      <Step title="Add Addresses" icon="wallet">
+        Select which addresses from your Address Book to include
+      </Step>
+
+      <Step title="Save Bundle" icon="floppy-disk">
+        Save the bundle to view cumulative analytics
+      </Step>
+    </Steps>
+
+    **Bundle Configuration:**
+    - Add unlimited addresses to a bundle
+    - Mix EVM, Solana, and Hyperliquid addresses
+    - Edit bundle membership anytime
+    - Rename or delete bundles as needed
+
+  </Tab>
+
+  <Tab title="Bundle Analytics" icon="chart-line">
+
+    ### What You See
+
+    **Bundle Dashboard Shows:**
+
+    <CardGroup cols={2}>
+
+      <Card title="Cumulative Net Worth" icon="dollar-sign">
+        **Total Value**
+
+        Combined portfolio value across all bundled addresses
+      </Card>
+
+      <Card title="Asset Distribution" icon="chart-pie">
+        **Allocation Charts**
+
+        How assets are distributed across chains and protocols
+      </Card>
+
+      <Card title="Performance" icon="chart-area">
+        **Combined Performance**
+
+        Historical value tracking for entire bundle
+      </Card>
+
+      <Card title="Address Breakdown" icon="list">
+        **Individual Wallets**
+
+        See contribution of each address to total
+      </Card>
+
+    </CardGroup>
+
+    **Analytics Features:**
+    - Total net worth across all chains
+    - Chain distribution (% on Ethereum vs Solana vs Base, etc.)
+    - Protocol distribution (DeFi positions aggregated)
+    - Token holdings (combined balances across addresses)
+    - Performance over time (1D, 1W, 1M, etc.)
+
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+
+  <Accordion title="Clear Naming" icon="tag" defaultOpen>
+
+    **Use Descriptive Labels:**
+    - Be specific with labels (e.g., "Hardware Wallet - Ledger" vs just "Wallet")
+    - Include context (e.g., "Trading - DeFi", "Cold Storage - Long Term")
+    - Use consistent naming patterns
+    - Consider adding dates for time-based wallets
+
+    **Good Examples:**
+    - "Main Wallet - Daily Use"
+    - "Hardware Wallet - Ledger Nano X"
+    - "Trading Wallet - DeFi Strategies"
+    - "Cold Storage - 2024 Holdings"
+
+    **Poor Examples:**
+    - "Wallet"
+    - "My Address"
+    - "Address 1"
+
+  </Accordion>
+
+  <Accordion title="Organize Your Wallets" icon="folder">
+
+    **Logical Organization:**
+    - Group similar wallets with naming prefixes
+    - Use labels to indicate purpose
+    - Create bundles for related addresses
+    - Keep frequently used wallets at the top
+
+    **Organization Examples:**
+    - **By Purpose:** "Trading - Base", "Trading - Arbitrum", "Holding - Long Term"
+    - **By Device:** "Ledger - Main", "Ledger - Backup", "MetaMask - Mobile"
+    - **By Chain:** "ETH Main", "SOL Trading", "ARB DeFi"
+
+    **Bundle Organization:**
+    - Create bundles for portfolio segments (e.g., "DeFi Holdings", "Long-Term Storage")
+    - Use bundles to track cross-chain strategies
+    - Bundle addresses by ownership or purpose
+
+  </Accordion>
+
+  <Accordion title="Regular Review" icon="calendar">
+
+    **Keep Your Address Book Clean:**
+    - Review addresses periodically
+    - Remove wallets you no longer use
+    - Update labels as wallet purposes change
+    - Verify ENS/SNS names are still resolving correctly
+
+  </Accordion>
+
+</AccordionGroup>
+
+---
+
+## Need Help?
+
+<CardGroup cols={3}>
+
+  <Card title="Account Settings" icon="gear" href="/docs/account">
+    Manage your account and preferences
+  </Card>
+
+  <Card title="Home Dashboard" icon="house" href="/docs/home">
+    Learn about dashboard features
+  </Card>
+
+  <Card title="Join Discord" icon="discord" iconType="brands" href="https://discord.gg/qvcknAz73A">
+    Get help from our community
+  </Card>
+
+</CardGroup>

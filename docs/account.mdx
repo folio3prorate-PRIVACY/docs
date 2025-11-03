@@ -1,0 +1,297 @@
+---
+title: "Account"
+description: "Manage your Octav account settings and preferences"
+---
+
+# Account Settings
+
+Manage your Octav account settings, preferences, and billing all in one place.
+
+<Info>
+  **Global & Address-Specific Settings** — Configure global account settings that apply everywhere, or customize settings per address for widgets, protocols, and chains.
+</Info>
+
+---
+
+## Global Settings
+
+Settings that apply across your entire Octav account.
+
+### General
+
+<Tabs>
+  <Tab title="Account Information" icon="user">
+
+    Manage your basic account details:
+
+    **Display Name**
+    - Your account display name
+
+    **Email Address**
+    - Primary email: Used for login with magic links
+    - Cannot be changed after account creation
+
+    **Telegram (Optional)**
+    - Link your Telegram account for notifications
+    - Format: @username
+    - Used for alerts and updates
+
+    **API Key**
+    - Your personal API key for programmatic access
+    - Click to reveal or regenerate
+    - Keep secure - never share publicly
+
+    [View API Documentation →](/api/introduction)
+
+  </Tab>
+
+  <Tab title="Usage & Credits" icon="chart-line">
+
+    ### Credit Balance
+
+    Track your remaining credits for API calls and premium features.
+
+    **Current Balance:**
+    - View remaining credits
+    - Credits used for API requests and premium widgets
+    - Buy more credits as needed
+
+    **What Uses Credits:**
+    - API Access - Real-time blockchain data and DeFi protocol information
+    - Premium Widgets - Enhanced widgets with real-time updates
+    - Advanced Features - Analytics, exports, and portfolio tools
+
+    <Card title="API Documentation" icon="code" href="https://api-docs.octav.fi">
+      Learn more about API usage and credit consumption
+    </Card>
+
+  </Tab>
+</Tabs>
+
+---
+
+### Price Sources (Coming Soon)
+
+<Info>
+  **Custom Price Configuration** — Configure your preferred price sources and their priority order.
+</Info>
+
+**Available Price Sources:**
+
+<CardGroup cols={2}>
+  <Card title="Octav" icon="star">
+    **Priority 1**
+
+    Octav internal pricing data - Active by default
+  </Card>
+
+  <Card title="DeBank" icon="database">
+    **Priority 2**
+
+    DeBank API pricing data - Requires API key
+  </Card>
+
+  <Card title="DeFiLlama" icon="chart-line">
+    **Priority 3**
+
+    DeFiLlama pricing data - Requires API key
+  </Card>
+
+  <Card title="CoinGecko" icon="coins">
+    **Priority 4**
+
+    CoinGecko API pricing data - Requires API key
+  </Card>
+</CardGroup>
+
+**Features:**
+- Drag to reorder priority
+- Enable/disable specific sources
+- Enter your own API keys for non-Octav sources
+- Fallback to next source if primary unavailable
+- Save custom configuration
+
+<Tip>
+  **API Keys Required** — To use DeBank, DeFiLlama, or CoinGecko as price sources, you'll need to provide your own API keys from those services.
+</Tip>
+
+---
+
+### Token Prices
+
+Set fixed prices for specific tokens across the application.
+
+<Steps>
+  <Step title="Add Fixed Price" icon="plus">
+    Click "Add Fixed Price" to create a new override
+  </Step>
+
+  <Step title="Select Chain" icon="link">
+    Choose the blockchain network
+  </Step>
+
+  <Step title="Enter Contract" icon="code">
+    Paste the token contract address
+  </Step>
+
+  <Step title="Set Price" icon="dollar-sign">
+    Enter your fixed price in USD
+  </Step>
+</Steps>
+
+**Use Cases:**
+- Override incorrect market prices
+- Set custom valuations for unlisted tokens
+- Fix prices for internal accounting
+- Lock prices for reporting periods
+
+---
+
+### Invoices
+
+<Info>
+  View your billing history and download invoice details.
+</Info>
+
+**Invoice History Table:**
+- **Date** - Invoice issue date
+- **Status** - Payment status (paid, pending, failed)
+- **Credits** - Number of credits purchased
+- **Amount** - Total amount paid
+- **Invoice** - Download PDF invoice
+
+**Invoice Actions:**
+- View invoice details
+- Download PDF
+- Resend invoice email
+- Request refund (if applicable)
+
+---
+
+### Credits & Usage
+
+<CardGroup cols={2}>
+  <Card title="Credit Balance" icon="coins">
+    **Current Balance**
+
+    View remaining credits and purchase history
+
+    [Buy More Credits →](https://beta.octav.fi/account/credits)
+  </Card>
+
+  <Card title="API Access" icon="code">
+    **Developer Access**
+
+    Use credits to access real-time blockchain data and DeFi protocol information
+
+    [API Documentation →](https://api-docs.octav.fi)
+  </Card>
+
+  <Card title="Widgets" icon="grid-2">
+    **Premium Widgets**
+
+    Enhanced widgets with real-time updates and advanced features
+  </Card>
+
+  <Card title="Premium Features" icon="star">
+    **Advanced Tools**
+
+    Advanced analytics, CSV/PDF exports, and portfolio management tools
+  </Card>
+</CardGroup>
+
+---
+
+## By Address Settings
+
+Settings that are specific to individual wallet addresses you're tracking.
+
+### Widgets
+
+Manage dashboard widgets for specific addresses.
+
+<Info>
+  **Address-Specific Widgets** — Each tracked address can have its own custom widget configuration.
+</Info>
+
+**Widget Management:**
+1. **Select an address** from the dropdown
+2. View widgets configured for that address
+3. See widget status and expiration dates
+4. Add, edit, or remove widgets per address
+
+**Widget Table:**
+- **Widget** - Widget name and type
+- **Address** - Associated wallet address
+- **Status** - Active, expired, or disabled
+- **Expiration Date** - When widget access expires (for premium widgets)
+
+[Learn more about widgets →](/docs/widget-explorer)
+
+---
+
+### Protocols and Chains
+
+<Info>
+  Manage the protocols and chains activated in your dashboard for each address.
+</Info>
+
+**Per-Address Configuration:**
+- Enable/disable specific chains for each wallet
+- Activate or deactivate protocol tracking
+- Optimize data fetching by tracking only what you need
+- Reduce API usage by limiting tracked protocols
+
+**Benefits:**
+- Faster dashboard loading
+- Lower credit consumption
+- Cleaner, more focused data
+- Better performance for large portfolios
+
+---
+
+## Appearance
+
+### Theme
+
+Customize how Octav looks on your device.
+
+<CardGroup cols={3}>
+  <Card title="Light Mode" icon="sun">
+    **Bright Interface**
+
+    Clean, bright interface ideal for daytime use
+  </Card>
+
+  <Card title="Dark Mode" icon="moon">
+    **Easy on the Eyes**
+
+    Comfortable viewing for extended sessions
+  </Card>
+
+  <Card title="Auto" icon="circle-half-stroke">
+    **System Default**
+
+    Follows your system/browser preferences
+  </Card>
+</CardGroup>
+
+---
+
+## Need Help?
+
+<CardGroup cols={3}>
+
+  <Card title="Contact Support" icon="envelope" href="/docs/contact-us">
+    Email our support team: support@octav.fi
+  </Card>
+
+  <Card title="Join Discord" icon="discord" iconType="brands" href="https://discord.gg/qvcknAz73A">
+    Get help from the community
+  </Card>
+
+  <Card title="Documentation" icon="book" href="/docs/quickstart">
+    Browse our guides and tutorials
+  </Card>
+
+</CardGroup>

@@ -1,0 +1,534 @@
+---
+title: "Home"
+description: "Overview of the Octav Home dashboard"
+---
+
+# Home Dashboard
+
+Your Octav Home dashboard is a powerful, customizable workspace for tracking your crypto portfolio across 90+ blockchains. Create multiple dashboard boards, add widgets, and arrange everything exactly how you want it.
+
+<CardGroup cols={3}>
+
+  <Card title="Multi-Board Support" icon="table-layout">
+    Create up to 10 different dashboards for different portfolios
+  </Card>
+
+  <Card title="Customizable Widgets" icon="grid-2">
+    Add, resize, and arrange widgets to build your perfect view
+  </Card>
+
+  <Card title="Real-Time Updates" icon="bolt">
+    Live portfolio value updates across 90+ chains
+  </Card>
+
+</CardGroup>
+
+---
+
+## Dashboard Boards
+
+<Info>
+  **Multiple Dashboards** — Create up to 10 different dashboard boards for different portfolios, trading strategies, or viewing preferences.
+</Info>
+
+### Board Management
+
+Your dashboard header shows:
+
+<CardGroup cols={2}>
+
+  <Card title="Wallet Selector" icon="wallet">
+    **Active Wallet Display**
+    - Wallet label (e.g., "Hot Wallet 1")
+    - Shortened address (e.g., "0x89d1...ad473a")
+    - Quick wallet switching dropdown
+  </Card>
+
+  <Card title="Last Update" icon="clock">
+    **Sync Status**
+    - Last data refresh timestamp
+    - Manual refresh button
+    - Auto-updates every 30 seconds
+  </Card>
+
+</CardGroup>
+
+### Board Actions Menu
+
+Click the menu button on your board to access:
+
+<AccordionGroup>
+
+  <Accordion title="Add Widget" icon="plus" defaultOpen>
+    Open the Widget Manager to browse and add new widgets to your current board
+  </Accordion>
+
+  <Accordion title="Rename Board" icon="pen">
+    Change the name of your current dashboard board (e.g., "Main Board", "Trading View", "DeFi Dashboard")
+  </Accordion>
+
+  <Accordion title="Duplicate Board" icon="copy">
+    Create a copy of your current board with all widgets and layout intact
+  </Accordion>
+
+  <Accordion title="Reset Layout" icon="arrows-rotate">
+    Restore the default widget layout for this board
+  </Accordion>
+
+  <Accordion title="Create New Board" icon="square-plus">
+    Add a new empty dashboard board (up to 10 boards total)
+  </Accordion>
+
+  <Accordion title="Delete Board" icon="trash">
+    Remove the current board (cannot delete your last remaining board)
+  </Accordion>
+
+</AccordionGroup>
+
+<Tip>
+  **Quick Board Switching** — Use the plus sign next to your board name to quickly create a new board, or click the board name dropdown to switch between existing boards.
+</Tip>
+
+---
+
+## Widget System
+
+<Info>
+  **Drag, Drop, and Resize** — All widgets can be freely moved around your dashboard and resized to your preference. Create the perfect layout for your needs.
+</Info>
+
+### Widget Manager
+
+Click "Add Widget" from your board menu to open the Widget Manager, where you can browse and add widgets to your dashboard.
+
+<Tabs>
+  <Tab title="Available Widgets" icon="grid-2">
+
+    **Widget Categories:**
+
+    <CardGroup cols={2}>
+      <Card title="Overview" icon="eye">
+        Portfolio summaries, net worth displays, and high-level metrics
+      </Card>
+
+      <Card title="Chain Filters" icon="link">
+        Filter and display data by specific blockchains
+      </Card>
+
+      <Card title="Protocols" icon="vault">
+        DeFi protocol positions, yields, and interactions
+      </Card>
+
+      <Card title="Chains" icon="network-wired">
+        Chain-specific balances and activity
+      </Card>
+
+      <Card title="Wallet" icon="wallet">
+        Wallet-level data, transactions, and balances
+      </Card>
+    </CardGroup>
+
+    **Each Widget Shows:**
+    - Widget name and description
+    - Author: Octav Labs
+    - Price (Free, or cost in credits)
+    - License tier (Free, Lite, Pro)
+    - Category tag
+
+  </Tab>
+
+  <Tab title="Active Widgets" icon="check">
+
+    View all widgets currently added to your dashboard:
+
+    - See which widgets are active on the current board
+    - Remove widgets you no longer need
+    - Quick access to widget settings
+    - Reorder widgets in the list
+
+  </Tab>
+
+  <Tab title="Pricing & Licenses" icon="tag">
+
+    ### Widget Pricing
+
+    Widgets come in three tiers:
+
+    <CardGroup cols={3}>
+      <Card title="Free" icon="circle-check">
+        **$0**
+
+        Core portfolio widgets available to all users
+      </Card>
+
+      <Card title="Lite" icon="star">
+        **$10 - $50**
+
+        Enhanced widgets with additional features and data
+      </Card>
+
+      <Card title="Pro" icon="crown">
+        **$25 - $50**
+
+        Advanced analytics, exports, and premium data
+      </Card>
+    </CardGroup>
+
+    **License Types:**
+    - **Free License** - Access to basic widgets
+    - **Lite License** - Unlocks enhanced widgets ($10-50 one-time or monthly)
+    - **Pro License** - Full access to all widgets ($25-50 one-time or monthly)
+
+    <Tip>
+      **Credits Required** — Premium widgets require credits. Purchase credits in your [Account Settings](/docs/account).
+    </Tip>
+
+  </Tab>
+</Tabs>
+
+[Explore all available widgets →](/docs/supported-widgets)
+
+---
+
+## Portfolio Summary Widget
+
+The Portfolio Summary widget is your main overview, showing key portfolio metrics at a glance.
+
+<Tabs>
+  <Tab title="Net Worth" icon="dollar-sign">
+
+    **Total Portfolio Value**
+
+    Your net worth displayed prominently, showing:
+    - Total value in USD
+    - Value in ETH equivalent
+    - 24h change (percentage and absolute)
+
+    **Value Breakdown:**
+    - **Protocols** - Value held in DeFi protocols (percentage of total)
+    - **Wallet** - Value in wallet balances (percentage of total)
+
+  </Tab>
+
+  <Tab title="Distribution Charts" icon="chart-pie">
+
+    **Visual Portfolio Breakdown**
+
+    Three interactive pie charts showing your distribution:
+
+    <CardGroup cols={3}>
+      <Card title="Chains" icon="link">
+        **By Blockchain**
+
+        See which chains hold the most value (Ethereum, Base, Arbitrum, etc.)
+      </Card>
+
+      <Card title="Protocols" icon="vault">
+        **By DeFi Protocol**
+
+        View your exposure across protocols (Aave, Uniswap, Lighter, etc.)
+      </Card>
+
+      <Card title="Wallet vs Protocols" icon="scale-balanced">
+        **Asset Location**
+
+        Percentage split between wallet balances and DeFi positions
+      </Card>
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="Performance Chart" icon="chart-line">
+
+    **Historical Value Tracking**
+
+    Track your portfolio value over time with multiple time ranges:
+
+    **Time Range Options:**
+    - **1D** - Last 24 hours (hourly data)
+    - **1W** - Last 7 days (4-hour data)
+    - **1M** - Last 30 days (daily data)
+    - **3M** - Last 90 days (daily data)
+    - **6M** - Last 180 days (weekly data)
+    - **YTD** - Year to date
+    - **1Y** - Last 12 months (weekly data)
+
+    **Chart Features:**
+    - Interactive hover details
+    - Value at specific timestamps
+    - Percentage change indicators
+    - Export chart as image
+
+  </Tab>
+</Tabs>
+
+---
+
+## Token List
+
+View all your token holdings organized by blockchain.
+
+<Tabs>
+  <Tab title="By Chain" icon="link">
+
+    **Chain-Organized View**
+
+    Tokens grouped by blockchain with:
+    - Chain logo and name
+    - Token symbol and logo
+    - Balance quantity
+    - USD value
+    - 24h price change
+    - Percentage of portfolio
+
+    **Supported Chains:**
+    - Ethereum, Base, Arbitrum, Optimism, Polygon
+    - Solana, BSC, Avalanche, Fantom
+    - And 80+ more chains
+
+  </Tab>
+
+  <Tab title="Filtering" icon="filter">
+
+    **Filter Options:**
+
+    <Steps>
+      <Step title="Chain Filter" icon="link">
+        Show tokens from specific blockchains only
+      </Step>
+
+      <Step title="Value Filter" icon="dollar-sign">
+        Hide small balances below a threshold (dust filter)
+      </Step>
+
+      <Step title="Sort Options" icon="arrow-up-arrow-down">
+        Sort by value, name, change %, or balance
+      </Step>
+
+      <Step title="Search" icon="magnifying-glass">
+        Quickly find specific tokens by name or symbol
+      </Step>
+    </Steps>
+
+  </Tab>
+</Tabs>
+
+---
+
+## Protocol List
+
+Track your DeFi positions across protocols.
+
+<CardGroup cols={2}>
+
+  <Card title="Active Positions" icon="vault">
+    **DeFi Protocol Holdings**
+
+    See all protocols where you have active positions:
+    - Aave V3
+    - Lighter Protocol
+    - Resolv
+    - Hyperliquid
+    - friend.tech
+    - And 10,000+ more protocols
+  </Card>
+
+  <Card title="Position Values" icon="coins">
+    **Real-Time Valuations**
+
+    Each protocol shows:
+    - Total value locked in protocol
+    - Individual position details
+    - APY/APR on yield positions
+    - Claimable rewards
+  </Card>
+
+</CardGroup>
+
+[Learn more about supported protocols →](/docs/supported-blockchains)
+
+---
+
+## Dashboard Settings
+
+Access dashboard settings from the top-right settings button.
+
+<Tabs>
+  <Tab title="Display Currency" icon="money-bill">
+
+    **Display Net Worth In:**
+
+    Choose how your portfolio value is displayed:
+
+    <CardGroup cols={3}>
+      <Card title="ETH" icon="ethereum" iconType="brands">
+        **Ethereum**
+
+        Display value in ETH
+      </Card>
+
+      <Card title="SOL" icon="https://images.octav.fi/chains/solana_icon.svg">
+        **Solana**
+
+        Display value in SOL
+      </Card>
+
+      <Card title="BTC" icon="bitcoin" iconType="brands">
+        **Bitcoin**
+
+        Display value in BTC
+      </Card>
+    </CardGroup>
+
+    Default is USD, but you can switch to crypto-denominated values for a different perspective on your portfolio.
+
+  </Tab>
+
+  <Tab title="Value Threshold" icon="filter">
+
+    **Show Value Above**
+
+    Set a minimum value threshold to hide small balances (dust):
+
+    - Enter a dollar amount (e.g., $1, $10, $100)
+    - Tokens below this value are hidden from your dashboard
+    - Helps declutter your view by hiding dust and airdrops
+    - Does not affect your total portfolio value calculation
+
+    <Tip>
+      **Dust Filtering** — Set a threshold like $1 or $10 to hide low-value tokens and keep your dashboard clean.
+    </Tip>
+
+  </Tab>
+
+  <Tab title="Theme" icon="palette">
+
+    **Appearance Settings**
+
+    <CardGroup cols={3}>
+      <Card title="Light Mode" icon="sun">
+        Clean, bright interface for daytime use
+      </Card>
+
+      <Card title="Dark Mode" icon="moon">
+        Easy on the eyes for extended viewing
+      </Card>
+
+      <Card title="Auto" icon="circle-half-stroke">
+        Follows your system preferences
+      </Card>
+    </CardGroup>
+
+    [More appearance options in Account Settings →](/docs/account#appearance)
+
+  </Tab>
+</Tabs>
+
+---
+
+## Widget Customization
+
+<Info>
+  **Fully Customizable** — Every widget on your dashboard can be moved, resized, and configured to create your perfect workspace.
+</Info>
+
+### Layout Control
+
+<CardGroup cols={2}>
+
+  <Card title="Drag and Drop" icon="up-down-left-right">
+    **Reposition Widgets**
+
+    - Click and hold any widget header
+    - Drag to a new position
+    - Other widgets automatically adjust
+    - Layout saves automatically
+  </Card>
+
+  <Card title="Resize Widgets" icon="expand">
+    **Adjust Widget Size**
+
+    - Hover over widget corners
+    - Drag corner to resize
+    - Snap to grid alignment
+    - Minimum and maximum sizes enforced
+  </Card>
+
+</CardGroup>
+
+### Widget Settings
+
+Each widget has its own settings accessible by clicking the widget's settings icon:
+
+<AccordionGroup>
+
+  <Accordion title="Widget Configuration" icon="gear" defaultOpen>
+    **Customize Display Options**
+    - Time ranges for charts
+    - Display currency preferences
+    - Filter by chains or protocols
+    - Toggle data fields on/off
+  </Accordion>
+
+  <Accordion title="Refresh Settings" icon="arrows-rotate">
+    **Update Frequency**
+    - Auto-refresh interval
+    - Manual refresh button
+    - Last update timestamp
+    - Loading state indicators
+  </Accordion>
+
+  <Accordion title="Remove Widget" icon="trash">
+    **Delete from Board**
+    - Remove widget from current board
+    - Does not affect other boards
+    - Can be re-added anytime from Widget Manager
+  </Accordion>
+
+</AccordionGroup>
+
+---
+
+## Quick Actions
+
+<Steps>
+  <Step title="Create New Board" icon="square-plus">
+    Click the plus sign next to your board name to create a new dashboard
+  </Step>
+
+  <Step title="Add Widgets" icon="plus">
+    Open the board menu and click "Add Widget" to browse available widgets
+  </Step>
+
+  <Step title="Arrange Layout" icon="up-down-left-right">
+    Drag widgets to reposition and resize from corners
+  </Step>
+
+  <Step title="Configure Settings" icon="gear">
+    Use the settings button to adjust display preferences and filters
+  </Step>
+
+  <Step title="Switch Wallets" icon="wallet">
+    Use the wallet selector dropdown to view different addresses
+  </Step>
+</Steps>
+
+---
+
+## Need Help?
+
+<CardGroup cols={3}>
+
+  <Card title="Widget Explorer" icon="grid-2" href="/docs/widget-explorer">
+    Browse all available widgets and their features
+  </Card>
+
+  <Card title="Supported Widgets" icon="book" href="/docs/supported-widgets">
+    Detailed documentation for each widget type
+  </Card>
+
+  <Card title="Join Discord" icon="discord" iconType="brands" href="https://discord.gg/qvcknAz73A">
+    Get help from our community and team
+  </Card>
+
+</CardGroup>

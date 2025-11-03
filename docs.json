@@ -3,8 +3,41 @@
   "theme": "palm",
   "name": "Octav Developer Docs",
   "colors": {
-    "primary": "#0052ff"
+    "primary": "#3F58C7",
+    "light": "#3F58C7",
+    "dark": "#3F58C7"
   },
+  "navbar": {
+    "links": [
+      {
+        "label": "Get Help",
+        "href": "https://discord.gg/qvcknAz73A",
+        "icon": "discord",
+        "iconType": "solid"
+      },
+      {
+        "label": "Dev Portal",
+        "href": "https://data.octav.fi/",
+        "icon": "laptop-code"
+      }
+    ]
+  },
+  "font": {
+    "headings": {
+      "family": "Space Grotesk"
+    },
+    "body": {
+      "family": "Geist"
+    },
+    "code": {
+      "family": "Geist Mono"
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
@@ -13,23 +46,70 @@
           {
             "group": "Get Started",
             "pages": [
-              "get-started/introduction",
-              "get-started/quickstart",
-              "get-started/authentication"
+              "docs/quickstart",
+              "docs/supported-blockchains",
+              "docs/authentication",
+              "docs/changelog"
+            ]
+          },
+          {
+            "group": "Using Octav",
+            "pages": [
+              "docs/account",
+              "docs/home",
+              "docs/address-book",
+              "docs/widget-explorer",
+              "docs/transactions",
+              "docs/reports"
+            ]
+          },
+          {
+            "group": "Widgets",
+            "pages": [
+              "docs/supported-widgets",
+              "docs/build-custom-widgets"
+            ]
+          },
+          {
+            "group": "Brand Kit",
+            "pages": [
+              "docs/brand-guidelines",
+              "docs/logo-files"
+            ]
+          },
+          {
+            "group": "Support",
+            "pages": [
+              "docs/contact-us",
+              "docs/submit-feature"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "api/introduction",
+              "api/authentication",
+              "api/quickstart"
             ]
           },
           {
             "group": "API Reference",
             "pages": [
-              "api/octav-api",
-              "api/examples"
+              "api/endpoints/wallets",
+              "api/endpoints/transactions",
+              "api/endpoints/portfolios"
             ]
           },
           {
             "group": "SDKs",
             "pages": [
-              "sdks/javascript",
-              "sdks/python"
+              "api/sdks/javascript",
+              "api/sdks/python"
             ]
           }
         ]

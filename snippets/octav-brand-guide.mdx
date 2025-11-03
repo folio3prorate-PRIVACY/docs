@@ -1,0 +1,118 @@
+# Octav Brand Guidelines
+
+This snippet provides quick reference to Octav branding elements for use in documentation.
+
+## Colors
+
+### Primary Color
+- **Cool Red**: `#FF1A45` - Used for primary CTAs, links, and key brand elements
+
+### Secondary Colors
+- **UI Blue**: `#3F58C7` - Used for secondary buttons and UI elements
+- **Sky Blue**: `#6BCCD1` - Data visualization and accents
+- **Mint Green**: `#59CE7E` - Success states and positive metrics
+- **Light Gold**: `#F4BD4D` - Warnings and highlights
+- **Mango Orange**: `#F68A54` - Alerts and important callouts
+
+### Dark Theme Colors
+- **Blue Charcoal**: `#091018` - Primary dark background
+- **Deep Sea**: `#06323E` - Secondary dark background
+- **Sea Green**: `#095762` - Dark UI elements
+- **Sea Foam**: `#558789` - Dark accent color
+
+### Neutral Colors
+- **True White**: `#FFFFFF`
+- **Tan**: `#F9F6F3` - Light background alternative
+- **Buff**: `#EFEBE4` - Subtle backgrounds
+
+## Typography
+
+### Headings
+- **H1**: Space Grotesk Medium, 100% line height, -2% letter spacing
+- **H2**: Geist Medium, 100% line height, 0% letter spacing
+- **H3**: Geist Mono Regular Caps, 100% line height, 5% letter spacing
+
+### Body Text
+- **Font**: Geist Regular
+- **Line Height**: 120%
+- **Letter Spacing**: 2%
+
+## Using Branded Components
+
+### Buttons
+
+Import the Button component:
+```jsx
+import { Button } from '/snippets/Button.jsx.mdx'
+```
+
+Usage:
+```jsx
+<Button href="/get-started">Get Started</Button>
+<Button href="/docs" variant="secondary">View Docs</Button>
+<Button href="/api" variant="outline">API Reference</Button>
+```
+
+### Cards
+
+Import the Card component:
+```jsx
+import { Card, CardGrid } from '/snippets/Card.jsx.mdx'
+```
+
+Usage:
+```jsx
+<CardGrid cols={2}>
+  <Card title="Quick Start" description="Get started in minutes" href="/quickstart" />
+  <Card title="API Reference" description="Complete API documentation" href="/api" variant="primary" />
+</CardGrid>
+```
+
+### Alerts
+
+Import the Alert component:
+```jsx
+import { Alert } from '/snippets/Alert.jsx.mdx'
+```
+
+Usage:
+```jsx
+<Alert type="info" title="Information">This is an informational message.</Alert>
+<Alert type="success" title="Success">Operation completed successfully!</Alert>
+<Alert type="warning" title="Warning">Please review before proceeding.</Alert>
+<Alert type="error" title="Error">Something went wrong.</Alert>
+<Alert type="tip" title="Pro Tip">Here's a helpful tip!</Alert>
+```
+
+### Color Palette
+
+Display the complete color palette:
+```jsx
+import { ColorPalette } from '/snippets/ColorPalette.jsx.mdx'
+
+<ColorPalette />
+```
+
+### Custom CSS Classes
+
+The `octav-styles.css` file includes utility classes:
+
+- `.octav-btn-primary` - Primary button style
+- `.octav-btn-secondary` - Secondary button style
+- `.octav-btn-outline` - Outline button style
+- `.octav-card` - Card component with hover effects
+- `.octav-accent-1` through `.octav-accent-6` - Accent colors
+- `.octav-bg-accent-1` through `.octav-bg-accent-6` - Accent backgrounds
+
+## Logo Assets
+
+Logos are available in the following locations:
+- **Main Logo (Light)**: `/logo/light.svg`
+- **Main Logo (Dark)**: `/logo/dark.svg`
+- **Icon**: `/images/octav-icon.svg`
+- **Octav API**: `/images/octav-api.svg`
+- **Octav Pro**: `/images/octav-pro.svg`
+
+## Color Reference JSON
+
+For programmatic access to brand colors, see `/snippets/octav-brand.json`

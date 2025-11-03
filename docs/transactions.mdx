@@ -1,0 +1,1300 @@
+---
+title: "Transactions"
+description: "View and analyze your transaction history"
+---
+
+# Transactions
+
+Comprehensive transaction history and analytics across all your wallets and blockchains. Track every swap, transfer, bridge, and DeFi interaction in one unified view.
+
+<CardGroup cols={3}>
+
+  <Card title="Multi-Chain View" icon="link">
+    Aggregate transactions across 90+ blockchains
+  </Card>
+
+  <Card title="Advanced Filters" icon="filter">
+    Filter by address, type, network, protocol, category, date, status, and notes
+  </Card>
+
+  <Card title="Transaction Review" icon="check-circle">
+    Validate and categorize transactions for tax and accounting
+  </Card>
+
+</CardGroup>
+
+---
+
+## Transaction List View
+
+The Transactions page provides a complete view of your blockchain activity with powerful search and filtering capabilities.
+
+### Search & Filter Bar
+
+<Tabs>
+  <Tab title="Search" icon="magnifying-glass">
+
+    **Search transactions by:**
+    - Transaction hash
+    - Token name or symbol
+    - Wallet address
+    - ENS names
+    - Protocol names
+
+    Start typing to instantly filter your transaction list.
+
+  </Tab>
+
+  <Tab title="Address Filter" icon="wallet">
+
+    **Filter by Wallet Address:**
+    - Select one or multiple addresses
+    - Search addresses by label or address
+    - View transactions for specific wallets only
+    - Address dropdown shows:
+      - Wallet label
+      - Shortened address (e.g., "0x89...473a")
+      - Wallet icon/avatar
+
+  </Tab>
+
+  <Tab title="Type Filter" icon="tag">
+
+    **Transaction Types:**
+    - **deposit** - Incoming transfers
+    - **withdraw** - Outgoing transfers
+    - **swap** - Token swaps on DEXs
+    - **bridgein** - Incoming bridge transfers
+    - **bridgeout** - Outgoing bridge transfers
+    - And more protocol-specific types
+
+  </Tab>
+
+  <Tab title="Network Filter" icon="link">
+
+    **Filter by Blockchain:**
+    - Select specific chains (Ethereum, Base, Arbitrum, Binance, Solana, etc.)
+    - Multi-select supported
+    - Filter transactions to specific networks only
+
+  </Tab>
+
+  <Tab title="Protocol Filter" icon="vault">
+
+    **Filter by Protocol:**
+    - Wallet transactions
+    - DeFi protocols (Uniswap, Aave, Curve, etc.)
+    - Bridge protocols (Debridge, Across V2, etc.)
+    - Exchange protocols
+
+  </Tab>
+
+  <Tab title="Category Filter" icon="folder">
+
+    **Categorize Transactions:**
+    - Custom categories for organization
+    - Tax categories
+    - Business vs personal
+    - Multi-select categories
+
+  </Tab>
+
+  <Tab title="Date Range" icon="calendar">
+
+    **Filter by Date:**
+    - Pick a specific date range
+    - Quick filters (Today, This Week, This Month, etc.)
+    - Custom date picker for precise ranges
+
+  </Tab>
+
+  <Tab title="Status Filter" icon="check">
+
+    **Octav Status:**
+    - **To be reviewed** - Needs validation
+    - **Validated** - Confirmed and categorized
+    - **Flagged** - Requires attention
+    - Filter by validation status
+
+  </Tab>
+
+  <Tab title="Notes Filter" icon="note-sticky">
+
+    **Filter by Notes:**
+    - Transactions with notes
+    - Transactions without notes
+    - Search note content
+
+  </Tab>
+</Tabs>
+
+**Clear Filters** — Reset all filters with one click to return to full transaction list.
+
+---
+
+## Transaction Table
+
+The transaction table shows your complete transaction history with sortable columns.
+
+### Table Columns
+
+<AccordionGroup>
+  <Accordion title="Date" icon="calendar" defaultOpen>
+    **Transaction Timestamp:**
+    - Full date and time (e.g., "Sep 18, 2025 2:57:11 PM")
+    - Sortable by newest or oldest first
+    - Timezone adjusted to your local time
+
+  </Accordion>
+
+  <Accordion title="Type" icon="tag">
+    **Transaction Type Badge:**
+    - Transaction type (deposit, withdraw, swap, bridgein, etc.)
+    - Protocol icon and name (Wallet, Debridge, Across V2, etc.)
+    - Chain icon (Base, Arbitrum, Linea, Binance, etc.)
+    - Colored badges for quick identification
+
+    **Common Types:**
+    - **deposit** - Incoming transfers to your wallet
+    - **withdraw** - Outgoing transfers from your wallet
+    - **swap** - Token swaps on DEXs
+    - **bridgein** - Incoming bridge transfers
+    - **bridgeout** - Outgoing bridge transfers
+
+  </Accordion>
+
+  <Accordion title="From / To" icon="arrows-left-right">
+    **Address Information:**
+    - **From address** - Sender wallet (shortened format: 0x8245...4e6db0)
+    - **To address** - Recipient wallet or labeled wallet name
+    - Wallet labels if address is in your Address Book (e.g., "Hot Wallet 1")
+    - Click address to copy or view details
+
+  </Accordion>
+
+  <Accordion title="Assets" icon="coins">
+    **Token Details:**
+    - Token symbol and amount (e.g., "+1.0000" or "-0.0000")
+    - USD value at time of transaction (e.g., "($0.00)")
+    - Positive (+) for incoming, negative (-) for outgoing
+    - Token icon displayed
+    - **Unavailable** status if data not yet synced
+
+  </Accordion>
+
+  <Accordion title="Fees" icon="fire">
+    **Transaction Fees:**
+    - Gas fees paid in native token
+    - USD value of fees (e.g., "&lt;0.0001 ($0.01)")
+    - Fee icon displayed
+    - Shows actual network fees paid
+
+  </Accordion>
+
+  <Accordion title="Octav Status" icon="check-circle">
+    **Validation Status:**
+    - **To be reviewed** - Transaction needs validation
+    - **Validated** - Transaction confirmed and categorized
+    - Status badge with color coding
+    - Click to change status
+
+  </Accordion>
+
+  <Accordion title="Categories & Notes" icon="note-sticky">
+    **Organization:**
+    - Custom categories applied to transaction
+    - Personal notes attached to transaction
+    - Tags for organization and tax purposes
+    - Click to add or edit
+
+  </Accordion>
+</AccordionGroup>
+
+### Transaction Actions
+
+Each transaction row has action buttons:
+
+<CardGroup cols={2}>
+  <Card title="View on Explorer" icon="external-link">
+    Opens the transaction on the blockchain explorer (Etherscan, Basescan, etc.)
+  </Card>
+
+  <Card title="Open Menu" icon="ellipsis">
+    **Additional Actions:**
+    - View full transaction details
+    - Add notes
+    - Add categories
+    - Mark as validated
+    - Review later
+    - Copy transaction hash
+  </Card>
+</CardGroup>
+
+### Sort Options
+
+**Sort transactions by:**
+- **Newest** (default) - Most recent first
+- **Oldest** - Historical view
+- Date ascending/descending
+- Value high to low
+- Status
+
+**Columns Button** - Customize which columns to display in the table
+
+---
+
+## Transaction Details Panel
+
+Click any transaction to view comprehensive details in a side panel.
+
+<Tabs>
+  <Tab title="Transaction Info" icon="circle-info">
+
+    ### Basic Information
+
+    <CardGroup cols={2}>
+      <Card title="Date & Time" icon="calendar">
+        Full timestamp of when the transaction was confirmed (e.g., "Sep 18, 2025 at 2:57:11 PM")
+      </Card>
+
+      <Card title="Network" icon="link">
+        Blockchain where the transaction occurred with chain logo (Base, Arbitrum, etc.)
+      </Card>
+
+      <Card title="Type" icon="tag">
+        Transaction type badge (DEPOSIT, WITHDRAW, SWAP, etc.)
+      </Card>
+
+      <Card title="Protocol" icon="vault">
+        Protocol involved (Wallet, Debridge, Across V2, etc.) with protocol icon
+      </Card>
+
+      <Card title="Transaction Hash" icon="hashtag">
+        Full transaction hash with copy button (e.g., "0x9fd7...752e")
+      </Card>
+
+      <Card title="Octav Status" icon="check-circle">
+        Current validation status (To be reviewed, Validated, etc.)
+      </Card>
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="Addresses" icon="wallet">
+
+    ### From and To
+
+    **From Address:**
+    - Sender wallet address (full or shortened)
+    - Wallet label if in your Address Book
+    - Click to copy address
+    - View on blockchain explorer
+
+    **To Address:**
+    - Recipient wallet address
+    - Wallet label if in your Address Book (e.g., "Hot Wallet 1")
+    - Click to copy address
+    - View on blockchain explorer
+
+  </Tab>
+
+  <Tab title="Assets" icon="coins">
+
+    ### Assets In/Out Table
+
+    Detailed breakdown of all assets involved in the transaction:
+
+    **Table Columns:**
+    - **Asset**: Token icon, name, and symbol
+    - **Quantity**: Amount transferred
+    - **Price**: Price per token at time of transaction
+    - **Total Value**: USD value of transferred amount
+    - **From**: Source address (shortened)
+    - **To**: Destination address (shortened)
+    - **Categories**: Applied transaction categories
+    - **Notes**: Personal notes field (add note button)
+
+    **Assets In (X)** - Number of incoming assets shown in parentheses
+
+    Each asset row shows:
+    - Token icon and name
+    - Positive/negative quantity indicator
+    - Transaction flow direction (From → To)
+    - Add note button for per-asset notes
+
+  </Tab>
+
+  <Tab title="Actions" icon="bolt">
+
+    ### Transaction Actions
+
+    <Steps>
+      <Step title="Add Categories" icon="folder">
+        Organize transactions with custom categories for tax and accounting purposes
+      </Step>
+
+      <Step title="Add Notes" icon="note-sticky">
+        Add personal notes or memos to document transaction context
+      </Step>
+
+      <Step title="Review Later" icon="clock">
+        Mark transaction for later review - appears in "To be reviewed" filter
+      </Step>
+
+      <Step title="Validate" icon="check">
+        Mark transaction as validated - confirms accuracy and categorization
+      </Step>
+    </Steps>
+
+  </Tab>
+</Tabs>
+
+---
+
+## Transaction Types
+
+<Tabs>
+  <Tab title="Transfers" icon="arrow-right-arrow-left">
+
+    ### Send, Receive, and Token Transfers
+
+    <AccordionGroup>
+
+      <Accordion title="Standard Transfers" icon="paper-plane" defaultOpen>
+        **Send and Receive Transactions:**
+        - Native currency transfers (ETH, SOL, MATIC, etc.)
+        - Token transfers (ERC-20, SPL, BEP-20)
+        - Multi-token transfers in single transaction
+        - Cross-chain transfers via bridges
+      </Accordion>
+
+      <Accordion title="NFT Transfers" icon="image">
+        **NFT Movement:**
+        - ERC-721 transfers (single NFTs)
+        - ERC-1155 transfers (multi-token)
+        - Solana NFT transfers (Metaplex)
+        - Batch NFT transfers
+      </Accordion>
+
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Swaps" icon="arrows-rotate">
+
+    ### Decentralized Exchange Transactions
+
+    **DEX Swap Tracking:**
+    - Uniswap, SushiSwap, PancakeSwap
+    - 1inch, Paraswap, Matcha aggregators
+    - Multi-hop swaps (token A → token B → token C)
+    - Limit orders and advanced order types
+    - Cross-chain swaps and bridge transactions
+    - Slippage and price impact display
+
+    **Swap Details Shown:**
+    - Tokens in/out with amounts
+    - Exchange rate at execution
+    - Price impact percentage
+    - Slippage tolerance
+    - DEX router used
+    - Gas fees in native token and USD
+
+  </Tab>
+
+  <Tab title="DeFi Actions" icon="vault">
+
+    ### DeFi Protocol Interactions
+
+    <CardGroup cols={2}>
+
+      <Card title="Staking" icon="layer-group">
+        **Staking Operations:**
+        - Stake tokens
+        - Unstake/withdraw
+        - Claim rewards
+        - Re-stake (compound)
+      </Card>
+
+      <Card title="Liquidity" icon="droplet">
+        **LP Provision:**
+        - Add liquidity
+        - Remove liquidity
+        - Collect fees
+        - Rebalance positions
+      </Card>
+
+      <Card title="Lending/Borrowing" icon="hand-holding-dollar">
+        **Lending Protocols:**
+        - Supply assets
+        - Borrow against collateral
+        - Repay loans
+        - Liquidations
+      </Card>
+
+      <Card title="Yield Farming" icon="seedling">
+        **Farming Activity:**
+        - Deposit to farms
+        - Harvest rewards
+        - Compound earnings
+        - Exit positions
+      </Card>
+
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="NFT Actions" icon="images">
+
+    ### NFT Marketplace Interactions
+
+    **Supported NFT Operations:**
+    - **Minting** - Primary and secondary mints
+    - **Buying** - Marketplace purchases (OpenSea, Blur, Magic Eden)
+    - **Selling** - NFT sales with royalty tracking
+    - **Listing/Delisting** - Marketplace listing changes
+    - **Transferring** - Gifting and moving NFTs
+    - **Bidding** - Offer placement and acceptance
+
+    **NFT Transaction Details:**
+    - Collection name and token ID
+    - Rarity rank (if available)
+    - Floor price at time of transaction
+    - Marketplace and royalty fees
+    - Seller and buyer addresses
+
+  </Tab>
+
+  <Tab title="Contract Interactions" icon="file-code">
+
+    ### Smart Contract Calls
+
+    **Advanced Interactions:**
+    - Direct smart contract calls
+    - Token approvals (ERC-20, ERC-721)
+    - Multi-sig operations and signatures
+    - Contract deployments
+    - Governance voting
+    - Protocol-specific functions
+
+    **Contract Details:**
+    - Contract address with verified badge
+    - Contract name (if verified)
+    - Function called
+    - Input parameters
+    - Event logs
+    - Internal transactions
+
+  </Tab>
+</Tabs>
+
+---
+
+## Search & Filter
+
+<Tip>
+  **Combine Filters** — Use multiple filters simultaneously for precise transaction discovery. All filters work together with AND logic.
+</Tip>
+
+<Tabs>
+  <Tab title="Search" icon="magnifying-glass">
+
+    ### Powerful Text Search
+
+    Search transactions by any of these fields:
+
+    <AccordionGroup>
+
+      <Accordion title="By Transaction Hash" icon="hashtag" defaultOpen>
+        Paste the full or partial transaction hash to find specific transactions
+      </Accordion>
+
+      <Accordion title="By Token" icon="coins">
+        - Token symbol (ETH, USDC, MATIC)
+        - Token name (Ethereum, USD Coin)
+        - Token contract address
+      </Accordion>
+
+      <Accordion title="By Address" icon="wallet">
+        - Wallet address (full or partial)
+        - ENS name (vitalik.eth)
+        - Smart contract address
+        - Address book labels
+      </Accordion>
+
+      <Accordion title="By Smart Contract" icon="file-contract">
+        - Contract name (Uniswap V3 Router)
+        - Protocol name (Aave, Compound)
+        - Contract address
+      </Accordion>
+
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Filters" icon="filter">
+
+    ### Advanced Filtering Options
+
+    <AccordionGroup>
+
+      <Accordion title="By Type" icon="tag" defaultOpen>
+        **Transaction Type Filter:**
+        - Select one or multiple types
+        - Filter by category (DeFi, NFT, Transfer)
+        - Exclude specific types
+        - Quick filters (Swaps Only, Transfers Only)
+      </Accordion>
+
+      <Accordion title="By Date" icon="calendar">
+        **Date Range Options:**
+        - Today, Yesterday
+        - Last 7/30/90 days
+        - Custom date range picker
+        - Specific month/year
+        - Quarter selection (Q1, Q2, Q3, Q4)
+      </Accordion>
+
+      <Accordion title="By Chain" icon="link">
+        **Blockchain Filter:**
+        - Single chain selection
+        - Multi-chain selection (hold Ctrl/Cmd)
+        - Cross-chain view
+        - Show only specific L1s or L2s
+      </Accordion>
+
+      <Accordion title="By Wallet" icon="wallet">
+        **Wallet Selection:**
+        - View single wallet
+        - Multiple wallet selection
+        - Portfolio-level view
+        - Wallet group filtering
+      </Accordion>
+
+      <Accordion title="By Value" icon="dollar-sign">
+        **Value Thresholds:**
+        - Minimum value (e.g., greater than $100)
+        - Maximum value (e.g., less than $10,000)
+        - Specific value ranges
+        - High-value transactions only
+      </Accordion>
+
+      <Accordion title="By Status" icon="circle-check">
+        **Transaction Status:**
+        - Confirmed ✅
+        - Pending ⏳
+        - Failed ❌
+        - All statuses
+      </Accordion>
+
+      <Accordion title="By Token" icon="coins">
+        **Token Filter:**
+        - Filter by specific token
+        - Multiple token selection
+        - Token categories (stablecoins, governance, etc.)
+        - Exclude tokens
+      </Accordion>
+
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Sort" icon="arrow-down-wide-short">
+
+    ### Sorting Options
+
+    Organize your transaction list:
+
+    - **Newest First** (default) - Most recent transactions
+    - **Oldest First** - Historical view
+    - **Highest Value** - Largest transactions first
+    - **Lowest Value** - Smallest transactions first
+    - **Most Gas** - Highest fees paid
+    - **By Token** - Alphabetical by token symbol
+
+  </Tab>
+</Tabs>
+
+---
+
+## Transaction Details
+
+<Tabs>
+  <Tab title="Overview" icon="circle-info">
+
+    ### Detailed Transaction View
+
+    Click any transaction to see comprehensive details:
+
+    <CardGroup cols={2}>
+
+      <Card title="Basic Info" icon="info">
+        **Transaction Essentials:**
+        - Full transaction hash (copy button)
+        - Block number with confirmations
+        - Timestamp (date and time)
+        - Transaction status badge
+        - Chain/network
+      </Card>
+
+      <Card title="Gas & Fees" icon="fire">
+        **Cost Analysis:**
+        - Gas used vs gas limit
+        - Gas price (gwei)
+        - Total fee in native token
+        - Total fee in USD
+        - Fee tier indicator (low/medium/high)
+      </Card>
+
+      <Card title="Technical Details" icon="code">
+        **Advanced Info:**
+        - Nonce value
+        - Position in block
+        - Transaction type (legacy, EIP-1559)
+        - Max priority fee
+        - Max fee per gas
+      </Card>
+
+      <Card title="Input Data" icon="brackets-curly">
+        **Contract Data:**
+        - Function called
+        - Input parameters
+        - Decoded data (if verified)
+        - Raw hex data
+      </Card>
+
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="Asset Flow" icon="arrows-turn-right">
+
+    ### Visual Asset Flow
+
+    **Interactive Flow Diagram:**
+
+    Clear visualization showing:
+    - Tokens sent (red arrows)
+    - Tokens received (green arrows)
+    - Multi-step swap paths
+    - Complex DeFi interactions
+    - LP token movements
+
+    **For Swap Transactions:**
+    ```
+    1.5 ETH → [Uniswap V3] → 2,850 USDC
+    ```
+
+    **For Complex DeFi:**
+    ```
+    100 USDC → [Curve] → LP Token → [Convex] → Staked Position
+    ```
+
+  </Tab>
+
+  <Tab title="Related Transactions" icon="link">
+
+    ### Transaction Grouping
+
+    **Grouped Related Transactions:**
+    - Approval + Swap (grouped together)
+    - Multi-step operations
+    - Sequential DeFi interactions
+    - Multi-sig transaction stages
+    - Failed transaction attempts
+
+    **Internal Transactions:**
+    - View all internal calls
+    - Token transfers within transaction
+    - Multi-send operations
+    - Contract-to-contract calls
+
+  </Tab>
+
+  <Tab title="Explorer Links" icon="external-link">
+
+    ### Blockchain Explorers
+
+    Quick links to view transactions on chain-specific explorers:
+
+    <CardGroup cols={2}>
+
+      <Card title="Ethereum" icon="ethereum" iconType="brands">
+        Etherscan, Blockscout
+      </Card>
+
+      <Card title="Solana" icon="s">
+        Solscan, Solana Explorer
+      </Card>
+
+      <Card title="Base" icon="cube">
+        Basescan
+      </Card>
+
+      <Card title="Polygon" icon="link">
+        PolygonScan
+      </Card>
+
+      <Card title="Arbitrum" icon="infinity">
+        Arbiscan
+      </Card>
+
+      <Card title="Optimism" icon="circle-nodes">
+        Optimistic Etherscan
+      </Card>
+
+    </CardGroup>
+
+  </Tab>
+</Tabs>
+
+---
+
+## Transaction Tags
+
+<Info>
+  **Organization** — Add custom tags to transactions for better categorization, tax reporting, and analysis.
+</Info>
+
+<Tabs>
+  <Tab title="Custom Tags" icon="tags">
+
+    ### Tag Your Transactions
+
+    **Pre-Built Tag Categories:**
+
+    <CardGroup cols={2}>
+
+      <Card title="Tax Categories" icon="file-invoice-dollar">
+        - Personal expenses
+        - Business transactions
+        - Investment activity
+        - Income (staking, airdrops)
+      </Card>
+
+      <Card title="Transaction Nature" icon="tag">
+        - Gift sent/received
+        - Donation
+        - Lost funds
+        - Stolen/compromised
+      </Card>
+
+      <Card title="Purpose" icon="bullseye">
+        - Trading
+        - Long-term hold
+        - Testing
+        - Migration
+      </Card>
+
+      <Card title="Custom Tags" icon="plus">
+        - Create unlimited custom tags
+        - Color coding
+        - Icon selection
+        - Description notes
+      </Card>
+
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="Tag Management" icon="gear">
+
+    ### Manage Tags
+
+    **Tag Operations:**
+    - Create custom tags with colors and icons
+    - Tag single transactions or bulk tag
+    - Filter transaction list by tags
+    - Generate tag-based reports
+    - Export transactions by tag
+    - Share tags across team (Team plan)
+
+    **Auto-Tagging Rules:**
+    Set up automatic tagging based on:
+    - Transaction type (auto-tag all swaps)
+    - Counterparty address
+    - Value threshold (tag transactions over $10k)
+    - Specific tokens involved
+    - Smart contract interactions
+
+  </Tab>
+
+  <Tab title="Tag-Based Reporting" icon="chart-simple">
+
+    ### Reporting by Tags
+
+    Use tags to generate focused reports:
+    - Tax reports by category tags
+    - Business expense summaries
+    - Gift tracking for tax purposes
+    - Investment performance by tag
+    - Protocol-specific analytics
+
+  </Tab>
+</Tabs>
+
+---
+
+## Analytics
+
+<Tabs>
+  <Tab title="Overview" icon="chart-mixed">
+
+    ### Transaction Analytics Dashboard
+
+    **Key Metrics:**
+
+    <CardGroup cols={2}>
+
+      <Card title="Volume Stats" icon="chart-column">
+        - Total transaction count
+        - Transaction volume (USD)
+        - Average transaction size
+        - Transaction frequency
+      </Card>
+
+      <Card title="Gas Analysis" icon="fire">
+        - Total gas spent (all chains)
+        - Average gas per transaction
+        - Most expensive transactions
+        - Gas optimization score
+      </Card>
+
+      <Card title="Chain Distribution" icon="link">
+        - Transactions per chain
+        - Volume per chain
+        - Gas costs by chain
+        - Chain activity trends
+      </Card>
+
+      <Card title="Type Breakdown" icon="chart-pie">
+        - Percentage by type
+        - Most common interactions
+        - DeFi vs NFT vs Transfers
+        - Growth trends by type
+      </Card>
+
+    </CardGroup>
+
+  </Tab>
+
+  <Tab title="Charts" icon="chart-area">
+
+    ### Visual Analytics
+
+    <AccordionGroup>
+
+      <Accordion title="By Type Chart" icon="chart-pie" defaultOpen>
+        **Transaction Type Distribution:**
+        - Pie or donut chart
+        - Bar chart view
+        - Time-series by type
+        - Hover for details
+      </Accordion>
+
+      <Accordion title="By Chain Chart" icon="link">
+        **Multi-Chain Activity:**
+        - Activity across all chains
+        - Chain comparison over time
+        - Cost analysis per chain
+        - Network preference trends
+      </Accordion>
+
+      <Accordion title="Gas Analysis" icon="fire">
+        **Gas Spending Insights:**
+        - Total gas spent over time
+        - Gas breakdown by chain
+        - Average gas price trends
+        - Optimization opportunities
+      </Accordion>
+
+      <Accordion title="Timeline View" icon="calendar">
+        **Activity Calendar:**
+        - Transaction heatmap
+        - Daily/weekly/monthly patterns
+        - Busiest periods identification
+        - Activity streaks
+      </Accordion>
+
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Counterparties" icon="users">
+
+    ### Top Interactions
+
+    See your most frequent transaction partners:
+
+    **Metrics Shown:**
+    - Most frequent addresses (by count)
+    - Highest value counterparties (by USD)
+    - Protocol usage statistics
+    - Exchange deposit frequency
+    - Smart contract interactions
+
+    **Insights Provided:**
+    - Your most-used protocols
+    - Favorite DEXs
+    - Regular payment recipients
+    - DeFi position concentrations
+
+  </Tab>
+</Tabs>
+
+---
+
+## Export Transactions
+
+<Tabs>
+  <Tab title="Export Formats" icon="download">
+
+    ### Available Export Formats
+
+    <AccordionGroup>
+
+      <Accordion title="CSV Export" icon="file-csv" defaultOpen>
+        **Spreadsheet Compatible:**
+        - All transaction data included
+        - Custom column selection
+        - Date range filtering
+        - Tag-based exports
+        - Compatible with Excel, Google Sheets
+        - UTF-8 encoding for all characters
+      </Accordion>
+
+      <Accordion title="PDF Report" icon="file-pdf">
+        **Professional Document:**
+        - Formatted transaction report
+        - Summary statistics at top
+        - Charts and visualizations
+        - Custom branding (Pro plan)
+        - Page numbers and table of contents
+        - Printable format
+      </Accordion>
+
+      <Accordion title="JSON Export" icon="code">
+        **Developer Friendly:**
+        - Raw transaction data
+        - API-compatible format
+        - Bulk data export
+        - Programmatic access
+        - Nested structure with full details
+      </Accordion>
+
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Tax Exports" icon="file-invoice-dollar">
+
+    ### Tax Software Integration
+
+    Specialized exports for tax preparation:
+
+    **Supported Formats:**
+    - **CoinTracker** - Direct CSV import
+    - **Koinly** - Transaction format
+    - **TaxBit** - Enterprise format
+    - **TokenTax** - Full integration
+    - **CryptoTaxCalculator** - Compatible export
+    - **ZenLedger** - Transaction import
+    - **Generic** - IRS Form 8949 compatible
+
+    **Tax Export Features:**
+    - Capital gains/losses calculated
+    - Income transactions flagged
+    - Cost basis tracking
+    - Tax lot identification
+    - Multi-year support
+
+    <Card title="Learn More About Tax Reports" icon="book" href="/docs/reports">
+      Complete guide to tax reporting and compliance
+    </Card>
+
+  </Tab>
+
+  <Tab title="Export Settings" icon="gear">
+
+    ### Customize Your Export
+
+    **Export Options:**
+    - Select date range
+    - Choose specific wallets
+    - Filter by transaction types
+    - Include/exclude failed transactions
+    - Select chains to include
+    - Choose column fields
+    - Set timezone for timestamps
+
+    **Scheduled Exports (Pro/Team):**
+    - Daily transaction exports
+    - Weekly summaries
+    - Monthly reports
+    - Automatic email delivery
+    - Cloud storage integration
+
+  </Tab>
+</Tabs>
+
+---
+
+## Real-Time Updates
+
+<Info>
+  **Live Monitoring** — Octav uses WebSocket connections for instant transaction notifications. New transactions appear automatically without refreshing.
+</Info>
+
+<Tabs>
+  <Tab title="Live Feed" icon="bolt">
+
+    ### Automatic Transaction Updates
+
+    **Real-Time Features:**
+    - New transactions appear instantly
+    - WebSocket connection for zero-latency
+    - Pending transaction monitoring
+    - Confirmation count updates
+    - Status changes reflected immediately
+
+    **Visual Indicators:**
+    - 🟢 New transaction highlight
+    - ⏳ Pending spinner animation
+    - ✅ Confirmed checkmark
+    - ❌ Failed red badge
+
+  </Tab>
+
+  <Tab title="Notifications" icon="bell">
+
+    ### Transaction Alerts
+
+    Get notified about important transactions:
+
+    <AccordionGroup>
+
+      <Accordion title="Incoming Transactions" icon="arrow-down" defaultOpen>
+        Alert when you receive tokens or NFTs
+      </Accordion>
+
+      <Accordion title="Large Outgoing" icon="arrow-up">
+        Warning for transactions above your threshold
+      </Accordion>
+
+      <Accordion title="Failed Transactions" icon="xmark">
+        Immediate notification of failed transactions
+      </Accordion>
+
+      <Accordion title="Confirmations" icon="check-double">
+        Track confirmations for high-value transactions
+      </Accordion>
+
+      <Accordion title="Price Impact" icon="triangle-exclamation">
+        Alert on swaps with high slippage or price impact
+      </Accordion>
+
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Settings" icon="gear">
+
+    ### Configure Notifications
+
+    **Notification Preferences:**
+    - Enable/disable real-time updates
+    - Set notification thresholds
+    - Choose notification methods (email, push, browser)
+    - Configure quiet hours
+    - Per-wallet notification settings
+    - Alert sound options
+
+  </Tab>
+</Tabs>
+
+---
+
+## Transaction Management
+
+<AccordionGroup>
+
+  <Accordion title="Bulk Actions" icon="list-check" defaultOpen>
+
+    **Perform Actions on Multiple Transactions:**
+
+    Select multiple transactions and:
+    - Apply tags in bulk
+    - Export selected transactions
+    - Mark as reviewed
+    - Add to tax reports
+    - Hide from view
+    - Create transaction groups
+
+    **Selection Tools:**
+    - Select all on page
+    - Select all matching filter
+    - Range selection (Shift+Click)
+    - Invert selection
+
+  </Accordion>
+
+  <Accordion title="Transaction Notes" icon="note-sticky">
+
+    **Add Context to Transactions:**
+
+    - Custom notes per transaction
+    - Attach receipts or documents
+    - Link related transactions
+    - Internal memo field
+    - Markdown formatting support
+    - Team-shared notes (Team plan)
+
+    **Use Cases:**
+    - Document business purposes
+    - Tax preparation notes
+    - Trading strategy notes
+    - Error documentation
+
+  </Accordion>
+
+  <Accordion title="Hide Transactions" icon="eye-slash">
+
+    **Transaction Privacy:**
+
+    - Hide specific transactions from view
+    - Archive old transactions
+    - Bulk hide operations
+    - Unhide anytime
+    - Hidden transactions excluded from reports
+    - Hidden count badge
+
+  </Accordion>
+
+</AccordionGroup>
+
+---
+
+## Privacy & Security
+
+<Warning>
+  **Read-Only Access** — Octav never stores your private keys. We only read public blockchain data. You cannot sign transactions through Octav.
+</Warning>
+
+<Tabs>
+  <Tab title="Data Privacy" icon="user-shield">
+
+    **Your Transaction Data is Secure:**
+
+    - View-only access to blockchain data
+    - No transaction signing capability
+    - Encrypted storage of tags and notes
+    - Private notes never shared publicly
+    - Optional local-only note storage
+    - GDPR and CCPA compliant
+
+  </Tab>
+
+  <Tab title="Address Privacy" icon="mask">
+
+    **Control Your Privacy:**
+
+    - Label addresses privately
+    - Hide sensitive transactions
+    - Archive old activity
+    - Bulk privacy operations
+    - Address book labels remain private
+    - Optional public profile (coming soon)
+
+  </Tab>
+</Tabs>
+
+---
+
+## Advanced Features
+
+<AccordionGroup>
+
+  <Accordion title="Multi-Wallet View" icon="layer-group" defaultOpen>
+
+    **Aggregate or Separate:**
+    - Combined view across all wallets
+    - Per-wallet breakdown available
+    - Wallet comparison mode
+    - Portfolio-level analysis
+    - Wallet group filtering
+  </Accordion>
+
+  <Accordion title="Cross-Chain Tracking" icon="arrows-left-right">
+
+    **Bridge and Cross-Chain Transactions:**
+    - Automatic bridge transaction detection
+    - Cross-chain swap tracking
+    - Wrapped token movements
+    - Multi-chain protocol tracking
+    - Bridge fee analysis
+  </Accordion>
+
+  <Accordion title="MEV Detection" icon="robot">
+
+    **Identify MEV Activity:**
+    - Sandwich attack detection
+    - Front-running identification
+    - Liquidation tracking
+    - Arbitrage opportunity analysis
+    - MEV impact on your transactions
+  </Accordion>
+
+  <Accordion title="Transaction Replay" icon="clock-rotate-left">
+
+    **Historical Analysis:**
+    - Replay historical transactions
+    - What-if analysis
+    - Price impact at different times
+    - Alternative routing comparison
+    - Historical gas price context
+  </Accordion>
+
+</AccordionGroup>
+
+---
+
+## Performance
+
+<Info>
+  **Optimized for Large Datasets** — Octav efficiently handles wallets with thousands of transactions using virtual scrolling and smart caching.
+</Info>
+
+**Performance Features:**
+- Paginated loading for large transaction sets
+- Infinite scroll for seamless browsing
+- Virtual scrolling for smooth performance
+- Background data syncing
+- Smart caching to reduce load times
+- Progressive loading of transaction details
+
+**Sync Status:**
+- Last sync timestamp displayed
+- Manual refresh button available
+- Auto-sync settings configurable
+- Sync progress indicator
+- Per-chain sync status
+
+---
+
+## Learn More
+
+<CardGroup cols={3}>
+
+  <Card title="Generate Reports" icon="file-chart-column" href="/docs/reports">
+    Create tax reports and analytics
+  </Card>
+
+  <Card title="Transaction API" icon="code" href="/api/endpoints/transactions">
+    Programmatic access to transactions
+  </Card>
+
+  <Card title="Address Book" icon="address-book" href="/docs/address-book">
+    Label and organize addresses
+  </Card>
+
+</CardGroup>
