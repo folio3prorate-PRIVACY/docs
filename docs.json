@@ -49,6 +49,9 @@
   "footerSocials": {},
   "api": {
     "baseUrl": "https://api.octav.fi/v1",
+    "auth": {
+      "method": "bearer"
+    },
     "mdx": {
       "auth": {
         "method": "bearer"
