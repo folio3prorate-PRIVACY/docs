@@ -2,6 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "palm",
   "name": "Octav Developer Docs",
+  "version": "2.0.6",
   "colors": {
     "primary": "#3F58C7",
     "light": "#3F58C7",
@@ -18,7 +19,7 @@
       {
         "label": "Dev Portal",
         "href": "https://data.octav.fi/",
-        "icon": "laptop-code"
+        "icon": "/logo/Octav_logo_icon_red@2x.png"
       }
     ]
   },
@@ -34,10 +35,14 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/logo-dark.svg",
+    "dark": "/logo/logo-light.svg",
+    "href": "https://octav.fi"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/Octav_logo_icon_red@2x.png",
+  "customCSS": [
+    "/custom.css"
+  ],
   "navigation": {
     "tabs": [
       {
@@ -94,22 +99,39 @@
             "pages": [
               "api/introduction",
               "api/authentication",
-              "api/quickstart"
+              "api/quickstart",
+              "api/pricing"
             ]
           },
           {
-            "group": "API Reference",
+            "group": "Endpoints",
             "pages": [
-              "api/endpoints/wallets",
+              "api/endpoints/portfolio",
+              "api/endpoints/wallet",
               "api/endpoints/transactions",
-              "api/endpoints/portfolios"
+              "api/endpoints/token-overview",
+              "api/endpoints/airdrop",
+              "api/endpoints/historical-portfolio",
+              "api/endpoints/sync",
+              "api/endpoints/status",
+              "api/endpoints/credits"
             ]
           },
           {
-            "group": "SDKs",
+            "group": "AI Development",
             "pages": [
-              "api/sdks/javascript",
-              "api/sdks/python"
+              "api/ai-development/overview",
+              "api/ai-development/quick-start",
+              "api/ai-development/llms-integration",
+              "api/ai-development/building-agents"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "api/reference/supported-chains",
+              "api/reference/protocol-types",
+              "api/reference/transaction-types"
             ]
           }
         ]

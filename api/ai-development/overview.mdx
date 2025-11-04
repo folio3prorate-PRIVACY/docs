@@ -1,0 +1,455 @@
+---
+title: "AI Development Overview"
+description: "Build blockchain analytics and portfolio applications with AI assistance using the Octav API"
+---
+
+Use AI as your development partner to build crypto portfolio trackers, analytics dashboards, and blockchain data applications through conversation and iteration.
+
+<CardGroup cols={2}>
+  <Card title="Use an LLM" icon="comment" href="/api/ai-development/llms-integration">
+    Access AI-optimized Octav API documentation via llms.txt for ChatGPT, Claude, and other LLMs
+  </Card>
+
+  <Card title="Quick Start Examples" icon="rocket" href="/api/ai-development/quick-start">
+    Ready-to-use AI prompts for building common crypto applications with Octav
+  </Card>
+</CardGroup>
+
+---
+
+## Why Build with AI + Octav?
+
+Rather than just code completion, AI helps you architect, implement, and optimize blockchain applications that leverage Octav's comprehensive portfolio and transaction data.
+
+### What You Can Build
+
+<CardGroup cols={2}>
+  <Card title="Portfolio Trackers" icon="wallet">
+    Multi-chain portfolio dashboards
+    - Real-time balance tracking
+    - DeFi position monitoring
+    - Net worth calculations
+    - Historical performance
+  </Card>
+
+  <Card title="Analytics Platforms" icon="chart-line">
+    Advanced blockchain analytics
+    - Transaction categorization
+    - Protocol usage patterns
+    - Chain distribution analysis
+    - Yield tracking
+  </Card>
+
+  <Card title="AI Agents" icon="robot">
+    Autonomous monitoring systems
+    - Portfolio alerts
+    - Balance notifications
+    - Transaction monitoring
+    - Automated reporting
+  </Card>
+
+  <Card title="Tax & Accounting" icon="calculator">
+    Financial tracking tools
+    - Transaction history export
+    - Fee tracking
+    - Income/expense categorization
+    - Multi-wallet aggregation
+  </Card>
+</CardGroup>
+
+---
+
+## Octav AI Integrations
+
+### llms.txt Format
+
+Access structured, AI-friendly Octav API documentation:
+
+```
+https://api-docs.octav.fi/llms.txt
+```
+
+<Tip>
+  Point your AI agent or LLM to this URL to automatically understand the Octav API structure and capabilities
+</Tip>
+
+**What's Included:**
+- Complete API endpoint reference
+- Authentication and pricing details
+- Supported chains and protocols
+- Transaction types and categorization
+- Code examples in multiple languages
+- Data models and response structures
+
+### Integration Methods
+
+<Tabs>
+  <Tab title="Direct LLM Access" icon="comment">
+    **ChatGPT, Claude, Perplexity**
+
+    Simply reference the llms.txt URL in your conversation:
+
+    ```
+    "Using the Octav API documentation at https://api-docs.octav.fi/llms.txt,
+    help me build a portfolio tracker for Ethereum and Base"
+    ```
+
+    The LLM will fetch and parse the documentation automatically.
+  </Tab>
+
+  <Tab title="Development IDEs" icon="code">
+    **Cursor, VS Code, Windsurf**
+
+    Configure your IDE to access Octav docs:
+
+    1. Add Octav API docs as a context source
+    2. Reference in prompts: "Check Octav docs for portfolio endpoint"
+    3. Get accurate code generation based on actual API structure
+  </Tab>
+
+  <Tab title="AI Agents" icon="robot">
+    **Autonomous Systems**
+
+    Build agents that:
+    - Fetch documentation programmatically
+    - Generate API calls based on requirements
+    - Monitor portfolios autonomously
+    - Send alerts based on conditions
+
+    See [Building AI Agents](/api/ai-development/building-agents) for details.
+  </Tab>
+</Tabs>
+
+---
+
+## What Octav Provides for AI Development
+
+### Comprehensive Blockchain Data
+
+<AccordionGroup>
+  <Accordion title="Portfolio Data" icon="wallet">
+    **Real-time holdings across 65+ chains**
+
+    - Multi-chain aggregation
+    - DeFi protocol positions
+    - Token balances and values
+    - NFT holdings
+    - Net worth calculations
+
+    Perfect for: Portfolio dashboards, wealth tracking, multi-wallet aggregation
+  </Accordion>
+
+  <Accordion title="Transaction History" icon="receipt">
+    **Complete transaction records with smart categorization**
+
+    - Automatic transaction typing (swaps, transfers, DeFi actions)
+    - Fee tracking
+    - Search and filtering
+    - Date range queries
+    - Multi-chain support
+
+    Perfect for: Tax tools, spending analysis, transaction explorers
+  </Accordion>
+
+  <Accordion title="Historical Data" icon="clock">
+    **Time-series portfolio snapshots**
+
+    - Daily portfolio values
+    - Performance tracking
+    - Historical comparisons
+    - Date-based queries
+
+    Perfect for: Performance analytics, trend analysis, reporting
+  </Accordion>
+
+  <Accordion title="DeFi Positions" icon="coins">
+    **Protocol-level position tracking**
+
+    - Lending positions
+    - Liquidity pools
+    - Staking positions
+    - Yield farming
+    - Vault positions
+
+    Perfect for: DeFi dashboards, yield tracking, risk analysis
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Getting Started with AI Development
+
+<Steps>
+  <Step title="Get API Access" icon="key">
+    1. Sign up at [data.octav.fi](https://data.octav.fi/)
+    2. Generate an API key
+    3. Purchase credits (see [Pricing](/api/pricing))
+  </Step>
+
+  <Step title="Choose Your AI Tool" icon="robot">
+    Pick the tool that fits your workflow:
+
+    - **ChatGPT/Claude**: Quick prototyping and exploration
+    - **Cursor**: Full IDE integration for serious development
+    - **GitHub Copilot**: Code completion while you type
+    - **Custom Agents**: Autonomous monitoring systems
+  </Step>
+
+  <Step title="Start Building" icon="code">
+    Use our [Quick Start Guide](/api/ai-development/quick-start) for ready-to-use prompts:
+
+    ```
+    "Using Octav API, create a Next.js portfolio tracker that shows:
+    - Real-time balance across Ethereum, Base, and Arbitrum
+    - DeFi positions from Aave and Uniswap
+    - Transaction history with filtering
+    - Historical performance chart"
+    ```
+  </Step>
+
+  <Step title="Deploy & Monitor" icon="rocket">
+    AI can help with deployment too:
+
+    - Environment variable setup
+    - Build optimization
+    - Error handling
+    - Production monitoring
+  </Step>
+</Steps>
+
+---
+
+## Example: Building with AI
+
+Here's a realistic example of building a portfolio tracker with AI assistance:
+
+<CodeGroup>
+
+```text Initial Prompt
+"I want to build a crypto portfolio tracker using the Octav API.
+
+Requirements:
+- Support multiple wallets
+- Show balances across Ethereum, Base, and Arbitrum
+- Display DeFi positions (lending, liquidity pools)
+- Show transaction history with search
+- Calculate total net worth
+
+Tech stack: Next.js, TypeScript, TailwindCSS
+
+Please help me:
+1. Design the architecture
+2. Set up the project structure
+3. Implement the core features"
+```
+
+```typescript Generated Code Example
+// AI generates this based on Octav API docs
+import { useState, useEffect } from 'react';
+
+interface Portfolio {
+  address: string;
+  networth: string;
+  chains: Record<string, Chain>;
+  assetByProtocols: Record<string, Protocol>;
+}
+
+export function usePortfolio(addresses: string[]) {
+  const [portfolio, setPortfolio] = useState<Portfolio[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    async function fetchPortfolio() {
+      try {
+        const response = await fetch(
+          `https://api.octav.fi/v1/portfolio?addresses=${addresses.join(',')}`,
+          {
+            headers: {
+              'Authorization': `Bearer ${process.env.OCTAV_API_KEY}`
+            }
+          }
+        );
+
+        if (!response.ok) throw new Error('Failed to fetch portfolio');
+
+        const data = await response.json();
+        setPortfolio(data);
+      } catch (err) {
+        setError(err as Error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPortfolio();
+  }, [addresses]);
+
+  return { portfolio, loading, error };
+}
+```
+
+```typescript Iterative Improvements
+// Then ask AI to add features:
+"Add error handling with retry logic"
+"Add loading states and skeleton UI"
+"Add filtering by chain"
+"Add transaction history integration"
+
+// AI generates incremental improvements based on context
+```
+
+</CodeGroup>
+
+---
+
+## Best Practices for AI + Octav
+
+<AccordionGroup>
+  <Accordion title="Provide Context" icon="message">
+    **Give AI the full picture:**
+
+    ```
+    "I'm building a DeFi yield tracker using Octav API.
+    Current stack: Next.js, TypeScript
+    Already implemented: Portfolio fetching
+    Now need: Yield position tracking across Aave, Compound, Uniswap"
+    ```
+
+    Better context = better code generation
+  </Accordion>
+
+  <Accordion title="Reference Actual Data" icon="database">
+    **Use real API responses:**
+
+    ```
+    "Here's the actual portfolio response from Octav:
+    [paste JSON]
+
+    Help me extract all lending positions and calculate total yield"
+    ```
+
+    Real data helps AI understand the structure
+  </Accordion>
+
+  <Accordion title="Iterate Incrementally" icon="arrows-rotate">
+    **Build in stages:**
+
+    1. Basic feature: "Fetch and display portfolio"
+    2. Add details: "Show protocol breakdown"
+    3. Add polish: "Add loading states and error handling"
+    4. Optimize: "Add caching and performance improvements"
+  </Accordion>
+
+  <Accordion title="Validate AI Output" icon="shield-check">
+    **Always review generated code:**
+
+    - Check API endpoint URLs
+    - Verify parameter names
+    - Test error handling
+    - Validate data types
+    - Review security (API key handling)
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common Use Cases
+
+<Tabs>
+  <Tab title="Portfolio Dashboard" icon="chart-pie">
+    ```
+    "Build a portfolio dashboard with Octav that:
+    - Aggregates multiple wallet addresses
+    - Shows total value by chain
+    - Displays top holdings
+    - Shows DeFi positions separately
+    - Updates every 5 minutes
+
+    Use React hooks for data fetching and state management"
+    ```
+  </Tab>
+
+  <Tab title="Transaction Explorer" icon="magnifying-glass">
+    ```
+    "Create a transaction history page using Octav that:
+    - Shows all transactions for an address
+    - Filters by type (swap, transfer, DeFi)
+    - Filters by date range
+    - Shows transaction details on click
+    - Exports to CSV
+
+    Include pagination and search functionality"
+    ```
+  </Tab>
+
+  <Tab title="DeFi Tracker" icon="coins">
+    ```
+    "Build a DeFi position tracker that:
+    - Shows all lending positions from Aave, Compound
+    - Displays liquidity pool positions from Uniswap
+    - Calculates total yield
+    - Shows health factors for leveraged positions
+    - Alerts on low health factor
+
+    Use Octav's protocol position data"
+    ```
+  </Tab>
+
+  <Tab title="Tax Export Tool" icon="file-export">
+    ```
+    "Create a tax export tool that:
+    - Fetches all transactions for a year
+    - Categories by type (income, expense, trade)
+    - Calculates fees in USD
+    - Exports to CSV format compatible with tax software
+    - Handles multiple addresses
+
+    Use Octav's transaction categorization"
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## What to Read Next
+
+<Steps>
+  <Step title="Quick Start Guide">
+    Jump right in with [ready-to-use prompts](/api/ai-development/quick-start) for common applications
+  </Step>
+
+  <Step title="LLMs Integration">
+    Learn how to [integrate with AI tools](/api/ai-development/llms-integration) like ChatGPT and Claude
+  </Step>
+
+  <Step title="Building AI Agents">
+    Create [autonomous monitoring systems](/api/ai-development/building-agents) with Octav data
+  </Step>
+
+  <Step title="Best Practices">
+    Master [effective prompting](/api/ai-development/prompting-techniques) for better results
+  </Step>
+</Steps>
+
+---
+
+## Need Help?
+
+<CardGroup cols={2}>
+  <Card title="Join Discord" icon="discord" href="https://discord.gg/qvcknAz73A">
+    Ask questions about AI development with Octav
+  </Card>
+
+  <Card title="API Documentation" icon="book" href="/api/introduction">
+    Complete API reference and guides
+  </Card>
+
+  <Card title="Code Examples" icon="code" href="/api/quickstart">
+    Working examples in multiple languages
+  </Card>
+
+  <Card title="Pricing" icon="tag" href="/api/pricing">
+    Understand API costs and credit usage
+  </Card>
+</CardGroup>

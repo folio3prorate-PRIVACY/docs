@@ -1,0 +1,396 @@
+---
+title: "Supported Chains"
+description: "Complete list of blockchain networks supported by Octav API"
+---
+
+Octav supports over 65 blockchain networks with varying levels of integration. Each chain has different capabilities for portfolio tracking and transaction indexing.
+
+<Info>
+  **Growing Network** - We regularly add support for new chains. Check this page for the latest updates.
+</Info>
+
+---
+
+## Support Levels
+
+<AccordionGroup>
+  <Accordion title="Portfolio Support" icon="wallet">
+    **Portfolio Support** means the chain is integrated with our portfolio tracking system.
+
+    - Real-time balance tracking
+    - Token holdings across protocols
+    - DeFi position tracking
+    - Net worth calculations
+    - Multi-chain aggregation
+
+    Available on: [/v1/portfolio](/api/endpoints/portfolio), [/v1/wallet](/api/endpoints/wallet), [/v1/airdrop](/api/endpoints/airdrop)
+  </Accordion>
+
+  <Accordion title="Transaction Support" icon="receipt">
+    **Transaction Support** means the chain provides full transaction history indexing.
+
+    - Complete transaction history
+    - Transaction categorization
+    - Fee tracking
+    - Search and filtering
+    - Advanced analytics
+
+    Available on: [/v1/transactions](/api/endpoints/transactions)
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Supported Chains
+
+<Tabs>
+  <Tab title="All Chains" icon="globe">
+    <AccordionGroup>
+      <Accordion title="Full Support (Portfolio + Transactions)" icon="circle-check">
+        These chains support both portfolio tracking and transaction history:
+
+        | Chain | Key | Chain ID |
+        |-------|-----|----------|
+        | Arbitrum | `arbitrum` | 42161 |
+        | Avalanche | `avalanche` | 43114 |
+        | Base | `base` | 8453 |
+        | Binance | `binance` | 56 |
+        | Blast | `blast` | 81457 |
+        | Ethereum | `ethereum` | 1 |
+        | Fraxtal | `fraxtal` | 252 |
+        | Gnosis | `gnosis` | 100 |
+        | Linea | `linea` | 59144 |
+        | Optimism | `optimism` | 10 |
+        | Plasma Testnet | `plasmatestnet` | - |
+        | Polygon | `polygon` | 137 |
+        | Solana | `solana` | - |
+        | Sonic | `sonic` | 146 |
+        | Starknet | `starknet` | - |
+        | Unichain | `unichain` | - |
+
+        <Tip>
+          These chains offer the most comprehensive data coverage for building full-featured applications.
+        </Tip>
+      </Accordion>
+
+      <Accordion title="Portfolio Only" icon="wallet">
+        These chains support portfolio tracking but not full transaction history:
+
+        | Chain | Key |
+        |-------|-----|
+        | Abstract | `abstract` |
+        | Arbitrum Nova | `arbitrum_nova` |
+        | Berachain | `berachain` |
+        | BOB | `bob` |
+        | Boba | `boba` |
+        | BounceBit | `bouncebit` |
+        | Celo | `celo` |
+        | Core | `core` |
+        | Corn | `corn` |
+        | Cronos | `cronos` |
+        | Etherlink | `ethlink` |
+        | Everclear | `everclear` |
+        | Fantom | `fantom` |
+        | Flare | `flare` |
+        | Fuse | `fuse` |
+        | HashKey | `hsk` |
+        | Hemi | `hemi` |
+        | HyperEVM | `hyperevm` |
+        | Hyperliquid | `hyperliquid` |
+        | Ink | `ink` |
+        | IoTeX | `iotex` |
+        | Katana | `katana` |
+        | Kava | `kava` |
+        | Manta | `manta` |
+        | Mantle | `mantle` |
+        | Merlin | `merlin` |
+        | Metis | `metis` |
+        | Mint | `mint` |
+        | Mode | `mode` |
+        | Morph | `morph` |
+        | Plasma | `plasma` |
+        | Plume | `plume` |
+        | Polygon zkEVM | `polygon_zkevm` |
+        | Rari | `rari` |
+        | Rootstock | `rsk` |
+        | Scroll | `scroll` |
+        | Shibarium | `shib` |
+        | Soneium | `soneium` |
+        | Sophon | `sophon` |
+        | SwellChain | `swellchain` |
+        | Taiko | `taiko` |
+        | Telos | `telos` |
+        | World Chain | `wc` |
+        | X Layer | `xlayer` |
+        | zkSync Era | `era` |
+        | Zora | `zora` |
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="By Ecosystem" icon="layer-group">
+    <AccordionGroup>
+      <Accordion title="Ethereum L2s" icon="ethereum">
+        Layer 2 scaling solutions for Ethereum:
+
+        - **Arbitrum** - Full support
+        - **Arbitrum Nova** - Portfolio only
+        - **Base** - Full support
+        - **Blast** - Full support
+        - **Linea** - Full support
+        - **Optimism** - Full support
+        - **Polygon zkEVM** - Portfolio only
+        - **Scroll** - Portfolio only
+        - **zkSync Era** - Portfolio only
+      </Accordion>
+
+      <Accordion title="Alt L1s" icon="cube">
+        Alternative Layer 1 blockchains:
+
+        - **Avalanche** - Full support
+        - **Binance** - Full support
+        - **Fantom** - Portfolio only
+        - **Solana** - Full support
+        - **Sonic** - Full support
+      </Accordion>
+
+      <Accordion title="Specialized Chains" icon="bolt">
+        Purpose-built chains:
+
+        - **Berachain** - Portfolio only
+        - **Hyperliquid** - Portfolio only (DeFi-focused)
+        - **Starknet** - Transactions only
+        - **Unichain** - Full support
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Quick Reference" icon="table">
+    Filter chains by key or name:
+
+    ```javascript
+    // Example: Get all chains with transaction support
+    const chainsWithTxSupport = [
+      'arbitrum', 'avalanche', 'base', 'binance', 'blast',
+      'ethereum', 'fraxtal', 'gnosis', 'linea', 'optimism',
+      'plasmatestnet', 'polygon', 'solana', 'sonic',
+      'starknet', 'unichain'
+    ];
+
+    // Filter by chain key
+    async function getPortfolioForChain(address, chainKey) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/portfolio?addresses=${address}`,
+        { headers: { 'Authorization': `Bearer ${apiKey}` } }
+      );
+
+      const [portfolio] = await response.json();
+      return portfolio.chains[chainKey];
+    }
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Using Chain Keys
+
+Chain keys are used throughout the Octav API to filter and identify blockchain networks:
+
+<CodeGroup>
+
+```javascript Filter Transactions by Chain
+// Get only Ethereum transactions
+const response = await fetch(
+  `https://api.octav.fi/v1/transactions?addresses=${address}&networks=ethereum`,
+  {
+    headers: { 'Authorization': `Bearer ${apiKey}` }
+  }
+);
+```
+
+```javascript Check Chain Holdings
+// Get holdings on specific chain
+const response = await fetch(
+  `https://api.octav.fi/v1/portfolio?addresses=${address}`,
+  {
+    headers: { 'Authorization': `Bearer ${apiKey}` }
+  }
+);
+
+const [portfolio] = await response.json();
+const arbitrumHoldings = portfolio.chains.arbitrum;
+
+console.log(`Arbitrum holdings: $${arbitrumHoldings.value}`);
+```
+
+```javascript Multi-Chain Query
+// Query multiple chains
+const chains = ['ethereum', 'arbitrum', 'base'];
+
+const response = await fetch(
+  `https://api.octav.fi/v1/transactions?addresses=${address}&networks=${chains.join(',')}`,
+  {
+    headers: { 'Authorization': `Bearer ${apiKey}` }
+  }
+);
+```
+
+</CodeGroup>
+
+---
+
+## Chain Data Structure
+
+When querying the API, chain data is returned in this format:
+
+```json
+{
+  "chains": {
+    "ethereum": {
+      "name": "Ethereum",
+      "key": "ethereum",
+      "chainId": "1",
+      "value": "5432.10",
+      "valuePercentile": "65.3",
+      "imgSmall": "https://images.octav.fi/chains/ethereum_icon.svg",
+      "imgLarge": "https://images.octav.fi/chains/ethereum_icon.svg",
+      "color": "#627EEA"
+    }
+  }
+}
+```
+
+<ResponseField name="name" type="string">
+  Human-readable chain name
+</ResponseField>
+
+<ResponseField name="key" type="string">
+  Unique identifier for API queries
+</ResponseField>
+
+<ResponseField name="chainId" type="string">
+  Numeric chain ID (EVM chains)
+</ResponseField>
+
+<ResponseField name="value" type="string">
+  Total USD value on this chain
+</ResponseField>
+
+<ResponseField name="valuePercentile" type="string">
+  Percentage of total portfolio
+</ResponseField>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Check Support Before Querying" icon="circle-check">
+    Always verify the chain supports your required endpoint:
+
+    ```javascript
+    const SUPPORTED_CHAINS = {
+      portfolio: ['ethereum', 'arbitrum', 'base', /* ... */],
+      transactions: ['ethereum', 'arbitrum', 'base', /* ... */]
+    };
+
+    function isChainSupported(chainKey, endpoint) {
+      return SUPPORTED_CHAINS[endpoint].includes(chainKey);
+    }
+
+    if (isChainSupported('ethereum', 'transactions')) {
+      // Query transactions
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Use Chain Filters" icon="filter">
+    Filter API responses to specific chains for better performance:
+
+    ```javascript
+    // Instead of fetching all chains and filtering client-side
+    const allPortfolio = await fetch(
+      `https://api.octav.fi/v1/portfolio?addresses=${address}`
+    );
+
+    // Prefer using network filters when available
+    const ethOnly = await fetch(
+      `https://api.octav.fi/v1/transactions?addresses=${address}&networks=ethereum`
+    );
+    ```
+  </Accordion>
+
+  <Accordion title="Handle Missing Chains" icon="triangle-exclamation">
+    Not all addresses will have holdings on all chains:
+
+    ```javascript
+    const [portfolio] = await response.json();
+
+    // Safely check for chain
+    const arbitrumData = portfolio.chains?.arbitrum;
+
+    if (arbitrumData) {
+      console.log(`Arbitrum value: $${arbitrumData.value}`);
+    } else {
+      console.log('No Arbitrum holdings');
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Why doesn't a chain support transactions?" icon="question">
+    Transaction support requires deep integration with chain-specific indexers and explorers. We prioritize chains based on:
+
+    - User demand
+    - Chain activity and TVL
+    - Technical feasibility
+    - Data source availability
+
+    Portfolio support is faster to implement and covers the most common use case (checking balances).
+  </Accordion>
+
+  <Accordion title="How often are new chains added?" icon="calendar">
+    We add new chains regularly based on ecosystem growth and user requests. Major chains typically get portfolio support within weeks of mainnet launch.
+
+    To request a chain, contact us via [Discord](https://discord.gg/qvcknAz73A).
+  </Accordion>
+
+  <Accordion title="Can I get testnet data?" icon="flask">
+    Currently only Plasma Testnet is supported. We generally focus on mainnet data for production applications.
+  </Accordion>
+
+  <Accordion title="What's the difference between 'key' and 'chainId'?" icon="key">
+    - **key**: Octav's internal identifier (e.g., `ethereum`, `arbitrum`)
+    - **chainId**: Standard EVM chain ID (e.g., `1` for Ethereum, `42161` for Arbitrum)
+
+    Use **key** for Octav API queries. ChainId is provided for reference.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Portfolio Endpoint" icon="wallet" href="/api/endpoints/portfolio">
+    Query holdings across all chains
+  </Card>
+
+  <Card title="Transactions Endpoint" icon="receipt" href="/api/endpoints/transactions">
+    Filter transactions by chain
+  </Card>
+
+  <Card title="Supported Protocols" icon="layer-group" href="/api/reference/protocol-types">
+    View all supported DeFi protocols
+  </Card>
+
+  <Card title="Request Support" icon="discord" href="https://discord.gg/qvcknAz73A">
+    Request a new chain on Discord
+  </Card>
+</CardGroup>

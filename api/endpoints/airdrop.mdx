@@ -1,0 +1,515 @@
+---
+title: "Airdrop"
+description: "Check claimable airdrops for Solana addresses"
+---
+
+Retrieve information about claimable airdrops for a Solana address, including token details, unlock dates, and claim links.
+
+<Info>
+  **Cost:** 1 credit per call
+</Info>
+
+<Warning>
+  **Solana Only** - This endpoint currently supports Solana (SOL) addresses only
+</Warning>
+
+---
+
+## Endpoint
+
+```bash
+GET https://api.octav.fi/v1/airdrop
+```
+
+### Parameters
+
+<ParamField query="addresses" type="string" required>
+  Solana wallet address to check for airdrops
+
+  ```
+  addresses=J8fo6fHGTD4egvuFE4RRQaBipfcHy5F5YVCcZmmZG6gR
+  ```
+</ParamField>
+
+---
+
+## Example
+
+<CodeGroup>
+
+```bash cURL
+curl "https://api.octav.fi/v1/airdrop?addresses=J8fo6fHGTD4egvuFE4RRQaBipfcHy5F5YVCcZmmZG6gR" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const address = 'J8fo6fHGTD4egvuFE4RRQaBipfcHy5F5YVCcZmmZG6gR';
+
+const response = await fetch(
+  `https://api.octav.fi/v1/airdrop?addresses=${address}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const airdrops = await response.json();
+console.log(`Total airdrop value: $${airdrops[0].networth}`);
+```
+
+```python Python
+address = 'J8fo6fHGTD4egvuFE4RRQaBipfcHy5F5YVCcZmmZG6gR'
+
+response = requests.get(
+    'https://api.octav.fi/v1/airdrop',
+    params={'addresses': address},
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+
+airdrops = response.json()
+print(f"Total airdrop value: ${airdrops[0]['networth']}")
+```
+
+```typescript TypeScript
+const address = 'J8fo6fHGTD4egvuFE4RRQaBipfcHy5F5YVCcZmmZG6gR';
+
+const response = await fetch(
+  `https://api.octav.fi/v1/airdrop?addresses=${address}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const airdrops: Airdrop[] = await response.json();
+console.log(`Total airdrop value: $${airdrops[0].networth}`);
+```
+
+</CodeGroup>
+
+---
+
+## Response
+
+Returns an array of portfolio objects containing airdrop data. The structure follows the same format as the [Portfolio endpoint](/api/endpoints/portfolio), but filtered to show only airdrop positions.
+
+### Top-Level Fields
+
+<ResponseField name="address" type="string">
+  The Solana wallet address
+</ResponseField>
+
+<ResponseField name="networth" type="string">
+  Total value of claimable airdrops in USD
+</ResponseField>
+
+<ResponseField name="conversionRates" type="object">
+  Current price conversion rates for major tokens (SOL, ETH, BTC)
+</ResponseField>
+
+<ResponseField name="lastUpdated" type="string">
+  Timestamp of last data update (milliseconds since epoch)
+</ResponseField>
+
+<ResponseField name="assetByProtocols" type="object">
+  Airdrop positions organized by protocol
+
+  Each protocol contains an `AIRDROP` key with:
+  - `protocolPositions[]`: Array of airdrop positions
+  - `totalValue`: Total USD value of airdrops from this protocol
+  - `unlockAt`: Unix timestamp when tokens unlock
+</ResponseField>
+
+<ResponseField name="chains" type="object">
+  Chain-level summary (currently Solana only)
+</ResponseField>
+
+### Airdrop Asset Fields
+
+Each airdrop asset includes:
+
+<ResponseField name="balance" type="string">
+  Amount of tokens claimable
+</ResponseField>
+
+<ResponseField name="symbol" type="string">
+  Token symbol (e.g., "sns")
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Token full name
+</ResponseField>
+
+<ResponseField name="value" type="string">
+  USD value of the airdrop
+</ResponseField>
+
+<ResponseField name="price" type="string">
+  Current token price in USD
+</ResponseField>
+
+<ResponseField name="isClaimable" type="boolean">
+  Whether the airdrop is currently claimable
+</ResponseField>
+
+<ResponseField name="link" type="string">
+  URL to claim the airdrop
+</ResponseField>
+
+<ResponseField name="unlockAt" type="string">
+  Unix timestamp when tokens become available
+</ResponseField>
+
+<ResponseField name="contract" type="string">
+  Token contract address
+</ResponseField>
+
+<ResponseField name="explorerUrl" type="string">
+  Link to view token on blockchain explorer
+</ResponseField>
+
+---
+
+## Example Response
+
+```json
+[
+  {
+    "address": "J8fo6fHGTD4egvuFE4RRQaBipfcHy5F5YVCcZmmZG6gR",
+    "networth": "29.9896511359350402985808",
+    "conversionRates": {
+      "SOL": "169.19",
+      "cbBTC": "115164",
+      "ETH": "3654.21"
+    },
+    "lastUpdated": "1754497718973",
+    "assetByProtocols": {
+      "sns": {
+        "name": "SNS",
+        "key": "sns",
+        "value": "29.9896511359350402985808",
+        "chains": {
+          "solana": {
+            "protocolPositions": {
+              "AIRDROP": {
+                "name": "Airdrop",
+                "totalValue": "29.9896511359350402985808",
+                "unlockAt": "1747137600",
+                "protocolPositions": [
+                  {
+                    "name": "Airdrop",
+                    "value": "29.9896511359350402985808",
+                    "unlockAt": "1747137600",
+                    "assets": [
+                      {
+                        "balance": "14671.9255",
+                        "symbol": "sns",
+                        "name": "solana name service",
+                        "value": "29.9896511359350402985808",
+                        "price": "0.0020440160451970016",
+                        "contract": "SNS8DJbHc34nKySHVhLGMUUE72ho6igvJaxtq9T3cX3",
+                        "chainKey": "solana",
+                        "isClaimable": true,
+                        "link": "https://airdrop.sns.id/",
+                        "unlockAt": "1747137600",
+                        "explorerUrl": "https://solscan.io/token/SNS8DJbHc34nKySHVhLGMUUE72ho6igvJaxtq9T3cX3",
+                        "imgSmall": "https://images.octav.fi/tokens/small/SNS8DJbHc34nKySHVhLGMUUE72ho6igvJaxtq9T3cX3_logo.png",
+                        "imgLarge": "https://images.octav.fi/tokens/small/SNS8DJbHc34nKySHVhLGMUUE72ho6igvJaxtq9T3cX3_logo.png"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "chains": {
+      "solana": {
+        "name": "Solana",
+        "key": "solana",
+        "value": "29.9896511359350402985808"
+      }
+    }
+  }
+]
+```
+
+---
+
+## Use Cases
+
+<Tabs>
+  <Tab title="Check All Airdrops" icon="gift">
+    Get all claimable airdrops for an address:
+
+    ```javascript
+    async function checkAirdrops(address) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/airdrop?addresses=${address}`,
+        {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        }
+      );
+
+      const [data] = await response.json();
+
+      console.log(`Total airdrop value: $${parseFloat(data.networth).toFixed(2)}`);
+
+      // Iterate through all protocols
+      Object.values(data.assetByProtocols).forEach(protocol => {
+        Object.values(protocol.chains).forEach(chain => {
+          const airdropData = chain.protocolPositions.AIRDROP;
+
+          if (airdropData) {
+            airdropData.protocolPositions.forEach(position => {
+              position.assets.forEach(asset => {
+                const unlockDate = new Date(parseInt(asset.unlockAt) * 1000);
+                console.log(`
+                  Token: ${asset.name} (${asset.symbol})
+                  Amount: ${parseFloat(asset.balance).toFixed(4)}
+                  Value: $${parseFloat(asset.value).toFixed(2)}
+                  Claimable: ${asset.isClaimable ? 'Yes' : 'No'}
+                  Unlock Date: ${unlockDate.toLocaleDateString()}
+                  Claim Link: ${asset.link}
+                `);
+              });
+            });
+          }
+        });
+      });
+    }
+    ```
+  </Tab>
+
+  <Tab title="Filter Claimable" icon="hand-pointer">
+    Show only currently claimable airdrops:
+
+    ```javascript
+    async function getClaimableAirdrops(address) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/airdrop?addresses=${address}`,
+        {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        }
+      );
+
+      const [data] = await response.json();
+      const claimable = [];
+
+      Object.values(data.assetByProtocols).forEach(protocol => {
+        Object.values(protocol.chains).forEach(chain => {
+          const airdropData = chain.protocolPositions.AIRDROP;
+
+          if (airdropData) {
+            airdropData.protocolPositions.forEach(position => {
+              position.assets.forEach(asset => {
+                if (asset.isClaimable) {
+                  claimable.push({
+                    name: asset.name,
+                    symbol: asset.symbol,
+                    amount: asset.balance,
+                    value: asset.value,
+                    claimLink: asset.link
+                  });
+                }
+              });
+            });
+          }
+        });
+      });
+
+      return claimable;
+    }
+
+    const claimable = await getClaimableAirdrops(address);
+    console.log(`${claimable.length} airdrops ready to claim`);
+    ```
+  </Tab>
+
+  <Tab title="Track Value" icon="chart-line">
+    Monitor total airdrop value over time:
+
+    ```javascript
+    async function trackAirdropValue(address) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/airdrop?addresses=${address}`,
+        {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        }
+      );
+
+      const [data] = await response.json();
+      const totalValue = parseFloat(data.networth);
+
+      // Calculate value by protocol
+      const valueByProtocol = {};
+
+      Object.entries(data.assetByProtocols).forEach(([key, protocol]) => {
+        valueByProtocol[protocol.name] = parseFloat(protocol.value);
+      });
+
+      return {
+        totalValue,
+        valueByProtocol,
+        timestamp: new Date(parseInt(data.lastUpdated))
+      };
+    }
+
+    const snapshot = await trackAirdropValue(address);
+    console.log(`Total: $${snapshot.totalValue.toFixed(2)}`);
+    console.log('By Protocol:', snapshot.valueByProtocol);
+    ```
+  </Tab>
+
+  <Tab title="Upcoming Unlocks" icon="calendar">
+    Find airdrops with upcoming unlock dates:
+
+    ```javascript
+    async function getUpcomingUnlocks(address, daysAhead = 30) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/airdrop?addresses=${address}`,
+        {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        }
+      );
+
+      const [data] = await response.json();
+      const now = Date.now() / 1000;
+      const futureDate = now + (daysAhead * 24 * 60 * 60);
+      const upcoming = [];
+
+      Object.values(data.assetByProtocols).forEach(protocol => {
+        Object.values(protocol.chains).forEach(chain => {
+          const airdropData = chain.protocolPositions.AIRDROP;
+
+          if (airdropData) {
+            airdropData.protocolPositions.forEach(position => {
+              position.assets.forEach(asset => {
+                const unlockTime = parseInt(asset.unlockAt);
+
+                if (unlockTime > now && unlockTime <= futureDate) {
+                  upcoming.push({
+                    name: asset.name,
+                    symbol: asset.symbol,
+                    value: asset.value,
+                    unlockDate: new Date(unlockTime * 1000),
+                    daysUntilUnlock: Math.ceil((unlockTime - now) / (24 * 60 * 60))
+                  });
+                }
+              });
+            });
+          }
+        });
+      });
+
+      return upcoming.sort((a, b) => a.unlockDate - b.unlockDate);
+    }
+
+    const upcoming = await getUpcomingUnlocks(address, 30);
+    upcoming.forEach(airdrop => {
+      console.log(`${airdrop.symbol} unlocks in ${airdrop.daysUntilUnlock} days`);
+    });
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Check Regularly" icon="arrows-rotate">
+    Airdrop eligibility can change frequently:
+
+    - Check daily for active addresses
+    - Set up alerts for new airdrops
+    - Monitor unlock dates for upcoming claims
+  </Accordion>
+
+  <Accordion title="Handle Empty Results" icon="circle-xmark">
+    Not all addresses will have airdrops:
+
+    ```javascript
+    const [data] = await response.json();
+
+    if (!data.assetByProtocols || Object.keys(data.assetByProtocols).length === 0) {
+      console.log('No airdrops found for this address');
+      return;
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Verify Claim Links" icon="shield-check">
+    Always verify claim URLs before using:
+
+    - Check that domains match official project sites
+    - Verify on project's official social media
+    - Be cautious of phishing attempts
+  </Accordion>
+
+  <Accordion title="Track Unlock Dates" icon="clock">
+    Monitor unlock timestamps:
+
+    ```javascript
+    const unlockDate = new Date(parseInt(asset.unlockAt) * 1000);
+    const isUnlocked = unlockDate <= new Date();
+    ```
+
+    Set reminders for upcoming unlocks to claim promptly
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Response Structure Notes
+
+<AccordionGroup>
+  <Accordion title="Portfolio Format" icon="layer-group">
+    The airdrop endpoint returns data in the same structure as the Portfolio endpoint:
+
+    - Follows the complete portfolio schema
+    - Filtered to show only AIRDROP protocol positions
+    - Includes all standard fields (chains, assets, protocols)
+    - Same nested structure for consistency
+  </Accordion>
+
+  <Accordion title="AIRDROP Key" icon="key">
+    Airdrop positions are identified by the `AIRDROP` key:
+
+    ```javascript
+    const airdropPositions = chain.protocolPositions.AIRDROP;
+    ```
+
+    This key exists within the protocol's chain data
+  </Accordion>
+
+  <Accordion title="Unix Timestamps" icon="calendar">
+    All time fields use Unix timestamps (seconds since epoch):
+
+    - `unlockAt`: When tokens become available
+    - `lastUpdated`: When data was last synced (milliseconds)
+
+    Convert to JavaScript Date:
+    ```javascript
+    const date = new Date(parseInt(unlockAt) * 1000);
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Portfolio" icon="wallet" href="/api/endpoints/portfolio">
+    Get complete portfolio including airdrops
+  </Card>
+
+  <Card title="Token Overview" icon="coins" href="/api/endpoints/token-overview">
+    Detailed token breakdown across chains
+  </Card>
+</CardGroup>

@@ -1,0 +1,308 @@
+/* Octav App Button Styling */
+/* Only apply to explicit action buttons and form inputs */
+
+/* Define button selector for action buttons only */
+button[type="submit"],
+input[type="submit"],
+input[type="button"],
+button.primary-button,
+button.action-button,
+.primary-button,
+.action-button,
+.cta-button {
+  /* Border styles */
+  border: 0px solid rgb(42, 48, 59);
+  border-radius: 4px;
+  border-image: none;
+
+  /* Box model */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  /* Sizing */
+  height: 32px;
+  padding: 8px 12px;
+
+  /* Typography */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: normal;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-font-smoothing: antialiased;
+
+  /* Colors */
+  background-color: oklch(0.5058 0.1748 269.54);
+
+  /* Spacing */
+  column-gap: 8px;
+  margin: 0;
+
+  /* Interaction */
+  cursor: pointer;
+  appearance: button;
+  opacity: 1;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  /* Transitions for smooth hover */
+  transition: all 0.2s ease;
+}
+
+/* Button text color - Light mode uses dark text (#091018), Dark mode uses white */
+@media (prefers-color-scheme: light) {
+  button[type="submit"],
+  input[type="submit"],
+  input[type="button"],
+  button.primary-button,
+  button.action-button,
+  .primary-button,
+  .action-button,
+  .cta-button {
+    color: #091018;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  button[type="submit"],
+  input[type="submit"],
+  input[type="button"],
+  button.primary-button,
+  button.action-button,
+  .primary-button,
+  .action-button,
+  .cta-button {
+    color: #FFFFFF;
+  }
+}
+
+/* Mintlify-specific dark mode class */
+.dark button[type="submit"],
+.dark input[type="submit"],
+.dark input[type="button"],
+.dark button.primary-button,
+.dark button.action-button,
+.dark .primary-button,
+.dark .action-button,
+.dark .cta-button {
+  color: #FFFFFF;
+}
+
+/* Mintlify-specific light mode class */
+.light button[type="submit"],
+.light input[type="submit"],
+.light input[type="button"],
+.light button.primary-button,
+.light button.action-button,
+.light .primary-button,
+.light .action-button,
+.light .cta-button {
+  color: #091018;
+}
+
+/* Hover state */
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+button.primary-button:hover,
+button.action-button:hover,
+.primary-button:hover,
+.action-button:hover,
+.cta-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Active/pressed state */
+button[type="submit"]:active,
+input[type="submit"]:active,
+input[type="button"]:active,
+button.primary-button:active,
+button.action-button:active,
+.primary-button:active,
+.action-button:active,
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* Focus state for accessibility */
+button[type="submit"]:focus-visible,
+input[type="submit"]:focus-visible,
+input[type="button"]:focus-visible,
+button.primary-button:focus-visible,
+button.action-button:focus-visible,
+.primary-button:focus-visible,
+.action-button:focus-visible,
+.cta-button:focus-visible {
+  outline: 2px solid oklch(0.5058 0.1748 269.54);
+  outline-offset: 2px;
+}
+
+/* Disabled state */
+button[type="submit"]:disabled,
+input[type="submit"]:disabled,
+input[type="button"]:disabled,
+button.primary-button:disabled,
+button.action-button:disabled,
+.primary-button:disabled,
+.action-button:disabled,
+.cta-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Secondary button variant (if needed) */
+.button-secondary,
+.secondary-button {
+  background-color: transparent;
+  border: 1px solid oklch(0.5058 0.1748 269.54);
+  color: oklch(0.5058 0.1748 269.54);
+}
+
+/* Text button variant (if needed) */
+.button-text,
+.text-button {
+  background-color: transparent;
+  border: none;
+  color: oklch(0.5058 0.1748 269.54);
+  padding: 4px 8px;
+  height: auto;
+}
+
+/* Navbar buttons - Apply Octav styling - MORE PROMINENT */
+nav a[href*="data.octav.fi"],
+header a[href*="data.octav.fi"],
+[class*="navbar"] a[href*="data.octav.fi"],
+[class*="header"] a[href*="data.octav.fi"] {
+  /* Border styles */
+  border: 0px solid rgb(42, 48, 59);
+  border-radius: 4px;
+  border-image: none;
+
+  /* Box model */
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  /* Sizing - LARGER for prominence */
+  height: 36px;
+  padding: 10px 16px !important;
+
+  /* Typography - BOLD for prominence */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  line-height: 20px;
+  letter-spacing: normal;
+  text-decoration: none !important;
+  -webkit-font-smoothing: antialiased;
+
+  /* Colors - Octav Red for prominence */
+  background-color: #FF1A45 !important;
+  color: #FFFFFF !important;
+
+  /* Spacing */
+  gap: 8px;
+  margin: 0;
+  margin-left: 8px !important;
+
+  /* Interaction */
+  cursor: pointer;
+  opacity: 1;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  /* Transitions for smooth hover */
+  transition: all 0.2s ease;
+
+  /* Order - appear after Discord */
+  order: 2;
+}
+
+/* Force white text in both modes for red button */
+nav a[href*="data.octav.fi"],
+header a[href*="data.octav.fi"],
+[class*="navbar"] a[href*="data.octav.fi"],
+[class*="header"] a[href*="data.octav.fi"],
+.dark nav a[href*="data.octav.fi"],
+.dark header a[href*="data.octav.fi"],
+.dark [class*="navbar"] a[href*="data.octav.fi"],
+.dark [class*="header"] a[href*="data.octav.fi"],
+.light nav a[href*="data.octav.fi"],
+.light header a[href*="data.octav.fi"],
+.light [class*="navbar"] a[href*="data.octav.fi"],
+.light [class*="header"] a[href*="data.octav.fi"] {
+  color: #FFFFFF !important;
+}
+
+/* Navbar button hover - brighter red */
+nav a[href*="data.octav.fi"]:hover,
+header a[href*="data.octav.fi"]:hover,
+[class*="navbar"] a[href*="data.octav.fi"]:hover,
+[class*="header"] a[href*="data.octav.fi"]:hover {
+  background-color: #FF2D5A !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 26, 69, 0.3);
+}
+
+/* Discord button - Discord branding - Secondary prominence */
+nav a[href*="discord"],
+header a[href*="discord"],
+[class*="navbar"] a[href*="discord"],
+[class*="header"] a[href*="discord"] {
+  /* Border styles */
+  border: 0px solid rgb(88, 101, 242);
+  border-radius: 4px;
+
+  /* Box model */
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  /* Sizing - smaller than Octav button */
+  height: 32px;
+  padding: 8px 12px !important;
+
+  /* Typography */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 20px;
+  text-decoration: none !important;
+  -webkit-font-smoothing: antialiased;
+
+  /* Discord brand color */
+  background-color: #5865F2 !important;
+  color: #FFFFFF !important;
+
+  /* Spacing */
+  gap: 8px;
+  margin: 0;
+
+  /* Interaction */
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  /* Transitions */
+  transition: all 0.2s ease;
+
+  /* Order - appear before Octav button */
+  order: 1;
+}
+
+/* Discord button hover */
+nav a[href*="discord"]:hover,
+header a[href*="discord"]:hover,
+[class*="navbar"] a[href*="discord"]:hover,
+[class*="header"] a[href*="discord"]:hover {
+  background-color: #4752C4 !important;
+  transform: translateY(-1px);
+}

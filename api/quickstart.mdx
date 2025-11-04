@@ -1,145 +1,514 @@
 ---
-title: "API Quickstart"
-description: "Make your first API request to Octav"
+title: "Quickstart"
+description: "Make your first API request in minutes"
 ---
 
-import { Alert } from '/snippets/Alert.jsx.mdx'
-import { Button } from '/snippets/Button.jsx.mdx'
+Get started with the Octav API and make your first request in minutes.
 
-# API Quickstart
+<Info>
+  **Prerequisites** — You'll need an API key from [data.octav.fi](https://data.octav.fi/). See [Authentication](/api/authentication) for details.
+</Info>
 
-Get started with the Octav API in minutes.
-
-## Prerequisites
-
-Before you begin, make sure you have:
-
-- An Octav account
-- An API key (see [Authentication](/api/authentication))
-- A tool to make HTTP requests (curl, Postman, or your preferred language)
+---
 
 ## Your First Request
 
-Let's fetch your portfolio data:
+Let's start by checking your remaining credits - this endpoint is free and perfect for testing authentication.
 
-### Using cURL
+<CodeGroup>
 
-```bash
-curl https://api.octav.fi/v1/portfolios \
+```bash cURL
+curl -X GET https://api.octav.fi/v1/credits \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-### Using JavaScript
+```javascript JavaScript
+const apiKey = 'YOUR_API_KEY';
 
-```javascript
-const fetch = require('node-fetch');
-
-const apiKey = process.env.OCTAV_API_KEY;
-
-fetch('https://api.octav.fi/v1/portfolios', {
+const response = await fetch('https://api.octav.fi/v1/credits', {
   headers: {
     'Authorization': `Bearer ${apiKey}`
   }
-})
-  .then(res => res.json())
-  .then(data => console.log(data));
+});
+
+const credits = await response.json();
+console.log(`Remaining credits: ${credits}`);
 ```
 
-### Using Python
-
-```python
+```python Python
 import requests
-import os
 
-api_key = os.environ.get('OCTAV_API_KEY')
-
-headers = {
-    'Authorization': f'Bearer {api_key}'
-}
+api_key = 'YOUR_API_KEY'
 
 response = requests.get(
-    'https://api.octav.fi/v1/portfolios',
-    headers=headers
+    'https://api.octav.fi/v1/credits',
+    headers={'Authorization': f'Bearer {api_key}'}
 )
 
-print(response.json())
+credits = response.json()
+print(f'Remaining credits: {credits}')
 ```
 
-## Response Format
+```typescript TypeScript
+const apiKey: string = process.env.OCTAV_API_KEY!;
 
-All API responses are returned in JSON format:
+const response = await fetch('https://api.octav.fi/v1/credits', {
+  headers: {
+    'Authorization': `Bearer ${apiKey}`
+  }
+});
+
+const credits: number = await response.json();
+console.log(`Remaining credits: ${credits}`);
+```
+
+</CodeGroup>
+
+### Response
+
+```json
+19033
+```
+
+The credits endpoint returns a simple number indicating your remaining credit balance.
+
+<Check>
+  **Success!** If you see a number, your API key is working correctly.
+</Check>
+
+---
+
+## Fetch a Portfolio
+
+Now let's retrieve portfolio data for a blockchain address.
+
+<CodeGroup>
+
+```bash cURL
+curl -X GET "https://api.octav.fi/v1/portfolio?addresses=0x6426af179aabebe47666f345d69fd9079673f6cd" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const address = '0x6426af179aabebe47666f345d69fd9079673f6cd';
+
+const response = await fetch(
+  `https://api.octav.fi/v1/portfolio?addresses=${address}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const portfolio = await response.json();
+console.log('Net Worth:', portfolio.networth);
+console.log('Protocols:', Object.keys(portfolio.assetByProtocols).length);
+```
+
+```python Python
+address = '0x6426af179aabebe47666f345d69fd9079673f6cd'
+
+response = requests.get(
+    'https://api.octav.fi/v1/portfolio',
+    params={'addresses': address},
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+
+portfolio = response.json()
+print(f"Net Worth: {portfolio['networth']}")
+print(f"Protocols: {len(portfolio['assetByProtocols'])}")
+```
+
+```typescript TypeScript
+const address = '0x6426af179aabebe47666f345d69fd9079673f6cd';
+
+interface Portfolio {
+  address: string;
+  networth: string;
+  assetByProtocols: Record<string, any>;
+  chains: Record<string, any>;
+}
+
+const response = await fetch(
+  `https://api.octav.fi/v1/portfolio?addresses=${address}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const portfolio: Portfolio = await response.json();
+console.log('Net Worth:', portfolio.networth);
+console.log('Protocols:', Object.keys(portfolio.assetByProtocols).length);
+```
+
+</CodeGroup>
+
+### Response Structure
+
+<Accordion title="View Sample Response" icon="code">
 
 ```json
 {
-  "data": {
-    "portfolios": [
-      {
-        "id": "portfolio_123",
-        "name": "My Portfolio",
-        "total_value": 15231.89,
-        "24h_change": 0.28,
-        "asset_count": 12
-      }
-    ]
+  "address": "0x6426af179aabebe47666f345d69fd9079673f6cd",
+  "cashBalance": "0",
+  "dailyIncome": "0",
+  "dailyExpense": "0",
+  "fees": "0",
+  "feesFiat": "0",
+  "lastUpdated": "1715173392020",
+  "networth": "45231.89",
+  "assetByProtocols": {
+    "wallet": {
+      "key": "wallet",
+      "name": "Wallet",
+      "value": "12453.20",
+      "assets": [
+        {
+          "balance": "1.5",
+          "symbol": "ETH",
+          "price": "3200.50",
+          "value": "4800.75",
+          "chain": "ethereum"
+        }
+      ]
+    },
+    "aave_v3": {
+      "key": "aave_v3",
+      "name": "Aave V3",
+      "value": "8934.12",
+      "assets": [...]
+    }
   },
-  "meta": {
-    "timestamp": "2024-11-03T12:00:00Z"
+  "chains": {
+    "ethereum": {
+      "value": "25123.45",
+      "protocols": [...]
+    },
+    "arbitrum": {
+      "value": "20108.44",
+      "protocols": [...]
+    }
   }
 }
 ```
 
-<Alert type="success" title="Successful Response">
-A successful API call returns a 200 status code with your requested data in the response body.
-</Alert>
+</Accordion>
 
-## Common Use Cases
+<Info>
+  **Cost:** 1 credit per call
+</Info>
 
-### Get Wallet Balance
+---
 
-```bash
-curl https://api.octav.fi/v1/wallets/0xYOUR_WALLET_ADDRESS \
+## Query Transaction History
+
+Retrieve transaction history with pagination and filtering.
+
+<CodeGroup>
+
+```bash cURL
+curl -X GET "https://api.octav.fi/v1/transactions?addresses=0x6426af179aabebe47666f345d69fd9079673f6cd&limit=10&offset=0&sort=DESC" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-### Fetch Transaction History
+```javascript JavaScript
+const params = new URLSearchParams({
+  addresses: '0x6426af179aabebe47666f345d69fd9079673f6cd',
+  limit: '10',
+  offset: '0',
+  sort: 'DESC'
+});
 
-```bash
-curl "https://api.octav.fi/v1/wallets/0xYOUR_WALLET_ADDRESS/transactions?limit=10" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
-### Query Portfolio Performance
-
-```bash
-curl "https://api.octav.fi/v1/portfolios/portfolio_123/performance?period=30d" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
-## Error Handling
-
-Always check for errors in your API responses:
-
-```javascript
-fetch('https://api.octav.fi/v1/portfolios', {
-  headers: { 'Authorization': `Bearer ${apiKey}` }
-})
-  .then(res => {
-    if (!res.ok) {
-      throw new Error(`API error: ${res.status}`);
+const response = await fetch(
+  `https://api.octav.fi/v1/transactions?${params}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
     }
-    return res.json();
-  })
-  .then(data => console.log(data))
-  .catch(err => console.error('Error:', err));
+  }
+);
+
+const transactions = await response.json();
+console.log(`Retrieved ${transactions.length} transactions`);
+transactions.forEach(tx => {
+  console.log(`${tx.type} - ${tx.chain.name} - ${tx.timestamp}`);
+});
 ```
+
+```python Python
+params = {
+    'addresses': '0x6426af179aabebe47666f345d69fd9079673f6cd',
+    'limit': 10,
+    'offset': 0,
+    'sort': 'DESC'
+}
+
+response = requests.get(
+    'https://api.octav.fi/v1/transactions',
+    params=params,
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+
+transactions = response.json()
+print(f'Retrieved {len(transactions)} transactions')
+for tx in transactions:
+    print(f"{tx['type']} - {tx['chain']['name']} - {tx['timestamp']}")
+```
+
+```typescript TypeScript
+interface Transaction {
+  hash: string;
+  type: string;
+  timestamp: string;
+  chain: {
+    key: string;
+    name: string;
+  };
+  from: string;
+  to: string;
+  value: string;
+  fees: string;
+}
+
+const params = new URLSearchParams({
+  addresses: '0x6426af179aabebe47666f345d69fd9079673f6cd',
+  limit: '10',
+  offset: '0',
+  sort: 'DESC'
+});
+
+const response = await fetch(
+  `https://api.octav.fi/v1/transactions?${params}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const transactions: Transaction[] = await response.json();
+console.log(`Retrieved ${transactions.length} transactions`);
+```
+
+</CodeGroup>
+
+### Key Parameters
+
+<ParamField query="addresses" type="string" required>
+  Comma-separated list of wallet addresses
+</ParamField>
+
+<ParamField query="limit" type="integer" required>
+  Number of transactions per page (1-250)
+</ParamField>
+
+<ParamField query="offset" type="integer" required>
+  Pagination offset
+</ParamField>
+
+<ParamField query="sort" type="string">
+  Sort order: `DESC` (newest first) or `ASC` (oldest first)
+</ParamField>
+
+<Info>
+  **Cost:** 1 credit per call
+</Info>
+
+---
+
+## Common Patterns
+
+### Environment Variables
+
+Store your API key securely in environment variables:
+
+<CodeGroup>
+
+```bash .env
+OCTAV_API_KEY=your_api_key_here
+```
+
+```javascript JavaScript
+// Load from .env file
+require('dotenv').config();
+const apiKey = process.env.OCTAV_API_KEY;
+```
+
+```python Python
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv('OCTAV_API_KEY')
+```
+
+```typescript TypeScript
+import dotenv from 'dotenv';
+dotenv.config();
+
+const apiKey = process.env.OCTAV_API_KEY;
+```
+
+</CodeGroup>
+
+### Error Handling
+
+Always handle errors gracefully:
+
+<CodeGroup>
+
+```javascript JavaScript
+async function fetchPortfolio(address) {
+  try {
+    const response = await fetch(
+      `https://api.octav.fi/v1/portfolio?addresses=${address}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${apiKey}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(`API Error: ${error.message}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch portfolio:', error);
+    throw error;
+  }
+}
+```
+
+```python Python
+def fetch_portfolio(address):
+    try:
+        response = requests.get(
+            'https://api.octav.fi/v1/portfolio',
+            params={'addresses': address},
+            headers={'Authorization': f'Bearer {api_key}'}
+        )
+
+        response.raise_for_status()
+        return response.json()
+
+    except requests.exceptions.HTTPError as e:
+        print(f'HTTP Error: {e}')
+        raise
+    except requests.exceptions.RequestException as e:
+        print(f'Request failed: {e}')
+        raise
+```
+
+```typescript TypeScript
+async function fetchPortfolio(address: string): Promise<Portfolio> {
+  try {
+    const response = await fetch(
+      `https://api.octav.fi/v1/portfolio?addresses=${address}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${apiKey}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(`API Error: ${error.message}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch portfolio:', error);
+    throw error;
+  }
+}
+```
+
+</CodeGroup>
+
+### Rate Limit Handling
+
+Respect rate limits with retry logic:
+
+<CodeGroup>
+
+```javascript JavaScript
+async function fetchWithRetry(url, options, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    const response = await fetch(url, options);
+
+    if (response.status === 429) {
+      const retryAfter = response.headers.get('Retry-After') || 60;
+      console.log(`Rate limited. Retrying after ${retryAfter}s...`);
+      await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+      continue;
+    }
+
+    return response;
+  }
+
+  throw new Error('Max retries exceeded');
+}
+```
+
+```python Python
+import time
+
+def fetch_with_retry(url, headers, max_retries=3):
+    for i in range(max_retries):
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 429:
+            retry_after = int(response.headers.get('Retry-After', 60))
+            print(f'Rate limited. Retrying after {retry_after}s...')
+            time.sleep(retry_after)
+            continue
+
+        return response
+
+    raise Exception('Max retries exceeded')
+```
+
+</CodeGroup>
+
+---
 
 ## Next Steps
 
-<Button href="/api/endpoints/wallets">Explore Wallet Endpoints</Button>
-<Button href="/api/sdks/javascript" variant="secondary">Use the JavaScript SDK</Button>
+<CardGroup cols={2}>
+  <Card title="Portfolio Endpoint" icon="wallet" href="/api/endpoints/portfolio">
+    Detailed documentation for portfolio data
+  </Card>
+
+  <Card title="Transactions Endpoint" icon="receipt" href="/api/endpoints/transactions">
+    Query and filter transaction history
+  </Card>
+
+  <Card title="All Endpoints" icon="list" href="/api/endpoints/status">
+    Explore all available endpoints
+  </Card>
+
+  <Card title="Pricing" icon="credit-card" href="/api/pricing">
+    Understand credit costs
+  </Card>
+</CardGroup>
+
+---
 
 ## Need Help?
 
-<Alert type="info" title="Support">
-If you run into issues, check our API Reference or contact support at support@octav.fi
-</Alert>
+<CardGroup cols={2}>
+  <Card title="Join Discord" icon="discord" href="https://discord.gg/qvcknAz73A">
+    Get help from the community
+  </Card>
+
+  <Card title="Contact Support" icon="envelope" href="/docs/contact-us">
+    Reach out to our team
+  </Card>
+</CardGroup>

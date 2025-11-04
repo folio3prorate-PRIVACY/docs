@@ -1,0 +1,558 @@
+---
+title: "Portfolio"
+description: "Retrieve portfolio holdings across wallets and DeFi protocols"
+---
+
+Get comprehensive portfolio data for blockchain addresses including assets, protocol positions, and net worth across multiple chains.
+
+<Info>
+  **Cost:** 1 credit per call
+</Info>
+
+---
+
+## Endpoint
+
+<CodeGroup>
+
+```bash Request
+GET https://api.octav.fi/v1/portfolio
+```
+
+```bash Example
+curl -X GET "https://api.octav.fi/v1/portfolio?addresses=0x6426af179aabebe47666f345d69fd9079673f6cd" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+</CodeGroup>
+
+---
+
+## Parameters
+
+<ParamField query="addresses" type="string" required>
+  Comma-separated list of EVM or SOL wallet addresses to retrieve portfolio data for
+
+  ```
+  addresses=0x6426af179aabebe47666f345d69fd9079673f6cd
+  ```
+
+  Multiple addresses:
+  ```
+  addresses=0x123...,0x456...,0x789...
+  ```
+</ParamField>
+
+<ParamField query="includeNFTs" type="boolean" default="false">
+  Include NFT holdings in the portfolio response
+
+  When `true`, response includes `nftsChains` and `nftsByCollection` fields
+</ParamField>
+
+<ParamField query="includeImages" type="boolean" default="false">
+  Include image URLs for chains, assets, and protocols
+
+  Useful for displaying logos in your application UI
+</ParamField>
+
+<ParamField query="includeExplorerUrls" type="boolean" default="false">
+  Include blockchain explorer URLs for assets and transactions
+
+  Links to Etherscan, Arbiscan, etc. for easy navigation
+</ParamField>
+
+<ParamField query="waitForSync" type="boolean" default="false">
+  Wait for fresh data if cache is stale
+
+  - `false`: Return cached data immediately (recommended)
+  - `true`: Wait for sync if data is older than 1 minute
+</ParamField>
+
+---
+
+## Response
+
+### Portfolio Object
+
+<ResponseField name="address" type="string">
+  The wallet address
+</ResponseField>
+
+<ResponseField name="networth" type="string">
+  Total portfolio net worth in USD
+</ResponseField>
+
+<ResponseField name="cashBalance" type="string">
+  Available cash balance
+</ResponseField>
+
+<ResponseField name="dailyIncome" type="string">
+  Income generated today
+</ResponseField>
+
+<ResponseField name="dailyExpense" type="string">
+  Expenses incurred today
+</ResponseField>
+
+<ResponseField name="fees" type="string">
+  Total fees in native asset
+</ResponseField>
+
+<ResponseField name="feesFiat" type="string">
+  Total fees in USD
+</ResponseField>
+
+<ResponseField name="lastUpdated" type="string">
+  Last sync timestamp (milliseconds since epoch)
+</ResponseField>
+
+<ResponseField name="openPnl" type="string">
+  Unrealized profit/loss (if available, otherwise "N/A")
+</ResponseField>
+
+<ResponseField name="closedPnl" type="string">
+  Realized profit/loss (if available, otherwise "N/A")
+</ResponseField>
+
+<ResponseField name="totalCostBasis" type="string">
+  Total cost basis of holdings (if available, otherwise "N/A")
+</ResponseField>
+
+<ResponseField name="assetByProtocols" type="object">
+  Assets organized by protocol (wallet, lending, staking, etc.)
+
+  Each protocol contains:
+  - `key`: Protocol identifier
+  - `name`: Protocol display name
+  - `value`: Total value in USD
+  - `assets[]`: Array of asset holdings
+</ResponseField>
+
+<ResponseField name="chains" type="object">
+  Assets organized by blockchain
+
+  Each chain contains:
+  - `key`: Chain identifier (e.g., "ethereum", "arbitrum")
+  - `name`: Chain display name
+  - `value`: Total value on this chain
+  - `protocols[]`: Protocols with positions on this chain
+</ResponseField>
+
+---
+
+## Example Request
+
+<CodeGroup>
+
+```bash cURL
+curl -X GET "https://api.octav.fi/v1/portfolio?addresses=0x6426af179aabebe47666f345d69fd9079673f6cd&includeImages=true" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const address = '0x6426af179aabebe47666f345d69fd9079673f6cd';
+
+const response = await fetch(
+  `https://api.octav.fi/v1/portfolio?addresses=${address}&includeImages=true`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const portfolio = await response.json();
+console.log(`Net Worth: $${portfolio.networth}`);
+```
+
+```python Python
+import requests
+
+address = '0x6426af179aabebe47666f345d69fd9079673f6cd'
+
+response = requests.get(
+    'https://api.octav.fi/v1/portfolio',
+    params={
+        'addresses': address,
+        'includeImages': True
+    },
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+
+portfolio = response.json()
+print(f"Net Worth: ${portfolio['networth']}")
+```
+
+```typescript TypeScript
+interface Asset {
+  balance: string;
+  symbol: string;
+  price: string;
+  value: string;
+  contractAddress?: string;
+}
+
+interface Protocol {
+  key: string;
+  name: string;
+  value: string;
+  assets: Asset[];
+}
+
+interface Portfolio {
+  address: string;
+  networth: string;
+  cashBalance: string;
+  lastUpdated: string;
+  assetByProtocols: Record<string, Protocol>;
+  chains: Record<string, any>;
+}
+
+const address = '0x6426af179aabebe47666f345d69fd9079673f6cd';
+
+const response = await fetch(
+  `https://api.octav.fi/v1/portfolio?addresses=${address}&includeImages=true`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const portfolio: Portfolio = await response.json();
+console.log(`Net Worth: $${portfolio.networth}`);
+```
+
+</CodeGroup>
+
+---
+
+## Example Response
+
+<Accordion title="View Full Response" icon="code">
+
+```json
+{
+  "address": "0x6426af179aabebe47666f345d69fd9079673f6cd",
+  "cashBalance": "0",
+  "dailyIncome": "0",
+  "dailyExpense": "0",
+  "fees": "0.125",
+  "feesFiat": "420.50",
+  "lastUpdated": "1715173392020",
+  "networth": "45231.89",
+  "assetByProtocols": {
+    "wallet": {
+      "key": "wallet",
+      "name": "Wallet",
+      "value": "25123.45",
+      "assets": [
+        {
+          "balance": "5.5",
+          "symbol": "ETH",
+          "price": "3200.50",
+          "value": "17602.75",
+          "contractAddress": "0x0000000000000000000000000000000000000000",
+          "chain": "ethereum"
+        },
+        {
+          "balance": "2.3",
+          "symbol": "WETH",
+          "price": "3200.50",
+          "value": "7361.15",
+          "contractAddress": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "chain": "ethereum"
+        }
+      ]
+    },
+    "aave_v3": {
+      "key": "aave_v3",
+      "name": "Aave V3",
+      "value": "12500.00",
+      "assets": [
+        {
+          "balance": "10000",
+          "symbol": "USDC",
+          "price": "1.00",
+          "value": "10000.00",
+          "contractAddress": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "chain": "ethereum"
+        },
+        {
+          "balance": "2500",
+          "symbol": "DAI",
+          "price": "1.00",
+          "value": "2500.00",
+          "contractAddress": "0x6b175474e89094c44da98b954eedeac495271d0f",
+          "chain": "ethereum"
+        }
+      ]
+    },
+    "uniswap_v3": {
+      "key": "uniswap_v3",
+      "name": "Uniswap V3",
+      "value": "7608.44",
+      "assets": [
+        {
+          "balance": "1.2",
+          "symbol": "ETH",
+          "price": "3200.50",
+          "value": "3840.60",
+          "chain": "ethereum"
+        },
+        {
+          "balance": "3767.84",
+          "symbol": "USDC",
+          "price": "1.00",
+          "value": "3767.84",
+          "chain": "ethereum"
+        }
+      ]
+    }
+  },
+  "chains": {
+    "ethereum": {
+      "key": "ethereum",
+      "name": "Ethereum",
+      "value": "38523.45",
+      "protocols": ["wallet", "aave_v3", "uniswap_v3"]
+    },
+    "arbitrum": {
+      "key": "arbitrum",
+      "name": "Arbitrum",
+      "value": "6708.44",
+      "protocols": ["wallet", "gmx"]
+    }
+  }
+}
+```
+
+</Accordion>
+
+---
+
+## Data Freshness
+
+The Portfolio endpoint uses intelligent caching to balance data freshness with performance:
+
+<AccordionGroup>
+  <Accordion title="How Caching Works" icon="clock">
+    **Cache Duration:** 1 minute
+
+    **When data is less than 1 minute old:**
+    - Cached data returned immediately
+    - Response time: under 100ms
+
+    **When data is more than 1 minute old:**
+    - Cached data returned immediately
+    - Background sync initiated for next request
+    - Next request gets fresh data
+
+    **With waitForSync=true:**
+    - Waits for sync if data is stale
+    - Returns data less than 1 minute old
+    - Response time: Variable (1-10 seconds)
+  </Accordion>
+
+  <Accordion title="Best Practices" icon="lightbulb">
+    **For most use cases:**
+    - Use default `waitForSync=false`
+    - Data fresher than 1 minute is sufficient
+    - Fast response times
+
+    **For real-time tracking:**
+    - Set `waitForSync=true` when you need the absolute latest data
+    - Accept longer response times
+    - Consider rate limits
+
+    **For background updates:**
+    - Call endpoint periodically to keep cache warm
+    - Background sync ensures next request is fresh
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Use Cases
+
+<Tabs>
+  <Tab title="Portfolio Dashboard" icon="chart-line">
+    Display portfolio overview with net worth and asset breakdown:
+
+    ```javascript
+    const portfolio = await fetchPortfolio(address);
+
+    // Display summary
+    console.log(`Net Worth: $${portfolio.networth}`);
+    console.log(`Daily P&L: $${portfolio.dailyIncome - portfolio.dailyExpense}`);
+
+    // List protocols
+    Object.values(portfolio.assetByProtocols).forEach(protocol => {
+      console.log(`${protocol.name}: $${protocol.value}`);
+    });
+
+    // Chain distribution
+    Object.values(portfolio.chains).forEach(chain => {
+      console.log(`${chain.name}: $${chain.value}`);
+    });
+    ```
+  </Tab>
+
+  <Tab title="Asset Tracking" icon="coins">
+    Track specific assets across all protocols:
+
+    ```javascript
+    function getAssetTotal(portfolio, symbol) {
+      let total = 0;
+      let balance = 0;
+
+      Object.values(portfolio.assetByProtocols).forEach(protocol => {
+        protocol.assets
+          .filter(asset => asset.symbol === symbol)
+          .forEach(asset => {
+            total += parseFloat(asset.value);
+            balance += parseFloat(asset.balance);
+          });
+      });
+
+      return { symbol, balance, value: total };
+    }
+
+    const ethTotal = getAssetTotal(portfolio, 'ETH');
+    console.log(`Total ETH: ${ethTotal.balance} ($${ethTotal.value})`);
+    ```
+  </Tab>
+
+  <Tab title="Protocol Analysis" icon="vault">
+    Analyze DeFi protocol exposure:
+
+    ```javascript
+    function getProtocolExposure(portfolio) {
+      const protocols = Object.values(portfolio.assetByProtocols);
+      const totalValue = parseFloat(portfolio.networth);
+
+      return protocols.map(protocol => ({
+        name: protocol.name,
+        value: parseFloat(protocol.value),
+        percentage: (parseFloat(protocol.value) / totalValue * 100).toFixed(2)
+      })).sort((a, b) => b.value - a.value);
+    }
+
+    const exposure = getProtocolExposure(portfolio);
+    exposure.forEach(p => {
+      console.log(`${p.name}: $${p.value} (${p.percentage}%)`);
+    });
+    ```
+  </Tab>
+
+  <Tab title="Multi-Wallet Bundle" icon="layer-group">
+    Aggregate multiple wallets:
+
+    ```javascript
+    const addresses = [
+      '0x123...',
+      '0x456...',
+      '0x789...'
+    ];
+
+    // Fetch all portfolios
+    const response = await fetch(
+      `https://api.octav.fi/v1/portfolio?addresses=${addresses.join(',')}`,
+      { headers: { 'Authorization': `Bearer ${apiKey}` } }
+    );
+
+    const portfolios = await response.json();
+
+    // Calculate total
+    const totalNetWorth = portfolios.reduce((sum, p) => {
+      return sum + parseFloat(p.networth);
+    }, 0);
+
+    console.log(`Total Net Worth: $${totalNetWorth}`);
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Error Responses
+
+<AccordionGroup>
+  <Accordion title="400 Bad Request" icon="circle-exclamation">
+    Invalid parameters provided.
+
+    ```json
+    {
+      "error": "Bad Request",
+      "message": "addresses parameter is required"
+    }
+    ```
+
+    **Common causes:**
+    - Missing `addresses` parameter
+    - Invalid address format
+    - Too many addresses in single request
+  </Accordion>
+
+  <Accordion title="401 Unauthorized" icon="lock">
+    Authentication failed.
+
+    ```json
+    {
+      "error": "Unauthorized",
+      "message": "Invalid API key"
+    }
+    ```
+
+    **Solution:** Check your API key in the Authorization header
+  </Accordion>
+
+  <Accordion title="429 Too Many Requests" icon="gauge-high">
+    Rate limit exceeded.
+
+    ```json
+    {
+      "error": "Rate limit exceeded",
+      "message": "You have exceeded your rate limit",
+      "retry_after": 60
+    }
+    ```
+
+    **Solution:** Wait for the specified time or implement retry logic
+  </Accordion>
+
+  <Accordion title="402 Payment Required" icon="credit-card">
+    Insufficient credits.
+
+    ```json
+    {
+      "error": "Insufficient credits",
+      "message": "Please purchase more credits to continue"
+    }
+    ```
+
+    **Solution:** Purchase more credits at [data.octav.fi](https://data.octav.fi/)
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Transactions" icon="receipt" href="/api/endpoints/transactions">
+    View transaction history for these addresses
+  </Card>
+
+  <Card title="Token Overview" icon="coins" href="/api/endpoints/token-overview">
+    Get detailed token breakdown by protocol
+  </Card>
+
+  <Card title="Historical Portfolio" icon="clock" href="/api/endpoints/historical-portfolio">
+    View portfolio value at specific dates
+  </Card>
+
+  <Card title="Status" icon="signal" href="/api/endpoints/status">
+    Check when portfolio was last synced
+  </Card>
+</CardGroup>

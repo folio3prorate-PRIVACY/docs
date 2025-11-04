@@ -1,0 +1,636 @@
+---
+title: "Wallet"
+description: "Get wallet balances and token holdings across chains"
+---
+
+Retrieve token balances held directly in wallet addresses, excluding DeFi protocol positions. This endpoint shows only assets in the wallet's custody across supported blockchains.
+
+<Info>
+  **Cost:** 1 credit per call
+</Info>
+
+---
+
+## Endpoint
+
+```bash
+GET https://api.octav.fi/v1/wallet
+```
+
+### Parameters
+
+<ParamField query="addresses" type="string" required>
+  Comma-separated list of EVM or Solana wallet addresses
+
+  ```
+  addresses=0xddda947f31da53d8f9b05ab5a0bb07713c256e35
+  ```
+</ParamField>
+
+---
+
+## Example
+
+<CodeGroup>
+
+```bash cURL
+curl "https://api.octav.fi/v1/wallet?addresses=0xddda947f31da53d8f9b05ab5a0bb07713c256e35" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const address = '0xddda947f31da53d8f9b05ab5a0bb07713c256e35';
+
+const response = await fetch(
+  `https://api.octav.fi/v1/wallet?addresses=${address}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const [wallet] = await response.json();
+console.log(`Total wallet value: $${wallet.networth}`);
+```
+
+```python Python
+address = '0xddda947f31da53d8f9b05ab5a0bb07713c256e35'
+
+response = requests.get(
+    'https://api.octav.fi/v1/wallet',
+    params={'addresses': address},
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+
+wallet = response.json()[0]
+print(f"Total wallet value: ${wallet['networth']}")
+```
+
+```typescript TypeScript
+const address = '0xddda947f31da53d8f9b05ab5a0bb07713c256e35';
+
+const response = await fetch(
+  `https://api.octav.fi/v1/wallet?addresses=${address}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const [wallet]: Wallet[] = await response.json();
+console.log(`Total wallet value: $${wallet.networth}`);
+```
+
+</CodeGroup>
+
+---
+
+## Response
+
+Returns an array of portfolio objects containing only wallet holdings. The structure follows the same format as the [Portfolio endpoint](/api/endpoints/portfolio), but filtered to show only the `wallet` protocol.
+
+### Top-Level Fields
+
+<ResponseField name="address" type="string">
+  The wallet address
+</ResponseField>
+
+<ResponseField name="networth" type="string">
+  Total value of all wallet holdings in USD
+</ResponseField>
+
+<ResponseField name="cashBalance" type="string">
+  Cash balance in USD (typically "0" for wallet-only view)
+</ResponseField>
+
+<ResponseField name="closedPnl" type="string">
+  Realized profit/loss (if available)
+</ResponseField>
+
+<ResponseField name="openPnl" type="string">
+  Unrealized profit/loss (if available)
+</ResponseField>
+
+<ResponseField name="fees" type="string">
+  Total transaction fees in wei
+</ResponseField>
+
+<ResponseField name="feesFiat" type="string">
+  Total transaction fees in USD
+</ResponseField>
+
+<ResponseField name="lastUpdated" type="string">
+  Last sync timestamp (milliseconds since epoch)
+</ResponseField>
+
+<ResponseField name="assetByProtocols" type="object">
+  Assets organized by protocol - contains only the `wallet` key
+
+  The `wallet` protocol contains:
+  - `name`: "Wallet"
+  - `key`: "wallet"
+  - `value`: Total USD value
+  - `chains`: Holdings organized by blockchain
+</ResponseField>
+
+<ResponseField name="chains" type="object">
+  Chain-level summary of wallet holdings
+
+  Each chain contains:
+  - `key`: Chain identifier
+  - `name`: Chain display name
+  - `value`: Total value on this chain
+  - `chainId`: Numeric chain ID
+  - `valuePercentile`: Percentage of total portfolio
+</ResponseField>
+
+### Asset Fields
+
+Each token asset includes:
+
+<ResponseField name="balance" type="string">
+  Token balance (in token units)
+</ResponseField>
+
+<ResponseField name="symbol" type="string">
+  Token symbol (e.g., "eth", "uni")
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Token full name
+</ResponseField>
+
+<ResponseField name="value" type="string">
+  USD value of holding
+</ResponseField>
+
+<ResponseField name="price" type="string">
+  Current token price in USD
+</ResponseField>
+
+<ResponseField name="contract" type="string">
+  Token contract address (0x000...000 for native tokens)
+</ResponseField>
+
+<ResponseField name="chainKey" type="string">
+  Blockchain identifier (e.g., "ethereum", "arbitrum")
+</ResponseField>
+
+<ResponseField name="decimal" type="string">
+  Token decimals
+</ResponseField>
+
+---
+
+## Example Response
+
+```json
+[
+  {
+    "address": "0xddda947f31da53d8f9b05ab5a0bb07713c256e35",
+    "networth": "1504.0972690884063639880894878216512",
+    "cashBalance": "0",
+    "closedPnl": "13.5466715367602206822681107794098304",
+    "fees": "48918091440000",
+    "feesFiat": "0.125327383206473102336577",
+    "lastUpdated": "1736976333061",
+    "assetByProtocols": {
+      "wallet": {
+        "name": "Wallet",
+        "key": "wallet",
+        "value": "1055.20576207293341601424",
+        "chains": {
+          "arbitrum": {
+            "name": "Arbitrum",
+            "key": "arbitrum",
+            "value": "1055.20576207293341601424",
+            "protocolPositions": {
+              "WALLET": {
+                "name": "wallet",
+                "totalValue": "1055.20576207293341601424",
+                "assets": [
+                  {
+                    "symbol": "eth",
+                    "name": "ethereum",
+                    "balance": "0.012695517744456324",
+                    "value": "43.70762066990445401424",
+                    "price": "3442.76",
+                    "contract": "0x0000000000000000000000000000000000000000",
+                    "chainKey": "arbitrum",
+                    "decimal": "18"
+                  },
+                  {
+                    "symbol": "uni",
+                    "name": "uniswap",
+                    "balance": "69.9031085959246",
+                    "value": "1011.497981383028962",
+                    "price": "14.47",
+                    "contract": "0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0",
+                    "chainKey": "arbitrum",
+                    "decimal": "18"
+                  },
+                  {
+                    "symbol": "ftw",
+                    "name": "black agnus",
+                    "balance": "15000",
+                    "value": "0.00016002",
+                    "price": "1.0668e-8",
+                    "contract": "0x306fd3e7b169aa4ee19412323e1a5995b8c1a1f4",
+                    "chainKey": "arbitrum",
+                    "decimal": "18"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "chains": {
+      "arbitrum": {
+        "name": "Arbitrum",
+        "key": "arbitrum",
+        "chainId": "42161",
+        "value": "1504.0972690884063639880894878216512",
+        "valuePercentile": "100"
+      }
+    }
+  }
+]
+```
+
+---
+
+## Use Cases
+
+<Tabs>
+  <Tab title="List All Tokens" icon="list">
+    Get all tokens in a wallet:
+
+    ```javascript
+    async function listWalletTokens(address) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/wallet?addresses=${address}`,
+        {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        }
+      );
+
+      const [wallet] = await response.json();
+      const walletProtocol = wallet.assetByProtocols.wallet;
+
+      console.log(`Total Value: $${parseFloat(wallet.networth).toFixed(2)}\n`);
+
+      // Iterate through each chain
+      Object.values(walletProtocol.chains).forEach(chain => {
+        console.log(`\n${chain.name}:`);
+
+        const assets = chain.protocolPositions.WALLET.assets;
+        assets.forEach(asset => {
+          console.log(`  ${asset.symbol.toUpperCase()}: ${parseFloat(asset.balance).toFixed(4)} ($${parseFloat(asset.value).toFixed(2)})`);
+        });
+      });
+    }
+    ```
+  </Tab>
+
+  <Tab title="Calculate Holdings" icon="calculator">
+    Calculate holdings by chain:
+
+    ```javascript
+    async function calculateHoldingsByChain(address) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/wallet?addresses=${address}`,
+        {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        }
+      );
+
+      const [wallet] = await response.json();
+      const holdingsByChain = {};
+
+      Object.entries(wallet.chains).forEach(([chainKey, chain]) => {
+        holdingsByChain[chain.name] = {
+          value: parseFloat(chain.value),
+          percentage: parseFloat(chain.valuePercentile),
+          chainId: chain.chainId
+        };
+      });
+
+      return holdingsByChain;
+    }
+
+    const holdings = await calculateHoldingsByChain(address);
+    console.log('Holdings by Chain:', holdings);
+    ```
+  </Tab>
+
+  <Tab title="Filter by Value" icon="filter">
+    Show only tokens above a value threshold:
+
+    ```javascript
+    async function getHighValueTokens(address, minValue = 10) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/wallet?addresses=${address}`,
+        {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        }
+      );
+
+      const [wallet] = await response.json();
+      const highValueTokens = [];
+
+      const walletProtocol = wallet.assetByProtocols.wallet;
+
+      Object.values(walletProtocol.chains).forEach(chain => {
+        const assets = chain.protocolPositions.WALLET.assets;
+
+        assets.forEach(asset => {
+          const value = parseFloat(asset.value);
+          if (value >= minValue) {
+            highValueTokens.push({
+              symbol: asset.symbol,
+              name: asset.name,
+              balance: asset.balance,
+              value: value,
+              chain: chain.name
+            });
+          }
+        });
+      });
+
+      return highValueTokens.sort((a, b) => b.value - a.value);
+    }
+
+    const tokens = await getHighValueTokens(address, 50);
+    console.log(`Tokens worth $50+: ${tokens.length}`);
+    ```
+  </Tab>
+
+  <Tab title="Track Fees" icon="coins">
+    Monitor transaction fees:
+
+    ```javascript
+    async function getWalletFees(address) {
+      const response = await fetch(
+        `https://api.octav.fi/v1/wallet?addresses=${address}`,
+        {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        }
+      );
+
+      const [wallet] = await response.json();
+
+      return {
+        feesWei: wallet.fees,
+        feesUSD: parseFloat(wallet.feesFiat),
+        lastUpdated: new Date(parseInt(wallet.lastUpdated))
+      };
+    }
+
+    const fees = await getWalletFees(address);
+    console.log(`Total fees paid: $${fees.feesUSD.toFixed(2)}`);
+    console.log(`Last updated: ${fees.lastUpdated.toLocaleString()}`);
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Comparison: Wallet vs Portfolio
+
+<AccordionGroup>
+  <Accordion title="What's the Difference?" icon="scale-balanced">
+    **Wallet Endpoint** (`/v1/wallet`)
+    - Returns only tokens in direct wallet custody
+    - Shows the `wallet` protocol only
+    - Excludes DeFi positions (lending, staking, liquidity pools)
+    - Best for simple balance checks
+
+    **Portfolio Endpoint** (`/v1/portfolio`)
+    - Returns complete portfolio including DeFi positions
+    - Shows all protocols (wallet, lending, staking, etc.)
+    - Includes positions on Aave, Uniswap, etc.
+    - Best for comprehensive portfolio view
+
+    **Example:**
+    - Wallet: Shows 1 ETH in your address
+    - Portfolio: Shows 1 ETH + 2 ETH deposited in Aave + LP tokens in Uniswap
+  </Accordion>
+
+  <Accordion title="When to Use Each" icon="lightbulb">
+    **Use /v1/wallet when:**
+    - You only need basic token balances
+    - Building a simple wallet balance viewer
+    - Checking liquid/available assets
+    - Monitoring tokens ready to transfer
+
+    **Use /v1/portfolio when:**
+    - You need complete financial picture
+    - Tracking DeFi positions
+    - Calculating total net worth
+    - Building portfolio analytics dashboard
+  </Accordion>
+
+  <Accordion title="Response Format" icon="layer-group">
+    Both endpoints return the same data structure:
+    - Same top-level fields (address, networth, chains)
+    - Same asset format (balance, value, price)
+    - Same nested structure
+
+    The only difference:
+    - Wallet: `assetByProtocols` contains only `wallet` key
+    - Portfolio: `assetByProtocols` contains all protocols
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Handling Multiple Chains" icon="layer-group">
+    Wallets can hold assets on multiple chains:
+
+    ```javascript
+    const walletProtocol = wallet.assetByProtocols.wallet;
+    const chainCount = Object.keys(walletProtocol.chains).length;
+
+    console.log(`Assets on ${chainCount} chains`);
+
+    // Process each chain
+    Object.entries(walletProtocol.chains).forEach(([key, chain]) => {
+      console.log(`${chain.name}: $${parseFloat(chain.value).toFixed(2)}`);
+    });
+    ```
+  </Accordion>
+
+  <Accordion title="Native Token Detection" icon="coins">
+    Native tokens (ETH, MATIC, etc.) have special contract address:
+
+    ```javascript
+    function isNativeToken(asset) {
+      return asset.contract === '0x0000000000000000000000000000000000000000';
+    }
+
+    const assets = chain.protocolPositions.WALLET.assets;
+    const nativeToken = assets.find(isNativeToken);
+
+    if (nativeToken) {
+      console.log(`Native balance: ${nativeToken.balance} ${nativeToken.symbol}`);
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Dust Filter" icon="broom">
+    Filter out very small token amounts (dust):
+
+    ```javascript
+    const MIN_DUST_VALUE = 0.01; // $0.01
+
+    const significantTokens = assets.filter(asset => {
+      return parseFloat(asset.value) > MIN_DUST_VALUE;
+    });
+
+    console.log(`${significantTokens.length} tokens above dust threshold`);
+    ```
+  </Accordion>
+
+  <Accordion title="Price Formatting" icon="dollar-sign">
+    Handle scientific notation in prices:
+
+    ```javascript
+    function formatPrice(priceString) {
+      const price = parseFloat(priceString);
+
+      if (price < 0.01) {
+        // Use scientific notation for very small prices
+        return price.toExponential(4);
+      } else if (price < 1) {
+        return price.toFixed(4);
+      } else {
+        return price.toFixed(2);
+      }
+    }
+
+    console.log(formatPrice("1.0668e-8")); // "1.0668e-08"
+    console.log(formatPrice("3442.76")); // "3442.76"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common Patterns
+
+<AccordionGroup>
+  <Accordion title="Calculate Total by Symbol" icon="calculator">
+    Sum up token holdings across chains:
+
+    ```javascript
+    function getTotalBySymbol(wallet, symbol) {
+      let total = 0;
+      const walletProtocol = wallet.assetByProtocols.wallet;
+
+      Object.values(walletProtocol.chains).forEach(chain => {
+        const assets = chain.protocolPositions.WALLET.assets;
+        assets.forEach(asset => {
+          if (asset.symbol.toLowerCase() === symbol.toLowerCase()) {
+            total += parseFloat(asset.balance);
+          }
+        });
+      });
+
+      return total;
+    }
+
+    const totalETH = getTotalBySymbol(wallet, 'eth');
+    console.log(`Total ETH across all chains: ${totalETH}`);
+    ```
+  </Accordion>
+
+  <Accordion title="Sort Assets by Value" icon="arrow-down-wide-short">
+    Get tokens sorted by USD value:
+
+    ```javascript
+    function getSortedAssets(wallet) {
+      const walletProtocol = wallet.assetByProtocols.wallet;
+      const allAssets = [];
+
+      Object.values(walletProtocol.chains).forEach(chain => {
+        const assets = chain.protocolPositions.WALLET.assets;
+        assets.forEach(asset => {
+          allAssets.push({
+            ...asset,
+            chainName: chain.name
+          });
+        });
+      });
+
+      return allAssets.sort((a, b) => {
+        return parseFloat(b.value) - parseFloat(a.value);
+      });
+    }
+
+    const sorted = getSortedAssets(wallet);
+    console.log('Top 3 holdings:', sorted.slice(0, 3));
+    ```
+  </Accordion>
+
+  <Accordion title="Check for Specific Token" icon="magnifying-glass">
+    Find if wallet holds a specific token:
+
+    ```javascript
+    function hasToken(wallet, contractAddress) {
+      const walletProtocol = wallet.assetByProtocols.wallet;
+
+      for (const chain of Object.values(walletProtocol.chains)) {
+        const assets = chain.protocolPositions.WALLET.assets;
+        const found = assets.find(asset =>
+          asset.contract.toLowerCase() === contractAddress.toLowerCase()
+        );
+
+        if (found) {
+          return {
+            has: true,
+            balance: found.balance,
+            value: found.value,
+            chain: chain.name
+          };
+        }
+      }
+
+      return { has: false };
+    }
+
+    const uniToken = hasToken(wallet, '0xfa7f8980b0f1e64a2062791cc3b0871572f1f7f0');
+    if (uniToken.has) {
+      console.log(`Found ${uniToken.balance} UNI on ${uniToken.chain}`);
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Portfolio" icon="wallet" href="/api/endpoints/portfolio">
+    Complete portfolio including DeFi positions
+  </Card>
+
+  <Card title="Transactions" icon="receipt" href="/api/endpoints/transactions">
+    Transaction history for wallet
+  </Card>
+
+  <Card title="Token Overview" icon="coins" href="/api/endpoints/token-overview">
+    Detailed token breakdown (PRO)
+  </Card>
+
+  <Card title="Airdrop" icon="gift" href="/api/endpoints/airdrop">
+    Check claimable airdrops
+  </Card>
+</CardGroup>

@@ -1,0 +1,404 @@
+---
+title: "Quick Start with AI"
+description: "Ready-to-use prompts for building crypto applications with Octav API and AI assistance"
+---
+
+Jump-start your development with these proven AI prompts for common blockchain applications. Each prompt is designed to work with ChatGPT, Claude, or your favorite AI coding assistant.
+
+<Tip>
+  **Copy and customize** these prompts for your specific needs. Replace placeholders like `[your requirements]` with your actual requirements.
+</Tip>
+
+---
+
+## Portfolio Tracker
+
+Build a multi-chain portfolio dashboard:
+
+```text
+I want to build a cryptocurrency portfolio tracker using the Octav API at https://api-docs.octav.fi
+
+Requirements:
+- Track multiple wallet addresses
+- Show balances across Ethereum, Base, Arbitrum, and Polygon
+- Display total net worth in USD
+- Show breakdown by chain and protocol
+- Real-time price updates
+- Responsive design for mobile
+
+Tech Stack:
+- Next.js 14 with App Router
+- TypeScript
+- TailwindCSS
+- Recharts for visualizations
+
+Please:
+1. Design the component architecture
+2. Create a portfolio data fetching hook
+3. Build the main dashboard component with charts
+4. Add error handling and loading states
+5. Include API key management (environment variables)
+
+The Octav API endpoint is GET https://api.octav.fi/v1/portfolio?addresses={addresses}
+It returns portfolio data including networth, chains, and asset breakdown.
+```
+
+---
+
+## Transaction History Viewer
+
+Create a filterable transaction explorer:
+
+```text
+Build a transaction history viewer using Octav API (docs: https://api-docs.octav.fi)
+
+Features Needed:
+- Display all transactions for a wallet address
+- Filter by transaction type (SWAP, TRANSFERIN, TRANSFEROUT, STAKE, etc.)
+- Filter by date range
+- Filter by chain (Ethereum, Arbitrum, Base, etc.)
+- Search functionality
+- Pagination (show 50 transactions per page)
+- Export to CSV
+
+UI Requirements:
+- Table view with sortable columns
+- Transaction type badges with colors
+- Click transaction to see full details
+- Mobile-responsive
+
+Tech Stack:
+- React with TypeScript
+- TailwindCSS
+- React Table or TanStack Table
+
+The API endpoint is GET https://api.octav.fi/v1/transactions?addresses={address}
+It supports these query parameters:
+- txTypes: filter by transaction type
+- networks: filter by chain
+- startDate/endDate: date range
+- limit/offset: pagination
+
+Generate complete code with proper TypeScript types based on the Octav API response structure.
+```
+
+---
+
+## DeFi Position Tracker
+
+Monitor lending and liquidity positions:
+
+```text
+Create a DeFi position tracker using the Octav API.
+
+Track These Position Types:
+- Lending positions (Aave, Compound)
+- Liquidity pools (Uniswap, Curve)
+- Staking positions
+- Yield farming positions
+- Vault positions (Yearn, etc.)
+
+Display:
+- Protocol name and logo
+- Position type
+- Total value in USD
+- Individual assets in each position
+- Chain where position exists
+- Health factor (if applicable for lending)
+
+Requirements:
+- Group positions by protocol
+- Show total value across all DeFi positions
+- Calculate percentage of portfolio in DeFi
+- Alert if health factor is low (under 1.5)
+
+Tech: Next.js, TypeScript, shadcn/ui components
+
+Reference the Octav API docs at https://api-docs.octav.fi for the portfolio endpoint response structure. The assetByProtocols object contains all protocol positions including LENDING, LIQUIDITYPOOL, STAKED, FARMING, VAULT, etc.
+```
+
+---
+
+## Multi-Wallet Aggregator
+
+Aggregate data across multiple addresses:
+
+```text
+Build a multi-wallet aggregator dashboard with Octav API.
+
+Functionality:
+- Add/remove multiple wallet addresses
+- Show combined net worth
+- Display holdings aggregated across all wallets
+- Show which wallets hold which assets
+- Identify duplicate holdings across wallets
+- Calculate percentage allocation per wallet
+
+Features:
+- Save wallet list to local storage
+- Export combined portfolio to CSV
+- Show top holdings across all wallets
+- Display total by chain across all addresses
+
+UI Components:
+- Wallet management sidebar
+- Combined portfolio overview
+- Individual wallet cards
+- Asset allocation chart
+- Chain distribution chart
+
+Stack: React, TypeScript, Chart.js or Recharts, TailwindCSS
+
+Use Octav API's ability to query multiple addresses in one call:
+https://api.octav.fi/v1/portfolio?addresses=0x123,0x456,0x789
+
+Build components to aggregate and display the combined data.
+```
+
+---
+
+## Token Balance Monitor
+
+Simple balance tracking with alerts:
+
+```text
+Create a token balance monitoring tool using Octav API.
+
+Core Features:
+- Monitor specific token balances (ETH, USDC, USDT, etc.)
+- Set up balance alerts (notify when balance goes above/below threshold)
+- Track balance changes over time
+- Support multiple chains
+- Show current price and USD value
+
+Alert Types:
+- Balance drops below X tokens
+- Balance exceeds Y tokens
+- Balance changes by Z%
+- New tokens received
+
+Technical Requirements:
+- Polling interval: every 30 seconds
+- Store historical balance data
+- Browser notifications for alerts
+- Sound notifications (optional)
+- Email notifications (optional via webhook)
+
+Tech: Next.js, TypeScript, React hooks for polling
+
+Use Octav's /v1/wallet endpoint for real-time balance data:
+https://api.octav.fi/v1/wallet?addresses={address}
+
+Create a useBalanceMonitor hook that polls the API and triggers alerts.
+```
+
+---
+
+## NFT Portfolio Viewer
+
+Display NFT collections and holdings:
+
+```text
+Build an NFT portfolio viewer with Octav API.
+
+Display:
+- All NFT collections owned by an address
+- Individual NFTs with images
+- Collection floor prices (if available)
+- Total NFT portfolio value
+- Breakdown by chain
+- Sorting by value, collection, chain
+
+Features:
+- Grid view with NFT images
+- Collection grouping
+- Search and filter functionality
+- Click NFT to see details
+- Links to marketplaces
+
+Use Octav Portfolio API which includes NFT data in the response.
+The endpoint is https://api.octav.fi/v1/portfolio?addresses={address}&includeNFTs=true
+
+Tech Stack: Next.js, TypeScript, TailwindCSS, Image optimization
+
+Note: Use includeImages=true parameter to get image URLs for NFTs.
+```
+
+---
+
+## Tax Export Tool
+
+Generate tax reports from transaction history:
+
+```text
+Create a cryptocurrency tax export tool using Octav's transaction data.
+
+Features:
+- Fetch all transactions for a tax year
+- Categorize transactions by type:
+  * Income (AIRDROP, CLAIM, REWARDS)
+  * Expenses (fees, gas)
+  * Trades (SWAP)
+  * Transfers (TRANSFERIN, TRANSFEROUT)
+- Calculate total fees paid in USD
+- Export to CSV format for tax software
+- Support multiple wallets
+- Date range selector
+
+CSV Columns:
+- Date & Time
+- Transaction Type
+- Asset Sent
+- Amount Sent
+- Asset Received
+- Amount Received
+- Fee (USD)
+- Transaction Hash
+- Chain
+
+Tech: React, TypeScript, date-fns for date handling, papaparse for CSV generation
+
+Use Octav Transactions API:
+https://api.octav.fi/v1/transactions?addresses={address}&startDate=2024-01-01&endDate=2024-12-31
+
+The API provides transaction categorization and fee data automatically.
+```
+
+---
+
+## Airdrop Checker
+
+Check for claimable airdrops:
+
+```text
+Build an airdrop checker for Solana addresses using Octav API.
+
+Features:
+- Check if a Solana address has claimable airdrops
+- Show airdrop token name and amount
+- Display USD value of claimable tokens
+- Show unlock date for locked airdrops
+- Provide claim links
+- Support multiple addresses
+
+Display Info:
+- Token name and symbol
+- Claimable amount
+- Current value in USD
+- Unlock date (if locked)
+- Claimable status (ready or locked)
+- Link to claim page
+
+Tech: Next.js, TypeScript, TailwindCSS
+
+Use Octav Airdrop endpoint (Solana only):
+https://api.octav.fi/v1/airdrop?addresses={solana_address}
+
+Create a clean UI showing all airdrops with status badges and claim buttons.
+```
+
+---
+
+## Portfolio Performance Chart
+
+Visualize portfolio performance over time:
+
+```text
+Create a portfolio performance chart using Octav's historical data.
+
+Chart Requirements:
+- Line chart showing net worth over time
+- Date range selector (7d, 30d, 90d, 1y, all)
+- Hover to see exact value and date
+- Show percentage change from start to current
+- Show highest and lowest values in period
+- Mobile responsive
+
+Additional Features:
+- Chain breakdown over time (stacked area chart)
+- Protocol allocation changes
+- Top gaining/losing assets
+
+Tech: Next.js, TypeScript, Recharts or Chart.js
+
+Note: Historical data requires subscription. Use:
+https://api.octav.fi/v1/historical?addresses={address}&date={YYYY-MM-DD}
+
+Fetch data for multiple dates and build the time series. Handle cases where historical data isn't available.
+```
+
+---
+
+## Best Practices for Using These Prompts
+
+<AccordionGroup>
+  <Accordion title="Customize for Your Needs" icon="pencil">
+    **Don't use prompts verbatim:**
+
+    - Add your specific requirements
+    - Specify your exact tech stack
+    - Include design preferences
+    - Add any constraints (mobile-first, accessibility, etc.)
+  </Accordion>
+
+  <Accordion title="Provide Context" icon="message">
+    **Give AI more information:**
+
+    ```
+    "I'm building a portfolio tracker for a mobile app.
+    Users are crypto beginners, so keep UI simple.
+    Need to support dark mode.
+    Budget: 10,000 API calls per month"
+    ```
+
+    More context = better code generation
+  </Accordion>
+
+  <Accordion title="Iterate and Refine" icon="arrows-rotate">
+    **Build in stages:**
+
+    1. Start with basic functionality
+    2. Ask AI to add features one at a time
+    3. Request improvements and optimizations
+    4. Add error handling and edge cases
+
+    ```
+    "The portfolio tracker works! Now add:
+    - Loading skeleton screens
+    - Error states with retry button
+    - Refresh button to update data"
+    ```
+  </Accordion>
+
+  <Accordion title="Validate the Output" icon="shield-check">
+    **Always review AI-generated code:**
+
+    - Check API endpoint URLs are correct
+    - Verify parameter names match Octav API
+    - Test error handling
+    - Review security (API key protection)
+    - Test with real data
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="LLMs Integration" icon="robot" href="/api/ai-development/llms-integration">
+    Learn how to integrate with AI tools
+  </Card>
+
+  <Card title="Building AI Agents" icon="code" href="/api/ai-development/building-agents">
+    Create autonomous monitoring systems
+  </Card>
+
+  <Card title="API Reference" icon="book" href="/api/introduction">
+    Complete API documentation
+  </Card>
+
+  <Card title="Code Examples" icon="brackets-curly" href="/api/quickstart">
+    Working code samples
+  </Card>
+</CardGroup>

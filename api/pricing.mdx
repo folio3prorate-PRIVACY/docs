@@ -1,0 +1,418 @@
+---
+title: "Pricing"
+description: "Credit-based pricing that scales with your usage"
+---
+
+Octav uses a flexible credit-based system that allows you to pay only for what you use. Credits never expire, giving you complete control over your API costs.
+
+<Info>
+  **Purchase Credits** - Buy credit packages at [data.octav.fi](https://data.octav.fi/)
+</Info>
+
+---
+
+## Credit Packages
+
+Choose the package that fits your needs. All credits never expire.
+
+<CardGroup cols={3}>
+  <Card title="Starter" icon="seedling">
+    **4,000 Credits**
+
+    $100.00
+
+    **$0.025** per credit
+
+    Perfect for small projects and testing
+  </Card>
+
+  <Card title="Small Team" icon="users">
+    **100,000 Credits**
+
+    $2,500.00
+
+    **$0.025** per credit
+
+    Ideal for growing applications
+  </Card>
+
+  <Card title="Intensive Usage" icon="rocket">
+    **1,000,000 Credits**
+
+    $20,000.00
+
+    **$0.020** per credit
+
+    Best value for high-volume usage
+  </Card>
+</CardGroup>
+
+<Tip>
+  **Volume Discount** - Save 20% with the Intensive Usage package ($0.020 vs $0.025 per credit)
+</Tip>
+
+---
+
+## Credit Costs
+
+### API Endpoints
+
+<AccordionGroup>
+  <Accordion title="Free Endpoints (0 Credits)" icon="circle-check">
+    These endpoints are completely free to call:
+
+    | Endpoint | Method | Cost |
+    |----------|--------|------|
+    | `/v1/credits` | GET | **0 credits** |
+    | `/v1/status` | GET | **0 credits** |
+
+    Perfect for testing authentication and monitoring sync status.
+  </Accordion>
+
+  <Accordion title="Standard Endpoints (1 Credit)" icon="coins">
+    Most API calls cost 1 credit:
+
+    | Endpoint | Method | Cost |
+    |----------|--------|------|
+    | `/v1/portfolio` | GET | **1 credit** |
+    | `/v1/transactions` | GET | **1 credit** |
+    | `/v1/token-overview` | GET | **1 credit** P |
+    | `/v1/historical` | GET | **1 credit** |
+    | `/v1/sync-transactions` | POST | **1 credit** |
+
+    P *Requires Octav PRO subscription*
+  </Accordion>
+
+  <Accordion title="Transaction Indexing" icon="database">
+    When syncing transactions, indexing costs apply:
+
+    **1 credit per 250 transactions indexed**
+
+    - First-time indexing of an address incurs indexing costs
+    - Once indexed, transactions are stored permanently
+    - Future queries don't re-index (no additional cost)
+    - Only new transactions since last sync require indexing
+
+    **One-Time Cost:** Indexing happens once. After initial sync, you only pay the 1 credit API call fee.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Cost Examples
+
+### Example 1: Portfolio Tracking
+
+Tracking 5 wallets, checking portfolios once per hour:
+
+<Steps>
+  <Step title="API Calls" icon="calculator">
+    5 addresses x 24 hours x 30 days = **3,600 API calls**
+  </Step>
+
+  <Step title="Credit Cost" icon="coins">
+    3,600 calls x 1 credit = **3,600 credits**
+  </Step>
+
+  <Step title="Monthly Cost" icon="dollar-sign">
+    3,600 credits x $0.025 = **$90/month**
+  </Step>
+</Steps>
+
+### Example 2: Transaction History
+
+Initial sync for an address with 10,000 transactions:
+
+<Steps>
+  <Step title="API Call" icon="code">
+    1 sync-transactions call = **1 credit**
+  </Step>
+
+  <Step title="Indexing Cost" icon="database">
+    10,000 transactions / 250 = 40 batches x 1 credit = **40 credits**
+  </Step>
+
+  <Step title="Total First Sync" icon="calculator">
+    1 + 40 = **41 credits** ($1.03)
+  </Step>
+
+  <Step title="Future Updates" icon="refresh">
+    Only 1 credit per call for new transactions
+  </Step>
+</Steps>
+
+### Example 3: High-Volume Application
+
+Application making 100,000 API calls per month:
+
+<Tabs>
+  <Tab title="Starter Package" icon="seedling">
+    **Not recommended** - Would need 25 packages
+
+    100,000 credits x $0.025 = **$2,500**
+  </Tab>
+
+  <Tab title="Small Team Package" icon="users">
+    **Perfect fit** - Exactly 100,000 credits
+
+    1 package = **$2,500**
+
+    **$0.025** per credit
+  </Tab>
+
+  <Tab title="Intensive Usage" icon="rocket">
+    **Best value** if you need flexibility
+
+    Buy 1M credits for future growth
+
+    100,000 used x $0.020 = **$2,000**
+
+    **Save $500** with volume discount
+  </Tab>
+</Tabs>
+
+---
+
+## How Credits Work
+
+### Credit System Benefits
+
+<CardGroup cols={2}>
+  <Card title="No Expiration" icon="infinity">
+    Credits never expire - buy when convenient, use when needed
+  </Card>
+
+  <Card title="Predictable Costs" icon="chart-line">
+    Know exactly how much each API call costs
+  </Card>
+
+  <Card title="No Subscriptions" icon="ban">
+    No monthly fees or commitments - pay as you grow
+  </Card>
+
+  <Card title="Volume Discounts" icon="tag">
+    Save money with larger credit packages
+  </Card>
+</CardGroup>
+
+### Permanent Indexing Advantage
+
+<AccordionGroup>
+  <Accordion title="How Permanent Indexing Saves Money" icon="piggy-bank">
+
+When you sync an address for the first time:
+1. **Pay indexing cost** - 1 credit per 250 transactions
+2. **Transactions stored permanently** - Data saved in Octav's system
+3. **Future queries are cheap** - Only 1 credit per API call
+4. **No re-indexing costs** - Historical data already available
+
+**Example:**
+- First sync: 10,000 transactions = 41 credits ($1.03)
+- Future calls: 1 credit each ($0.025)
+- Query 100 times: 100 credits ($2.50)
+- **Total: 141 credits vs re-indexing 4,100 credits each time**
+
+This makes regular monitoring very cost-effective!
+
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Monitoring Usage
+
+### Check Your Credits
+
+Use the free `/v1/credits` endpoint anytime:
+
+<CodeGroup>
+
+```bash cURL
+curl -X GET https://api.octav.fi/v1/credits \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.octav.fi/v1/credits', {
+  headers: {
+    'Authorization': `Bearer ${apiKey}`
+  }
+});
+
+const credits = await response.json();
+console.log(`Remaining credits: ${credits}`);
+```
+
+```python Python
+response = requests.get(
+    'https://api.octav.fi/v1/credits',
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+
+credits = response.json()
+print(f'Remaining credits: {credits}')
+```
+
+</CodeGroup>
+
+### Developer Portal
+
+Track detailed usage at [data.octav.fi](https://data.octav.fi/):
+
+- Credit balance and history
+- API call volumes
+- Usage by endpoint
+- Historical usage patterns
+- Purchase more credits
+
+---
+
+## Cost Optimization Tips
+
+<AccordionGroup>
+  <Accordion title="Use Free Endpoints" icon="circle-check">
+    Leverage the free `/v1/status` and `/v1/credits` endpoints:
+
+    - Check sync status before calling expensive endpoints
+    - Monitor credit balance without cost
+    - Verify authentication without using credits
+  </Accordion>
+
+  <Accordion title="Cache Portfolio Data" icon="database">
+    Portfolio data is cached for 1 minute:
+
+    - Multiple calls within 1 minute return cached data
+    - No need to implement your own caching for under 1 minute intervals
+    - Use `waitForSync=false` (default) unless you need the absolute latest data
+  </Accordion>
+
+  <Accordion title="Batch Addresses" icon="layer-group">
+    Request multiple addresses in a single call:
+
+    ```bash
+    # Instead of 3 separate calls (3 credits):
+    curl "https://api.octav.fi/v1/portfolio?addresses=0x123"
+    curl "https://api.octav.fi/v1/portfolio?addresses=0x456"
+    curl "https://api.octav.fi/v1/portfolio?addresses=0x789"
+
+    # Use one call (1 credit):
+    curl "https://api.octav.fi/v1/portfolio?addresses=0x123,0x456,0x789"
+    ```
+  </Accordion>
+
+  <Accordion title="Optimize Transaction Queries" icon="filter">
+    Use filters to reduce unnecessary data:
+
+    - Filter by `networks` to query specific chains
+    - Use `txTypes` to get only relevant transaction types
+    - Apply `startDate` and `endDate` for time-based queries
+    - Set appropriate `limit` values for pagination
+  </Accordion>
+
+  <Accordion title="Index Strategically" icon="brain">
+    For addresses with 100,000+ transactions:
+
+    - Contact support for assistance
+    - Consider filtering by specific chains
+    - Use date ranges to limit initial sync
+    - Addresses over 100k transactions are not auto-indexed
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Enterprise Solutions
+
+Need more than standard packages?
+
+<CardGroup cols={2}>
+  <Card title="Custom Pricing" icon="handshake">
+    **Volume discounts** for 10M+ credits
+
+    Contact us for enterprise pricing
+  </Card>
+
+  <Card title="Dedicated Support" icon="headset">
+    **Priority support** and SLAs
+
+    Technical account management
+  </Card>
+
+  <Card title="Higher Rate Limits" icon="gauge-high">
+    **Custom rate limits** beyond 360/min
+
+    Dedicated infrastructure options
+  </Card>
+
+  <Card title="Custom Solutions" icon="wand-magic-sparkles">
+    **White-label options**
+
+    Custom integrations and features
+  </Card>
+</CardGroup>
+
+---
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Do credits expire?" icon="clock">
+    **No, credits never expire.** Purchase credits whenever convenient and use them at your own pace.
+  </Accordion>
+
+  <Accordion title="Can I get a refund?" icon="rotate-left">
+    Credits are non-refundable, but since they never expire, you can always use them in the future.
+  </Accordion>
+
+  <Accordion title="What happens if I run out of credits?" icon="battery-empty">
+    API calls will fail with an insufficient credits error. Purchase more credits at [data.octav.fi](https://data.octav.fi/) to continue.
+  </Accordion>
+
+  <Accordion title="Can I share credits across API keys?" icon="share-nodes">
+    Yes, all API keys under your account share the same credit pool.
+  </Accordion>
+
+  <Accordion title="How are partial syncs charged?" icon="percent">
+    If you sync 125 transactions, you're charged for a full 250-transaction batch (1 credit). Batches are rounded up.
+  </Accordion>
+
+  <Accordion title="Is there a free tier?" icon="gift">
+    We don't offer a free tier, but the Starter package ($100) provides 4,000 credits for testing and small projects. The `/v1/credits` and `/v1/status` endpoints are always free.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Get Started
+
+<Steps>
+  <Step title="Create Account" icon="user-plus">
+    Sign up at [data.octav.fi](https://data.octav.fi/)
+  </Step>
+
+  <Step title="Purchase Credits" icon="credit-card">
+    Choose a credit package that fits your needs
+  </Step>
+
+  <Step title="Generate API Key" icon="key">
+    Create an API key in the developer portal
+  </Step>
+
+  <Step title="Start Building" icon="code">
+    Make your first API call using the [Quickstart Guide](/api/quickstart)
+  </Step>
+</Steps>
+
+---
+
+## Need Help?
+
+<CardGroup cols={2}>
+  <Card title="Join Discord" icon="discord" href="https://discord.gg/qvcknAz73A">
+    Ask questions about pricing and usage
+  </Card>
+
+  <Card title="Contact Sales" icon="envelope" href="/docs/contact-us">
+    Discuss enterprise pricing and custom solutions
+  </Card>
+</CardGroup>

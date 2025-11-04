@@ -1,69 +1,229 @@
 ---
-title: "API Introduction"
-description: "Get started with the Octav API for programmatic access to portfolio data"
+title: "Introduction"
+description: "Welcome to the Octav API - Build powerful crypto portfolio applications"
 ---
 
-import { Button } from '/snippets/Button.jsx.mdx'
-import { Alert } from '/snippets/Alert.jsx.mdx'
+Welcome to the Octav API documentation. Here you'll find everything you need to integrate cryptocurrency portfolio tracking, transaction history, and analytics into your applications.
 
-# Octav API
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="rocket" href="/api/quickstart">
+    Get started with your first API call in minutes
+  </Card>
 
-Access real-time and historical data for digital assets through the Octav API.
+  <Card title="Authentication" icon="key" href="/api/authentication">
+    Learn how to authenticate your API requests
+  </Card>
 
-## Overview
+  <Card title="API Reference" icon="code" href="/api/endpoints/portfolio">
+    Explore all available endpoints
+  </Card>
 
-The Octav API provides programmatic access to:
+  <Card title="Pricing" icon="credit-card" href="/api/pricing">
+    Understand our credit-based pricing model
+  </Card>
+</CardGroup>
 
-- **Portfolio Data** - Access wallet balances, positions, and performance metrics
-- **Transaction History** - Query historical transactions and transfers
-- **Market Data** - Real-time and historical price data
-- **Analytics** - Portfolio analytics and performance calculations
+---
 
-<Alert type="info" title="RESTful API">
-The Octav API is a RESTful API that returns JSON responses. All requests require authentication via API keys.
-</Alert>
+## What You Can Build
 
-## Base URL
+The Octav API enables you to:
+
+<AccordionGroup>
+  <Accordion title="Portfolio Tracking" icon="wallet">
+    - Retrieve real-time portfolio balances across multiple chains
+    - Track assets in wallets and DeFi protocols
+    - Monitor net worth and PnL metrics
+    - Include NFTs and protocol positions
+  </Accordion>
+
+  <Accordion title="Transaction History" icon="clock-rotate-left">
+    - Access complete transaction history
+    - Filter by chain, protocol, transaction type
+    - Search transactions with full-text search
+    - Track fees and profit/loss per transaction
+  </Accordion>
+
+  <Accordion title="Token Analytics" icon="chart-line">
+    - Get detailed token breakdowns by protocol
+    - View token distribution across positions
+    - Track token balances and valuations
+    - Monitor historical token holdings
+  </Accordion>
+
+  <Accordion title="Historical Data" icon="calendar">
+    - Retrieve historical portfolio snapshots
+    - Subscribe to addresses for daily snapshots
+    - Analyze portfolio performance over time
+    - Track net worth changes
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Key Features
+
+<CardGroup cols={3}>
+  <Card title="Multi-Chain Support" icon="link">
+    Support for 20+ blockchain networks including Ethereum, Arbitrum, Base, Solana, and more
+  </Card>
+
+  <Card title="Real-Time Data" icon="bolt">
+    Fresh data with 1-minute caching and on-demand sync capabilities
+  </Card>
+
+  <Card title="DeFi Protocol Coverage" icon="vault">
+    Track positions across hundreds of DeFi protocols automatically
+  </Card>
+
+  <Card title="Credit-Based Pricing" icon="coins">
+    Pay only for what you use with our flexible credit system
+  </Card>
+
+  <Card title="Developer Friendly" icon="code">
+    RESTful API with JSON responses and comprehensive documentation
+  </Card>
+
+  <Card title="Production Ready" icon="check-circle">
+    Rate limiting, error handling, and status monitoring built-in
+  </Card>
+</CardGroup>
+
+---
+
+## API Overview
+
+### Base URL
 
 ```
-https://api.octav.fi/v1
+https://api.octav.fi
 ```
 
-## Features
+### Authentication
 
-### Real-Time Data
-Access up-to-the-minute portfolio and market data.
+All API requests require an API key passed in the Authorization header:
 
-### Historical Analysis
-Query historical data for backtesting and analysis.
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
 
-### Multi-Chain Support
-Access data across all supported blockchains through a single API.
+<Info>
+  **Get Your API Key** — Create and manage API keys at [data.octav.fi](https://data.octav.fi/)
+</Info>
 
-### High Performance
-Optimized for speed with caching and efficient data retrieval.
+### Rate Limits
 
-## API Capabilities
+<Card title="Rate Limit" icon="gauge">
+  **360 requests / minute / API key**
 
-- **Wallet Tracking** - Monitor wallet balances and positions
-- **Transaction Queries** - Retrieve transaction history
-- **Portfolio Metrics** - Calculate performance and analytics
-- **Asset Protocols** - Track DeFi positions and protocols
-- **Price Data** - Access real-time and historical prices
+  Higher limits available upon request
+</Card>
 
-## Rate Limits
+### Response Format
 
-API rate limits vary by plan:
+All endpoints return JSON responses with consistent structure:
 
-- **Free**: 100 requests/hour
-- **Pro**: 1,000 requests/hour
-- **Enterprise**: Custom limits
+```json
+{
+  "data": { ... },
+  "status": "success"
+}
+```
 
-<Alert type="warning" title="Rate Limiting">
-API requests that exceed your rate limit will return a 429 status code. Monitor your usage to stay within limits.
-</Alert>
+---
+
+## Core Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Portfolio" icon="wallet" href="/api/endpoints/portfolio">
+    **GET** `/v1/portfolio`
+
+    Retrieve portfolio holdings with asset breakdown by protocol and chain
+
+    **Cost:** 1 credit per call
+  </Card>
+
+  <Card title="Transactions" icon="receipt" href="/api/endpoints/transactions">
+    **GET** `/v1/transactions`
+
+    Get paginated transaction history with filtering and search
+
+    **Cost:** 1 credit per call
+  </Card>
+
+  <Card title="Token Overview" icon="coins" href="/api/endpoints/token-overview">
+    **GET** `/v1/token-overview`
+
+    Detailed token breakdown across wallet and protocol positions
+
+    **Cost:** 1 credit per call
+  </Card>
+
+  <Card title="Historical Portfolio" icon="clock" href="/api/endpoints/historical-portfolio">
+    **GET** `/v1/historical`
+
+    Retrieve historical portfolio snapshots for any date
+
+    **Cost:** 1 credit per call
+  </Card>
+
+  <Card title="Sync Transactions" icon="arrows-rotate" href="/api/endpoints/sync">
+    **POST** `/v1/sync-transactions`
+
+    Trigger transaction synchronization for an address
+
+    **Cost:** 1 credit + 1 per 250 txns
+  </Card>
+
+  <Card title="Status" icon="signal" href="/api/endpoints/status">
+    **GET** `/v1/status`
+
+    Check sync status and data freshness
+
+    **Cost:** Free (0 credits)
+  </Card>
+
+  <Card title="Credits" icon="credit-card" href="/api/endpoints/credits">
+    **GET** `/v1/credits`
+
+    Check your remaining credit balance
+
+    **Cost:** Free (0 credits)
+  </Card>
+</CardGroup>
+
+---
 
 ## Next Steps
 
-<Button href="/api/authentication">Authentication Setup</Button>
-<Button href="/api/quickstart" variant="secondary">API Quickstart</Button>
+<Steps>
+  <Step title="Get Your API Key" icon="key">
+    Visit [data.octav.fi](https://data.octav.fi/) to create your API key
+  </Step>
+
+  <Step title="Make Your First Request" icon="code">
+    Follow our [Quickstart Guide](/api/quickstart) to make your first API call
+  </Step>
+
+  <Step title="Explore Endpoints" icon="compass">
+    Browse the [API Reference](/api/endpoints/portfolio) to see all available endpoints
+  </Step>
+
+  <Step title="Monitor Usage" icon="chart-line">
+    Track your credit usage and manage your account at the [Dev Portal](https://data.octav.fi/)
+  </Step>
+</Steps>
+
+---
+
+## Need Help?
+
+<CardGroup cols={2}>
+  <Card title="Join Discord" icon="discord" href="https://discord.gg/qvcknAz73A">
+    Get help from the team and community
+  </Card>
+
+  <Card title="Contact Us" icon="envelope" href="/docs/contact-us">
+    Reach out for enterprise support
+  </Card>
+</CardGroup>

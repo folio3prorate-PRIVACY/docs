@@ -1,183 +1,838 @@
 ---
-title: "Transactions API"
-description: "Query transaction history and details"
+title: "Transactions"
+description: "Query transaction history with powerful filtering and search"
 ---
 
-import { Alert } from '/snippets/Alert.jsx.mdx'
+Retrieve paginated transaction history for blockchain addresses with comprehensive filtering, full-text search, and detailed transaction data.
 
-# Transactions API
+<Info>
+  **Cost:** 1 credit per call
+</Info>
 
-Access transaction history and details for wallets.
+<Warning>
+  **Index Limit** — Addresses with more than 100,000 transactions are not automatically indexed. Contact support for assistance with large addresses.
+</Warning>
 
-## Get Wallet Transactions
+---
 
-Retrieve transaction history for a specific wallet.
+## Endpoint
 
-### Endpoint
+<CodeGroup>
 
+```bash Request
+GET https://api.octav.fi/v1/transactions
 ```
-GET /v1/wallets/{address}/transactions
-```
 
-### Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `address` | string | Yes | Wallet address |
-| `limit` | integer | No | Number of results (default: 20, max: 100) |
-| `offset` | integer | No | Pagination offset |
-| `chain` | string | No | Filter by blockchain |
-| `type` | string | No | Transaction type filter |
-| `start_date` | string | No | Start date (ISO 8601) |
-| `end_date` | string | No | End date (ISO 8601) |
-
-### Transaction Types
-
-- `send` - Outgoing transfers
-- `receive` - Incoming transfers
-- `swap` - Token swaps
-- `mint` - NFT mints or token creation
-- `burn` - Token burns
-- `stake` - Staking deposits
-- `unstake` - Staking withdrawals
-- `contract` - Smart contract interactions
-
-### Example Request
-
-```bash
-curl "https://api.octav.fi/v1/wallets/0xabcdef1234567890/transactions?limit=10&type=swap" \
+```bash Example
+curl -X GET "https://api.octav.fi/v1/transactions?addresses=0x6426af179aabebe47666f345d69fd9079673f6cd&limit=10&offset=0&sort=DESC" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-### Response
+</CodeGroup>
 
-```json
-{
-  "data": {
-    "transactions": [
-      {
-        "hash": "0x123abc...",
-        "timestamp": "2024-11-03T10:30:00Z",
-        "type": "swap",
-        "chain": "ethereum",
-        "from_token": {
-          "symbol": "USDC",
-          "amount": "1000.00",
-          "value_usd": 1000.00
-        },
-        "to_token": {
-          "symbol": "ETH",
-          "amount": "0.5",
-          "value_usd": 1000.00
-        },
-        "gas_fee": {
-          "amount": "0.002",
-          "value_usd": 4.00
-        },
-        "status": "confirmed"
-      }
-    ]
-  },
-  "meta": {
-    "total": 1234,
-    "limit": 10,
-    "offset": 0
-  }
-}
-```
+---
 
-## Get Transaction Details
+## Required Parameters
 
-Get detailed information about a specific transaction.
+<ParamField query="addresses" type="string" required>
+  Comma-separated list of wallet addresses
 
-### Endpoint
+  ```
+  addresses=0x6426af179aabebe47666f345d69fd9079673f6cd
+  ```
 
-```
-GET /v1/transactions/{hash}
-```
+  Multiple addresses:
+  ```
+  addresses=0x123...,0x456...
+  ```
+</ParamField>
 
-### Example Request
+<ParamField query="limit" type="integer" required>
+  Number of transactions per page
 
-```bash
-curl https://api.octav.fi/v1/transactions/0x123abc... \
+  - **Minimum:** 1
+  - **Maximum:** 250
+  - **Recommended:** 10-50 for optimal performance
+</ParamField>
+
+<ParamField query="offset" type="integer" required>
+  Pagination offset (0-based)
+
+  ```
+  offset=0   # First page
+  offset=10  # Second page (if limit=10)
+  offset=20  # Third page (if limit=10)
+  ```
+</ParamField>
+
+---
+
+## Optional Parameters
+
+### Search & Filter
+
+<ParamField query="initialSearchText" type="string">
+  Full-text search in transaction assets
+
+  Searches across:
+  - Token symbols
+  - Token names
+  - Contract addresses
+  - Transaction descriptions
+
+  ```
+  initialSearchText=USDC
+  ```
+</ParamField>
+
+<ParamField query="interactingAddresses" type="string">
+  Filter by interacting addresses (comma-separated)
+
+  Shows only transactions where these addresses are involved:
+  ```
+  interactingAddresses=0x123...,0x456...
+  ```
+</ParamField>
+
+<ParamField query="networks" type="string">
+  Filter by blockchain networks (comma-separated chain keys)
+
+  ```
+  networks=ethereum,arbitrum,base
+  ```
+
+  See [Supported Blockchains](/docs/supported-blockchains) for chain keys
+</ParamField>
+
+<ParamField query="txTypes" type="string">
+  Filter by transaction types (comma-separated type keys)
+
+  Common types:
+  - `SEND` - Token transfers out
+  - `RECEIVE` - Token transfers in
+  - `SWAP` - Token swaps
+  - `DEPOSIT` - DeFi deposits
+  - `WITHDRAW` - DeFi withdrawals
+  - `STAKE` - Staking operations
+  - `CLAIM` - Reward claims
+  - `APPROVE` - Token approvals
+
+  ```
+  txTypes=SWAP,DEPOSIT
+  ```
+</ParamField>
+
+<ParamField query="protocols" type="string">
+  Filter by protocol keys (comma-separated)
+
+  ```
+  protocols=uniswap_v3,aave_v3
+  ```
+</ParamField>
+
+<ParamField query="hideSpam" type="boolean" default="false">
+  Exclude spam transactions
+
+  ```
+  hideSpam=true
+  ```
+</ParamField>
+
+### Sorting & Date Range
+
+<ParamField query="sort" type="string" default="DESC">
+  Sort order by timestamp
+
+  - `DESC` - Newest first (recommended)
+  - `ASC` - Oldest first
+
+  ```
+  sort=DESC
+  ```
+</ParamField>
+
+<ParamField query="startDate" type="string">
+  Start date in ISO 8601 format
+
+  ```
+  startDate=2024-01-01T00:00:00Z
+  ```
+</ParamField>
+
+<ParamField query="endDate" type="string">
+  End date in ISO 8601 format
+
+  ```
+  endDate=2024-12-31T23:59:59Z
+  ```
+</ParamField>
+
+### NFT Filters
+
+<ParamField query="tokenId" type="string">
+  Filter by NFT token ID
+
+  ```
+  tokenId=1234
+  ```
+</ParamField>
+
+---
+
+## Response
+
+### Transaction Object
+
+<ResponseField name="hash" type="string">
+  Transaction hash
+</ResponseField>
+
+<ResponseField name="timestamp" type="string">
+  Transaction timestamp in seconds since epoch
+</ResponseField>
+
+<ResponseField name="chain" type="object">
+  Blockchain information
+  - `key`: Chain identifier
+  - `name`: Chain display name
+</ResponseField>
+
+<ResponseField name="from" type="string">
+  Address initiating the transaction
+</ResponseField>
+
+<ResponseField name="to" type="string">
+  Recipient address
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Transaction type (DEPOSIT, WITHDRAWAL, SWAP, etc.)
+</ResponseField>
+
+<ResponseField name="protocol" type="object">
+  Protocol information (if applicable)
+  - `key`: Protocol identifier
+  - `name`: Protocol display name
+</ResponseField>
+
+<ResponseField name="subProtocol" type="object">
+  Sub-protocol information (if applicable)
+  - `key`: Sub-protocol identifier
+  - `name`: Sub-protocol name
+</ResponseField>
+
+<ResponseField name="value" type="string">
+  Transaction value in native asset
+</ResponseField>
+
+<ResponseField name="valueFiat" type="string">
+  Transaction value in USD
+</ResponseField>
+
+<ResponseField name="fees" type="string">
+  Fees paid in native asset
+</ResponseField>
+
+<ResponseField name="feesFiat" type="string">
+  Fees paid in USD
+</ResponseField>
+
+<ResponseField name="assetsIn" type="Asset[]">
+  Assets received in the transaction
+</ResponseField>
+
+<ResponseField name="assetsOut" type="Asset[]">
+  Assets sent out in the transaction
+</ResponseField>
+
+<ResponseField name="functionName" type="string">
+  Smart contract function called
+</ResponseField>
+
+<ResponseField name="closedPnl" type="string">
+  Realized profit/loss for the transaction (if available, otherwise "N/A")
+</ResponseField>
+
+<ResponseField name="nativeAssetFees" type="object">
+  Detailed fee breakdown
+</ResponseField>
+
+---
+
+## Example Request
+
+<CodeGroup>
+
+```bash cURL
+curl -X GET "https://api.octav.fi/v1/transactions?addresses=0x6426af179aabebe47666f345d69fd9079673f6cd&limit=10&offset=0&sort=DESC&hideSpam=true" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
-### Response
+```javascript JavaScript
+const params = new URLSearchParams({
+  addresses: '0x6426af179aabebe47666f345d69fd9079673f6cd',
+  limit: '10',
+  offset: '0',
+  sort: 'DESC',
+  hideSpam: 'true'
+});
 
-```json
-{
-  "data": {
-    "hash": "0x123abc...",
-    "block_number": 18234567,
-    "timestamp": "2024-11-03T10:30:00Z",
-    "from": "0xabcdef...",
-    "to": "0x123456...",
-    "value": "1.5",
-    "gas_used": "21000",
-    "gas_price": "50",
-    "status": "confirmed",
-    "chain": "ethereum",
-    "method": "transfer",
-    "token_transfers": [
-      {
-        "token": "USDC",
-        "from": "0xabcdef...",
-        "to": "0x123456...",
-        "amount": "1000.00"
-      }
-    ]
-  }
-}
-```
-
-## Transaction Analytics
-
-Get analytics for wallet transactions.
-
-### Endpoint
-
-```
-GET /v1/wallets/{address}/transactions/analytics
-```
-
-### Parameters
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `period` | string | No | Time period (24h, 7d, 30d, 90d, 1y, all) |
-| `group_by` | string | No | Group by: day, week, month |
-
-### Example Request
-
-```bash
-curl "https://api.octav.fi/v1/wallets/0xabcdef.../transactions/analytics?period=30d" \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
-
-### Response
-
-```json
-{
-  "data": {
-    "period": "30d",
-    "total_transactions": 45,
-    "total_volume": 125000.00,
-    "gas_spent": 150.50,
-    "by_type": {
-      "swap": 25,
-      "send": 10,
-      "receive": 8,
-      "stake": 2
-    },
-    "by_chain": {
-      "ethereum": 30,
-      "base": 15
+const response = await fetch(
+  `https://api.octav.fi/v1/transactions?${params}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
     }
   }
-}
+);
+
+const transactions = await response.json();
+console.log(`Retrieved ${transactions.length} transactions`);
 ```
 
-<Alert type="tip" title="Performance Tip">
-For large transaction histories, use pagination and date filters to improve response times.
-</Alert>
+```python Python
+import requests
+
+params = {
+    'addresses': '0x6426af179aabebe47666f345d69fd9079673f6cd',
+    'limit': 10,
+    'offset': 0,
+    'sort': 'DESC',
+    'hideSpam': True
+}
+
+response = requests.get(
+    'https://api.octav.fi/v1/transactions',
+    params=params,
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+
+transactions = response.json()
+print(f'Retrieved {len(transactions)} transactions')
+```
+
+```typescript TypeScript
+interface Asset {
+  symbol: string;
+  amount: string;
+  value: string;
+  contractAddress?: string;
+}
+
+interface Transaction {
+  hash: string;
+  timestamp: string;
+  chain: {
+    key: string;
+    name: string;
+  };
+  from: string;
+  to: string;
+  type: string;
+  value: string;
+  valueFiat: string;
+  fees: string;
+  feesFiat: string;
+  assetsIn: Asset[];
+  assetsOut: Asset[];
+  protocol?: {
+    key: string;
+    name: string;
+  };
+}
+
+const params = new URLSearchParams({
+  addresses: '0x6426af179aabebe47666f345d69fd9079673f6cd',
+  limit: '10',
+  offset: '0',
+  sort: 'DESC',
+  hideSpam: 'true'
+});
+
+const response = await fetch(
+  `https://api.octav.fi/v1/transactions?${params}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  }
+);
+
+const transactions: Transaction[] = await response.json();
+console.log(`Retrieved ${transactions.length} transactions`);
+```
+
+</CodeGroup>
+
+---
+
+## Example Response
+
+<Accordion title="View Full Response" icon="code">
+
+```json
+[
+  {
+    "hash": "0xa1b2c3d4e5f6...",
+    "timestamp": "1699012800",
+    "chain": {
+      "key": "ethereum",
+      "name": "Ethereum"
+    },
+    "from": "0x6426af179aabebe47666f345d69fd9079673f6cd",
+    "to": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+    "type": "SWAP",
+    "protocol": {
+      "key": "uniswap_v3",
+      "name": "Uniswap V3"
+    },
+    "value": "0",
+    "valueFiat": "0",
+    "fees": "0.002134",
+    "feesFiat": "7.12",
+    "assetsIn": [
+      {
+        "symbol": "WETH",
+        "amount": "1.5",
+        "value": "4800.00",
+        "contractAddress": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+      }
+    ],
+    "assetsOut": [
+      {
+        "symbol": "USDC",
+        "amount": "4795.23",
+        "value": "4795.23",
+        "contractAddress": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+      }
+    ],
+    "functionName": "swapExactTokensForTokens",
+    "nativeAssetFees": {
+      "symbol": "ETH",
+      "amount": "0.002134",
+      "value": "7.12"
+    }
+  },
+  {
+    "hash": "0xf9e8d7c6b5a4...",
+    "timestamp": "1698926400",
+    "chain": {
+      "key": "arbitrum",
+      "name": "Arbitrum"
+    },
+    "from": "0x6426af179aabebe47666f345d69fd9079673f6cd",
+    "to": "0x794a61358D6845594F94dc1DB02A252b5b4814aD",
+    "type": "DEPOSIT",
+    "protocol": {
+      "key": "aave_v3",
+      "name": "Aave V3"
+    },
+    "value": "0",
+    "valueFiat": "0",
+    "fees": "0.000421",
+    "feesFiat": "1.35",
+    "assetsIn": [],
+    "assetsOut": [
+      {
+        "symbol": "USDC",
+        "amount": "10000",
+        "value": "10000.00",
+        "contractAddress": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+      }
+    ],
+    "functionName": "supply",
+    "nativeAssetFees": {
+      "symbol": "ETH",
+      "amount": "0.000421",
+      "value": "1.35"
+    }
+  }
+]
+```
+
+</Accordion>
+
+---
+
+## Use Cases
+
+<Tabs>
+  <Tab title="Transaction History" icon="clock-rotate-left">
+    Display transaction history with pagination:
+
+    ```javascript
+    async function getTransactionHistory(address, page = 1, pageSize = 20) {
+      const offset = (page - 1) * pageSize;
+
+      const params = new URLSearchParams({
+        addresses: address,
+        limit: pageSize.toString(),
+        offset: offset.toString(),
+        sort: 'DESC',
+        hideSpam: 'true'
+      });
+
+      const response = await fetch(
+        `https://api.octav.fi/v1/transactions?${params}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`
+          }
+        }
+      );
+
+      return await response.json();
+    }
+
+    // Get first page
+    const page1 = await getTransactionHistory(address, 1);
+
+    // Get next page
+    const page2 = await getTransactionHistory(address, 2);
+    ```
+  </Tab>
+
+  <Tab title="Filter by Type" icon="filter">
+    Filter transactions by type:
+
+    ```javascript
+    async function getSwapTransactions(address) {
+      const params = new URLSearchParams({
+        addresses: address,
+        txTypes: 'SWAP',
+        limit: '50',
+        offset: '0',
+        sort: 'DESC'
+      });
+
+      const response = await fetch(
+        `https://api.octav.fi/v1/transactions?${params}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`
+          }
+        }
+      );
+
+      const transactions = await response.json();
+
+      // Calculate total swap volume
+      const totalVolume = transactions.reduce((sum, tx) => {
+        return sum + parseFloat(tx.valueFiat || 0);
+      }, 0);
+
+      console.log(`Total swap volume: $${totalVolume}`);
+      return transactions;
+    }
+    ```
+  </Tab>
+
+  <Tab title="Search Transactions" icon="magnifying-glass">
+    Search for specific tokens or protocols:
+
+    ```javascript
+    async function searchTransactions(address, searchTerm) {
+      const params = new URLSearchParams({
+        addresses: address,
+        initialSearchText: searchTerm,
+        limit: '50',
+        offset: '0',
+        sort: 'DESC'
+      });
+
+      const response = await fetch(
+        `https://api.octav.fi/v1/transactions?${params}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`
+          }
+        }
+      );
+
+      return await response.json();
+    }
+
+    // Search for USDC transactions
+    const usdcTxs = await searchTransactions(address, 'USDC');
+
+    // Search for Uniswap interactions
+    const uniswapTxs = await searchTransactions(address, 'Uniswap');
+    ```
+  </Tab>
+
+  <Tab title="Date Range Query" icon="calendar">
+    Query transactions within a date range:
+
+    ```javascript
+    async function getTransactionsInRange(address, startDate, endDate) {
+      const params = new URLSearchParams({
+        addresses: address,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        limit: '100',
+        offset: '0',
+        sort: 'DESC'
+      });
+
+      const response = await fetch(
+        `https://api.octav.fi/v1/transactions?${params}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`
+          }
+        }
+      );
+
+      return await response.json();
+    }
+
+    // Get last 30 days
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 30);
+
+    const recentTxs = await getTransactionsInRange(
+      address,
+      startDate,
+      endDate
+    );
+    ```
+  </Tab>
+
+  <Tab title="Fee Analysis" icon="dollar-sign">
+    Calculate total fees paid:
+
+    ```javascript
+    async function calculateTotalFees(address, startDate, endDate) {
+      let offset = 0;
+      const limit = 250;
+      let totalFees = 0;
+      let hasMore = true;
+
+      while (hasMore) {
+        const params = new URLSearchParams({
+          addresses: address,
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString(),
+          limit: limit.toString(),
+          offset: offset.toString(),
+          sort: 'DESC'
+        });
+
+        const response = await fetch(
+          `https://api.octav.fi/v1/transactions?${params}`,
+          {
+            headers: {
+              'Authorization': `Bearer ${apiKey}`
+            }
+          }
+        );
+
+        const transactions = await response.json();
+
+        if (transactions.length === 0) {
+          hasMore = false;
+        } else {
+          transactions.forEach(tx => {
+            totalFees += parseFloat(tx.feesFiat || 0);
+          });
+
+          offset += limit;
+          hasMore = transactions.length === limit;
+        }
+      }
+
+      return totalFees;
+    }
+
+    const fees = await calculateTotalFees(address, startDate, endDate);
+    console.log(`Total fees paid: $${fees.toFixed(2)}`);
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Pagination Best Practices
+
+<AccordionGroup>
+  <Accordion title="Efficient Pagination" icon="forward">
+    **Use appropriate page sizes:**
+    - Small pages (10-20): Fast response, more requests
+    - Medium pages (50-100): Balanced approach (recommended)
+    - Large pages (200-250): Fewer requests, slower response
+
+    **Track pagination state:**
+    ```javascript
+    class TransactionPaginator {
+      constructor(address, pageSize = 50) {
+        this.address = address;
+        this.pageSize = pageSize;
+        this.currentOffset = 0;
+      }
+
+      async nextPage() {
+        const params = new URLSearchParams({
+          addresses: this.address,
+          limit: this.pageSize.toString(),
+          offset: this.currentOffset.toString(),
+          sort: 'DESC'
+        });
+
+        const response = await fetch(
+          `https://api.octav.fi/v1/transactions?${params}`,
+          {
+            headers: {
+              'Authorization': `Bearer ${apiKey}`
+            }
+          }
+        );
+
+        const transactions = await response.json();
+
+        if (transactions.length > 0) {
+          this.currentOffset += transactions.length;
+        }
+
+        return {
+          transactions,
+          hasMore: transactions.length === this.pageSize
+        };
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Handling Large Histories" icon="database">
+    For addresses with many transactions:
+
+    1. **Use filters to reduce results:**
+       - Filter by date range
+       - Filter by transaction type
+       - Filter by specific networks
+
+    2. **Process in batches:**
+       ```javascript
+       async function processAllTransactions(address, processor) {
+         let offset = 0;
+         const limit = 250;
+
+         while (true) {
+           const params = new URLSearchParams({
+             addresses: address,
+             limit: limit.toString(),
+             offset: offset.toString(),
+             sort: 'DESC'
+           });
+
+           const response = await fetch(
+             `https://api.octav.fi/v1/transactions?${params}`,
+             {
+               headers: {
+                 'Authorization': `Bearer ${apiKey}`
+               }
+             }
+           );
+
+           const transactions = await response.json();
+
+           if (transactions.length === 0) break;
+
+           await processor(transactions);
+
+           offset += transactions.length;
+
+           if (transactions.length < limit) break;
+         }
+       }
+       ```
+
+    3. **Implement caching:**
+       - Cache transaction pages locally
+       - Only fetch new transactions since last sync
+       - Use `startDate` to fetch only recent data
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Error Responses
+
+<AccordionGroup>
+  <Accordion title="400 Bad Request" icon="circle-exclamation">
+    Invalid parameters provided.
+
+    ```json
+    {
+      "error": "Bad Request",
+      "message": "limit must be between 1 and 250"
+    }
+    ```
+
+    **Common causes:**
+    - Missing required parameters (`addresses`, `limit`, `offset`)
+    - Invalid parameter values
+    - Invalid date format
+  </Accordion>
+
+  <Accordion title="404 Not Found" icon="circle-question">
+    Address has more than 100,000 transactions.
+
+    ```json
+    {
+      "error": "Address not indexed",
+      "message": "This address has over 100,000 transactions and is not indexed"
+    }
+    ```
+
+    **Solution:** Contact support for assistance with high-volume addresses
+  </Accordion>
+
+  <Accordion title="401 Unauthorized" icon="lock">
+    Authentication failed.
+
+    ```json
+    {
+      "error": "Unauthorized",
+      "message": "Invalid API key"
+    }
+    ```
+
+    **Solution:** Check your API key in the Authorization header
+  </Accordion>
+
+  <Accordion title="402 Payment Required" icon="credit-card">
+    Insufficient credits.
+
+    ```json
+    {
+      "error": "Insufficient credits",
+      "message": "Please purchase more credits to continue"
+    }
+    ```
+
+    **Solution:** Purchase more credits at [data.octav.fi](https://data.octav.fi/)
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Portfolio" icon="wallet" href="/api/endpoints/portfolio">
+    View current portfolio holdings
+  </Card>
+
+  <Card title="Sync Transactions" icon="arrows-rotate" href="/api/endpoints/sync">
+    Manually trigger transaction sync
+  </Card>
+
+  <Card title="Status" icon="signal" href="/api/endpoints/status">
+    Check when transactions were last synced
+  </Card>
+
+  <Card title="Historical Portfolio" icon="clock" href="/api/endpoints/historical-portfolio">
+    View portfolio at specific dates
+  </Card>
+</CardGroup>

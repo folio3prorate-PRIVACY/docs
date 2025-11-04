@@ -1,0 +1,614 @@
+---
+title: "Transaction Types"
+description: "Complete guide to transaction categorization in Octav"
+---
+
+Octav automatically categorizes all blockchain transactions into specific types, making it easy to filter, analyze, and understand on-chain activity.
+
+<Info>
+  **Smart Categorization** - Transactions are analyzed and categorized automatically based on method signatures, protocols, and transfer patterns
+</Info>
+
+---
+
+## Transaction Type Enum
+
+```typescript
+export enum TransactionType {
+  ADDLIQUIDITY = "ADDLIQUIDITY",
+  AIRDROP = "AIRDROP",
+  APPROVAL = "APPROVAL",
+  BORROW = "BORROW",
+  BRIDGEIN = "BRIDGEIN",
+  BRIDGEOUT = "BRIDGEOUT",
+  CLAIM = "CLAIM",
+  COLLECT = "COLLECT",
+  CLOSEVAULT = "CLOSEVAULT",
+  DEPOSIT = "DEPOSIT",
+  DONATION = "DONATION",
+  EXPENSE = "EXPENSE",
+  FAILED = "FAILED",
+  FOLLOW = "FOLLOW",
+  IGNORE = "IGNORE",
+  INTERACTION = "INTERACTION",
+  LEND = "LEND",
+  MINT = "MINT",
+  MULTITYPE = "MULTITYPE",
+  OPENVAULT = "OPENVAULT",
+  REPAYVAULT = "REPAYVAULT",
+  REMOVELIQUIDITY = "REMOVELIQUIDITY",
+  SIGN = "SIGN",
+  SELFTRANSFER = "SELFTRANSFER",
+  SPAM = "SPAM",
+  STAKE = "STAKE",
+  SWAP = "SWAP",
+  TRANSFERIN = "TRANSFERIN",
+  TRANSFEROUT = "TRANSFEROUT",
+  UNDEFINED = "UNDEFINED",
+  UNSTAKE = "UNSTAKE",
+  UNWRAP = "UNWRAP",
+  VOTE = "VOTE",
+  WITHDRAW = "WITHDRAW",
+  WRAP = "WRAP"
+}
+```
+
+---
+
+## Transaction Categories
+
+<Tabs>
+  <Tab title="Transfers" icon="arrow-right-arrow-left">
+    <AccordionGroup>
+      <Accordion title="TRANSFERIN" icon="arrow-down">
+        **Receiving tokens from another address**
+
+        - Incoming token transfers
+        - Received payments
+        - Peer-to-peer receipts
+
+        Example: Receiving USDC from a friend
+      </Accordion>
+
+      <Accordion title="TRANSFEROUT" icon="arrow-up">
+        **Sending tokens to another address**
+
+        - Outgoing token transfers
+        - Payments sent
+        - Peer-to-peer sends
+
+        Example: Sending ETH to another wallet
+      </Accordion>
+
+      <Accordion title="SELFTRANSFER" icon="arrows-rotate">
+        **Moving tokens between your own wallets**
+
+        - Transfers between addresses you control
+        - Portfolio rebalancing
+        - Moving funds to cold storage
+
+        Example: Moving USDT from hot wallet to hardware wallet
+      </Accordion>
+
+      <Accordion title="BRIDGEIN" icon="bridge">
+        **Receiving assets from another blockchain**
+
+        - Cross-chain bridge receipts
+        - Assets arriving from L1 to L2
+        - Multi-chain transfers
+
+        Example: Bridging USDC from Ethereum to Arbitrum
+      </Accordion>
+
+      <Accordion title="BRIDGEOUT" icon="bridge">
+        **Sending assets to another blockchain**
+
+        - Cross-chain bridge sends
+        - Moving assets from L2 to L1
+        - Multi-chain transfers
+
+        Example: Bridging ETH from Base to Ethereum
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="DeFi Actions" icon="coins">
+    <AccordionGroup>
+      <Accordion title="SWAP" icon="arrow-right-arrow-left">
+        **Exchanging one token for another**
+
+        - DEX trades (Uniswap, Curve, etc.)
+        - Token swaps
+        - Trading activity
+
+        Example: Swapping 1000 USDC for ETH on Uniswap
+      </Accordion>
+
+      <Accordion title="ADDLIQUIDITY" icon="droplet-plus">
+        **Depositing assets into a liquidity pool**
+
+        - Providing liquidity on DEXs
+        - Entering LP positions
+        - Earning trading fees
+
+        Example: Adding ETH/USDC to Uniswap V3 pool
+      </Accordion>
+
+      <Accordion title="REMOVELIQUIDITY" icon="droplet-slash">
+        **Withdrawing assets from a liquidity pool**
+
+        - Removing liquidity from DEXs
+        - Exiting LP positions
+        - Collecting principal + fees
+
+        Example: Removing liquidity from Curve 3pool
+      </Accordion>
+
+      <Accordion title="STAKE" icon="lock">
+        **Locking up assets to earn rewards**
+
+        - Staking tokens
+        - Entering staking pools
+        - Beginning reward accrual
+
+        Example: Staking ETH on Lido
+      </Accordion>
+
+      <Accordion title="UNSTAKE" icon="lock-open">
+        **Withdrawing previously staked assets**
+
+        - Unstaking tokens
+        - Exiting staking positions
+        - May forfeit some rewards
+
+        Example: Unstaking stETH from Lido
+      </Accordion>
+
+      <Accordion title="LEND" icon="hand-holding-dollar">
+        **Supplying assets to lending protocols**
+
+        - Depositing to Aave, Compound
+        - Earning interest
+        - Becoming a lender
+
+        Example: Supplying USDC to Aave
+      </Accordion>
+
+      <Accordion title="BORROW" icon="money-bill-transfer">
+        **Taking a loan from lending protocols**
+
+        - Borrowing against collateral
+        - Opening debt positions
+        - Paying interest
+
+        Example: Borrowing DAI on Aave against ETH collateral
+      </Accordion>
+
+      <Accordion title="DEPOSIT" icon="piggy-bank">
+        **Depositing funds into a protocol**
+
+        - General protocol deposits
+        - Entering vaults
+        - Starting strategies
+
+        Example: Depositing into Yearn vault
+      </Accordion>
+
+      <Accordion title="WITHDRAW" icon="hand-holding-dollar">
+        **Withdrawing funds from a protocol**
+
+        - Removing deposits
+        - Exiting strategies
+        - Claiming principal
+
+        Example: Withdrawing from Yearn vault
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Special Actions" icon="star">
+    <AccordionGroup>
+      <Accordion title="CLAIM" icon="gift">
+        **Claiming rewards or distributions**
+
+        - Harvesting farming rewards
+        - Claiming airdrop tokens
+        - Collecting yield
+
+        Example: Claiming UNI rewards from liquidity mining
+      </Accordion>
+
+      <Accordion title="AIRDROP" icon="parachute-box">
+        **Receiving free tokens from a project**
+
+        - Airdrop distributions
+        - Free token allocations
+        - Promotional distributions
+
+        Example: Receiving ENS airdrop
+      </Accordion>
+
+      <Accordion title="MINT" icon="circle-plus">
+        **Creating new tokens or NFTs**
+
+        - Minting NFTs
+        - Creating new ERC-20 tokens
+        - Issuing assets
+
+        Example: Minting an NFT on OpenSea
+      </Accordion>
+
+      <Accordion title="WRAP" icon="box">
+        **Converting native assets to wrapped versions**
+
+        - ETH → WETH
+        - Native tokens → ERC-20 versions
+        - Required for DeFi usage
+
+        Example: Wrapping ETH to WETH
+      </Accordion>
+
+      <Accordion title="UNWRAP" icon="box-open">
+        **Converting wrapped assets back to native**
+
+        - WETH → ETH
+        - Returning to native form
+        - Gas optimization
+
+        Example: Unwrapping WETH back to ETH
+      </Accordion>
+
+      <Accordion title="VOTE" icon="check-to-slot">
+        **Participating in onchain governance**
+
+        - Voting on proposals
+        - DAO participation
+        - Protocol governance
+
+        Example: Voting on a Compound governance proposal
+      </Accordion>
+
+      <Accordion title="APPROVAL" icon="circle-check">
+        **Granting permission to access tokens**
+
+        - Token approvals for contracts
+        - Required before interacting with DeFi
+        - Security-relevant
+
+        Example: Approving Uniswap to spend USDC
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Advanced" icon="layer-group">
+    <AccordionGroup>
+      <Accordion title="OPENVAULT" icon="vault">
+        **Creating a new vault position**
+
+        - Opening MakerDAO CDP
+        - Creating collateralized positions
+        - Starting leverage strategies
+
+        Example: Opening a vault on MakerDAO
+      </Accordion>
+
+      <Accordion title="CLOSEVAULT" icon="vault">
+        **Closing a vault after repaying debt**
+
+        - Closing MakerDAO CDP
+        - Exiting collateralized positions
+        - Retrieving collateral
+
+        Example: Closing a MakerDAO vault
+      </Accordion>
+
+      <Accordion title="REPAYVAULT" icon="money-bill-wave">
+        **Paying back borrowed funds in vault**
+
+        - Repaying debt
+        - Reducing liquidation risk
+        - Unlocking collateral
+
+        Example: Repaying DAI debt on MakerDAO
+      </Accordion>
+
+      <Accordion title="COLLECT" icon="hand-holding-dollar">
+        **Gathering yield, fees, or rewards**
+
+        - Collecting LP fees
+        - Harvesting protocol rewards
+        - Claiming earnings
+
+        Example: Collecting fees from Uniswap V3 position
+      </Accordion>
+
+      <Accordion title="MULTITYPE" icon="layer-group">
+        **Transaction with multiple categorizations**
+
+        - Complex transactions
+        - Multiple actions in one tx
+        - Zaps and batch operations
+
+        Example: Swap + Add Liquidity in single transaction
+      </Accordion>
+
+      <Accordion title="INTERACTION" icon="handshake">
+        **General smart contract interaction**
+
+        - Custom contract calls
+        - Protocol-specific functions
+        - Non-standard operations
+
+        Example: Calling a custom function on a protocol
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Meta Types" icon="circle-info">
+    <AccordionGroup>
+      <Accordion title="FAILED" icon="circle-xmark">
+        **Transaction that did not succeed**
+
+        - Insufficient gas
+        - Reverted transactions
+        - Failed smart contract calls
+
+        Example: Swap failed due to slippage
+      </Accordion>
+
+      <Accordion title="SPAM" icon="ban">
+        **Low-quality or unwanted transaction**
+
+        - Spam airdrops
+        - Phishing attempts
+        - Irrelevant transfers
+
+        Example: Unsolicited token airdrop
+      </Accordion>
+
+      <Accordion title="UNDEFINED" icon="question">
+        **Unknown or uncategorized transaction**
+
+        - Novel transaction types
+        - Unsupported protocols
+        - Edge cases
+
+        Example: Interaction with new, unrecognized protocol
+      </Accordion>
+
+      <Accordion title="IGNORE" icon="eye-slash">
+        **Transaction deliberately disregarded**
+
+        - User-marked to ignore
+        - Filtered out
+        - Hidden from analysis
+
+        Example: Test transaction marked to ignore
+      </Accordion>
+
+      <Accordion title="SIGN" icon="signature">
+        **Message signing transaction**
+
+        - Off-chain signature requests
+        - Authentication signatures
+        - Gasless approvals
+
+        Example: Signing a message for authentication
+      </Accordion>
+
+      <Accordion title="FOLLOW" icon="user-plus">
+        **Social action on blockchain**
+
+        - Following users on Lens, Farcaster
+        - Social graph interactions
+        - Decentralized social
+
+        Example: Following someone on Lens Protocol
+      </Accordion>
+
+      <Accordion title="DONATION" icon="hand-holding-heart">
+        **Charitable or gift transfers**
+
+        - Donations to causes
+        - Tips to creators
+        - Charitable contributions
+
+        Example: Donating to Gitcoin grants
+      </Accordion>
+
+      <Accordion title="EXPENSE" icon="receipt">
+        **Payment for goods or services**
+
+        - Paying for services in crypto
+        - Business expenses
+        - Off-chain purchases
+
+        Example: Paying for SaaS subscription in USDC
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
+
+---
+
+## Using Transaction Types
+
+<CodeGroup>
+
+```javascript Filter by Type
+// Get only swaps
+const response = await fetch(
+  `https://api.octav.fi/v1/transactions?addresses=${address}&txTypes=SWAP`,
+  {
+    headers: { 'Authorization': `Bearer ${apiKey}` }
+  }
+);
+
+const transactions = await response.json();
+console.log(`Found ${transactions.length} swaps`);
+```
+
+```javascript Multiple Types
+// Get swaps and transfers
+const types = ['SWAP', 'TRANSFERIN', 'TRANSFEROUT'];
+
+const response = await fetch(
+  `https://api.octav.fi/v1/transactions?addresses=${address}&txTypes=${types.join(',')}`,
+  {
+    headers: { 'Authorization': `Bearer ${apiKey}` }
+  }
+);
+```
+
+```javascript Analyze Transaction Mix
+// Count transactions by type
+function analyzeTransactionTypes(transactions) {
+  const counts = {};
+
+  transactions.forEach(tx => {
+    const type = tx.txType;
+    counts[type] = (counts[type] || 0) + 1;
+  });
+
+  // Sort by frequency
+  const sorted = Object.entries(counts)
+    .sort(([,a], [,b]) => b - a);
+
+  return Object.fromEntries(sorted);
+}
+
+const analysis = analyzeTransactionTypes(transactions);
+console.log('Most common:', Object.keys(analysis)[0]);
+```
+
+</CodeGroup>
+
+---
+
+## Common Patterns
+
+<Tabs>
+  <Tab title="DeFi Activity" icon="coins">
+    ```javascript
+    // Get all DeFi-related transactions
+    const DEFI_TYPES = [
+      'SWAP', 'ADDLIQUIDITY', 'REMOVELIQUIDITY',
+      'STAKE', 'UNSTAKE', 'LEND', 'BORROW',
+      'DEPOSIT', 'WITHDRAW', 'CLAIM'
+    ];
+
+    const response = await fetch(
+      `https://api.octav.fi/v1/transactions?addresses=${address}&txTypes=${DEFI_TYPES.join(',')}`,
+      {
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      }
+    );
+    ```
+  </Tab>
+
+  <Tab title="Portfolio Changes" icon="chart-line">
+    ```javascript
+    // Track transactions that changed portfolio
+    const PORTFOLIO_CHANGING = [
+      'TRANSFERIN', 'TRANSFEROUT', 'SWAP',
+      'ADDLIQUIDITY', 'REMOVELIQUIDITY',
+      'STAKE', 'UNSTAKE', 'DEPOSIT', 'WITHDRAW',
+      'CLAIM', 'AIRDROP', 'MINT'
+    ];
+
+    function getPortfolioChanges(transactions) {
+      return transactions.filter(tx =>
+        PORTFOLIO_CHANGING.includes(tx.txType)
+      );
+    }
+    ```
+  </Tab>
+
+  <Tab title="Exclude Spam" icon="filter">
+    ```javascript
+    // Filter out unwanted transactions
+    const EXCLUDE_TYPES = ['SPAM', 'FAILED', 'APPROVAL', 'SIGN', 'IGNORE'];
+
+    function cleanTransactions(transactions) {
+      return transactions.filter(tx =>
+        !EXCLUDE_TYPES.includes(tx.txType)
+      );
+    }
+
+    const clean = cleanTransactions(allTransactions);
+    console.log(`Kept ${clean.length} of ${allTransactions.length} txs`);
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Use Type Filters" icon="filter">
+    Filter on the API side for better performance:
+
+    ```javascript
+    // Good - Filter on API
+    const swaps = await fetch(
+      `https://api.octav.fi/v1/transactions?addresses=${address}&txTypes=SWAP`
+    );
+
+    // Less efficient - Filter client-side
+    const all = await fetch(
+      `https://api.octav.fi/v1/transactions?addresses=${address}`
+    );
+    const swaps = all.filter(tx => tx.txType === 'SWAP');
+    ```
+  </Accordion>
+
+  <Accordion title="Handle MULTITYPE" icon="layer-group">
+    MULTITYPE transactions may need special handling:
+
+    ```javascript
+    if (tx.txType === 'MULTITYPE') {
+      // Transaction has multiple aspects
+      // Check other fields for details
+      console.log('Complex transaction:', tx);
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Display User-Friendly Names" icon="tag">
+    Convert type enums to readable labels:
+
+    ```javascript
+    const TYPE_LABELS = {
+      'TRANSFERIN': 'Received',
+      'TRANSFEROUT': 'Sent',
+      'SWAP': 'Swapped',
+      'ADDLIQUIDITY': 'Added Liquidity',
+      'REMOVELIQUIDITY': 'Removed Liquidity',
+      // ... etc
+    };
+
+    function getTypeLabel(txType) {
+      return TYPE_LABELS[txType] || txType;
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Transactions Endpoint" icon="receipt" href="/api/endpoints/transactions">
+    Query and filter transactions
+  </Card>
+
+  <Card title="Protocol Types" icon="layer-group" href="/api/reference/protocol-types">
+    Understand protocol positions
+  </Card>
+
+  <Card title="Supported Chains" icon="globe" href="/api/reference/supported-chains">
+    View supported blockchains
+  </Card>
+</CardGroup>

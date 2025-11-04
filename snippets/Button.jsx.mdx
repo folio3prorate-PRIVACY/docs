@@ -1,12 +1,47 @@
 export const Button = ({ href, children, variant = "primary" }) => {
-  const variants = {
-    primary: "bg-[#3F58C7] hover:bg-[#2F4AA7] text-white",
-    secondary: "bg-[#6BCCD1] hover:bg-[#5ABCC1] text-white",
-    outline: "border-2 border-[#3F58C7] text-[#3F58C7] hover:bg-[#3F58C7] hover:text-white"
+  const styles = {
+    primary: {
+      backgroundColor: "#2563eb",
+      color: "white",
+      textDecoration: "none"
+    },
+    secondary: {
+      backgroundColor: "#2563eb",
+      color: "white",
+      textDecoration: "none"
+    },
+    outline: {
+      border: "2px solid #2563eb",
+      color: "#2563eb",
+      backgroundColor: "transparent",
+      textDecoration: "none"
+    }
   };
 
   return (
-    <a href={href} className={`inline-block rounded-lg px-6 py-3 font-medium transition-all duration-200 ${variants[variant]}`}>
+    <a
+      href={href}
+      style={styles[variant]}
+      className="inline-block rounded px-4 py-2 text-sm transition-all duration-200"
+      onMouseEnter={(e) => {
+        if (variant === "primary" || variant === "secondary") {
+          e.target.style.backgroundColor = "#1d4ed8";
+        }
+        if (variant === "outline") {
+          e.target.style.backgroundColor = "#2563eb";
+          e.target.style.color = "white";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (variant === "primary" || variant === "secondary") {
+          e.target.style.backgroundColor = "#2563eb";
+        }
+        if (variant === "outline") {
+          e.target.style.backgroundColor = "transparent";
+          e.target.style.color = "#2563eb";
+        }
+      }}
+    >
       {children}
     </a>
   );

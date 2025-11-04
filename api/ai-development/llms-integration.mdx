@@ -1,0 +1,503 @@
+---
+title: "AI Agents & LLMs"
+description: "Integrate Octav API into AI agents and language models"
+---
+
+Make the Octav API easily discoverable and usable by AI agents, LLMs, and autonomous programs through standardized documentation formats.
+
+<Info>
+  **llms.txt Standard** - We support the [llms.txt](https://llmstxt.org/) format for LLM-friendly documentation
+</Info>
+
+---
+
+## What are AI Agents?
+
+AI agents are autonomous programs designed to carry out specific tasks or simulations with a degree of independence. They can:
+
+- Process inputs and execute logic
+- Interact with APIs and external services
+- Make decisions based on data
+- Achieve predefined goals autonomously
+
+### Common Use Cases
+
+<CardGroup cols={2}>
+  <Card title="Portfolio Assistants" icon="robot">
+    AI agents that help users:
+    - Track portfolio performance
+    - Get balance updates
+    - Analyze DeFi positions
+    - Receive alerts on changes
+  </Card>
+
+  <Card title="Trading Bots" icon="chart-line">
+    Automated trading systems that:
+    - Monitor wallet activity
+    - Track transaction patterns
+    - Analyze on-chain behavior
+    - Generate trading signals
+  </Card>
+
+  <Card title="Analytics Agents" icon="chart-bar">
+    Data analysis tools that:
+    - Aggregate cross-chain data
+    - Calculate metrics
+    - Identify trends
+    - Generate reports
+  </Card>
+
+  <Card title="Notification Systems" icon="bell">
+    Alert systems that:
+    - Watch for transactions
+    - Monitor balances
+    - Detect anomalies
+    - Send notifications
+  </Card>
+</CardGroup>
+
+---
+
+## LLMs.txt Integration
+
+The `llms.txt` format makes web content easily parsable by Large Language Models. Access Octav's LLM-friendly documentation:
+
+```
+https://api-docs.octav.fi/llms.txt
+```
+
+<Tip>
+  Point your AI agent or LLM to this URL to automatically understand the Octav API structure and capabilities
+</Tip>
+
+### What's Included
+
+The llms.txt file contains:
+
+- **API Overview** - Introduction and key features
+- **Authentication** - How to access the API
+- **Endpoints** - All available endpoints with descriptions
+- **Data Models** - Response structures and types
+- **Code Examples** - Usage patterns
+- **Best Practices** - Integration guidelines
+
+---
+
+## Quick Start for AI Agents
+
+<Steps>
+  <Step title="Load Documentation" icon="book">
+    Fetch and parse the llms.txt documentation:
+
+    ```python
+    import requests
+
+    # Load LLM-friendly docs
+    docs = requests.get('https://api-docs.octav.fi/llms.txt').text
+
+    # Feed to your LLM
+    prompt = f"""
+    Using this API documentation:
+    {docs}
+
+    How can I get the portfolio for address 0x123...?
+    """
+    ```
+  </Step>
+
+  <Step title="Get API Key" icon="key">
+    Obtain authentication credentials:
+
+    1. Sign up at [data.octav.fi](https://data.octav.fi/)
+    2. Generate an API key
+    3. Purchase credits for API calls
+  </Step>
+
+  <Step title="Make API Calls" icon="code">
+    Use the API in your agent:
+
+    ```python
+    # Example: Portfolio checking agent
+    def check_portfolio(address, api_key):
+        headers = {'Authorization': f'Bearer {api_key}'}
+        response = requests.get(
+            f'https://api.octav.fi/v1/portfolio?addresses={address}',
+            headers=headers
+        )
+        return response.json()
+
+    # Agent logic
+    portfolio = check_portfolio('0x123...', API_KEY)
+    networth = portfolio[0]['networth']
+
+    print(f"Portfolio value: ${networth}")
+    ```
+  </Step>
+
+  <Step title="Handle Responses" icon="robot">
+    Process data intelligently:
+
+    ```python
+    def analyze_portfolio(portfolio_data):
+        data = portfolio_data[0]
+
+        analysis = {
+            'total_value': float(data['networth']),
+            'chains': list(data['chains'].keys()),
+            'protocols': list(data['assetByProtocols'].keys()),
+            'chain_count': len(data['chains'])
+        }
+
+        return analysis
+    ```
+  </Step>
+</Steps>
+
+---
+
+## Example AI Agent
+
+Here's a complete example of a portfolio monitoring agent:
+
+<CodeGroup>
+
+```python Python Agent
+import requests
+import time
+from datetime import datetime
+
+class PortfolioAgent:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = 'https://api.octav.fi'
+        self.headers = {'Authorization': f'Bearer {api_key}'}
+
+    def get_portfolio(self, address):
+        """Fetch portfolio data for an address"""
+        response = requests.get(
+            f'{self.base_url}/v1/portfolio?addresses={address}',
+            headers=self.headers
+        )
+        return response.json()[0]
+
+    def analyze_holdings(self, portfolio):
+        """Analyze portfolio composition"""
+        analysis = {
+            'timestamp': datetime.now().isoformat(),
+            'total_value': float(portfolio['networth']),
+            'chains': {},
+            'protocols': {},
+            'top_assets': []
+        }
+
+        # Analyze by chain
+        for chain_key, chain in portfolio['chains'].items():
+            analysis['chains'][chain['name']] = float(chain['value'])
+
+        # Analyze by protocol
+        for protocol_key, protocol in portfolio['assetByProtocols'].items():
+            analysis['protocols'][protocol['name']] = float(protocol['value'])
+
+        return analysis
+
+    def monitor(self, address, check_interval=60):
+        """Monitor portfolio and report changes"""
+        last_value = None
+
+        while True:
+            portfolio = self.get_portfolio(address)
+            current_value = float(portfolio['networth'])
+
+            if last_value is not None:
+                change = current_value - last_value
+                change_pct = (change / last_value) * 100
+
+                if abs(change_pct) > 1:  # Alert on 1% change
+                    print(f"🚨 Portfolio changed by {change_pct:.2f}%")
+                    print(f"   New value: ${current_value:,.2f}")
+
+            last_value = current_value
+            time.sleep(check_interval)
+
+# Usage
+agent = PortfolioAgent('YOUR_API_KEY')
+analysis = agent.analyze_holdings(
+    agent.get_portfolio('0x123...')
+)
+print(analysis)
+```
+
+```javascript JavaScript Agent
+class PortfolioAgent {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.baseUrl = 'https://api.octav.fi';
+  }
+
+  async getPortfolio(address) {
+    const response = await fetch(
+      `${this.baseUrl}/v1/portfolio?addresses=${address}`,
+      {
+        headers: { 'Authorization': `Bearer ${this.apiKey}` }
+      }
+    );
+    const data = await response.json();
+    return data[0];
+  }
+
+  analyzeHoldings(portfolio) {
+    const analysis = {
+      timestamp: new Date().toISOString(),
+      totalValue: parseFloat(portfolio.networth),
+      chains: {},
+      protocols: {},
+      topAssets: []
+    };
+
+    // Analyze by chain
+    Object.entries(portfolio.chains).forEach(([key, chain]) => {
+      analysis.chains[chain.name] = parseFloat(chain.value);
+    });
+
+    // Analyze by protocol
+    Object.entries(portfolio.assetByProtocols).forEach(([key, protocol]) => {
+      analysis.protocols[protocol.name] = parseFloat(protocol.value);
+    });
+
+    return analysis;
+  }
+
+  async monitor(address, checkInterval = 60000) {
+    let lastValue = null;
+
+    setInterval(async () => {
+      const portfolio = await this.getPortfolio(address);
+      const currentValue = parseFloat(portfolio.networth);
+
+      if (lastValue !== null) {
+        const change = currentValue - lastValue;
+        const changePct = (change / lastValue) * 100;
+
+        if (Math.abs(changePct) > 1) {
+          console.log(`🚨 Portfolio changed by ${changePct.toFixed(2)}%`);
+          console.log(`   New value: $${currentValue.toFixed(2)}`);
+        }
+      }
+
+      lastValue = currentValue;
+    }, checkInterval);
+  }
+}
+
+// Usage
+const agent = new PortfolioAgent('YOUR_API_KEY');
+const analysis = await agent.analyzeHoldings(
+  await agent.getPortfolio('0x123...')
+);
+console.log(analysis);
+```
+
+</CodeGroup>
+
+---
+
+## Use Cases for AI Agents
+
+<Tabs>
+  <Tab title="Conversational Interfaces" icon="comments">
+    Build chat-based portfolio assistants:
+
+    ```python
+    # Example: ChatGPT-style portfolio assistant
+    def portfolio_chat_handler(user_message, address, api_key):
+        agent = PortfolioAgent(api_key)
+        portfolio = agent.get_portfolio(address)
+
+        if "balance" in user_message.lower():
+            return f"Your portfolio is worth ${portfolio['networth']}"
+
+        elif "chains" in user_message.lower():
+            chains = ", ".join(portfolio['chains'].keys())
+            return f"You have assets on: {chains}"
+
+        elif "top holding" in user_message.lower():
+            # Find largest position
+            max_protocol = max(
+                portfolio['assetByProtocols'].items(),
+                key=lambda x: float(x[1]['value'])
+            )
+            return f"Your top holding is {max_protocol[1]['name']}: ${max_protocol[1]['value']}"
+
+    # User: "What's my balance?"
+    response = portfolio_chat_handler(
+        "What's my balance?",
+        "0x123...",
+        API_KEY
+    )
+    print(response)  # "Your portfolio is worth $12,345.67"
+    ```
+  </Tab>
+
+  <Tab title="Automated Alerts" icon="bell">
+    Send notifications on portfolio changes:
+
+    ```python
+    class AlertAgent(PortfolioAgent):
+        def __init__(self, api_key, webhook_url):
+            super().__init__(api_key)
+            self.webhook_url = webhook_url
+
+        def send_alert(self, message):
+            requests.post(
+                self.webhook_url,
+                json={'text': message}
+            )
+
+        def check_thresholds(self, address, thresholds):
+            portfolio = self.get_portfolio(address)
+            value = float(portfolio['networth'])
+
+            if value < thresholds['min']:
+                self.send_alert(
+                    f"⚠️  Portfolio below ${thresholds['min']:,}"
+                )
+
+            if value > thresholds['max']:
+                self.send_alert(
+                    f"🎉 Portfolio above ${thresholds['max']:,}"
+                )
+
+    # Usage
+    agent = AlertAgent(API_KEY, SLACK_WEBHOOK)
+    agent.check_thresholds('0x123...', {
+        'min': 10000,
+        'max': 100000
+    })
+    ```
+  </Tab>
+
+  <Tab title="Data Aggregation" icon="database">
+    Aggregate data across multiple addresses:
+
+    ```python
+    class AggregatorAgent(PortfolioAgent):
+        def aggregate_portfolios(self, addresses):
+            total_value = 0
+            all_chains = set()
+            all_protocols = set()
+
+            for address in addresses:
+                portfolio = self.get_portfolio(address)
+                total_value += float(portfolio['networth'])
+                all_chains.update(portfolio['chains'].keys())
+                all_protocols.update(portfolio['assetByProtocols'].keys())
+
+            return {
+                'total_value': total_value,
+                'unique_chains': len(all_chains),
+                'unique_protocols': len(all_protocols),
+                'address_count': len(addresses)
+            }
+
+    # Usage
+    agent = AggregatorAgent(API_KEY)
+    summary = agent.aggregate_portfolios([
+        '0x123...',
+        '0x456...',
+        '0x789...'
+    ])
+    print(f"Combined portfolio: ${summary['total_value']:,.2f}")
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Rate Limiting" icon="gauge">
+    Respect API rate limits (360 requests/minute):
+
+    ```python
+    import time
+    from collections import deque
+
+    class RateLimitedAgent(PortfolioAgent):
+        def __init__(self, api_key, max_rpm=360):
+            super().__init__(api_key)
+            self.max_rpm = max_rpm
+            self.requests = deque()
+
+        def _check_rate_limit(self):
+            now = time.time()
+            # Remove requests older than 1 minute
+            while self.requests and self.requests[0] < now - 60:
+                self.requests.popleft()
+
+            if len(self.requests) >= self.max_rpm:
+                sleep_time = 60 - (now - self.requests[0])
+                time.sleep(sleep_time)
+
+        def get_portfolio(self, address):
+            self._check_rate_limit()
+            self.requests.append(time.time())
+            return super().get_portfolio(address)
+    ```
+  </Accordion>
+
+  <Accordion title="Error Handling" icon="triangle-exclamation">
+    Handle API errors gracefully:
+
+    ```python
+    def safe_api_call(self, func, *args, max_retries=3):
+        for attempt in range(max_retries):
+            try:
+                return func(*args)
+            except requests.exceptions.RequestException as e:
+                if attempt == max_retries - 1:
+                    raise
+                time.sleep(2 ** attempt)  # Exponential backoff
+    ```
+  </Accordion>
+
+  <Accordion title="Credit Management" icon="coins">
+    Monitor and manage API credits:
+
+    ```python
+    def check_credits(self):
+        response = requests.get(
+            f'{self.base_url}/v1/credits',
+            headers=self.headers
+        )
+        credits = response.json()
+
+        if credits < 100:
+            print(f"⚠️  Low credits: {credits}")
+
+        return credits
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/api/authentication">
+    Get your API key
+  </Card>
+
+  <Card title="Pricing" icon="tag" href="/api/pricing">
+    Understand credit costs
+  </Card>
+
+  <Card title="Portfolio Endpoint" icon="wallet" href="/api/endpoints/portfolio">
+    Main data endpoint
+  </Card>
+
+  <Card title="llms.txt Spec" icon="file-lines" href="https://llmstxt.org/">
+    Learn about the standard
+  </Card>
+</CardGroup>

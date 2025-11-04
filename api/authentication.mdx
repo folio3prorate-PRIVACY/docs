@@ -1,81 +1,220 @@
 ---
 title: "Authentication"
-description: "Authenticate your API requests with Octav"
+description: "Authenticate your API requests with API keys"
 ---
 
-import { Alert } from '/snippets/Alert.jsx.mdx'
+All Octav API requests require authentication using API keys. Learn how to create, use, and manage your API keys securely.
 
-# Authentication
+<Info>
+  **Get Your API Key** — Create and manage API keys at [data.octav.fi](https://data.octav.fi/)
+</Info>
 
-All Octav API requests require authentication using API keys.
+---
 
 ## Getting Your API Key
 
-1. Log in to your Octav account at [octav.fi](https://octav.fi)
-2. Navigate to **Settings** → **API Keys**
-3. Click **Create New API Key**
-4. Give your key a descriptive name
-5. Copy and securely store your API key
+<Steps>
+  <Step title="Access Developer Portal" icon="browser">
+    Navigate to [data.octav.fi](https://data.octav.fi/) and log in to your Octav account
+  </Step>
 
-<Alert type="error" title="Keep Your Keys Secret">
-Never share your API keys or commit them to version control. Treat them like passwords.
-</Alert>
+  <Step title="Create API Key" icon="key">
+    Go to the API Keys section and click **Create New API Key**
+  </Step>
+
+  <Step title="Name Your Key" icon="tag">
+    Give your key a descriptive name to identify its purpose (e.g., "Production App", "Development")
+  </Step>
+
+  <Step title="Save Your Key" icon="lock">
+    Copy and securely store your API key immediately - you won't be able to see it again
+  </Step>
+</Steps>
+
+<Warning>
+  **Keep Your Keys Secret** — Never share your API keys or commit them to version control. Treat them like passwords.
+</Warning>
+
+---
 
 ## Using Your API Key
 
-Include your API key in the `Authorization` header of every request:
-
-```bash
-curl https://api.octav.fi/v1/wallets \
-  -H "Authorization: Bearer YOUR_API_KEY"
-```
+Include your API key in the `Authorization` header of every API request as a Bearer token.
 
 ### Header Format
 
 ```
-Authorization: Bearer <your-api-key>
+Authorization: Bearer YOUR_API_KEY
 ```
+
+### Example Requests
+
+<CodeGroup>
+
+```bash cURL
+curl -X GET https://api.octav.fi/v1/portfolio?addresses=0x123... \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.octav.fi/v1/portfolio?addresses=0x123...', {
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY'
+  }
+});
+
+const data = await response.json();
+```
+
+```python Python
+import requests
+
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY'
+}
+
+response = requests.get(
+    'https://api.octav.fi/v1/portfolio',
+    params={'addresses': '0x123...'},
+    headers=headers
+)
+
+data = response.json()
+```
+
+```typescript TypeScript
+const response = await fetch('https://api.octav.fi/v1/portfolio?addresses=0x123...', {
+  headers: {
+    'Authorization': `Bearer ${process.env.OCTAV_API_KEY}`
+  }
+});
+
+const data: Portfolio = await response.json();
+```
+
+</CodeGroup>
+
+---
 
 ## API Key Security
 
 ### Best Practices
 
-- **Use Environment Variables** - Store keys in environment variables, not in code
-- **Rotate Keys Regularly** - Create new keys periodically and revoke old ones
-- **Limit Key Scope** - Create separate keys for different applications
-- **Monitor Usage** - Regularly review API key usage in your dashboard
+<AccordionGroup>
+  <Accordion title="Use Environment Variables" icon="shield">
+    Store API keys in environment variables, never hardcode them in your source code.
 
-### Revoking Keys
+    ```bash .env
+    OCTAV_API_KEY=your_api_key_here
+    ```
 
-If a key is compromised:
+    ```javascript
+    // Access in your code
+    const apiKey = process.env.OCTAV_API_KEY;
+    ```
+  </Accordion>
 
-1. Go to **Settings** → **API Keys**
-2. Find the compromised key
-3. Click **Revoke**
-4. Create a new key for your application
+  <Accordion title="Rotate Keys Regularly" icon="arrows-rotate">
+    Periodically create new API keys and revoke old ones to maintain security:
+
+    1. Create a new API key in the developer portal
+    2. Update your applications with the new key
+    3. Revoke the old key once migration is complete
+  </Accordion>
+
+  <Accordion title="Use Separate Keys Per Application" icon="layer-group">
+    Create different API keys for each application or environment:
+
+    - **Production** - For live applications
+    - **Staging** - For testing environment
+    - **Development** - For local development
+    - **CI/CD** - For automated testing
+
+    This allows you to revoke access to specific applications without affecting others.
+  </Accordion>
+
+  <Accordion title="Monitor Usage" icon="chart-line">
+    Regularly review API key usage in the developer portal:
+
+    - Track credit consumption
+    - Monitor request patterns
+    - Identify unusual activity
+    - Set up usage alerts
+  </Accordion>
+</AccordionGroup>
+
+### Revoking Compromised Keys
+
+If you suspect an API key has been compromised:
+
+<Steps>
+  <Step title="Revoke Immediately" icon="ban">
+    Go to [data.octav.fi](https://data.octav.fi/), find the compromised key, and click **Revoke**
+  </Step>
+
+  <Step title="Create New Key" icon="key">
+    Generate a new API key with a different name
+  </Step>
+
+  <Step title="Update Applications" icon="code">
+    Update all applications using the old key with the new key
+  </Step>
+
+  <Step title="Investigate" icon="magnifying-glass">
+    Review usage logs to understand how the key may have been compromised
+  </Step>
+</Steps>
+
+---
 
 ## Rate Limiting
 
-Authentication also determines your rate limits. Your plan level controls:
+The Octav API enforces rate limits to ensure service stability and fair usage.
 
-- Requests per hour
-- Concurrent connections
-- Data retention period
+<Card title="Rate Limit" icon="gauge">
+  **360 requests per minute per API key**
+
+  Higher limits available upon request - contact us for enterprise needs
+</Card>
+
+### Rate Limit Headers
+
+Every API response includes rate limit information in the headers:
+
+```
+X-RateLimit-Limit: 360
+X-RateLimit-Remaining: 355
+X-RateLimit-Reset: 1672531200
+```
+
+---
 
 ## Error Responses
 
 ### 401 Unauthorized
 
-```json
+Missing or invalid API key.
+
+<CodeGroup>
+
+```json Response
 {
   "error": "Unauthorized",
   "message": "Invalid or missing API key"
 }
 ```
 
-**Solution**: Check that your API key is correct and included in the Authorization header.
+```bash Solution
+# Check that your API key is included in the Authorization header
+curl -X GET https://api.octav.fi/v1/portfolio?addresses=0x123... \
+  -H "Authorization: Bearer YOUR_ACTUAL_API_KEY"
+```
+
+</CodeGroup>
 
 ### 403 Forbidden
+
+API key doesn't have access to the requested resource.
 
 ```json
 {
@@ -84,20 +223,110 @@ Authentication also determines your rate limits. Your plan level controls:
 }
 ```
 
-**Solution**: Verify your API key has the necessary permissions.
+**Solution:** Verify your subscription plan includes access to this endpoint (e.g., Token Overview requires Octav PRO).
 
 ### 429 Too Many Requests
 
-```json
+Rate limit exceeded.
+
+<CodeGroup>
+
+```json Response
 {
   "error": "Rate limit exceeded",
-  "message": "You have exceeded your hourly rate limit",
-  "retry_after": 3600
+  "message": "You have exceeded your rate limit",
+  "retry_after": 60
 }
 ```
 
-**Solution**: Wait for the time specified in `retry_after` (seconds) or upgrade your plan.
+```javascript Handling Rate Limits
+async function fetchWithRetry(url, options, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    const response = await fetch(url, options);
 
-<Alert type="tip" title="Testing Your Key">
-Use the `/v1/status` endpoint to verify your API key is working correctly.
-</Alert>
+    if (response.status === 429) {
+      const retryAfter = response.headers.get('Retry-After') || 60;
+      await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+      continue;
+    }
+
+    return response;
+  }
+
+  throw new Error('Max retries exceeded');
+}
+```
+
+</CodeGroup>
+
+---
+
+## Testing Your API Key
+
+Verify your API key is working correctly with a test request:
+
+<CodeGroup>
+
+```bash cURL
+# The /v1/credits endpoint costs 0 credits and is perfect for testing
+curl -X GET https://api.octav.fi/v1/credits \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.octav.fi/v1/credits', {
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY'
+  }
+});
+
+if (response.ok) {
+  const credits = await response.json();
+  console.log(`✓ Authentication successful! Remaining credits: ${credits}`);
+} else {
+  console.error('✗ Authentication failed');
+}
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    'https://api.octav.fi/v1/credits',
+    headers={'Authorization': 'Bearer YOUR_API_KEY'}
+)
+
+if response.status_code == 200:
+    credits = response.json()
+    print(f'✓ Authentication successful! Remaining credits: {credits}')
+else:
+    print('✗ Authentication failed')
+```
+
+</CodeGroup>
+
+<Tip>
+  **Free Testing** — The `/v1/credits` and `/v1/status` endpoints are free to call (0 credits), making them ideal for testing authentication.
+</Tip>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="rocket" href="/api/quickstart">
+    Make your first API call
+  </Card>
+
+  <Card title="Portfolio Endpoint" icon="wallet" href="/api/endpoints/portfolio">
+    Retrieve portfolio data
+  </Card>
+
+  <Card title="Pricing" icon="credit-card" href="/api/pricing">
+    Learn about credit costs
+  </Card>
+
+  <Card title="Developer Portal" icon="laptop-code" href="https://data.octav.fi/">
+    Manage your API keys
+  </Card>
+</CardGroup>

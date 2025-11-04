@@ -1,0 +1,136 @@
+---
+title: "Historical Portfolio"
+description: "Retrieve portfolio snapshots from specific dates"
+---
+
+Access historical portfolio data for subscribed addresses, enabling time-based analysis and portfolio performance tracking.
+
+<Warning>
+  **Subscription Required** — You must subscribe to an address before retrieving historical data. Contact support or use the dashboard.
+</Warning>
+
+<Info>
+  **Cost:** 1 credit per call
+</Info>
+
+---
+
+## Endpoint
+
+```bash
+GET https://api.octav.fi/v1/historical
+```
+
+### Parameters
+
+<ParamField query="addresses" type="string" required>
+  EVM or SOL wallet address
+</ParamField>
+
+<ParamField query="date" type="string" required>
+  Date in YYYY-MM-DD format (e.g., `2024-11-01`)
+</ParamField>
+
+---
+
+## Example
+
+<CodeGroup>
+
+```bash cURL
+curl "https://api.octav.fi/v1/historical?addresses=0x6426af...&date=2024-11-01" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript
+const response = await fetch(
+  `https://api.octav.fi/v1/historical?addresses=${address}&date=2024-11-01`,
+  { headers: { 'Authorization': `Bearer ${apiKey}` } }
+);
+const portfolio = await response.json();
+console.log(`Net worth: $${portfolio.networth}`);
+```
+
+```python Python
+response = requests.get(
+    'https://api.octav.fi/v1/historical',
+    params={'addresses': address, 'date': '2024-11-01'},
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+portfolio = response.json()
+print(f"Net worth: ${portfolio['networth']}")
+```
+
+</CodeGroup>
+
+---
+
+## Response
+
+Returns the same structure as the [Portfolio endpoint](/api/endpoints/portfolio), but with data as it existed on the specified date.
+
+---
+
+## Use Cases
+
+<Tabs>
+  <Tab title="Performance Tracking" icon="chart-line">
+    ```javascript
+    async function trackPerformance(address, days) {
+      const snapshots = [];
+      for (let i = 0; i < days; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toISOString().split('T')[0];
+
+        const response = await fetch(
+          `https://api.octav.fi/v1/historical?addresses=${address}&date=${dateStr}`,
+          { headers: { 'Authorization': `Bearer ${apiKey}` } }
+        );
+        snapshots.push(await response.json());
+      }
+      return snapshots;
+    }
+    ```
+  </Tab>
+
+  <Tab title="Compare Dates" icon="scale-balanced">
+    ```javascript
+    const [portfolio1, portfolio2] = await Promise.all([
+      fetch(`https://api.octav.fi/v1/historical?addresses=${address}&date=2024-10-01`,
+        { headers: { 'Authorization': `Bearer ${apiKey}` } }).then(r => r.json()),
+      fetch(`https://api.octav.fi/v1/historical?addresses=${address}&date=2024-11-01`,
+        { headers: { 'Authorization': `Bearer ${apiKey}` } }).then(r => r.json())
+    ]);
+
+    const change = parseFloat(portfolio2.networth) - parseFloat(portfolio1.networth);
+    console.log(`30-day change: $${change.toFixed(2)}`);
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Subscription
+
+To enable historical tracking:
+
+1. Login to [data.octav.fi](https://data.octav.fi/)
+2. Navigate to Historical Tracking
+3. Add addresses for daily snapshots
+
+Or contact support via [Discord](https://discord.gg/qvcknAz73A)
+
+---
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Portfolio" icon="wallet" href="/api/endpoints/portfolio">
+    Current portfolio state
+  </Card>
+
+  <Card title="Token Overview" icon="coins" href="/api/endpoints/token-overview">
+    Historical token breakdown
+  </Card>
+</CardGroup>

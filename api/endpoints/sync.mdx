@@ -1,0 +1,244 @@
+---
+title: "Sync Transactions"
+description: "Manually trigger transaction synchronization for an address"
+---
+
+Trigger transaction synchronization for an address, bypassing the 10-minute cache to force an immediate update.
+
+<Info>
+  **Cost:** 1 credit + 1 credit per 250 transactions indexed
+</Info>
+
+<Warning>
+  **Index Limit** — Addresses with more than 100,000 transactions are not indexed. Contact support for assistance.
+</Warning>
+
+---
+
+## Endpoint
+
+```bash
+POST https://api.octav.fi/v1/sync-transactions
+```
+
+### Request Body
+
+<ParamField body="addresses" type="array" required>
+  Array of addresses to sync (currently supports 1 address)
+
+  ```json
+  {
+    "addresses": ["0x6426af179aabebe47666f345d69fd9079673f6cd"]
+  }
+  ```
+</ParamField>
+
+---
+
+## Example
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST "https://api.octav.fi/v1/sync-transactions" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"addresses": ["0x6426af179aabebe47666f345d69fd9079673f6cd"]}'
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.octav.fi/v1/sync-transactions', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${apiKey}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    addresses: ['0x6426af179aabebe47666f345d69fd9079673f6cd']
+  })
+});
+
+const result = await response.text();
+console.log(result); // "Address is syncing" or "Address already syncing"
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    'https://api.octav.fi/v1/sync-transactions',
+    headers={'Authorization': f'Bearer {api_key}'},
+    json={'addresses': ['0x6426af179aabebe47666f345d69fd9079673f6cd']}
+)
+
+print(response.text)  # "Address is syncing" or "Address already syncing"
+```
+
+</CodeGroup>
+
+---
+
+## Response
+
+Returns a string indicating sync status:
+
+- `"Address is syncing"` - Synchronization started
+- `"Address already syncing"` - Address is currently syncing
+
+---
+
+## Cost Breakdown
+
+<AccordionGroup>
+  <Accordion title="API Call Cost" icon="coins">
+    **1 credit** per sync request
+  </Accordion>
+
+  <Accordion title="Indexing Cost" icon="database">
+    **1 credit per 250 transactions** indexed
+
+    - Only new transactions since last sync are indexed
+    - Transactions are indexed permanently (one-time cost)
+    - Subsequent syncs only pay for new transactions
+  </Accordion>
+</AccordionGroup>
+
+### Example Costs
+
+<Tabs>
+  <Tab title="First Sync" icon="sparkles">
+    Address with 10,000 transactions:
+    - API call: 1 credit
+    - Indexing: 40 credits (10,000 ÷ 250)
+    - **Total: 41 credits** ($1.03)
+  </Tab>
+
+  <Tab title="Update Sync" icon="arrows-rotate">
+    Address with 100 new transactions since last sync:
+    - API call: 1 credit
+    - Indexing: 1 credit (100 ÷ 250, rounded up)
+    - **Total: 2 credits** ($0.05)
+  </Tab>
+
+  <Tab title="No New Transactions" icon="check">
+    No transactions since last sync:
+    - API call: 1 credit
+    - Indexing: 0 credits
+    - **Total: 1 credit** ($0.025)
+  </Tab>
+</Tabs>
+
+---
+
+## Use Cases
+
+<Tabs>
+  <Tab title="Force Update" icon="bolt">
+    Force immediate transaction sync:
+
+    ```javascript
+    async function forceSync(address) {
+      const response = await fetch(
+        'https://api.octav.fi/v1/sync-transactions',
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ addresses: [address] })
+        }
+      );
+
+      const status = await response.text();
+      console.log(`Sync status: ${status}`);
+
+      // Wait for sync to complete
+      await new Promise(resolve => setTimeout(resolve, 5000));
+
+      // Fetch updated transactions
+      const txResponse = await fetch(
+        `https://api.octav.fi/v1/transactions?addresses=${address}&limit=10&offset=0&sort=DESC`,
+        { headers: { 'Authorization': `Bearer ${apiKey}` } }
+      );
+
+      return await txResponse.json();
+    }
+    ```
+  </Tab>
+
+  <Tab title="Check Before Sync" icon="magnifying-glass">
+    Check status before syncing:
+
+    ```javascript
+    async function smartSync(address) {
+      // Check current status
+      const statusResponse = await fetch(
+        `https://api.octav.fi/v1/status?addresses=${address}`,
+        { headers: { 'Authorization': `Bearer ${apiKey}` } }
+      );
+
+      const [status] = await statusResponse.json();
+
+      // Check if sync needed
+      const lastSync = new Date(status.transactionsLastSync);
+      const now = new Date();
+      const minutesSinceSync = (now - lastSync) / 1000 / 60;
+
+      if (minutesSinceSync > 10 && !status.syncInProgress) {
+        console.log('Triggering sync...');
+        await fetch('https://api.octav.fi/v1/sync-transactions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ addresses: [address] })
+        });
+      } else if (status.syncInProgress) {
+        console.log('Sync already in progress');
+      } else {
+        console.log('Recent sync available, no need to sync');
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Check Status First" icon="signal">
+    Use the [Status endpoint](/api/endpoints/status) to check if a sync is needed before triggering one
+
+    Avoid unnecessary sync costs by checking `transactionsLastSync` timestamp
+  </Accordion>
+
+  <Accordion title="Handle Concurrent Syncs" icon="triangle-exclamation">
+    If you receive "Address already syncing", wait for the current sync to complete
+
+    Typical sync time: 5-30 seconds depending on transaction count
+  </Accordion>
+
+  <Accordion title="Monitor Costs" icon="dollar-sign">
+    First-time syncs can be expensive for addresses with many transactions
+
+    Regular syncs are cheap as only new transactions are indexed
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Status" icon="signal" href="/api/endpoints/status">
+    Check when last synced
+  </Card>
+
+  <Card title="Transactions" icon="receipt" href="/api/endpoints/transactions">
+    Query synced transactions
+  </Card>
+</CardGroup>

@@ -1,636 +1,124 @@
 ---
 title: "Brand Guidelines"
-description: "Official Octav brand guidelines and design system"
+description: "Official Octav brand color palette"
 ---
 
-# Octav Brand Guidelines
+import { ColorSwatch } from '/snippets/ColorPalette.jsx.mdx'
 
-Official brand guidelines for using the Octav name, logo, and visual identity.
+Official brand color palette for using Octav's visual identity.
 
-## Overview
-
-These guidelines help maintain consistency and quality across all Octav communications, products, and marketing materials.
+---
 
 ## Color Palette
 
-<Tabs>
-  <Tab title="Primary Colors" icon="palette">
-
-    ### Primary Brand Colors
-
-    <CardGroup cols={2}>
-      <Card title="Cool Red" icon="circle">
-        **Primary brand color**
-
-        - Hex: `#FF1A45`
-        - RGB: `255, 26, 69`
-        - CMYK: `0, 90, 73, 0`
-
-        **Usage:** Primary CTAs, emphasis, brand moments
-      </Card>
-
-      <Card title="UI Blue" icon="circle">
-        **Interface color**
-
-        - Hex: `#3F58C7`
-        - RGB: `63, 88, 199`
-        - CMYK: `68, 56, 0, 22`
-
-        **Usage:** Interactive elements, buttons, links
-      </Card>
-    </CardGroup>
-
-  </Tab>
-
-  <Tab title="Secondary Colors" icon="swatchbook">
-
-    ### Secondary Palette
-
-    <CardGroup cols={2}>
-      <Card title="Dark Navy" icon="circle">
-        **Background and text**
-
-        - Hex: `#091018`
-        - RGB: `9, 16, 24`
-
-        **Usage:** Dark backgrounds, headers
-      </Card>
-
-      <Card title="Cool Teal" icon="circle">
-        **Accent color**
-
-        - Hex: `#6BCCD1`
-        - RGB: `107, 204, 209`
-
-        **Usage:** Success states, positive indicators
-      </Card>
-
-      <Card title="Success Green" icon="circle">
-        - Hex: `#59CE7E`
-        - RGB: `89, 206, 126`
-
-        **Usage:** Positive changes, success messages
-      </Card>
-
-      <Card title="Warning Orange" icon="circle">
-        - Hex: `#FF9B50`
-        - RGB: `255, 155, 80`
-
-        **Usage:** Warnings, important notices
-      </Card>
-
-      <Card title="Error Red" icon="circle">
-        - Hex: `#FF5757`
-        - RGB: `255, 87, 87`
-
-        **Usage:** Errors, negative changes
-      </Card>
-    </CardGroup>
-
-  </Tab>
-
-  <Tab title="Neutral Colors" icon="circle-half-stroke">
-
-    ### Neutral Palette
-
-    **Light Backgrounds**
-    - White: `#FFFFFF`
-    - Light Gray: `#F5F7FA`
-    - Medium Gray: `#E2E8F0`
-
-    **Dark Backgrounds**
-    - Dark Navy: `#091018`
-    - Dark Blue: `#1A202C`
-    - Slate: `#2D3748`
-
-    **Text Colors**
-    - Primary Text (Light): `#091018`
-    - Primary Text (Dark): `#FFFFFF`
-    - Secondary Text (Light): `#4A5568`
-    - Secondary Text (Dark): `#A0AEC0`
-
-  </Tab>
-</Tabs>
-
-## Typography
-
-<Tabs>
-  <Tab title="Space Grotesk" icon="heading">
-
-    ### Primary Font: Space Grotesk
-
-    Used for headings, titles, and emphasis.
-
-    **Weights:**
-    - Light (300)
-    - Regular (400)
-    - Medium (500)
-    - Bold (700)
-
-    **Usage:**
-    - H1: 48px, Bold
-    - H2: 36px, Bold
-    - H3: 28px, Medium
-    - H4: 24px, Medium
-    - H5: 20px, Medium
-    - H6: 16px, Bold
-
-  </Tab>
-
-  <Tab title="Geist" icon="text">
-
-    ### Secondary Font: Geist
-
-    Used for body text, UI elements, and data display.
-
-    **Weights:**
-    - Regular (400)
-    - Medium (500)
-    - Semibold (600)
-
-    **Usage:**
-    - Body Large: 18px, Regular
-    - Body: 16px, Regular
-    - Body Small: 14px, Regular
-    - Caption: 12px, Regular
-    - Button: 16px, Medium
-
-  </Tab>
-
-  <Tab title="Code Examples" icon="code">
-
-    ### Font Pairing Examples
-
-    ```css
-    /* Heading + Body */
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 48px;
-    }
-
-    p {
-      font-family: 'Geist', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    ```
-
-  </Tab>
-</Tabs>
-
-## Logo Usage
-
-### Logo Variations
-
-<CardGroup cols={2}>
-  <Card title="Octav Bevel Logo" icon="image">
-    **Primary logo with bevel effect**
-
-    - Use on light backgrounds
-    - Minimum size: 120px width
-    - Best for marketing materials
-  </Card>
-
-  <Card title="Octav Solid Logo" icon="image">
-    **Simplified solid version**
-
-    - Use when bevel doesn't render well
-    - Minimum size: 100px width
-    - Best for small sizes
-  </Card>
-
-  <Card title="Octav Icon" icon="square">
-    **Standalone icon mark**
-
-    - Use for app icons, favicons
-    - Minimum size: 32px x 32px
-    - Best for small applications
-  </Card>
-
-  <Card title="Octav Wordmark" icon="font">
-    **Text-only version**
-
-    - Use in tight spaces
-    - Minimum size: 80px width
-    - Best for horizontal layouts
-  </Card>
-</CardGroup>
-
-### Logo Files
-
-All logo files available in multiple formats:
-- SVG (vector, preferred)
-- PNG (transparent background)
-- JPG (solid background)
-
-<Card title="Download Logo Files" icon="download" href="/docs/logo-files">
-  Access all logo variations and formats
-</Card>
-
-### Logo Clearspace
-
-<Info>
-  Maintain clearspace around the logo equal to the height of the "O" in Octav.
-</Info>
-
-**Minimum clearspace:**
-- All sides: Height of "O" letter
-- Never place other elements within clearspace
-- Applies to all logo variations
-
-### Logo Guidelines
-
-<AccordionGroup>
-  <Accordion title="Do's ✅" icon="check" defaultOpen>
-    - Use official logo files
-    - Maintain aspect ratio
-    - Ensure sufficient contrast
-    - Use on appropriate backgrounds
-    - Respect clearspace
-  </Accordion>
-
-  <Accordion title="Don'ts ❌" icon="xmark">
-    - Stretch or distort the logo
-    - Change logo colors
-    - Add effects (drop shadow, gradient, etc.)
-    - Rotate the logo
-    - Place on busy backgrounds
-    - Use low-resolution files
-    - Recreate or redraw the logo
-  </Accordion>
-</AccordionGroup>
-
-## Brand Voice
-
-### Tone
-
-<CardGroup cols={2}>
-  <Card title="Professional" icon="briefcase">
-    Clear, confident, and trustworthy
-  </Card>
-
-  <Card title="Approachable" icon="handshake">
-    Helpful, supportive, and human
-  </Card>
-
-  <Card title="Innovative" icon="lightbulb">
-    Forward-thinking and cutting-edge
-  </Card>
-
-  <Card title="Reliable" icon="shield-check">
-    Dependable and secure
-  </Card>
-</CardGroup>
-
-### Writing Style
-
-<Tabs>
-  <Tab title="Be Clear" icon="eye">
-
-    - Use simple, direct language
-    - Avoid jargon when possible
-    - Explain technical concepts simply
-    - Get to the point quickly
-
-  </Tab>
-
-  <Tab title="Be Helpful" icon="hand-holding-heart">
-
-    - Anticipate user needs
-    - Provide actionable guidance
-    - Offer solutions, not just information
-    - Include examples when helpful
-
-  </Tab>
-
-  <Tab title="Be Human" icon="user">
-
-    - Write conversationally
-    - Show empathy
-    - Use active voice
-    - Acknowledge challenges
-
-  </Tab>
-</Tabs>
-
-### Word Usage
-
-**Preferred Terms:**
-
-<Check>Web3 (not Web 3, web3)</Check>
-<Check>Crypto (not cryptocurrency unless formal)</Check>
-<Check>Blockchain (not block chain)</Check>
-<Check>Portfolio (not wallet group)</Check>
-<Check>Dashboard (not home page)</Check>
-
-## Iconography
-
-### Icon Style
-
-<CardGroup cols={2}>
-  <Card title="Style Guidelines" icon="paintbrush">
-    - Outline style - 2px stroke weight
-    - Rounded corners - 2px radius
-    - 24x24px grid - Standard icon size
-    - Consistent visual weight
-  </Card>
-
-  <Card title="Icon Library" icon="grid-2">
-    **Primary icon set:**
-    - [Lucide Icons](https://lucide.dev/)
-    - Custom icons for Octav-specific features
-  </Card>
-</CardGroup>
-
-### Icon Colors
-
-- **Primary:** UI Blue (#3F58C7)
-- **Secondary:** Cool Teal (#6BCCD1)
-- **Neutral:** Match text color
-- **Status:** Use semantic colors (green, orange, red)
-
-## Buttons & CTAs
-
-<Tabs>
-  <Tab title="Button Styles" icon="square">
-
-    <CardGroup cols={2}>
-      <Card title="Primary Button" icon="square">
-        **Main call-to-action**
-
-        - Background: UI Blue (#3F58C7)
-        - Text: White
-        - Hover: Darker blue (#2F4AA7)
-        - Usage: Primary actions
-      </Card>
-
-      <Card title="Secondary Button" icon="square">
-        **Secondary actions**
-
-        - Background: Cool Teal (#6BCCD1)
-        - Text: White
-        - Hover: Darker teal (#5ABCC1)
-        - Usage: Secondary actions
-      </Card>
-
-      <Card title="Outline Button" icon="square">
-        **Tertiary actions**
-
-        - Border: UI Blue (#3F58C7)
-        - Text: UI Blue (#3F58C7)
-        - Hover: Fill with UI Blue
-        - Usage: Tertiary actions
-      </Card>
-
-      <Card title="Text Button" icon="t">
-        **Low emphasis**
-
-        - No background
-        - Text: UI Blue (#3F58C7)
-        - Hover: Underline
-        - Usage: Low emphasis actions
-      </Card>
-    </CardGroup>
-
-  </Tab>
-
-  <Tab title="Button Sizes" icon="ruler">
-
-    **Size Specifications:**
-    - **Large:** 48px height, 16px font
-    - **Medium:** 40px height, 14px font
-    - **Small:** 32px height, 12px font
-
-  </Tab>
-</Tabs>
-
-## Cards & Containers
-
-<Tabs>
-  <Tab title="Card Styles" icon="square">
-
-    ### Default Card
-
-    - Background: White (light) / #1A202C (dark)
-    - Border: 1px solid #E2E8F0 (light) / #2D3748 (dark)
-    - Border radius: 12px
-    - Padding: 24px
-    - Shadow: Subtle (0 2px 8px rgba(0,0,0,0.08))
-
-    ### Elevated Card
-
-    - Same as default card
-    - Shadow: Medium (0 4px 16px rgba(0,0,0,0.12))
-    - Usage: Important content, modals
-
-    ### Outlined Card
-
-    - Background: Transparent
-    - Border: 2px solid
-    - No shadow
-    - Usage: Empty states, placeholders
-
-  </Tab>
-</Tabs>
-
-## Charts & Data Visualization
-
-### Chart Colors
-
-Use color palette in order:
-
-1. **UI Blue** (#3F58C7)
-2. **Cool Teal** (#6BCCD1)
-3. **Success Green** (#59CE7E)
-4. **Warning Orange** (#FF9B50)
-5. **Cool Red** (#FF1A45)
-6. **Purple** (#9B51E0)
-
-### Chart Style
-
-- **Line charts:** 2px line weight
-- **Bar charts:** 8px border radius
-- **Pie charts:** 2px gap between segments
-- **Grid lines:** Subtle gray (#E2E8F0)
-
-## Imagery
-
-<Tabs>
-  <Tab title="Photography" icon="camera">
-
-    ### Photography Style
-
-    <CardGroup cols={2}>
-      <Card title="Authentic" icon="check">
-        Real people, real scenarios
-      </Card>
-
-      <Card title="Bright" icon="sun">
-        Well-lit, optimistic atmosphere
-      </Card>
-
-      <Card title="Diverse" icon="users">
-        Represent our global community
-      </Card>
-
-      <Card title="Modern" icon="bolt">
-        Contemporary, tech-forward
-      </Card>
-    </CardGroup>
-
-  </Tab>
-
-  <Tab title="Illustration" icon="paintbrush">
-
-    ### Illustration Style
-
-    - **Clean** - Minimal, focused
-    - **Geometric** - Use of shapes and patterns
-    - **On-brand** - Use brand colors
-    - **Purposeful** - Support the message
-
-  </Tab>
-</Tabs>
-
-## Spacing & Layout
-
-### Spacing Scale
-
-Use 8px base unit:
-
-<CardGroup cols={4}>
-  <Card title="0.5x">4px</Card>
-  <Card title="1x">8px</Card>
-  <Card title="2x">16px</Card>
-  <Card title="3x">24px</Card>
-  <Card title="4x">32px</Card>
-  <Card title="6x">48px</Card>
-  <Card title="8x">64px</Card>
-</CardGroup>
-
-### Grid System
-
-- **12-column grid**
-- **24px gutters**
-- **Responsive breakpoints:**
-  - Mobile: 0-767px
-  - Tablet: 768-1023px
-  - Desktop: 1024px+
-
-## Accessibility
-
-<Warning>
-  All designs must meet WCAG 2.1 Level AA standards.
-</Warning>
-
-### Color Contrast
-
-Minimum contrast ratios:
-
-<Check>Normal text: 4.5:1</Check>
-<Check>Large text: 3:1</Check>
-<Check>UI components: 3:1</Check>
-
-### Interactive Elements
-
-<CardGroup cols={2}>
-  <Card title="Touch Targets" icon="hand-pointer">
-    Minimum size: 44x44px for all interactive elements
-  </Card>
-
-  <Card title="Focus Indicators" icon="circle">
-    2px outline on all focusable elements
-  </Card>
-
-  <Card title="Keyboard Navigation" icon="keyboard">
-    Full keyboard support for all interactions
-  </Card>
-
-  <Card title="Screen Readers" icon="eye">
-    Semantic HTML and ARIA labels
-  </Card>
-</CardGroup>
-
-## Brand Applications
-
-<Tabs>
-  <Tab title="Website" icon="globe">
-
-    **Guidelines:**
-    - Use official color palette
-    - Maintain typography hierarchy
-    - Follow spacing guidelines
-    - Ensure accessibility standards
-
-  </Tab>
-
-  <Tab title="Mobile App" icon="mobile">
-
-    **Guidelines:**
-    - Adapt for smaller screens
-    - Touch-optimized interactions
-    - Native platform guidelines
-    - Maintain brand consistency
-
-  </Tab>
-
-  <Tab title="Social Media" icon="share-nodes">
-
-    **Guidelines:**
-    - Profile images: Use Octav icon
-    - Cover images: Brand colors and patterns
-    - Post templates: Consistent style
-    - Hashtags: #Octav #OctavApp
-
-  </Tab>
-
-  <Tab title="Presentations" icon="presentation">
-
-    **Guidelines:**
-    - Title slide: Octav logo + presentation title
-    - Content slides: Consistent headers
-    - Brand colors for emphasis
-    - Official typography
-
-  </Tab>
-</Tabs>
-
-## Contact
-
-<Info>
-  Questions about brand guidelines?
-</Info>
-
-**Brand Inquiries:**
-Email: brand@octav.fi
-
-**Media Kit:**
-Download our complete media kit with logos, screenshots, and brand assets.
-
-<CardGroup cols={2}>
-  <Card title="Download Logo Files" icon="download" href="/docs/logo-files">
-    Access all logo variations and formats
-  </Card>
-
-  <Card title="Contact Us" icon="envelope" href="/docs/contact-us">
-    Get in touch with our team
-  </Card>
-</CardGroup>
+### Primary Colors
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <div>
+    <ColorSwatch color="coolRed" name="Cool Red" hex="#FF1A45" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Primary CTAs, emphasis, brand moments</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="uiBlue" name="UI Blue" hex="#3F58C7" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Interactive elements, buttons, links</p>
+  </div>
+</div>
 
 ---
 
-## Version History
+### Secondary Colors
 
-<AccordionGroup>
-  <Accordion title="v2.0 - November 2024" defaultOpen>
-    - Updated UI Blue as primary interactive color
-    - Added dark mode guidelines
-    - Expanded accessibility section
-  </Accordion>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
+  <div>
+    <ColorSwatch color="darkNavy" name="Dark Navy" hex="#091018" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Dark backgrounds, headers</p>
+  </div>
 
-  <Accordion title="v1.0 - August 2024">
-    - Initial brand guidelines released
-  </Accordion>
-</AccordionGroup>
+  <div>
+    <ColorSwatch color="coolTeal" name="Cool Teal" hex="#6BCCD1" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Success states, positive indicators</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="successGreen" name="Success Green" hex="#59CE7E" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Positive changes, success messages</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="warningOrange" name="Warning Orange" hex="#FF9B50" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Warnings, important notices</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="errorRed" name="Error Red" hex="#FF5757" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Errors, negative changes</p>
+  </div>
+</div>
+
+---
+
+### Neutral Colors
+
+#### Light Backgrounds
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
+  <div>
+    <ColorSwatch color="white" name="White" hex="#FFFFFF" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Primary light background</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="lightGray" name="Light Gray" hex="#F5F7FA" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Secondary light background</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="mediumGray" name="Medium Gray" hex="#E2E8F0" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Borders, dividers</p>
+  </div>
+</div>
+
+#### Dark Backgrounds
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
+  <div>
+    <ColorSwatch color="darkNavy" name="Dark Navy" hex="#091018" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Primary dark background</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="darkBlue" name="Dark Blue" hex="#1A202C" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Secondary dark background</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="slate" name="Slate" hex="#2D3748" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Dark UI elements</p>
+  </div>
+</div>
+
+#### Text Colors
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
+  <div>
+    <ColorSwatch color="primaryTextLight" name="Primary Text (Light)" hex="#091018" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Main text on light backgrounds</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="secondaryTextLight" name="Secondary Text (Light)" hex="#4A5568" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Secondary text on light backgrounds</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="primaryTextDark" name="Primary Text (Dark)" hex="#FFFFFF" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Main text on dark backgrounds</p>
+  </div>
+
+  <div>
+    <ColorSwatch color="secondaryTextDark" name="Secondary Text (Dark)" hex="#A0AEC0" />
+    <p className="mt-3 text-sm text-gray-600"><strong>Usage:</strong> Secondary text on dark backgrounds</p>
+  </div>
+</div>
+

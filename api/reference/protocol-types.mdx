@@ -1,0 +1,485 @@
+---
+title: "Protocol Types"
+description: "DeFi protocol position types supported by Octav"
+---
+
+Octav categorizes DeFi positions into specific protocol types, allowing you to understand how assets are being used across different protocols and strategies.
+
+<Info>
+  **Protocol Positions** - These types appear in the `protocolPositions` object within the portfolio response
+</Info>
+
+---
+
+## Protocol Position Types
+
+<Tabs>
+  <Tab title="All Types" icon="list">
+    <AccordionGroup>
+      <Accordion title="Basic Holdings" icon="wallet">
+        **WALLET** - Direct wallet custody
+        - Tokens held directly in wallet
+        - Not deposited into any protocol
+        - Fully liquid and transferable
+
+        **LOCKED** - Time-locked tokens
+        - Tokens with transfer restrictions
+        - Vesting schedules
+        - Cannot be transferred until unlock date
+      </Accordion>
+
+      <Accordion title="Lending & Borrowing" icon="hand-holding-dollar">
+        **LENDING** - Supplied assets earning interest
+        - Aave deposits
+        - Compound supplies
+        - Liquidity provided to money markets
+
+        **DEPOSIT** - General protocol deposits
+        - Funds deposited but not specifically lending
+        - May earn yield or rewards
+
+        **NFTLENDING** - NFT-backed lending
+        - NFTs used as collateral
+        - Borrowing against NFT value
+
+        **NFTBORROWER** - Borrowing with NFT collateral
+        - Active loan against NFT
+
+        **NFTLENDER** - Lending to NFT borrowers
+        - Providing liquidity for NFT loans
+      </Accordion>
+
+      <Accordion title="Liquidity Provision" icon="droplet">
+        **LIQUIDITYPOOL** - DEX liquidity positions
+        - Uniswap V2/V3 positions
+        - SushiSwap pools
+        - Curve pools
+        - Earn trading fees
+
+        **NFTLIQUIDITYPOOL** - NFT liquidity pools
+        - Sudoswap positions
+        - NFT AMMs
+      </Accordion>
+
+      <Accordion title="Yield Strategies" icon="chart-line">
+        **FARMING** - Yield farming positions
+        - Staking LP tokens for rewards
+        - Farm protocol tokens
+        - Multiple reward streams
+
+        **LEVERAGEDFARMING** - Leveraged yield farming
+        - Borrowed funds used for farming
+        - Amplified returns (and risks)
+        - Examples: Alpaca Finance, Gearbox
+
+        **STAKED** - Staking positions
+        - Protocol staking (e.g., ETH 2.0)
+        - Single-sided staking
+        - Earn staking rewards
+
+        **NFTSTAKED** - Staked NFTs
+        - NFTs staked for rewards
+        - Gaming NFTs earning yield
+
+        **YIELD** - General yield positions
+        - Auto-compounding vaults
+        - Yield aggregators
+      </Accordion>
+
+      <Accordion title="Vaults" icon="vault">
+        **VAULT** - Strategy vaults
+        - Yearn vaults
+        - Auto-compounding strategies
+        - Managed yield optimization
+
+        **VAULT_PS** - Vault with protocol-specific features
+        - Specialized vault mechanics
+        - Custom strategies
+      </Accordion>
+
+      <Accordion title="Derivatives" icon="chart-candlestick">
+        **MARGIN** - Margin trading positions
+        - Leveraged spot trades
+        - Open long/short positions
+
+        **MARGIN_PS** - Protocol-specific margin
+        - Custom margin implementations
+
+        **PERPETUALS** - Perpetual futures
+        - Perpetual swaps (dYdX, GMX)
+        - Funding rate exposure
+
+        **LEVERAGE** - General leveraged positions
+        - Amplified exposure
+        - Borrowed capital
+
+        **OPTIONSBUYER** - Long options positions
+        - Purchased calls or puts
+        - Defined risk exposure
+
+        **OPTIONSSELLER** - Short options positions
+        - Sold calls or puts
+        - Premium collection
+        - Unlimited risk potential
+      </Accordion>
+
+      <Accordion title="Special Categories" icon="star">
+        **REWARDS** - Claimable rewards
+        - Unclaimed farming rewards
+        - Staking rewards pending
+        - Airdrop allocations
+
+        **VESTING** - Vesting schedules
+        - Team/investor tokens vesting
+        - Gradual unlock over time
+
+        **GOVERNANCE** - Governance positions
+        - Locked governance tokens
+        - Vote-escrowed positions (veTokens)
+        - Protocol governance power
+
+        **INVESTMENT** - Strategic investments
+        - Protocol treasury positions
+        - Long-term holdings
+
+        **SPOT** - Spot trading
+        - CEX-style spot positions
+        - On-chain order books
+
+        **INSURANCEBUYER** - Insurance coverage
+        - Nexus Mutual coverage
+        - Protocol insurance
+
+        **INSURANCESELLER** - Insurance underwriter
+        - Capital at risk for premiums
+        - Providing insurance coverage
+
+        **NFTFRACTION** - Fractionalized NFTs
+        - Partial NFT ownership
+        - Fractional.art positions
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="By Risk Level" icon="shield">
+    <Steps>
+      <Step title="Low Risk" icon="shield-check">
+        **Minimal smart contract risk, no liquidation risk:**
+
+        - WALLET - Direct custody
+        - LOCKED - Time-locked tokens
+        - STAKED - Simple staking
+        - GOVERNANCE - Governance tokens
+      </Step>
+
+      <Step title="Medium Risk" icon="shield-halved">
+        **Smart contract risk, potential impermanent loss:**
+
+        - LENDING - Money market deposits
+        - DEPOSIT - Protocol deposits
+        - LIQUIDITYPOOL - DEX liquidity
+        - FARMING - Yield farming
+        - VAULT - Strategy vaults
+        - YIELD - Yield aggregators
+      </Step>
+
+      <Step title="High Risk" icon="shield-exclamation">
+        **Liquidation risk, high complexity:**
+
+        - LEVERAGE - Leveraged positions
+        - MARGIN - Margin trading
+        - LEVERAGEDFARMING - Leveraged farming
+        - PERPETUALS - Perpetual futures
+        - OPTIONSBUYER - Long options
+        - OPTIONSSELLER - Short options (highest risk)
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Code Examples" icon="code">
+    ```typescript TypeScript Enum
+    export enum ProtocolPositionType {
+      DEPOSIT = "DEPOSIT",
+      FARMING = "FARMING",
+      GOVERNANCE = "GOVERNANCE",
+      INSURANCEBUYER = "INSURANCEBUYER",
+      INSURANCESELLER = "INSURANCESELLER",
+      INVESTMENT = "INVESTMENT",
+      LENDING = "LENDING",
+      LEVERAGE = "LEVERAGE",
+      LEVERAGEDFARMING = "LEVERAGED FARMING",
+      LIQUIDITYPOOL = "LIQUIDITYPOOL",
+      LOCKED = "LOCKED",
+      MARGIN = "MARGIN",
+      MARGIN_PS = "MARGINPS",
+      NFTBORROWER = "NFTBORROWER",
+      NFTFRACTION = "NFTFRACTION",
+      NFTLENDER = "NFTLENDER",
+      NFTLENDING = "NFTLENDING",
+      NFTLIQUIDITYPOOL = "NFTLIQUIDITYPOOL",
+      NFTSTAKED = "NFTSTAKED",
+      OPTIONSBUYER = "OPTIONSBUYER",
+      OPTIONSSELLER = "OPTIONSSELLER",
+      PERPETUALS = "PERPETUALS",
+      REWARDS = "REWARDS",
+      SPOT = "SPOT",
+      STAKED = "STAKED",
+      VAULT = "VAULT",
+      VAULT_PS = "VAULTPS",
+      VESTING = "VESTING",
+      WALLET = "WALLET",
+      YIELD = "YIELD"
+    }
+    ```
+
+    ```javascript Get Positions by Type
+    // Filter positions by type
+    function getPositionsByType(portfolio, type) {
+      const positions = [];
+
+      Object.values(portfolio.assetByProtocols).forEach(protocol => {
+        Object.values(protocol.chains).forEach(chain => {
+          if (chain.protocolPositions[type]) {
+            positions.push({
+              protocol: protocol.name,
+              chain: chain.name,
+              position: chain.protocolPositions[type]
+            });
+          }
+        });
+      });
+
+      return positions;
+    }
+
+    // Get all lending positions
+    const lendingPositions = getPositionsByType(portfolio, 'LENDING');
+    console.log(`Found ${lendingPositions.length} lending positions`);
+    ```
+
+    ```javascript Calculate Risk Exposure
+    // Categorize portfolio by risk
+    const RISK_CATEGORIES = {
+      low: ['WALLET', 'LOCKED', 'STAKED', 'GOVERNANCE'],
+      medium: ['LENDING', 'DEPOSIT', 'LIQUIDITYPOOL', 'FARMING', 'VAULT', 'YIELD'],
+      high: ['LEVERAGE', 'MARGIN', 'LEVERAGEDFARMING', 'PERPETUALS', 'OPTIONSBUYER', 'OPTIONSSELLER']
+    };
+
+    function calculateRiskExposure(portfolio) {
+      const exposure = { low: 0, medium: 0, high: 0 };
+
+      Object.values(portfolio.assetByProtocols).forEach(protocol => {
+        Object.values(protocol.chains).forEach(chain => {
+          Object.entries(chain.protocolPositions).forEach(([type, position]) => {
+            const value = parseFloat(position.totalValue || position.value || 0);
+
+            for (const [risk, types] of Object.entries(RISK_CATEGORIES)) {
+              if (types.includes(type)) {
+                exposure[risk] += value;
+                break;
+              }
+            }
+          });
+        });
+      });
+
+      return exposure;
+    }
+
+    const risk = calculateRiskExposure(portfolio);
+    console.log(`Low risk: $${risk.low.toFixed(2)}`);
+    console.log(`Medium risk: $${risk.medium.toFixed(2)}`);
+    console.log(`High risk: $${risk.high.toFixed(2)}`);
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Common Use Cases
+
+<Tabs>
+  <Tab title="Portfolio Analytics" icon="chart-pie">
+    Track asset allocation across DeFi strategies:
+
+    ```javascript
+    function analyzeDefiAllocation(portfolio) {
+      const allocation = {};
+
+      Object.values(portfolio.assetByProtocols).forEach(protocol => {
+        Object.values(protocol.chains).forEach(chain => {
+          Object.entries(chain.protocolPositions).forEach(([type, position]) => {
+            const value = parseFloat(position.totalValue || position.value || 0);
+            allocation[type] = (allocation[type] || 0) + value;
+          });
+        });
+      });
+
+      // Calculate percentages
+      const total = Object.values(allocation).reduce((sum, val) => sum + val, 0);
+      const percentages = {};
+
+      Object.entries(allocation).forEach(([type, value]) => {
+        percentages[type] = ((value / total) * 100).toFixed(2);
+      });
+
+      return { allocation, percentages, total };
+    }
+
+    const analysis = analyzeDefiAllocation(portfolio);
+    console.log('DeFi Allocation:', analysis.percentages);
+    ```
+  </Tab>
+
+  <Tab title="Yield Tracking" icon="chart-line">
+    Monitor all yield-generating positions:
+
+    ```javascript
+    const YIELD_TYPES = [
+      'FARMING', 'LEVERAGEDFARMING', 'STAKED',
+      'LENDING', 'VAULT', 'YIELD', 'LIQUIDITYPOOL'
+    ];
+
+    function getYieldPositions(portfolio) {
+      const yieldPositions = [];
+
+      Object.values(portfolio.assetByProtocols).forEach(protocol => {
+        Object.values(protocol.chains).forEach(chain => {
+          Object.entries(chain.protocolPositions).forEach(([type, position]) => {
+            if (YIELD_TYPES.includes(type)) {
+              yieldPositions.push({
+                protocol: protocol.name,
+                chain: chain.name,
+                type: type,
+                value: position.totalValue || position.value,
+                assets: position.assets || []
+              });
+            }
+          });
+        });
+      });
+
+      return yieldPositions;
+    }
+
+    const yields = getYieldPositions(portfolio);
+    const totalYield = yields.reduce((sum, p) =>
+      sum + parseFloat(p.value), 0
+    );
+
+    console.log(`Total in yield: $${totalYield.toFixed(2)}`);
+    ```
+  </Tab>
+
+  <Tab title="Liquidation Risk" icon="triangle-exclamation">
+    Identify positions with liquidation risk:
+
+    ```javascript
+    const LIQUIDATION_RISK_TYPES = [
+      'LEVERAGE', 'MARGIN', 'MARGIN_PS',
+      'LEVERAGEDFARMING', 'PERPETUALS'
+    ];
+
+    function checkLiquidationRisk(portfolio) {
+      const riskyPositions = [];
+
+      Object.values(portfolio.assetByProtocols).forEach(protocol => {
+        Object.values(protocol.chains).forEach(chain => {
+          Object.entries(chain.protocolPositions).forEach(([type, position]) => {
+            if (LIQUIDATION_RISK_TYPES.includes(type)) {
+              riskyPositions.push({
+                protocol: protocol.name,
+                chain: chain.name,
+                type: type,
+                value: position.totalValue,
+                healthRate: position.healthRate, // If available
+                assets: position.assets
+              });
+            }
+          });
+        });
+      });
+
+      return riskyPositions;
+    }
+
+    const risky = checkLiquidationRisk(portfolio);
+    if (risky.length > 0) {
+      console.warn(`⚠️  ${risky.length} positions with liquidation risk`);
+    }
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Check Position Type" icon="circle-check">
+    Always check the position type before making assumptions:
+
+    ```javascript
+    const position = chain.protocolPositions.LENDING;
+
+    if (position) {
+      // This is a lending position
+      const supplied = position.supplyAssets || [];
+      const borrowed = position.borrowAssets || [];
+
+      console.log(`Supplied: ${supplied.length} assets`);
+      console.log(`Borrowed: ${borrowed.length} assets`);
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Handle Missing Types" icon="code">
+    Not all positions will have all asset types:
+
+    ```javascript
+    const position = chain.protocolPositions.LIQUIDITYPOOL;
+
+    // Safely access optional asset arrays
+    const baseAssets = position?.baseAssets || [];
+    const quoteAssets = position?.quoteAssets || [];
+    const rewardAssets = position?.rewardAssets || [];
+    ```
+  </Accordion>
+
+  <Accordion title="Calculate Total Value" icon="calculator">
+    Use `totalValue` when available:
+
+    ```javascript
+    function getPositionValue(position) {
+      // Prefer totalValue if available
+      if (position.totalValue) {
+        return parseFloat(position.totalValue);
+      }
+
+      // Fall back to summing assets
+      const assets = position.assets || [];
+      return assets.reduce((sum, asset) =>
+        sum + parseFloat(asset.value || 0), 0
+      );
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Portfolio Endpoint" icon="wallet" href="/api/endpoints/portfolio">
+    See protocol positions in action
+  </Card>
+
+  <Card title="Supported Chains" icon="globe" href="/api/reference/supported-chains">
+    View all supported blockchains
+  </Card>
+
+  <Card title="Transaction Types" icon="receipt" href="/api/reference/transaction-types">
+    Understand transaction categorization
+  </Card>
+</CardGroup>
