@@ -37,7 +37,7 @@ button.action-button,
   -webkit-font-smoothing: antialiased;
 
   /* Colors */
-  background-color: oklch(0.5058 0.1748 269.54);
+  background-color: #3F58C7;
 
   /* Spacing */
   column-gap: 8px;
@@ -174,7 +174,7 @@ button.action-button:disabled,
   height: auto;
 }
 
-/* Navbar buttons - Apply Octav styling - MORE PROMINENT */
+/* Navbar buttons - Apply Octav styling */
 nav a[href*="data.octav.fi"],
 header a[href*="data.octav.fi"],
 [class*="navbar"] a[href*="data.octav.fi"],
@@ -191,11 +191,11 @@ header a[href*="data.octav.fi"],
   justify-content: center;
   flex-shrink: 0;
 
-  /* Sizing - LARGER for prominence */
+  /* Sizing */
   height: 36px;
   padding: 10px 16px !important;
 
-  /* Typography - BOLD for prominence */
+  /* Typography */
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 15px !important;
   font-weight: 600 !important;
@@ -204,8 +204,8 @@ header a[href*="data.octav.fi"],
   text-decoration: none !important;
   -webkit-font-smoothing: antialiased;
 
-  /* Colors - Octav Red for prominence */
-  background-color: #FF1A45 !important;
+  /* Colors - UI Blue */
+  background-color: #3F58C7 !important;
   color: #FFFFFF !important;
 
   /* Spacing */
@@ -225,6 +225,16 @@ header a[href*="data.octav.fi"],
   order: 2;
 }
 
+/* Fix icon aspect ratio - prevent squishing */
+nav a[href*="data.octav.fi"] img,
+header a[href*="data.octav.fi"] img,
+[class*="navbar"] a[href*="data.octav.fi"] img,
+[class*="header"] a[href*="data.octav.fi"] img {
+  width: 16px !important;
+  height: 16px !important;
+  object-fit: contain !important;
+}
+
 /* Force white text in both modes for red button */
 nav a[href*="data.octav.fi"],
 header a[href*="data.octav.fi"],
@@ -241,51 +251,39 @@ header a[href*="data.octav.fi"],
   color: #FFFFFF !important;
 }
 
-/* Navbar button hover - brighter red */
+/* Navbar button hover - brighter blue */
 nav a[href*="data.octav.fi"]:hover,
 header a[href*="data.octav.fi"]:hover,
 [class*="navbar"] a[href*="data.octav.fi"]:hover,
 [class*="header"] a[href*="data.octav.fi"]:hover {
-  background-color: #FF2D5A !important;
+  background-color: #5366d4 !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 26, 69, 0.3);
+  box-shadow: 0 4px 12px rgba(63, 88, 199, 0.3);
 }
 
-/* Discord button - Discord branding - Secondary prominence */
+/* Discord button - No background, just text/icon */
 nav a[href*="discord"],
 header a[href*="discord"],
 [class*="navbar"] a[href*="discord"],
 [class*="header"] a[href*="discord"] {
-  /* Border styles */
-  border: 0px solid rgb(88, 101, 242);
-  border-radius: 4px;
+  /* Remove background */
+  background-color: transparent !important;
 
   /* Box model */
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-
-  /* Sizing - smaller than Octav button */
-  height: 32px;
-  padding: 8px 12px !important;
-
-  /* Typography */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  line-height: 20px;
-  text-decoration: none !important;
-  -webkit-font-smoothing: antialiased;
-
-  /* Discord brand color */
-  background-color: #5865F2 !important;
-  color: #FFFFFF !important;
 
   /* Spacing */
   gap: 8px;
+  padding: 8px !important;
   margin: 0;
+
+  /* Typography */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  text-decoration: none !important;
+  -webkit-font-smoothing: antialiased;
 
   /* Interaction */
   cursor: pointer;
@@ -298,11 +296,10 @@ header a[href*="discord"],
   order: 1;
 }
 
-/* Discord button hover */
+/* Discord button hover - subtle */
 nav a[href*="discord"]:hover,
 header a[href*="discord"]:hover,
 [class*="navbar"] a[href*="discord"]:hover,
 [class*="header"] a[href*="discord"]:hover {
-  background-color: #4752C4 !important;
-  transform: translateY(-1px);
+  opacity: 0.8;
 }
