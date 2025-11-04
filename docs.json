@@ -50,10 +50,16 @@
   "api": {
     "baseUrl": "https://api.octav.fi/v1",
     "auth": {
-      "method": "bearer"
+      "method": "bearer",
+      "name": "Authorization"
     },
     "playground": {
       "display": "interactive"
+    },
+    "request": {
+      "example": {
+        "showOptionalParams": true
+      }
     }
   },
   "navigation": {
