@@ -36,8 +36,7 @@
   },
   "logo": {
     "light": "/logo/logo-dark.svg",
-    "dark": "/logo/logo-light.svg",
-    "href": "/"
+    "dark": "/logo/logo-light.svg"
   },
   "favicon": "/logo/Octav_logo_icon_red@2x.png",
   "customCSS": [
@@ -128,7 +127,18 @@
           },
           {
             "group": "Endpoints",
-            "openapi": "openapi.json"
+            "openapi": "openapi.json",
+            "pages": [
+              "api/endpoints/portfolio",
+              "api/endpoints/wallet",
+              "api/endpoints/transactions",
+              "api/endpoints/token-overview",
+              "api/endpoints/airdrop",
+              "api/endpoints/historical-portfolio",
+              "api/endpoints/sync",
+              "api/endpoints/status",
+              "api/endpoints/credits"
+            ]
           },
           {
             "group": "AI Development",
