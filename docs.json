@@ -43,6 +43,10 @@
   "customCSS": [
     "/custom.css"
   ],
+  "metadata": {
+    "og:image": "https://octav.fi/og-image.png"
+  },
+  "footerSocials": {},
   "navigation": {
     "tabs": [
       {

@@ -1,0 +1,38 @@
+```jsx TabAwareButton.jsx
+export function TabAwareButton() {
+  const [label, setLabel] = React.useState('Dev Portal');
+
+  React.useEffect(() => {
+    // Check if we're on the API tab
+    const isApiTab = window.location.pathname.includes('/api/');
+    setLabel(isApiTab ? 'Dev Portal' : 'Launch Octav');
+
+    // Listen for route changes
+    const handleRouteChange = () => {
+      const isApiTab = window.location.pathname.includes('/api/');
+      setLabel(isApiTab ? 'Dev Portal' : 'Launch Octav');
+    };
+
+    // Listen for popstate (browser back/forward)
+    window.addEventListener('popstate', handleRouteChange);
+
+    // Also listen for clicks on navigation links
+    const observer = new MutationObserver(() => {
+      const isApiTab = window.location.pathname.includes('/api/');
+      setLabel(isApiTab ? 'Dev Portal' : 'Launch Octav');
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      observer.disconnect();
+    };
+  }, []);
+
+  return null; // This component doesn't render anything, just updates the button via CSS
+}
+```
