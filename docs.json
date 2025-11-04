@@ -54,8 +54,7 @@
     },
     "mdx": {
       "auth": {
-        "method": "key",
-        "name": "x-api-key"
+        "method": "bearer"
       }
     },
     "playground": {
