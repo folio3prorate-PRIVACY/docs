@@ -37,7 +37,7 @@
   "logo": {
     "light": "/logo/logo-dark.svg",
     "dark": "/logo/logo-light.svg",
-    "href": "https://octav.fi"
+    "href": "/"
   },
   "favicon": "/logo/Octav_logo_icon_red@2x.png",
   "customCSS": [
