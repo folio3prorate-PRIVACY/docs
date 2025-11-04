@@ -49,8 +49,13 @@
   "api": {
     "baseUrl": "https://api.octav.fi/v1",
     "auth": {
-      "method": "bearer",
-      "name": "Authorization"
+      "method": "bearer"
+    },
+    "mdx": {
+      "server": "https://api.octav.fi/v1",
+      "auth": {
+        "method": "bearer"
+      }
     },
     "playground": {
       "mode": "simple"
