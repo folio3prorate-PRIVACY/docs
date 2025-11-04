@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "palm",
   "name": "Octav Developer Docs",
-  "version": "2.0.9",
+  "version": "2.1.0",
   "colors": {
     "primary": "#3F58C7",
     "light": "#3F58C7",
@@ -47,6 +47,15 @@
     "og:image": "https://octav.fi/og-image.png"
   },
   "footerSocials": {},
+  "api": {
+    "baseUrl": "https://api.octav.fi/v1",
+    "auth": {
+      "method": "bearer"
+    },
+    "playground": {
+      "display": "interactive"
+    }
+  },
   "navigation": {
     "tabs": [
       {

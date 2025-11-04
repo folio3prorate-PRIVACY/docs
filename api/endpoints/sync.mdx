@@ -1,6 +1,7 @@
 ---
 title: "Sync Transactions"
 description: "Manually trigger transaction synchronization for an address"
+api: POST https://api.octav.fi/v1/sync
 ---
 
 Trigger transaction synchronization for an address, bypassing the 10-minute cache to force an immediate update.
@@ -11,6 +12,10 @@ Trigger transaction synchronization for an address, bypassing the 10-minute cach
 
 <Warning>
   **Index Limit** — Addresses with more than 100,000 transactions are not indexed. Contact support for assistance.
+</Warning>
+
+<Warning>
+  **API Key Required:** You'll need to provide your own API key to test this playground. Get your key at [data.octav.fi](https://data.octav.fi/)
 </Warning>
 
 ---

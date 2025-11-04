@@ -1,6 +1,7 @@
 ---
 title: "Token Overview"
 description: "Get detailed token breakdown across wallet and protocol positions"
+api: GET https://api.octav.fi/v1/token-overview
 ---
 
 Retrieve a comprehensive view of all tokens owned by an address, including distribution across wallet holdings and DeFi protocol positions.
@@ -12,6 +13,10 @@ Retrieve a comprehensive view of all tokens owned by an address, including distr
 <Info>
   **Cost:** 1 credit per call
 </Info>
+
+<Warning>
+  **API Key Required:** You'll need to provide your own API key to test this playground. Get your key at [data.octav.fi](https://data.octav.fi/)
+</Warning>
 
 ---
 
@@ -83,7 +88,7 @@ curl -X GET "https://api.octav.fi/v1/token-overview?addresses=0x6426af179aabebe4
 </ResponseField>
 
 <ResponseField name="value" type="string">
-  Total value in USD (balance × price)
+  Total value in USD (balance ï¿½ price)
 </ResponseField>
 
 <ResponseField name="percentage" type="string">
@@ -416,7 +421,7 @@ tokens.slice(0, 5).forEach(token => {
       changes
         .sort((a, b) => Math.abs(b.change) - Math.abs(a.change))
         .forEach(({ symbol, change, percentChange }) => {
-          const direction = change > 0 ? '=È' : '=É';
+          const direction = change > 0 ? '=ï¿½' : '=ï¿½';
           console.log(
             `${direction} ${symbol}: ${change > 0 ? '+' : ''}${change.toFixed(4)} ` +
             `(${percentChange > 0 ? '+' : ''}${percentChange.toFixed(2)}%)`
