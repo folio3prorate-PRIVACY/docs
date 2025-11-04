@@ -25,9 +25,7 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "description": "Enter your API key from https://data.octav.fi/"
+        "scheme": "bearer"
       }
     }
   },
