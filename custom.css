@@ -177,8 +177,12 @@ button.action-button:disabled,
 /* Navbar buttons - Apply Octav styling */
 nav a[href*="data.octav.fi"],
 header a[href*="data.octav.fi"],
+nav a[href*="beta.octav.fi"],
+header a[href*="beta.octav.fi"],
 [class*="navbar"] a[href*="data.octav.fi"],
-[class*="header"] a[href*="data.octav.fi"] {
+[class*="header"] a[href*="data.octav.fi"],
+[class*="navbar"] a[href*="beta.octav.fi"],
+[class*="header"] a[href*="beta.octav.fi"] {
   /* Border styles */
   border: 0px solid rgb(42, 48, 59);
   border-radius: 4px;
@@ -228,34 +232,54 @@ header a[href*="data.octav.fi"],
 /* Fix icon aspect ratio - prevent squishing */
 nav a[href*="data.octav.fi"] img,
 header a[href*="data.octav.fi"] img,
+nav a[href*="beta.octav.fi"] img,
+header a[href*="beta.octav.fi"] img,
 [class*="navbar"] a[href*="data.octav.fi"] img,
-[class*="header"] a[href*="data.octav.fi"] img {
+[class*="header"] a[href*="data.octav.fi"] img,
+[class*="navbar"] a[href*="beta.octav.fi"] img,
+[class*="header"] a[href*="beta.octav.fi"] img {
   width: 16px !important;
   height: 16px !important;
   object-fit: contain !important;
 }
 
-/* Force white text in both modes for red button */
+/* Force white text in both modes for blue button */
 nav a[href*="data.octav.fi"],
 header a[href*="data.octav.fi"],
+nav a[href*="beta.octav.fi"],
+header a[href*="beta.octav.fi"],
 [class*="navbar"] a[href*="data.octav.fi"],
 [class*="header"] a[href*="data.octav.fi"],
+[class*="navbar"] a[href*="beta.octav.fi"],
+[class*="header"] a[href*="beta.octav.fi"],
 .dark nav a[href*="data.octav.fi"],
 .dark header a[href*="data.octav.fi"],
+.dark nav a[href*="beta.octav.fi"],
+.dark header a[href*="beta.octav.fi"],
 .dark [class*="navbar"] a[href*="data.octav.fi"],
 .dark [class*="header"] a[href*="data.octav.fi"],
+.dark [class*="navbar"] a[href*="beta.octav.fi"],
+.dark [class*="header"] a[href*="beta.octav.fi"],
 .light nav a[href*="data.octav.fi"],
 .light header a[href*="data.octav.fi"],
+.light nav a[href*="beta.octav.fi"],
+.light header a[href*="beta.octav.fi"],
 .light [class*="navbar"] a[href*="data.octav.fi"],
-.light [class*="header"] a[href*="data.octav.fi"] {
+.light [class*="header"] a[href*="data.octav.fi"],
+.light [class*="navbar"] a[href*="beta.octav.fi"],
+.light [class*="header"] a[href*="beta.octav.fi"] {
   color: #FFFFFF !important;
 }
 
 /* Navbar button hover - brighter blue */
 nav a[href*="data.octav.fi"]:hover,
 header a[href*="data.octav.fi"]:hover,
+nav a[href*="beta.octav.fi"]:hover,
+header a[href*="beta.octav.fi"]:hover,
 [class*="navbar"] a[href*="data.octav.fi"]:hover,
-[class*="header"] a[href*="data.octav.fi"]:hover {
+[class*="header"] a[href*="data.octav.fi"]:hover,
+[class*="navbar"] a[href*="beta.octav.fi"]:hover,
+[class*="header"] a[href*="beta.octav.fi"]:hover {
   background-color: #5366d4 !important;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(63, 88, 199, 0.3);

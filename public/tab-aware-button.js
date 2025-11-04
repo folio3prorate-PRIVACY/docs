@@ -1,11 +1,16 @@
-// Update Dev Portal button label based on current tab
+// Update Dev Portal button label and URL based on current tab
 (function() {
   function updateButtonLabel() {
     const isApiTab = window.location.pathname.startsWith('/api/');
-    const buttons = document.querySelectorAll('nav a[href*="data.octav.fi"], header a[href*="data.octav.fi"]');
+    const buttons = document.querySelectorAll('nav a[href*="data.octav.fi"], header a[href*="data.octav.fi"], nav a[href*="beta.octav.fi"], header a[href*="beta.octav.fi"]');
 
     buttons.forEach(button => {
       const label = isApiTab ? 'Dev Portal' : 'Launch Octav';
+      const url = isApiTab ? 'https://data.octav.fi/' : 'https://beta.octav.fi/';
+
+      // Update the href
+      button.href = url;
+
       // Only update text nodes, not the img element
       const textNode = Array.from(button.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
       if (textNode) {
