@@ -127,18 +127,7 @@
           },
           {
             "group": "Endpoints",
-            "openapi": "openapi.json",
-            "pages": [
-              "api/endpoints/portfolio",
-              "api/endpoints/wallet",
-              "api/endpoints/transactions",
-              "api/endpoints/token-overview",
-              "api/endpoints/airdrop",
-              "api/endpoints/historical-portfolio",
-              "api/endpoints/sync",
-              "api/endpoints/status",
-              "api/endpoints/credits"
-            ]
+            "openapi": "openapi.json"
           },
           {
             "group": "AI Development",
