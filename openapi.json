@@ -1,0 +1,400 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Octav API",
+    "description": "Comprehensive blockchain data API for portfolio management, transactions, and DeFi analytics",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Octav Support",
+      "url": "https://octav.fi",
+      "email": "support@octav.fi"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.octav.fi/v1",
+      "description": "Production API"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Enter your API key from https://data.octav.fi/"
+      }
+    }
+  },
+  "paths": {
+    "/portfolio": {
+      "get": {
+        "summary": "Portfolio",
+        "description": "Retrieve portfolio holdings across wallets and DeFi protocols",
+        "operationId": "getPortfolio",
+        "tags": ["Portfolio"],
+        "parameters": [
+          {
+            "name": "addresses",
+            "in": "query",
+            "required": true,
+            "description": "Comma-separated list of EVM or SOL wallet addresses to retrieve portfolio data for",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0x6426af179aabebe47666f345d69fd9079673f6cd"
+          },
+          {
+            "name": "includeNFTs",
+            "in": "query",
+            "required": false,
+            "description": "Include NFT holdings in the portfolio response",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "includeImages",
+            "in": "query",
+            "required": false,
+            "description": "Include image URLs for chains, assets, and protocols",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "includeExplorerUrls",
+            "in": "query",
+            "required": false,
+            "description": "Include blockchain explorer URLs for assets and transactions",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "waitForSync",
+            "in": "query",
+            "required": false,
+            "description": "Wait for fresh data if cache is stale",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "address": {
+                      "type": "string",
+                      "description": "The wallet address"
+                    },
+                    "networth": {
+                      "type": "string",
+                      "description": "Total portfolio net worth in USD"
+                    },
+                    "cashBalance": {
+                      "type": "string",
+                      "description": "Available cash balance"
+                    },
+                    "dailyIncome": {
+                      "type": "string",
+                      "description": "Income generated today"
+                    },
+                    "dailyExpense": {
+                      "type": "string",
+                      "description": "Expenses incurred today"
+                    },
+                    "fees": {
+                      "type": "string",
+                      "description": "Total fees in native asset"
+                    },
+                    "feesFiat": {
+                      "type": "string",
+                      "description": "Total fees in USD"
+                    },
+                    "lastUpdated": {
+                      "type": "string",
+                      "description": "Last sync timestamp (milliseconds since epoch)"
+                    },
+                    "assetByProtocols": {
+                      "type": "object",
+                      "description": "Assets organized by protocol"
+                    },
+                    "chains": {
+                      "type": "object",
+                      "description": "Assets organized by blockchain"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/wallet": {
+      "get": {
+        "summary": "Wallet",
+        "description": "Get wallet balance and basic information",
+        "operationId": "getWallet",
+        "tags": ["Wallet"],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "description": "Wallet address to retrieve information for",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "Transactions",
+        "description": "Get transaction history for wallet addresses",
+        "operationId": "getTransactions",
+        "tags": ["Transactions"],
+        "parameters": [
+          {
+            "name": "addresses",
+            "in": "query",
+            "required": true,
+            "description": "Comma-separated list of wallet addresses",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/token-overview": {
+      "get": {
+        "summary": "Token Overview",
+        "description": "Get detailed token breakdown by protocol (PRO only)",
+        "operationId": "getTokenOverview",
+        "tags": ["Tokens"],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "description": "Wallet address",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/airdrop": {
+      "get": {
+        "summary": "Airdrop",
+        "description": "Check airdrop eligibility (Solana only)",
+        "operationId": "getAirdrop",
+        "tags": ["Airdrops"],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "description": "Solana wallet address",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/historical-portfolio": {
+      "get": {
+        "summary": "Historical Portfolio",
+        "description": "View portfolio value at specific dates",
+        "operationId": "getHistoricalPortfolio",
+        "tags": ["Portfolio"],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "description": "Wallet address",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Date for historical snapshot",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/sync": {
+      "post": {
+        "summary": "Sync",
+        "description": "Trigger a sync for wallet data",
+        "operationId": "syncWallet",
+        "tags": ["Sync"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "Wallet address to sync"
+                  }
+                },
+                "required": ["address"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sync initiated successfully"
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "summary": "Status",
+        "description": "Check when portfolio was last synced (Free)",
+        "operationId": "getStatus",
+        "tags": ["Status"],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "description": "Wallet address",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": []
+      }
+    },
+    "/credits": {
+      "get": {
+        "summary": "Credits",
+        "description": "Check your API credit balance (Free)",
+        "operationId": "getCredits",
+        "tags": ["Credits"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "credits": {
+                      "type": "number",
+                      "description": "Remaining API credits"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Portfolio",
+      "description": "Portfolio and holdings endpoints"
+    },
+    {
+      "name": "Wallet",
+      "description": "Wallet information endpoints"
+    },
+    {
+      "name": "Transactions",
+      "description": "Transaction history endpoints"
+    },
+    {
+      "name": "Tokens",
+      "description": "Token data endpoints"
+    },
+    {
+      "name": "Airdrops",
+      "description": "Airdrop eligibility endpoints"
+    },
+    {
+      "name": "Sync",
+      "description": "Data synchronization endpoints"
+    },
+    {
+      "name": "Status",
+      "description": "Status check endpoints"
+    },
+    {
+      "name": "Credits",
+      "description": "Credit balance endpoints"
+    }
+  ]
+}
