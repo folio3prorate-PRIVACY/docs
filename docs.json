@@ -49,20 +49,11 @@
   "api": {
     "baseUrl": "https://api.octav.fi/v1",
     "auth": {
-      "method": "bearer"
-    },
-    "mdx": {
-      "auth": {
-        "method": "bearer"
-      }
+      "method": "bearer",
+      "name": "Authorization"
     },
     "playground": {
-      "display": "interactive"
-    },
-    "request": {
-      "example": {
-        "showOptionalParams": true
-      }
+      "mode": "simple"
     }
   },
   "navigation": {
@@ -127,7 +118,17 @@
           },
           {
             "group": "Endpoints",
-            "openapi": "openapi.json"
+            "pages": [
+              "api/endpoints/portfolio",
+              "api/endpoints/wallet",
+              "api/endpoints/transactions",
+              "api/endpoints/token-overview",
+              "api/endpoints/airdrop",
+              "api/endpoints/historical-portfolio",
+              "api/endpoints/sync",
+              "api/endpoints/status",
+              "api/endpoints/credits"
+            ]
           },
           {
             "group": "AI Development",
