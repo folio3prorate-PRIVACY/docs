@@ -279,7 +279,7 @@
         }
       }
     },
-    "/sync": {
+    "/sync-transactions": {
       "post": {
         "summary": "Sync",
         "description": "Trigger a sync for wallet data.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
