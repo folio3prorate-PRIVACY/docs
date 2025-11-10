@@ -2,9 +2,14 @@
 (function() {
   function updateButtonLabel() {
     const isApiTab = window.location.pathname.startsWith('/api/');
-    const buttons = document.querySelectorAll('nav a[href*="data.octav.fi"], header a[href*="data.octav.fi"], nav a[href*="beta.octav.fi"], header a[href*="beta.octav.fi"]');
 
-    buttons.forEach(button => {
+    // Only target navbar buttons with icon images to avoid affecting content links
+    const buttons = document.querySelectorAll('nav a[href*="data.octav.fi"] img, header a[href*="data.octav.fi"] img, nav a[href*="beta.octav.fi"] img, header a[href*="beta.octav.fi"] img');
+
+    buttons.forEach(img => {
+      const button = img.parentElement; // Get the parent <a> tag
+      if (!button || button.tagName !== 'A') return;
+
       const label = isApiTab ? 'Dev Portal' : 'Launch Octav';
       const url = isApiTab ? 'https://data.octav.fi/' : 'https://beta.octav.fi/';
 
@@ -17,10 +22,7 @@
         textNode.textContent = label;
       } else {
         // If no text node exists, create one after the image
-        const img = button.querySelector('img');
-        if (img) {
-          button.insertBefore(document.createTextNode(' ' + label), img.nextSibling);
-        }
+        button.insertBefore(document.createTextNode(' ' + label), img.nextSibling);
       }
     });
   }
