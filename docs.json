@@ -44,7 +44,8 @@
   ],
   "customScripts": [
     "/tab-aware-button.js",
-    "/chain-search.js"
+    "/chain-search.js",
+    "/hotjar.js"
   ],
   "metadata": {
     "og:image": "https://octav.fi/og-image.png"
