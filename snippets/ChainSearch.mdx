@@ -1,0 +1,175 @@
+import { useState, useEffect } from 'react';
+
+export const ChainSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [resultCount, setResultCount] = useState(0);
+
+  useEffect(() => {
+    const filterChains = () => {
+      const searchValue = searchTerm.toLowerCase();
+
+      // Get all cards across all tabs using multiple selectors
+      const cardSelectors = [
+        'a[href*="Card"]',
+        '[class*="card"]',
+        'div[class*="Card"]'
+      ].join(',');
+
+      const allElements = document.querySelectorAll(cardSelectors);
+      let visibleCount = 0;
+
+      allElements.forEach(element => {
+        // Find the actual card container
+        const cardElement = element.closest('a') || element;
+        const cardText = cardElement.textContent.toLowerCase();
+        const shouldShow = searchValue === '' || cardText.includes(searchValue);
+
+        if (cardElement.tagName === 'A' || cardElement.classList.toString().toLowerCase().includes('card')) {
+          if (shouldShow) {
+            cardElement.style.display = '';
+            visibleCount++;
+          } else {
+            cardElement.style.display = 'none';
+          }
+        }
+      });
+
+      setResultCount(visibleCount);
+
+      // When searching, show all tab content
+      if (searchValue) {
+        const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+        tabPanels.forEach(panel => {
+          panel.style.display = 'block';
+          panel.style.opacity = '1';
+          panel.style.position = 'relative';
+        });
+
+        // Hide tab navigation when searching
+        const tabList = document.querySelector('[role="tablist"]');
+        if (tabList) {
+          tabList.style.display = 'none';
+        }
+
+        // Hide tab section headings
+        const tabHeadings = document.querySelectorAll('h3');
+        tabHeadings.forEach(heading => {
+          if (heading.textContent.includes('Layer') ||
+              heading.textContent.includes('Blockchains') ||
+              heading.textContent.includes('Solutions') ||
+              heading.textContent.includes('Chains')) {
+            heading.style.display = 'none';
+          }
+        });
+      } else {
+        // Reset to normal tab behavior
+        const tabList = document.querySelector('[role="tablist"]');
+        if (tabList) {
+          tabList.style.display = '';
+        }
+
+        const tabHeadings = document.querySelectorAll('h3');
+        tabHeadings.forEach(heading => {
+          heading.style.display = '';
+        });
+      }
+    };
+
+    const timeoutId = setTimeout(filterChains, 150);
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm]);
+
+  return (
+    <div style={{
+      marginBottom: '24px',
+      marginTop: '8px'
+    }}>
+      <div style={{
+        position: 'relative',
+        maxWidth: '600px'
+      }}>
+        <input
+          type="text"
+          placeholder="Search blockchains (e.g., Ethereum, Layer 2, gaming)..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{
+            width: '100%',
+            padding: '12px 16px 12px 42px',
+            fontSize: '15px',
+            border: '1px solid #e5e7eb',
+            borderRadius: '8px',
+            outline: 'none',
+            transition: 'all 0.2s',
+            backgroundColor: '#ffffff'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#3F58C7';
+            e.target.style.boxShadow = '0 0 0 3px rgba(63, 88, 199, 0.1)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = '#e5e7eb';
+            e.target.style.boxShadow = 'none';
+          }}
+        />
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            position: 'absolute',
+            left: '14px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: '#9ca3af'
+          }}
+        >
+          <path
+            d="M12.5 11h-.79l-.28-.27A6.471 6.471 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L17.49 16l-4.99-5zm-6 0C4.01 11 2 8.99 2 6.5S4.01 2 6.5 2 11 4.01 11 6.5 8.99 11 6.5 11z"
+            fill="currentColor"
+          />
+        </svg>
+        {searchTerm && (
+          <button
+            onClick={() => setSearchTerm('')}
+            style={{
+              position: 'absolute',
+              right: '12px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'none',
+              border: 'none',
+              color: '#9ca3af',
+              cursor: 'pointer',
+              fontSize: '20px',
+              lineHeight: '1',
+              padding: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            onMouseEnter={(e) => e.target.style.color = '#3F58C7'}
+            onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
+          >
+            ×
+          </button>
+        )}
+      </div>
+      {searchTerm && (
+        <p style={{
+          marginTop: '12px',
+          fontSize: '14px',
+          color: '#6b7280'
+        }}>
+          {resultCount > 0 ? (
+            <>Found <strong>{resultCount}</strong> blockchain{resultCount !== 1 ? 's' : ''} matching "<strong>{searchTerm}</strong>"</>
+          ) : (
+            <>No blockchains found matching "<strong>{searchTerm}</strong>"</>
+          )}
+        </p>
+      )}
+    </div>
+  );
+};
