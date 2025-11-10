@@ -52,6 +52,7 @@
       "destination": "/docs/quickstart"
     }
   ],
+  "openapi": "openapi.json",
   "api": {
     "baseUrl": "https://api.octav.fi/v1",
     "auth": {
