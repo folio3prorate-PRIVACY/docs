@@ -375,16 +375,42 @@
     });
   }
 
-  // Initialize on page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initChainSearch);
-  } else {
-    initChainSearch();
+  // Retry logic for SPA navigation
+  let retryCount = 0;
+  const maxRetries = 10;
+
+  function tryInitWithRetry() {
+    if (window.location.pathname.includes('supported-blockchains')) {
+      const headings = document.querySelectorAll('h2');
+      const hasTargetHeading = Array.from(headings).some(h => h.textContent.includes('All Supported Chains'));
+
+      if (hasTargetHeading && !document.getElementById('chain-search-container')) {
+        initChainSearch();
+        retryCount = 0;
+      } else if (!document.getElementById('chain-search-container') && retryCount < maxRetries) {
+        retryCount++;
+        setTimeout(tryInitWithRetry, 100);
+      }
+    } else {
+      retryCount = 0;
+    }
   }
 
-  // Re-initialize on navigation (for SPA)
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryInitWithRetry);
+  } else {
+    tryInitWithRetry();
+  }
+
+  // Re-initialize on navigation (for SPA) with debouncing
+  let debounceTimer;
   const observer = new MutationObserver(() => {
-    initChainSearch();
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      retryCount = 0;
+      tryInitWithRetry();
+    }, 150);
   });
 
   observer.observe(document.body, {
@@ -392,14 +418,9 @@
     subtree: true
   });
 
-  // Listen for navigation
+  // Listen for navigation events
   window.addEventListener('popstate', () => {
-    setTimeout(initChainSearch, 100);
-  });
-
-  document.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A' || e.target.closest('a')) {
-      setTimeout(initChainSearch, 200);
-    }
+    retryCount = 0;
+    setTimeout(tryInitWithRetry, 100);
   });
 })();
