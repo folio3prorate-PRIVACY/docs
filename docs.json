@@ -46,6 +46,12 @@
     "og:image": "https://octav.fi/og-image.png"
   },
   "footerSocials": {},
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/docs/quickstart"
+    }
+  ],
   "api": {
     "baseUrl": "https://api.octav.fi/v1",
     "auth": {
