@@ -481,8 +481,7 @@
           "200": {
             "description": "Successful response"
           }
-        },
-        "security": []
+        }
       }
     },
     "/credits": {
