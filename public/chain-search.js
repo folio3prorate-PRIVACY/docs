@@ -46,7 +46,7 @@
     searchIcon.style.left = '14px';
     searchIcon.style.top = '50%';
     searchIcon.style.transform = 'translateY(-50%)';
-    searchIcon.style.color = '#9ca3af';
+    searchIcon.style.color = '#3F58C7';
 
     const searchIconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     searchIconPath.setAttribute('d', 'M12.5 11h-.79l-.28-.27A6.471 6.471 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L17.49 16l-4.99-5zm-6 0C4.01 11 2 8.99 2 6.5S4.01 2 6.5 2 11 4.01 11 6.5 8.99 11 6.5 11z');
@@ -60,7 +60,7 @@
     searchInput.style.width = '100%';
     searchInput.style.padding = '12px 40px 12px 42px';
     searchInput.style.fontSize = '15px';
-    searchInput.style.border = '1px solid #e5e7eb';
+    searchInput.style.border = '2px solid #3F58C7';
     searchInput.style.borderRadius = '8px';
     searchInput.style.outline = 'none';
     searchInput.style.transition = 'all 0.2s';
@@ -267,6 +267,9 @@
           card.style.backgroundColor = '#ffffff';
           card.style.transition = 'all 0.2s';
           card.style.cursor = 'default';
+          card.style.display = 'flex';
+          card.style.gap = '12px';
+          card.style.alignItems = 'flex-start';
 
           // Card hover effect
           card.addEventListener('mouseenter', () => {
@@ -278,22 +281,62 @@
             card.style.transform = 'translateY(0)';
           });
 
-          // Card content
+          // Chain icon/logo
+          const iconContainer = document.createElement('div');
+          iconContainer.style.flexShrink = '0';
+          iconContainer.style.width = '40px';
+          iconContainer.style.height = '40px';
+          iconContainer.style.borderRadius = '8px';
+          iconContainer.style.overflow = 'hidden';
+          iconContainer.style.display = 'flex';
+          iconContainer.style.alignItems = 'center';
+          iconContainer.style.justifyContent = 'center';
+          iconContainer.style.backgroundColor = '#f9fafb';
+
+          // Check if icon is a URL or FontAwesome icon name
+          if (chain.icon.startsWith('http')) {
+            const iconImg = document.createElement('img');
+            iconImg.src = chain.icon;
+            iconImg.alt = chain.name;
+            iconImg.style.width = '32px';
+            iconImg.style.height = '32px';
+            iconImg.style.objectFit = 'contain';
+            iconContainer.appendChild(iconImg);
+          } else {
+            // FontAwesome icon placeholder
+            const iconPlaceholder = document.createElement('div');
+            iconPlaceholder.textContent = chain.name.charAt(0).toUpperCase();
+            iconPlaceholder.style.fontSize = '18px';
+            iconPlaceholder.style.fontWeight = '600';
+            iconPlaceholder.style.color = '#3F58C7';
+            iconContainer.appendChild(iconPlaceholder);
+          }
+
+          // Content container
+          const contentContainer = document.createElement('div');
+          contentContainer.style.flex = '1';
+          contentContainer.style.minWidth = '0';
+
+          // Card title
           const title = document.createElement('h4');
           title.textContent = chain.name;
-          title.style.margin = '0 0 8px 0';
+          title.style.margin = '0 0 4px 0';
           title.style.fontSize = '16px';
           title.style.fontWeight = '600';
           title.style.color = '#111827';
 
+          // Card description
           const description = document.createElement('p');
           description.textContent = chain.description;
           description.style.margin = '0';
           description.style.fontSize = '14px';
           description.style.color = '#6b7280';
+          description.style.lineHeight = '1.5';
 
-          card.appendChild(title);
-          card.appendChild(description);
+          contentContainer.appendChild(title);
+          contentContainer.appendChild(description);
+          card.appendChild(iconContainer);
+          card.appendChild(contentContainer);
           gridContainer.appendChild(card);
         });
 
@@ -309,11 +352,11 @@
 
     searchInput.addEventListener('focus', () => {
       searchInput.style.borderColor = '#3F58C7';
-      searchInput.style.boxShadow = '0 0 0 3px rgba(63, 88, 199, 0.1)';
+      searchInput.style.boxShadow = '0 0 0 3px rgba(63, 88, 199, 0.15)';
     });
 
     searchInput.addEventListener('blur', () => {
-      searchInput.style.borderColor = '#e5e7eb';
+      searchInput.style.borderColor = '#3F58C7';
       searchInput.style.boxShadow = 'none';
     });
 
