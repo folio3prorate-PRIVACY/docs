@@ -3,377 +3,137 @@ title: "Pricing"
 description: "Choose the plan that fits your portfolio tracking needs"
 ---
 
+import { Button } from '/snippets/Button.jsx.mdx';
+
 Transform how you track and analyze your crypto portfolio across 90+ blockchains with Octav's flexible pricing plans.
 
-<CardGroup cols={4}>
-  <Card>
-    <div style={{ padding: '24px 0' }}>
-      <div style={{
-        display: 'inline-block',
-        padding: '4px 12px',
-        backgroundColor: '#f3f4f6',
-        borderRadius: '12px',
-        fontSize: '13px',
-        fontWeight: '500',
-        color: '#6b7280',
-        marginBottom: '16px'
-      }}>
-        Try out
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
+  <div className="border rounded-lg p-6 flex flex-col">
+    <span className="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-medium mb-4 self-start">
+      Try out
+    </span>
+
+    <h3 className="text-3xl font-bold mb-6">Free</h3>
+
+    <div className="text-5xl font-bold mb-8">$0</div>
+
+    <Button href="https://beta.octav.fi/">Launch App</Button>
+
+    <div className="mt-8 space-y-3">
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Portfolio Tracking</span>
       </div>
-
-      <h2 style={{
-        fontSize: '32px',
-        fontWeight: '700',
-        margin: '0 0 32px 0',
-        color: '#111827'
-      }}>
-        Free
-      </h2>
-
-      <div style={{
-        fontSize: '48px',
-        fontWeight: '700',
-        marginBottom: '32px',
-        color: '#111827'
-      }}>
-        $0
-      </div>
-
-      <a
-        href="https://beta.octav.fi/"
-        target="_blank"
-        style={{
-          display: 'block',
-          width: '100%',
-          padding: '12px 24px',
-          backgroundColor: '#ef4444',
-          color: 'white',
-          textAlign: 'center',
-          borderRadius: '8px',
-          fontWeight: '600',
-          fontSize: '15px',
-          textDecoration: 'none',
-          marginBottom: '32px',
-          transition: 'all 0.2s'
-        }}
-        onMouseOver="this.style.backgroundColor='#dc2626'"
-        onMouseOut="this.style.backgroundColor='#ef4444'"
-      >
-        Launch App
-      </a>
-
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-        fontSize: '15px'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Portfolio Tracking</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>All blockchains included</span>
-        </div>
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>All blockchains included</span>
       </div>
     </div>
-  </Card>
+  </div>
 
-  <Card>
-    <div style={{ padding: '24px 0' }}>
-      <div style={{
-        display: 'inline-block',
-        padding: '4px 12px',
-        backgroundColor: '#1f2937',
-        borderRadius: '12px',
-        fontSize: '13px',
-        fontWeight: '500',
-        color: 'white',
-        marginBottom: '16px'
-      }}>
-        Starter plan
+  <div className="border rounded-lg p-6 flex flex-col">
+    <span className="inline-block px-3 py-1 bg-gray-900 text-white rounded-full text-sm font-medium mb-4 self-start">
+      Starter plan
+    </span>
+
+    <h3 className="text-3xl font-bold mb-6">Lite</h3>
+
+    <div className="mb-8">
+      <span className="text-5xl font-bold">$149</span>
+      <span className="text-gray-500">* / Year</span>
+    </div>
+
+    <Button href="https://beta.octav.fi/" variant="secondary">Start Lite</Button>
+
+    <div className="mt-8 space-y-3">
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Daily Portfolio Snapshot</span>
       </div>
-
-      <h2 style={{
-        fontSize: '32px',
-        fontWeight: '700',
-        margin: '0 0 32px 0',
-        color: '#111827'
-      }}>
-        Lite
-      </h2>
-
-      <div style={{ marginBottom: '32px' }}>
-        <span style={{
-          fontSize: '48px',
-          fontWeight: '700',
-          color: '#111827'
-        }}>
-          $149
-        </span>
-        <span style={{
-          fontSize: '18px',
-          color: '#6b7280',
-          fontWeight: '500'
-        }}>
-          *
-        </span>
-        <span style={{
-          fontSize: '16px',
-          color: '#6b7280',
-          marginLeft: '8px'
-        }}>
-          / Year
-        </span>
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Historical Portfolio Timeline</span>
       </div>
-
-      <a
-        href="https://beta.octav.fi/"
-        target="_blank"
-        style={{
-          display: 'block',
-          width: '100%',
-          padding: '12px 24px',
-          backgroundColor: 'white',
-          color: '#111827',
-          textAlign: 'center',
-          borderRadius: '8px',
-          fontWeight: '600',
-          fontSize: '15px',
-          textDecoration: 'none',
-          marginBottom: '32px',
-          border: '1px solid #e5e7eb',
-          transition: 'all 0.2s'
-        }}
-        onMouseOver="this.style.backgroundColor='#f9fafb'"
-        onMouseOut="this.style.backgroundColor='white'"
-      >
-        Start Lite
-      </a>
-
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-        fontSize: '15px'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Daily Portfolio Snapshot</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Historical Portfolio Timeline</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Financial Analytics Widgets</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Asset Exposure Overview</span>
-        </div>
-        <div style={{
-          marginTop: '16px',
-          padding: '12px',
-          backgroundColor: '#f9fafb',
-          borderRadius: '6px',
-          fontSize: '13px',
-          color: '#6b7280'
-        }}>
-          *per address
-        </div>
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Financial Analytics Widgets</span>
+      </div>
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Asset Exposure Overview</span>
       </div>
     </div>
-  </Card>
 
-  <Card>
-    <div style={{ padding: '24px 0' }}>
-      <div style={{
-        display: 'inline-block',
-        padding: '4px 12px',
-        backgroundColor: '#991b1b',
-        borderRadius: '12px',
-        fontSize: '13px',
-        fontWeight: '500',
-        color: 'white',
-        marginBottom: '16px'
-      }}>
-        Growth plan
+    <div className="mt-6 p-3 bg-gray-50 rounded text-sm text-gray-600">
+      *per address
+    </div>
+  </div>
+
+  <div className="border rounded-lg p-6 flex flex-col">
+    <span className="inline-block px-3 py-1 bg-red-900 text-white rounded-full text-sm font-medium mb-4 self-start">
+      Growth plan
+    </span>
+
+    <h3 className="text-3xl font-bold mb-6">Pro</h3>
+
+    <div className="mb-8">
+      <span className="text-5xl font-bold">$499</span>
+      <span className="text-gray-500">* / Year</span>
+    </div>
+
+    <Button href="https://beta.octav.fi/" variant="secondary">Scale up</Button>
+
+    <div className="mt-8 space-y-3">
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Transaction Tagging & Labeling</span>
       </div>
-
-      <h2 style={{
-        fontSize: '32px',
-        fontWeight: '700',
-        margin: '0 0 32px 0',
-        color: '#111827'
-      }}>
-        Pro
-      </h2>
-
-      <div style={{ marginBottom: '32px' }}>
-        <span style={{
-          fontSize: '48px',
-          fontWeight: '700',
-          color: '#111827'
-        }}>
-          $499
-        </span>
-        <span style={{
-          fontSize: '18px',
-          color: '#6b7280',
-          fontWeight: '500'
-        }}>
-          *
-        </span>
-        <span style={{
-          fontSize: '16px',
-          color: '#6b7280',
-          marginLeft: '8px'
-        }}>
-          / Year
-        </span>
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>PDF / CSV Reports</span>
       </div>
-
-      <a
-        href="https://beta.octav.fi/"
-        target="_blank"
-        style={{
-          display: 'block',
-          width: '100%',
-          padding: '12px 24px',
-          backgroundColor: 'white',
-          color: '#111827',
-          textAlign: 'center',
-          borderRadius: '8px',
-          fontWeight: '600',
-          fontSize: '15px',
-          textDecoration: 'none',
-          marginBottom: '32px',
-          border: '1px solid #e5e7eb',
-          transition: 'all 0.2s'
-        }}
-        onMouseOver="this.style.backgroundColor='#f9fafb'"
-        onMouseOut="this.style.backgroundColor='white'"
-      >
-        Scale up
-      </a>
-
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-        fontSize: '15px'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Transaction Tagging & Labeling</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>PDF / CSV Reports</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Asset Variation report</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>P&L Calendar</span>
-        </div>
-        <div style={{
-          marginTop: '16px',
-          padding: '12px',
-          backgroundColor: '#f9fafb',
-          borderRadius: '6px',
-          fontSize: '13px',
-          color: '#6b7280'
-        }}>
-          *per address
-        </div>
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Asset Variation report</span>
+      </div>
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>P&L Calendar</span>
       </div>
     </div>
-  </Card>
 
-  <Card>
-    <div style={{ padding: '24px 0' }}>
-      <div style={{
-        display: 'inline-block',
-        padding: '4px 12px',
-        backgroundColor: '#164e63',
-        borderRadius: '12px',
-        fontSize: '13px',
-        fontWeight: '500',
-        color: 'white',
-        marginBottom: '16px'
-      }}>
-        Enterprise solution
+    <div className="mt-6 p-3 bg-gray-50 rounded text-sm text-gray-600">
+      *per address
+    </div>
+  </div>
+
+  <div className="border rounded-lg p-6 flex flex-col">
+    <span className="inline-block px-3 py-1 bg-cyan-900 text-white rounded-full text-sm font-medium mb-4 self-start">
+      Enterprise solution
+    </span>
+
+    <h3 className="text-3xl font-bold mb-6">Institutional</h3>
+
+    <div className="text-5xl font-bold mb-8">Custom</div>
+
+    <Button href="mailto:info@octav.fi?subject=Institutional%20Plan%20Inquiry" variant="secondary">Contact Sales</Button>
+
+    <div className="mt-8 space-y-3">
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Dedicated Support team</span>
       </div>
-
-      <h2 style={{
-        fontSize: '32px',
-        fontWeight: '700',
-        margin: '0 0 32px 0',
-        color: '#111827'
-      }}>
-        Institutional
-      </h2>
-
-      <div style={{
-        fontSize: '48px',
-        fontWeight: '700',
-        marginBottom: '32px',
-        color: '#111827'
-      }}>
-        Custom
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Advanced integrations</span>
       </div>
-
-      <a
-        href="mailto:info@octav.fi?subject=Institutional%20Plan%20Inquiry"
-        style={{
-          display: 'block',
-          width: '100%',
-          padding: '12px 24px',
-          backgroundColor: 'white',
-          color: '#111827',
-          textAlign: 'center',
-          borderRadius: '8px',
-          fontWeight: '600',
-          fontSize: '15px',
-          textDecoration: 'none',
-          marginBottom: '32px',
-          border: '1px solid #e5e7eb',
-          transition: 'all 0.2s'
-        }}
-        onMouseOver="this.style.backgroundColor='#f9fafb'"
-        onMouseOut="this.style.backgroundColor='white'"
-      >
-        Contact Sales
-      </a>
-
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-        fontSize: '15px'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Dedicated Support team</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Advanced integrations</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-          <span style={{ color: '#10b981', fontSize: '18px', flexShrink: '0' }}>✓</span>
-          <span style={{ color: '#4b5563' }}>Custom development</span>
-        </div>
+      <div className="flex items-start gap-2">
+        <span className="text-green-500 text-lg">✓</span>
+        <span>Custom development</span>
       </div>
     </div>
-  </Card>
-</CardGroup>
+  </div>
+</div>
 
 ---
 
