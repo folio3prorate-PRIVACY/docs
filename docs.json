@@ -143,6 +143,10 @@
             ]
           },
           {
+            "group": "Playground",
+            "openapi": "openapi.json"
+          },
+          {
             "group": "AI Development",
             "pages": [
               "api/ai-development/overview",

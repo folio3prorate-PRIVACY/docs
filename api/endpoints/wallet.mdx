@@ -1,7 +1,6 @@
 ---
 title: "Wallet"
 description: "Get wallet balances and token holdings across chains"
-openapi: "openapi.json GET /wallet"
 ---
 
 Retrieve token balances held directly in wallet addresses, excluding DeFi protocol positions. This endpoint shows only assets in the wallet's custody across supported blockchains.
@@ -11,27 +10,21 @@ Retrieve token balances held directly in wallet addresses, excluding DeFi protoc
 </Info>
 
 <Note>
-  **Interactive Playground:** Enter your API key in the "Authorization" field below to test this endpoint directly. Get your API key at [data.octav.fi](https://data.octav.fi/)
+  **Interactive Playground:** Test this endpoint in the [API Playground](/api-reference/wallet). Get your API key at [data.octav.fi](https://data.octav.fi/)
 </Note>
 
 ---
-
 ## Endpoint
-
 ```bash
 GET https://api.octav.fi/v1/wallet
 ```
-
 ### Parameters
-
 <ParamField query="addresses" type="string" required>
   Comma-separated list of EVM or Solana wallet addresses
-
   ```
   addresses=0xddda947f31da53d8f9b05ab5a0bb07713c256e35
   ```
 </ParamField>
-
 ---
 
 ## Example
@@ -91,58 +84,43 @@ console.log(`Total wallet value: $${wallet.networth}`);
 </CodeGroup>
 
 ---
-
 ## Response
-
 Returns an array of portfolio objects containing only wallet holdings. The structure follows the same format as the [Portfolio endpoint](/api/endpoints/portfolio), but filtered to show only the `wallet` protocol.
-
 ### Top-Level Fields
-
 <ResponseField name="address" type="string">
   The wallet address
 </ResponseField>
-
 <ResponseField name="networth" type="string">
   Total value of all wallet holdings in USD
 </ResponseField>
-
 <ResponseField name="cashBalance" type="string">
   Cash balance in USD (typically "0" for wallet-only view)
 </ResponseField>
-
 <ResponseField name="closedPnl" type="string">
   Realized profit/loss (if available)
 </ResponseField>
-
 <ResponseField name="openPnl" type="string">
   Unrealized profit/loss (if available)
 </ResponseField>
-
 <ResponseField name="fees" type="string">
   Total transaction fees in wei
 </ResponseField>
-
 <ResponseField name="feesFiat" type="string">
   Total transaction fees in USD
 </ResponseField>
-
 <ResponseField name="lastUpdated" type="string">
   Last sync timestamp (milliseconds since epoch)
 </ResponseField>
-
 <ResponseField name="assetByProtocols" type="object">
   Assets organized by protocol - contains only the `wallet` key
-
   The `wallet` protocol contains:
   - `name`: "Wallet"
   - `key`: "wallet"
   - `value`: Total USD value
   - `chains`: Holdings organized by blockchain
 </ResponseField>
-
 <ResponseField name="chains" type="object">
   Chain-level summary of wallet holdings
-
   Each chain contains:
   - `key`: Chain identifier
   - `name`: Chain display name
@@ -150,43 +128,32 @@ Returns an array of portfolio objects containing only wallet holdings. The struc
   - `chainId`: Numeric chain ID
   - `valuePercentile`: Percentage of total portfolio
 </ResponseField>
-
 ### Asset Fields
-
 Each token asset includes:
-
 <ResponseField name="balance" type="string">
   Token balance (in token units)
 </ResponseField>
-
 <ResponseField name="symbol" type="string">
   Token symbol (e.g., "eth", "uni")
 </ResponseField>
-
 <ResponseField name="name" type="string">
   Token full name
 </ResponseField>
-
 <ResponseField name="value" type="string">
   USD value of holding
 </ResponseField>
-
 <ResponseField name="price" type="string">
   Current token price in USD
 </ResponseField>
-
 <ResponseField name="contract" type="string">
   Token contract address (0x000...000 for native tokens)
 </ResponseField>
-
 <ResponseField name="chainKey" type="string">
   Blockchain identifier (e.g., "ethereum", "arbitrum")
 </ResponseField>
-
 <ResponseField name="decimal" type="string">
   Token decimals
 </ResponseField>
-
 ---
 
 ## Example Response
@@ -267,13 +234,10 @@ Each token asset includes:
 ```
 
 ---
-
 ## Use Cases
-
 <Tabs>
   <Tab title="List All Tokens" icon="list">
     Get all tokens in a wallet:
-
     ```javascript
     async function listWalletTokens(address) {
       const response = await fetch(
@@ -282,16 +246,12 @@ Each token asset includes:
           headers: { 'Authorization': `Bearer ${apiKey}` }
         }
       );
-
       const [wallet] = await response.json();
       const walletProtocol = wallet.assetByProtocols.wallet;
-
       console.log(`Total Value: $${parseFloat(wallet.networth).toFixed(2)}\n`);
-
       // Iterate through each chain
       Object.values(walletProtocol.chains).forEach(chain => {
         console.log(`\n${chain.name}:`);
-
         const assets = chain.protocolPositions.WALLET.assets;
         assets.forEach(asset => {
           console.log(`  ${asset.symbol.toUpperCase()}: ${parseFloat(asset.balance).toFixed(4)} ($${parseFloat(asset.value).toFixed(2)})`);
@@ -300,10 +260,8 @@ Each token asset includes:
     }
     ```
   </Tab>
-
   <Tab title="Calculate Holdings" icon="calculator">
     Calculate holdings by chain:
-
     ```javascript
     async function calculateHoldingsByChain(address) {
       const response = await fetch(
@@ -312,10 +270,8 @@ Each token asset includes:
           headers: { 'Authorization': `Bearer ${apiKey}` }
         }
       );
-
       const [wallet] = await response.json();
       const holdingsByChain = {};
-
       Object.entries(wallet.chains).forEach(([chainKey, chain]) => {
         holdingsByChain[chain.name] = {
           value: parseFloat(chain.value),
@@ -323,18 +279,14 @@ Each token asset includes:
           chainId: chain.chainId
         };
       });
-
       return holdingsByChain;
     }
-
     const holdings = await calculateHoldingsByChain(address);
     console.log('Holdings by Chain:', holdings);
     ```
   </Tab>
-
   <Tab title="Filter by Value" icon="filter">
     Show only tokens above a value threshold:
-
     ```javascript
     async function getHighValueTokens(address, minValue = 10) {
       const response = await fetch(
@@ -343,15 +295,11 @@ Each token asset includes:
           headers: { 'Authorization': `Bearer ${apiKey}` }
         }
       );
-
       const [wallet] = await response.json();
       const highValueTokens = [];
-
       const walletProtocol = wallet.assetByProtocols.wallet;
-
       Object.values(walletProtocol.chains).forEach(chain => {
         const assets = chain.protocolPositions.WALLET.assets;
-
         assets.forEach(asset => {
           const value = parseFloat(asset.value);
           if (value >= minValue) {
@@ -365,18 +313,14 @@ Each token asset includes:
           }
         });
       });
-
       return highValueTokens.sort((a, b) => b.value - a.value);
     }
-
     const tokens = await getHighValueTokens(address, 50);
     console.log(`Tokens worth $50+: ${tokens.length}`);
     ```
   </Tab>
-
   <Tab title="Track Fees" icon="coins">
     Monitor transaction fees:
-
     ```javascript
     async function getWalletFees(address) {
       const response = await fetch(
@@ -385,23 +329,19 @@ Each token asset includes:
           headers: { 'Authorization': `Bearer ${apiKey}` }
         }
       );
-
       const [wallet] = await response.json();
-
       return {
         feesWei: wallet.fees,
         feesUSD: parseFloat(wallet.feesFiat),
         lastUpdated: new Date(parseInt(wallet.lastUpdated))
       };
     }
-
     const fees = await getWalletFees(address);
     console.log(`Total fees paid: $${fees.feesUSD.toFixed(2)}`);
     console.log(`Last updated: ${fees.lastUpdated.toLocaleString()}`);
     ```
   </Tab>
 </Tabs>
-
 ---
 
 ## Comparison: Wallet vs Portfolio
@@ -452,64 +392,48 @@ Each token asset includes:
 </AccordionGroup>
 
 ---
-
 ## Best Practices
-
 <AccordionGroup>
   <Accordion title="Handling Multiple Chains" icon="layer-group">
     Wallets can hold assets on multiple chains:
-
     ```javascript
     const walletProtocol = wallet.assetByProtocols.wallet;
     const chainCount = Object.keys(walletProtocol.chains).length;
-
     console.log(`Assets on ${chainCount} chains`);
-
     // Process each chain
     Object.entries(walletProtocol.chains).forEach(([key, chain]) => {
       console.log(`${chain.name}: $${parseFloat(chain.value).toFixed(2)}`);
     });
     ```
   </Accordion>
-
   <Accordion title="Native Token Detection" icon="coins">
     Native tokens (ETH, MATIC, etc.) have special contract address:
-
     ```javascript
     function isNativeToken(asset) {
       return asset.contract === '0x0000000000000000000000000000000000000000';
     }
-
     const assets = chain.protocolPositions.WALLET.assets;
     const nativeToken = assets.find(isNativeToken);
-
     if (nativeToken) {
       console.log(`Native balance: ${nativeToken.balance} ${nativeToken.symbol}`);
     }
     ```
   </Accordion>
-
   <Accordion title="Dust Filter" icon="broom">
     Filter out very small token amounts (dust):
-
     ```javascript
     const MIN_DUST_VALUE = 0.01; // $0.01
-
     const significantTokens = assets.filter(asset => {
       return parseFloat(asset.value) > MIN_DUST_VALUE;
     });
-
     console.log(`${significantTokens.length} tokens above dust threshold`);
     ```
   </Accordion>
-
   <Accordion title="Price Formatting" icon="dollar-sign">
     Handle scientific notation in prices:
-
     ```javascript
     function formatPrice(priceString) {
       const price = parseFloat(priceString);
-
       if (price < 0.01) {
         // Use scientific notation for very small prices
         return price.toExponential(4);
@@ -519,13 +443,11 @@ Each token asset includes:
         return price.toFixed(2);
       }
     }
-
     console.log(formatPrice("1.0668e-8")); // "1.0668e-08"
     console.log(formatPrice("3442.76")); // "3442.76"
     ```
   </Accordion>
 </AccordionGroup>
-
 ---
 
 ## Common Patterns
@@ -619,22 +541,17 @@ Each token asset includes:
 </AccordionGroup>
 
 ---
-
 ## Related Endpoints
-
 <CardGroup cols={2}>
   <Card title="Portfolio" icon="wallet" href="/api/endpoints/portfolio">
     Complete portfolio including DeFi positions
   </Card>
-
   <Card title="Transactions" icon="receipt" href="/api/endpoints/transactions">
     Transaction history for wallet
   </Card>
-
   <Card title="Token Overview" icon="coins" href="/api/endpoints/token-overview">
     Detailed token breakdown (PRO)
   </Card>
-
   <Card title="Airdrop" icon="gift" href="/api/endpoints/airdrop">
     Check claimable airdrops
   </Card>

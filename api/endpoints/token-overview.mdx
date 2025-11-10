@@ -1,7 +1,6 @@
 ---
 title: "Token Overview"
 description: "Get detailed token breakdown across wallet and protocol positions"
-openapi: "openapi.json GET /token-overview"
 ---
 
 Retrieve a comprehensive view of all tokens owned by an address, including distribution across wallet holdings and DeFi protocol positions.
@@ -15,26 +14,20 @@ Retrieve a comprehensive view of all tokens owned by an address, including distr
 </Info>
 
 <Note>
-  **Interactive Playground:** Enter your API key in the "Authorization" field below to test this endpoint directly. Get your API key at [data.octav.fi](https://data.octav.fi/)
+  **Interactive Playground:** Test this endpoint in the [API Playground](/api-reference/token-overview). Get your API key at [data.octav.fi](https://data.octav.fi/)
 </Note>
 
 ---
-
 ## Endpoint
-
 <CodeGroup>
-
 ```bash Request
 GET https://api.octav.fi/v1/token-overview
 ```
-
 ```bash Example
 curl -X GET "https://api.octav.fi/v1/token-overview?addresses=0x6426af179aabebe47666f345d69fd9079673f6cd&date=2024-11-01" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
-
 </CodeGroup>
-
 ---
 
 ## Parameters
@@ -62,42 +55,31 @@ curl -X GET "https://api.octav.fi/v1/token-overview?addresses=0x6426af179aabebe4
 </ParamField>
 
 ---
-
 ## Response
-
 ### Token Object
-
 <ResponseField name="image" type="string">
   Token logo URL
 </ResponseField>
-
 <ResponseField name="symbol" type="string">
   Token ticker symbol (e.g., "ETH", "USDC")
 </ResponseField>
-
 <ResponseField name="name" type="string">
   Full token name
 </ResponseField>
-
 <ResponseField name="price" type="string">
   Token price at the specified date
 </ResponseField>
-
 <ResponseField name="balance" type="string">
   Total quantity held across all positions
 </ResponseField>
-
 <ResponseField name="value" type="string">
   Total value in USD (balance � price)
 </ResponseField>
-
 <ResponseField name="percentage" type="string">
   Percentage of total portfolio value
 </ResponseField>
-
 <ResponseField name="protocolsDetailed" type="array">
   Breakdown of token distribution across protocols
-
   Each entry contains:
   - `key`: Protocol identifier
   - `name`: Protocol display name
@@ -105,7 +87,6 @@ curl -X GET "https://api.octav.fi/v1/token-overview?addresses=0x6426af179aabebe4
   - `balance`: Quantity held in this protocol
   - `image`: Protocol logo URL
 </ResponseField>
-
 ---
 
 ## Example Request
@@ -206,11 +187,8 @@ tokens.slice(0, 5).forEach(token => {
 </CodeGroup>
 
 ---
-
 ## Example Response
-
 <Accordion title="View Full Response" icon="code">
-
 ```json
 [
   {
@@ -290,9 +268,7 @@ tokens.slice(0, 5).forEach(token => {
   }
 ]
 ```
-
 </Accordion>
-
 ---
 
 ## Use Cases
@@ -496,21 +472,15 @@ tokens.slice(0, 5).forEach(token => {
 </Tabs>
 
 ---
-
 ## Historical Analysis
-
 The Token Overview endpoint is particularly powerful when combined with historical portfolio subscriptions:
-
 <Steps>
   <Step title="Subscribe to Address" icon="bell">
     First, subscribe to the address for historical snapshots
-
     See [Historical Portfolio](/api/endpoints/historical-portfolio) for details
   </Step>
-
   <Step title="Query Multiple Dates" icon="calendar">
     Retrieve token overviews for different dates to track changes
-
     ```javascript
     const dates = ['2024-09-01', '2024-10-01', '2024-11-01'];
     const snapshots = await Promise.all(
@@ -523,17 +493,14 @@ The Token Overview endpoint is particularly powerful when combined with historic
     );
     ```
   </Step>
-
   <Step title="Analyze Trends" icon="chart-line">
     Track how token allocation changes over time
-
     - New tokens added
     - Tokens sold or removed
     - Balance changes
     - Protocol migration patterns
   </Step>
 </Steps>
-
 ---
 
 ## Error Responses
@@ -596,22 +563,17 @@ The Token Overview endpoint is particularly powerful when combined with historic
 </AccordionGroup>
 
 ---
-
 ## Related Endpoints
-
 <CardGroup cols={2}>
   <Card title="Portfolio" icon="wallet" href="/api/endpoints/portfolio">
     Get current portfolio overview
   </Card>
-
   <Card title="Historical Portfolio" icon="clock" href="/api/endpoints/historical-portfolio">
     View full portfolio at specific dates
   </Card>
-
   <Card title="Transactions" icon="receipt" href="/api/endpoints/transactions">
     Track token movements over time
   </Card>
-
   <Card title="Pricing" icon="credit-card" href="/api/pricing">
     Learn about PRO subscription
   </Card>

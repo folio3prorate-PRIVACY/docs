@@ -1,7 +1,6 @@
 ---
 title: "Historical Portfolio"
 description: "Retrieve portfolio snapshots from specific dates"
-openapi: "openapi.json GET /historical-portfolio"
 ---
 
 Access historical portfolio data for subscribed addresses, enabling time-based analysis and portfolio performance tracking.
@@ -15,27 +14,21 @@ Access historical portfolio data for subscribed addresses, enabling time-based a
 </Info>
 
 <Note>
-  **Interactive Playground:** Enter your API key in the "Authorization" field below to test this endpoint directly. Get your API key at [data.octav.fi](https://data.octav.fi/)
+  **Interactive Playground:** Test this endpoint in the [API Playground](/api-reference/historical-portfolio). Get your API key at [data.octav.fi](https://data.octav.fi/)
 </Note>
 
 ---
-
 ## Endpoint
-
 ```bash
 GET https://api.octav.fi/v1/historical
 ```
-
 ### Parameters
-
 <ParamField query="addresses" type="string" required>
   EVM or SOL wallet address
 </ParamField>
-
 <ParamField query="date" type="string" required>
   Date in YYYY-MM-DD format (e.g., `2024-11-01`)
 </ParamField>
-
 ---
 
 ## Example
@@ -69,11 +62,8 @@ print(f"Net worth: ${portfolio['networth']}")
 </CodeGroup>
 
 ---
-
 ## Response
-
 Returns the same structure as the [Portfolio endpoint](/api/endpoints/portfolio), but with data as it existed on the specified date.
-
 ---
 
 ## Use Cases
@@ -115,17 +105,12 @@ Returns the same structure as the [Portfolio endpoint](/api/endpoints/portfolio)
 </Tabs>
 
 ---
-
 ## Subscription
-
 To enable historical tracking:
-
 1. Login to [data.octav.fi](https://data.octav.fi/)
 2. Navigate to Historical Tracking
 3. Add addresses for daily snapshots
-
 Or contact support via [Discord](https://discord.com/invite/qvcknAa73A)
-
 ---
 
 ## Related Endpoints

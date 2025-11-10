@@ -1,7 +1,6 @@
 ---
 title: "Airdrop"
 description: "Check claimable airdrops for Solana addresses"
-openapi: "openapi.json GET /airdrop"
 ---
 
 Retrieve information about claimable airdrops for a Solana address, including token details, unlock dates, and claim links.
@@ -15,27 +14,21 @@ Retrieve information about claimable airdrops for a Solana address, including to
 </Warning>
 
 <Note>
-  **Interactive Playground:** Enter your API key in the "Authorization" field below to test this endpoint directly. Get your API key at [data.octav.fi](https://data.octav.fi/)
+  **Interactive Playground:** Test this endpoint in the [API Playground](/api-reference/airdrop). Get your API key at [data.octav.fi](https://data.octav.fi/)
 </Note>
 
 ---
-
 ## Endpoint
-
 ```bash
 GET https://api.octav.fi/v1/airdrop
 ```
-
 ### Parameters
-
 <ParamField query="addresses" type="string" required>
   Solana wallet address to check for airdrops
-
   ```
   addresses=J8fo6fHGTD4egvuFE4RRQaBipfcHy5F5YVCcZmmZG6gR
   ```
 </ParamField>
-
 ---
 
 ## Example
@@ -95,86 +88,63 @@ console.log(`Total airdrop value: $${airdrops[0].networth}`);
 </CodeGroup>
 
 ---
-
 ## Response
-
 Returns an array of portfolio objects containing airdrop data. The structure follows the same format as the [Portfolio endpoint](/api/endpoints/portfolio), but filtered to show only airdrop positions.
-
 ### Top-Level Fields
-
 <ResponseField name="address" type="string">
   The Solana wallet address
 </ResponseField>
-
 <ResponseField name="networth" type="string">
   Total value of claimable airdrops in USD
 </ResponseField>
-
 <ResponseField name="conversionRates" type="object">
   Current price conversion rates for major tokens (SOL, ETH, BTC)
 </ResponseField>
-
 <ResponseField name="lastUpdated" type="string">
   Timestamp of last data update (milliseconds since epoch)
 </ResponseField>
-
 <ResponseField name="assetByProtocols" type="object">
   Airdrop positions organized by protocol
-
   Each protocol contains an `AIRDROP` key with:
   - `protocolPositions[]`: Array of airdrop positions
   - `totalValue`: Total USD value of airdrops from this protocol
   - `unlockAt`: Unix timestamp when tokens unlock
 </ResponseField>
-
 <ResponseField name="chains" type="object">
   Chain-level summary (currently Solana only)
 </ResponseField>
-
 ### Airdrop Asset Fields
-
 Each airdrop asset includes:
-
 <ResponseField name="balance" type="string">
   Amount of tokens claimable
 </ResponseField>
-
 <ResponseField name="symbol" type="string">
   Token symbol (e.g., "sns")
 </ResponseField>
-
 <ResponseField name="name" type="string">
   Token full name
 </ResponseField>
-
 <ResponseField name="value" type="string">
   USD value of the airdrop
 </ResponseField>
-
 <ResponseField name="price" type="string">
   Current token price in USD
 </ResponseField>
-
 <ResponseField name="isClaimable" type="boolean">
   Whether the airdrop is currently claimable
 </ResponseField>
-
 <ResponseField name="link" type="string">
   URL to claim the airdrop
 </ResponseField>
-
 <ResponseField name="unlockAt" type="string">
   Unix timestamp when tokens become available
 </ResponseField>
-
 <ResponseField name="contract" type="string">
   Token contract address
 </ResponseField>
-
 <ResponseField name="explorerUrl" type="string">
   Link to view token on blockchain explorer
 </ResponseField>
-
 ---
 
 ## Example Response
@@ -244,13 +214,10 @@ Each airdrop asset includes:
 ```
 
 ---
-
 ## Use Cases
-
 <Tabs>
   <Tab title="Check All Airdrops" icon="gift">
     Get all claimable airdrops for an address:
-
     ```javascript
     async function checkAirdrops(address) {
       const response = await fetch(
@@ -259,16 +226,12 @@ Each airdrop asset includes:
           headers: { 'Authorization': `Bearer ${apiKey}` }
         }
       );
-
       const [data] = await response.json();
-
       console.log(`Total airdrop value: $${parseFloat(data.networth).toFixed(2)}`);
-
       // Iterate through all protocols
       Object.values(data.assetByProtocols).forEach(protocol => {
         Object.values(protocol.chains).forEach(chain => {
           const airdropData = chain.protocolPositions.AIRDROP;
-
           if (airdropData) {
             airdropData.protocolPositions.forEach(position => {
               position.assets.forEach(asset => {
@@ -289,10 +252,8 @@ Each airdrop asset includes:
     }
     ```
   </Tab>
-
   <Tab title="Filter Claimable" icon="hand-pointer">
     Show only currently claimable airdrops:
-
     ```javascript
     async function getClaimableAirdrops(address) {
       const response = await fetch(
@@ -301,14 +262,11 @@ Each airdrop asset includes:
           headers: { 'Authorization': `Bearer ${apiKey}` }
         }
       );
-
       const [data] = await response.json();
       const claimable = [];
-
       Object.values(data.assetByProtocols).forEach(protocol => {
         Object.values(protocol.chains).forEach(chain => {
           const airdropData = chain.protocolPositions.AIRDROP;
-
           if (airdropData) {
             airdropData.protocolPositions.forEach(position => {
               position.assets.forEach(asset => {
@@ -326,18 +284,14 @@ Each airdrop asset includes:
           }
         });
       });
-
       return claimable;
     }
-
     const claimable = await getClaimableAirdrops(address);
     console.log(`${claimable.length} airdrops ready to claim`);
     ```
   </Tab>
-
   <Tab title="Track Value" icon="chart-line">
     Monitor total airdrop value over time:
-
     ```javascript
     async function trackAirdropValue(address) {
       const response = await fetch(
@@ -346,33 +300,26 @@ Each airdrop asset includes:
           headers: { 'Authorization': `Bearer ${apiKey}` }
         }
       );
-
       const [data] = await response.json();
       const totalValue = parseFloat(data.networth);
-
       // Calculate value by protocol
       const valueByProtocol = {};
-
       Object.entries(data.assetByProtocols).forEach(([key, protocol]) => {
         valueByProtocol[protocol.name] = parseFloat(protocol.value);
       });
-
       return {
         totalValue,
         valueByProtocol,
         timestamp: new Date(parseInt(data.lastUpdated))
       };
     }
-
     const snapshot = await trackAirdropValue(address);
     console.log(`Total: $${snapshot.totalValue.toFixed(2)}`);
     console.log('By Protocol:', snapshot.valueByProtocol);
     ```
   </Tab>
-
   <Tab title="Upcoming Unlocks" icon="calendar">
     Find airdrops with upcoming unlock dates:
-
     ```javascript
     async function getUpcomingUnlocks(address, daysAhead = 30) {
       const response = await fetch(
@@ -381,21 +328,17 @@ Each airdrop asset includes:
           headers: { 'Authorization': `Bearer ${apiKey}` }
         }
       );
-
       const [data] = await response.json();
       const now = Date.now() / 1000;
       const futureDate = now + (daysAhead * 24 * 60 * 60);
       const upcoming = [];
-
       Object.values(data.assetByProtocols).forEach(protocol => {
         Object.values(protocol.chains).forEach(chain => {
           const airdropData = chain.protocolPositions.AIRDROP;
-
           if (airdropData) {
             airdropData.protocolPositions.forEach(position => {
               position.assets.forEach(asset => {
                 const unlockTime = parseInt(asset.unlockAt);
-
                 if (unlockTime > now && unlockTime <= futureDate) {
                   upcoming.push({
                     name: asset.name,
@@ -410,10 +353,8 @@ Each airdrop asset includes:
           }
         });
       });
-
       return upcoming.sort((a, b) => a.unlockDate - b.unlockDate);
     }
-
     const upcoming = await getUpcomingUnlocks(address, 30);
     upcoming.forEach(airdrop => {
       console.log(`${airdrop.symbol} unlocks in ${airdrop.daysUntilUnlock} days`);
@@ -421,7 +362,6 @@ Each airdrop asset includes:
     ```
   </Tab>
 </Tabs>
-
 ---
 
 ## Best Practices
@@ -469,42 +409,32 @@ Each airdrop asset includes:
 </AccordionGroup>
 
 ---
-
 ## Response Structure Notes
-
 <AccordionGroup>
   <Accordion title="Portfolio Format" icon="layer-group">
     The airdrop endpoint returns data in the same structure as the Portfolio endpoint:
-
     - Follows the complete portfolio schema
     - Filtered to show only AIRDROP protocol positions
     - Includes all standard fields (chains, assets, protocols)
     - Same nested structure for consistency
   </Accordion>
-
   <Accordion title="AIRDROP Key" icon="key">
     Airdrop positions are identified by the `AIRDROP` key:
-
     ```javascript
     const airdropPositions = chain.protocolPositions.AIRDROP;
     ```
-
     This key exists within the protocol's chain data
   </Accordion>
-
   <Accordion title="Unix Timestamps" icon="calendar">
     All time fields use Unix timestamps (seconds since epoch):
-
     - `unlockAt`: When tokens become available
     - `lastUpdated`: When data was last synced (milliseconds)
-
     Convert to JavaScript Date:
     ```javascript
     const date = new Date(parseInt(unlockAt) * 1000);
     ```
   </Accordion>
 </AccordionGroup>
-
 ---
 
 ## Related Endpoints

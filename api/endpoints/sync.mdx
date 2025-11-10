@@ -1,7 +1,6 @@
 ---
 title: "Sync Transactions"
 description: "Manually trigger transaction synchronization for an address"
-openapi: "openapi.json POST /sync"
 ---
 
 Trigger transaction synchronization for an address, bypassing the 10-minute cache to force an immediate update.
@@ -15,29 +14,23 @@ Trigger transaction synchronization for an address, bypassing the 10-minute cach
 </Warning>
 
 <Note>
-  **Interactive Playground:** Enter your API key in the "Authorization" field below to test this endpoint directly. Get your API key at [data.octav.fi](https://data.octav.fi/)
+  **Interactive Playground:** Test this endpoint in the [API Playground](/api-reference/sync). Get your API key at [data.octav.fi](https://data.octav.fi/)
 </Note>
 
 ---
-
 ## Endpoint
-
 ```bash
 POST https://api.octav.fi/v1/sync-transactions
 ```
-
 ### Request Body
-
 <ParamField body="addresses" type="array" required>
   Array of addresses to sync (currently supports 1 address)
-
   ```json
   {
     "addresses": ["0x6426af179aabebe47666f345d69fd9079673f6cd"]
   }
   ```
 </ParamField>
-
 ---
 
 ## Example
@@ -82,14 +75,10 @@ print(response.text)  # "Address is syncing" or "Address already syncing"
 </CodeGroup>
 
 ---
-
 ## Response
-
 Returns a string indicating sync status:
-
 - `"Address is syncing"` - Synchronization started
 - `"Address already syncing"` - Address is currently syncing
-
 ---
 
 ## Cost Breakdown
@@ -134,13 +123,10 @@ Returns a string indicating sync status:
 </Tabs>
 
 ---
-
 ## Use Cases
-
 <Tabs>
   <Tab title="Force Update" icon="bolt">
     Force immediate transaction sync:
-
     ```javascript
     async function forceSync(address) {
       const response = await fetch(
@@ -154,27 +140,21 @@ Returns a string indicating sync status:
           body: JSON.stringify({ addresses: [address] })
         }
       );
-
       const status = await response.text();
       console.log(`Sync status: ${status}`);
-
       // Wait for sync to complete
       await new Promise(resolve => setTimeout(resolve, 5000));
-
       // Fetch updated transactions
       const txResponse = await fetch(
         `https://api.octav.fi/v1/transactions?addresses=${address}&limit=10&offset=0&sort=DESC`,
         { headers: { 'Authorization': `Bearer ${apiKey}` } }
       );
-
       return await txResponse.json();
     }
     ```
   </Tab>
-
   <Tab title="Check Before Sync" icon="magnifying-glass">
     Check status before syncing:
-
     ```javascript
     async function smartSync(address) {
       // Check current status
@@ -182,14 +162,11 @@ Returns a string indicating sync status:
         `https://api.octav.fi/v1/status?addresses=${address}`,
         { headers: { 'Authorization': `Bearer ${apiKey}` } }
       );
-
       const [status] = await statusResponse.json();
-
       // Check if sync needed
       const lastSync = new Date(status.transactionsLastSync);
       const now = new Date();
       const minutesSinceSync = (now - lastSync) / 1000 / 60;
-
       if (minutesSinceSync > 10 && !status.syncInProgress) {
         console.log('Triggering sync...');
         await fetch('https://api.octav.fi/v1/sync-transactions', {
@@ -209,7 +186,6 @@ Returns a string indicating sync status:
     ```
   </Tab>
 </Tabs>
-
 ---
 
 ## Best Practices
@@ -235,14 +211,11 @@ Returns a string indicating sync status:
 </AccordionGroup>
 
 ---
-
 ## Related Endpoints
-
 <CardGroup cols={2}>
   <Card title="Status" icon="signal" href="/api/endpoints/status">
     Check when last synced
   </Card>
-
   <Card title="Transactions" icon="receipt" href="/api/endpoints/transactions">
     Query synced transactions
   </Card>

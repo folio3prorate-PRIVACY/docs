@@ -1,7 +1,6 @@
 ---
 title: "Credits"
 description: "Check your remaining credit balance"
-openapi: "openapi.json GET /credits"
 ---
 
 Check your remaining API credit balance at any time without consuming credits.
@@ -11,19 +10,15 @@ Check your remaining API credit balance at any time without consuming credits.
 </Info>
 
 <Note>
-  **Interactive Playground:** Enter your API key in the "Authorization" field below to test this endpoint directly. Get your API key at [data.octav.fi](https://data.octav.fi/)
+  **Interactive Playground:** Test this endpoint in the [API Playground](/api-reference/credits). Get your API key at [data.octav.fi](https://data.octav.fi/)
 </Note>
 
 ---
-
 ## Endpoint
-
 ```bash
 GET https://api.octav.fi/v1/credits
 ```
-
 No parameters required.
-
 ---
 
 ## Example
@@ -70,15 +65,11 @@ console.log(`Remaining credits: ${credits}`);
 </CodeGroup>
 
 ---
-
 ## Response
-
 Returns a simple number representing your remaining credits.
-
 ```json
 19033
 ```
-
 ---
 
 ## Use Cases
@@ -273,9 +264,7 @@ Returns a simple number representing your remaining credits.
 </Tabs>
 
 ---
-
 ## Best Practices
-
 <AccordionGroup>
   <Accordion title="Check Regularly" icon="arrows-rotate">
     Since this endpoint is free, check it liberally:
@@ -283,14 +272,12 @@ Returns a simple number representing your remaining credits.
     - In application health checks
     - When displaying usage stats to users
   </Accordion>
-
   <Accordion title="Set Up Alerts" icon="bell">
     Implement automated alerts:
     - Alert at 20% remaining
     - Warning at 10% remaining
     - Critical at 5% remaining
   </Accordion>
-
   <Accordion title="Plan Ahead" icon="calendar">
     Monitor consumption patterns:
     - Track daily usage
@@ -298,7 +285,6 @@ Returns a simple number representing your remaining credits.
     - Purchase credits before running low
   </Accordion>
 </AccordionGroup>
-
 ---
 
 ## Related Endpoints
