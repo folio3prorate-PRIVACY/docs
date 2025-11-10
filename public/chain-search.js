@@ -16,13 +16,13 @@
     let targetHeading = null;
 
     // Find the exact heading with "All Supported Chains" text
-    for (const heading of headings) {
+    // Use forEach to get the LAST match (main content), not first (which might be TOC/nav)
+    headings.forEach(heading => {
       const text = heading.textContent.trim();
       if (text === 'All Supported Chains' || text.startsWith('All Supported Chains')) {
         targetHeading = heading;
-        break; // Take the first match only
       }
-    }
+    });
 
     if (!targetHeading) {
       return;
@@ -387,14 +387,13 @@
       const headings = document.querySelectorAll('h2');
       let hasTargetHeading = false;
 
-      // Check for exact heading match
-      for (const h of headings) {
+      // Check for exact heading match (use forEach to find last match like main function)
+      headings.forEach(h => {
         const text = h.textContent.trim();
         if (text === 'All Supported Chains' || text.startsWith('All Supported Chains')) {
           hasTargetHeading = true;
-          break;
         }
-      }
+      });
 
       if (hasTargetHeading && !document.getElementById('chain-search-container')) {
         initChainSearch();
