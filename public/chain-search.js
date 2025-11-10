@@ -19,12 +19,8 @@
     for (const heading of headings) {
       const text = heading.textContent.trim();
       if (text === 'All Supported Chains' || text.startsWith('All Supported Chains')) {
-        // Verify this is in the main content area, not navigation
-        const parentSection = heading.closest('article, main, [class*="content"]');
-        if (parentSection) {
-          targetHeading = heading;
-          break; // Take the first match only
-        }
+        targetHeading = heading;
+        break; // Take the first match only
       }
     }
 
@@ -391,15 +387,12 @@
       const headings = document.querySelectorAll('h2');
       let hasTargetHeading = false;
 
-      // Check for exact heading match in main content area
+      // Check for exact heading match
       for (const h of headings) {
         const text = h.textContent.trim();
         if (text === 'All Supported Chains' || text.startsWith('All Supported Chains')) {
-          const parentSection = h.closest('article, main, [class*="content"]');
-          if (parentSection) {
-            hasTargetHeading = true;
-            break;
-          }
+          hasTargetHeading = true;
+          break;
         }
       }
 
