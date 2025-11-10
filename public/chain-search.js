@@ -56,7 +56,7 @@
     // Create search input
     const searchInput = document.createElement('input');
     searchInput.type = 'text';
-    searchInput.placeholder = 'Search blockchains (e.g., Ethereum, Layer 2, gaming)...';
+    searchInput.placeholder = 'Search Supported Blockchains (e.g. Ethereum, Base)...';
     searchInput.style.width = '100%';
     searchInput.style.padding = '12px 40px 12px 42px';
     searchInput.style.fontSize = '15px';
@@ -99,12 +99,8 @@
     // Insert after the heading
     targetHeading.parentNode.insertBefore(searchContainer, targetHeading.nextSibling);
 
-    // Store original tab state
-    let originalTabState = {
-      tabList: null,
-      tabPanels: [],
-      headings: []
-    };
+    // Find the "Major Blockchains" section to exclude from search
+    const majorBlockchainsSection = targetHeading.previousElementSibling;
 
     // Search functionality
     function performSearch() {
@@ -113,11 +109,17 @@
       // Show/hide clear button
       clearButton.style.display = searchValue ? 'flex' : 'none';
 
-      // Get all card elements
-      const allCards = document.querySelectorAll('a[class*="Card"], div[class*="card-"]');
+      // Get all cards within the tabs section only (not Major Blockchains)
+      const tabsContainer = targetHeading.nextElementSibling;
+      if (!tabsContainer) {
+        return;
+      }
+
+      const tabCards = tabsContainer.querySelectorAll('a[class*="Card"], div[class*="card-"]');
       let visibleCount = 0;
 
-      allCards.forEach(card => {
+      // Filter cards within tabs
+      tabCards.forEach(card => {
         const cardText = card.textContent.toLowerCase();
         const shouldShow = searchValue === '' || cardText.includes(searchValue);
 
@@ -129,57 +131,8 @@
         }
       });
 
-      // Handle tab visibility
+      // Show/hide result message
       if (searchValue) {
-        // Store original state if not already stored
-        if (!originalTabState.tabList) {
-          const tabList = document.querySelector('[role="tablist"]');
-          if (tabList) {
-            originalTabState.tabList = {
-              element: tabList,
-              display: tabList.style.display
-            };
-          }
-
-          const tabPanels = document.querySelectorAll('[role="tabpanel"]');
-          tabPanels.forEach(panel => {
-            originalTabState.tabPanels.push({
-              element: panel,
-              display: panel.style.display,
-              hidden: panel.hidden
-            });
-          });
-
-          const h3s = document.querySelectorAll('h3');
-          h3s.forEach(h3 => {
-            if (h3.textContent.match(/Layer|Blockchains|Solutions|Chains|Alternative|Bitcoin|DeFi|Emerging/)) {
-              originalTabState.headings.push({
-                element: h3,
-                display: h3.style.display
-              });
-            }
-          });
-        }
-
-        // Hide tab navigation
-        if (originalTabState.tabList) {
-          originalTabState.tabList.element.style.display = 'none';
-        }
-
-        // Show all tab panels
-        originalTabState.tabPanels.forEach(panelState => {
-          panelState.element.style.display = 'block';
-          panelState.element.hidden = false;
-          panelState.element.style.opacity = '1';
-          panelState.element.style.position = 'relative';
-        });
-
-        // Hide section headings
-        originalTabState.headings.forEach(headingState => {
-          headingState.element.style.display = 'none';
-        });
-
-        // Show result message
         resultMessage.style.display = 'block';
         if (visibleCount > 0) {
           resultMessage.innerHTML = `Found <strong>${visibleCount}</strong> blockchain${visibleCount !== 1 ? 's' : ''} matching "<strong>${searchValue}</strong>"`;
@@ -187,23 +140,6 @@
           resultMessage.innerHTML = `No blockchains found matching "<strong>${searchValue}</strong>"`;
         }
       } else {
-        // Restore original state
-        if (originalTabState.tabList) {
-          originalTabState.tabList.element.style.display = originalTabState.tabList.display;
-        }
-
-        originalTabState.tabPanels.forEach(panelState => {
-          panelState.element.style.display = panelState.display;
-          panelState.element.hidden = panelState.hidden;
-          panelState.element.style.opacity = '';
-          panelState.element.style.position = '';
-        });
-
-        originalTabState.headings.forEach(headingState => {
-          headingState.element.style.display = headingState.display;
-        });
-
-        // Hide result message
         resultMessage.style.display = 'none';
       }
     }
