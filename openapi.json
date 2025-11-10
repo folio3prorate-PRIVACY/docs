@@ -33,7 +33,7 @@
     "/portfolio": {
       "get": {
         "summary": "Portfolio",
-        "description": "Retrieve portfolio holdings across wallets and DeFi protocols.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** data.octav.fi",
+        "description": "Retrieve portfolio holdings across wallets and DeFi protocols.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "getPortfolio",
         "tags": ["Portfolio"],
         "parameters": [
@@ -152,7 +152,7 @@
     "/wallet": {
       "get": {
         "summary": "Wallet",
-        "description": "Get wallet balance and basic information.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** data.octav.fi",
+        "description": "Get wallet balance and basic information.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "getWallet",
         "tags": ["Wallet"],
         "parameters": [
@@ -176,7 +176,7 @@
     "/transactions": {
       "get": {
         "summary": "Transactions",
-        "description": "Get transaction history for wallet addresses.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** data.octav.fi",
+        "description": "Get transaction history for wallet addresses.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "getTransactions",
         "tags": ["Transactions"],
         "parameters": [
@@ -200,7 +200,7 @@
     "/token-overview": {
       "get": {
         "summary": "Token Overview",
-        "description": "Get detailed token breakdown by protocol (PRO only).\n\n**Cost:** 1 credit per call\n\n**Get your API key:** data.octav.fi",
+        "description": "Get detailed token breakdown by protocol (PRO only).\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "getTokenOverview",
         "tags": ["Tokens"],
         "parameters": [
@@ -224,7 +224,7 @@
     "/airdrop": {
       "get": {
         "summary": "Airdrop",
-        "description": "Check airdrop eligibility (Solana only).\n\n**Cost:** 1 credit per call\n\n**Get your API key:** data.octav.fi",
+        "description": "Check airdrop eligibility (Solana only).\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "getAirdrop",
         "tags": ["Airdrops"],
         "parameters": [
@@ -248,7 +248,7 @@
     "/historical-portfolio": {
       "get": {
         "summary": "Historical Portfolio",
-        "description": "View portfolio value at specific dates.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** data.octav.fi",
+        "description": "View portfolio value at specific dates.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "getHistoricalPortfolio",
         "tags": ["Portfolio"],
         "parameters": [
@@ -282,7 +282,7 @@
     "/sync": {
       "post": {
         "summary": "Sync",
-        "description": "Trigger a sync for wallet data.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** data.octav.fi",
+        "description": "Trigger a sync for wallet data.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "syncWallet",
         "tags": ["Sync"],
         "requestBody": {
@@ -312,7 +312,7 @@
     "/status": {
       "get": {
         "summary": "Status",
-        "description": "Check when portfolio was last synced.\n\n**Cost:** Free (0 credits)\n\n**Get your API key:** data.octav.fi",
+        "description": "Check when portfolio was last synced.\n\n**Cost:** Free (0 credits)\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "getStatus",
         "tags": ["Status"],
         "parameters": [
@@ -337,7 +337,7 @@
     "/credits": {
       "get": {
         "summary": "Credits",
-        "description": "Check your API credit balance.\n\n**Cost:** Free (0 credits)\n\n**Get your API key:** data.octav.fi",
+        "description": "Check your API credit balance.\n\n**Cost:** Free (0 credits)\n\n**Get your API key:** [data.octav.fi](https://data.octav.fi)",
         "operationId": "getCredits",
         "tags": ["Credits"],
         "responses": {
