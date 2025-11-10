@@ -177,7 +177,7 @@
     "/transactions": {
       "get": {
         "summary": "Transactions",
-        "description": "Get transaction history for wallet addresses.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
+        "description": "Query transaction history with powerful filtering and search.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
         "operationId": "getTransactions",
         "tags": ["Transactions"],
         "parameters": [
@@ -186,6 +186,127 @@
             "in": "query",
             "required": true,
             "description": "Comma-separated list of wallet addresses",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0x6426af179aabebe47666f345d69fd9079673f6cd"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "description": "Number of transactions per page (1-250, recommended 10-50)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 250
+            },
+            "example": 10
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": true,
+            "description": "Pagination offset (0-based)",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by timestamp (DESC=newest first, ASC=oldest first)",
+            "schema": {
+              "type": "string",
+              "enum": ["DESC", "ASC"],
+              "default": "DESC"
+            }
+          },
+          {
+            "name": "initialSearchText",
+            "in": "query",
+            "required": false,
+            "description": "Full-text search in transaction assets (token symbols, names, addresses)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interactingAddresses",
+            "in": "query",
+            "required": false,
+            "description": "Filter by interacting addresses (comma-separated)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "networks",
+            "in": "query",
+            "required": false,
+            "description": "Filter by blockchain networks (comma-separated chain keys)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "txTypes",
+            "in": "query",
+            "required": false,
+            "description": "Filter by transaction types (comma-separated: SEND, RECEIVE, SWAP, DEPOSIT, WITHDRAW, STAKE, CLAIM, APPROVE)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "protocols",
+            "in": "query",
+            "required": false,
+            "description": "Filter by protocol keys (comma-separated)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hideSpam",
+            "in": "query",
+            "required": false,
+            "description": "Exclude spam transactions",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "description": "Start date in ISO 8601 format",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2024-01-01T00:00:00Z"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "description": "End date in ISO 8601 format",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "example": "2024-12-31T23:59:59Z"
+          },
+          {
+            "name": "tokenId",
+            "in": "query",
+            "required": false,
+            "description": "Filter by NFT token ID",
             "schema": {
               "type": "string"
             }
