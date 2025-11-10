@@ -96,11 +96,126 @@
     searchContainer.appendChild(searchWrapper);
     searchContainer.appendChild(resultMessage);
 
+    // Create results container for search results
+    const resultsContainer = document.createElement('div');
+    resultsContainer.id = 'chain-search-results';
+    resultsContainer.style.display = 'none';
+    resultsContainer.style.marginTop = '24px';
+    resultsContainer.style.marginBottom = '24px';
+
     // Insert after the heading
     targetHeading.parentNode.insertBefore(searchContainer, targetHeading.nextSibling);
+    targetHeading.parentNode.insertBefore(resultsContainer, targetHeading.nextSibling.nextSibling);
 
-    // Find the "Major Blockchains" section to exclude from search
-    const majorBlockchainsSection = targetHeading.previousElementSibling;
+    // Hidden blockchain database
+    const blockchains = [
+      // Ethereum L2s
+      { name: 'Arbitrum', description: 'High-performance L2', icon: 'https://images.octav.fi/chains/arbitrum_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Arbitrum Nova', description: 'Gaming & social L2', icon: 'https://images.octav.fi/chains/arbitrum_nova_icon.png', category: 'Ethereum L2s' },
+      { name: 'Base', description: 'Coinbase L2', icon: 'https://images.octav.fi/chains/base_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Optimism', description: 'OP Stack L2', icon: 'https://images.octav.fi/chains/optimism_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Blast', description: 'Native yield L2', icon: 'https://images.octav.fi/chains/blast_icon.svg', category: 'Ethereum L2s' },
+      { name: 'zkSync Era', description: 'Zero-knowledge L2', icon: 'https://images.octav.fi/chains/zksync_era_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Linea', description: 'ConsenSys zkEVM', icon: 'https://images.octav.fi/chains/linea_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Scroll', description: 'Native zkEVM', icon: 'https://images.octav.fi/chains/scroll_icon.png', category: 'Ethereum L2s' },
+      { name: 'Polygon zkEVM', description: 'Polygon\'s zkEVM', icon: 'https://images.octav.fi/chains/polygon_zkevm_icon.png', category: 'Ethereum L2s' },
+      { name: 'Starknet', description: 'Cairo-based L2', icon: 'https://images.octav.fi/chains/starknet_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Zora', description: 'Creator economy L2', icon: 'https://images.octav.fi/chains/zora_icon.png', category: 'Ethereum L2s' },
+      { name: 'Mode', description: 'DeFi-focused L2', icon: 'https://images.octav.fi/chains/mode_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Mantle', description: 'Modular L2', icon: 'https://images.octav.fi/chains/mantle.svg', category: 'Ethereum L2s' },
+      { name: 'Metis', description: 'Decentralized L2', icon: 'https://images.octav.fi/chains/metis_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Boba', description: 'Hybrid compute L2', icon: 'circle', category: 'Ethereum L2s' },
+      { name: 'Fraxtal', description: 'Frax\'s L2', icon: 'https://images.octav.fi/chains/fraxtal_icon.svg', category: 'Ethereum L2s' },
+      { name: 'Taiko', description: 'Based rollup', icon: 'https://images.octav.fi/chains/taiko_icon.png', category: 'Ethereum L2s' },
+      { name: 'X Layer', description: 'OKX L2', icon: 'x', category: 'Ethereum L2s' },
+      { name: 'opBNB', description: 'BSC\'s L2', icon: 'https://images.octav.fi/chains/op_bnb_icon.png', category: 'Ethereum L2s' },
+      { name: 'Unichain', description: 'Uniswap\'s L2', icon: 'https://images.octav.fi/chains/unichain_icon.png', category: 'Ethereum L2s' },
+      { name: 'Sonic', description: 'Fast transactions', icon: 'https://images.octav.fi/chains/sonic_icon.png', category: 'Ethereum L2s' },
+      { name: 'Abstract', description: 'Consumer-focused L2', icon: 'https://images.octav.fi/chains/abstract_icon.png', category: 'Ethereum L2s' },
+      { name: 'Lens', description: 'Social L2', icon: 'https://images.octav.fi/chains/lens_icon.png', category: 'Ethereum L2s' },
+      { name: 'Cyber', description: 'Social network L2', icon: 'robot', category: 'Ethereum L2s' },
+      { name: 'ApeChain', description: 'ApeCoin L2', icon: 'monkey', category: 'Ethereum L2s' },
+      { name: 'Ink', description: 'Kraken\'s L2', icon: 'https://images.octav.fi/chains/ink_icon.png', category: 'Ethereum L2s' },
+      { name: 'Sonieum', description: 'Sony\'s L2', icon: 'https://images.octav.fi/chains/soneium_icon.png', category: 'Ethereum L2s' },
+      { name: 'World Chain', description: 'Worldcoin L2', icon: 'https://images.octav.fi/chains/world_icon.png', category: 'Ethereum L2s' },
+      { name: 'Plasma', description: 'Gaming L2', icon: 'https://images.octav.fi/chains/plasma_icon.png', category: 'Ethereum L2s' },
+      { name: 'ZERϴ', description: 'Privacy L2', icon: 'circle', category: 'Ethereum L2s' },
+      { name: 'Zircuit', description: 'AI-enhanced L2', icon: 'z', category: 'Ethereum L2s' },
+      { name: 'Gravity', description: 'Galxe\'s L2', icon: 'circle-dot', category: 'Ethereum L2s' },
+      { name: 'Morph', description: 'Consumer L2', icon: 'https://images.octav.fi/chains/morph_icon.png', category: 'Ethereum L2s' },
+
+      // EVM L1s
+      { name: 'Ethereum', description: 'Leading smart contract platform', icon: 'https://images.octav.fi/chains/ethereum_icon.svg', category: 'EVM L1s' },
+      { name: 'BSC', description: 'BNB Smart Chain', icon: 'https://images.octav.fi/chains/binance_icon.svg', category: 'EVM L1s' },
+      { name: 'Polygon', description: 'Ethereum sidechain', icon: 'https://images.octav.fi/chains/polygon_icon.svg', category: 'EVM L1s' },
+      { name: 'Avalanche', description: 'Subnet architecture', icon: 'https://images.octav.fi/chains/avalanche_icon.svg', category: 'EVM L1s' },
+      { name: 'Fantom', description: 'Fast finality', icon: 'https://images.octav.fi/chains/fantom_icon.svg', category: 'EVM L1s' },
+      { name: 'Gnosis', description: 'Payments focused', icon: 'https://images.octav.fi/chains/gnosis_icon.svg', category: 'EVM L1s' },
+      { name: 'Celo', description: 'Mobile-first', icon: 'https://images.octav.fi/chains/celo_icon.svg', category: 'EVM L1s' },
+      { name: 'Cronos', description: 'Crypto.com chain', icon: 'https://images.octav.fi/chains/cronos_icon.svg', category: 'EVM L1s' },
+      { name: 'Cronos zkEVM', description: 'Cronos L2', icon: 'https://images.octav.fi/chains/cronos_icon.svg', category: 'EVM L1s' },
+      { name: 'Kaia', description: 'Asian market focus', icon: 'k', category: 'EVM L1s' },
+      { name: 'Moonbeam', description: 'Polkadot parachain', icon: 'moon', category: 'EVM L1s' },
+      { name: 'Moonriver', description: 'Kusama parachain', icon: 'moon', category: 'EVM L1s' },
+      { name: 'Canto', description: 'DeFi-focused', icon: 'c', category: 'EVM L1s' },
+      { name: 'Core', description: 'Bitcoin-aligned', icon: 'https://images.octav.fi/chains/core_icon.png', category: 'EVM L1s' },
+      { name: 'Rootstock', description: 'Bitcoin sidechain', icon: 'https://images.octav.fi/chains/rootstock_icon.png', category: 'EVM L1s' },
+      { name: 'Kava', description: 'Cosmos EVM', icon: 'k', category: 'EVM L1s' },
+      { name: 'IoTeX', description: 'IoT blockchain', icon: 'microchip', category: 'EVM L1s' },
+      { name: 'Shibarium', description: 'SHIB L2', icon: 'https://images.octav.fi/chains/shib_icon.png', category: 'EVM L1s' },
+      { name: 'WEMIX', description: 'Gaming platform', icon: 'w', category: 'EVM L1s' },
+      { name: 'Astar', description: 'Polkadot parachain', icon: 'star', category: 'EVM L1s' },
+      { name: 'ZetaChain', description: 'Omnichain', icon: 'z', category: 'EVM L1s' },
+      { name: 'Flare', description: 'Data blockchain', icon: 'https://images.octav.fi/chains/flare_icon.png', category: 'EVM L1s' },
+      { name: 'Fuse', description: 'Payments', icon: 'https://images.octav.fi/chains/fuse_icon.png', category: 'EVM L1s' },
+      { name: 'Oasys', description: 'Gaming optimized', icon: 'gamepad', category: 'EVM L1s' },
+      { name: 'Telos', description: 'Fast & feeless', icon: 'https://images.octav.fi/chains/tlos_icon.png', category: 'EVM L1s' },
+      { name: 'Dogechain', description: 'DOGE ecosystem', icon: 'dog', category: 'EVM L1s' },
+      { name: 'Chiliz', description: 'Sports & entertainment', icon: 'pepper-hot', category: 'EVM L1s' },
+      { name: 'Conflux', description: 'Chinese blockchain', icon: 'wave', category: 'EVM L1s' },
+      { name: 'Lisk', description: 'JavaScript SDK', icon: 'l', category: 'EVM L1s' },
+      { name: 'Etherlink', description: 'Tezos L2', icon: 'https://images.octav.fi/chains/ethlink_icon.png', category: 'EVM L1s' },
+      { name: 'Vana', description: 'Data ownership', icon: 'v', category: 'EVM L1s' },
+
+      // Alt L1s & Specialized
+      { name: 'Solana', description: 'High-throughput blockchain', icon: 'https://images.octav.fi/chains/solana_icon.svg', category: 'Alt L1s' },
+      { name: 'Hyperliquid', description: 'Decentralized perpetuals exchange', icon: 'https://images.octav.fi/chains/hyperliquid_icon.png', category: 'Alt L1s' },
+      { name: 'Berachain', description: 'Liquidity-focused PoL', icon: 'https://images.octav.fi/chains/berachain_icon.png', category: 'Alt L1s' },
+      { name: 'Sei', description: 'Trading-optimized', icon: 's', category: 'Alt L1s' },
+      { name: 'Immutable', description: 'Gaming & NFTs', icon: 'shield', category: 'Alt L1s' },
+      { name: 'Ronin', description: 'Axie Infinity chain', icon: 'sword', category: 'Alt L1s' },
+      { name: 'XRPL', description: 'XRP Ledger', icon: 'x', category: 'Alt L1s' },
+      { name: 'DuckChain', description: 'TON-based', icon: 'duck', category: 'Alt L1s' },
+
+      // Bitcoin & Others
+      { name: 'Bitlayer', description: 'Bitcoin L2', icon: 'layer-group', category: 'Bitcoin' },
+      { name: 'B²', description: 'Bitcoin L2', icon: 'https://images.octav.fi/chains/b2_icon.png', category: 'Bitcoin' },
+      { name: 'BOB', description: 'Build on Bitcoin', icon: 'https://images.octav.fi/chains/bob_icon.png', category: 'Bitcoin' },
+      { name: 'Merlin', description: 'Bitcoin L2', icon: 'https://images.octav.fi/chains/merlin_icon.png', category: 'Bitcoin' },
+
+      // DeFi & Infrastructure
+      { name: 'Manta', description: 'Privacy DeFi', icon: 'https://images.octav.fi/chains/manta.svg', category: 'DeFi' },
+      { name: 'Karak', description: 'Restaking layer', icon: 'k', category: 'DeFi' },
+      { name: 'Orderly', description: 'DeFi infrastructure', icon: 'chart-line', category: 'DeFi' },
+      { name: 'Reya', description: 'Trading optimized', icon: 'r', category: 'DeFi' },
+      { name: 'Katana', description: 'Ronin DEX chain', icon: 'https://images.octav.fi/chains/katana_icon.png', category: 'DeFi' },
+      { name: 'Bouncebit', description: 'BTC restaking', icon: 'https://images.octav.fi/chains/bouncebit_icon.png', category: 'DeFi' },
+      { name: 'Plume', description: 'RWA-focused', icon: 'https://images.octav.fi/chains/plume_icon.svg', category: 'DeFi' },
+      { name: 'SwellChain', description: 'Liquid staking L2', icon: 'https://images.octav.fi/chains/swell_icon.png', category: 'DeFi' },
+      { name: 'Story', description: 'IP blockchain', icon: 'book', category: 'DeFi' },
+      { name: 'Bifrost', description: 'Liquid staking', icon: 'bridge', category: 'DeFi' },
+      { name: 'Everclear', description: 'Cross-chain clearing', icon: 'https://images.octav.fi/chains/everclear_icon.png', category: 'DeFi' },
+      { name: 'HyperEVM', description: 'High performance', icon: 'h', category: 'DeFi' },
+      { name: 'Mint', description: 'NFT-focused', icon: 'https://images.octav.fi/chains/mint_icon.png', category: 'DeFi' },
+      { name: 'Rari', description: 'Royalty-focused', icon: 'https://images.octav.fi/chains/rari_icon.png', category: 'DeFi' },
+
+      // Emerging
+      { name: 'Sophon', description: 'Entertainment & gaming', icon: 'https://images.octav.fi/chains/sophon_icon.png', category: 'Emerging' },
+      { name: 'Corn', description: 'DeFi layer', icon: 'https://images.octav.fi/chains/corn_icon.png', category: 'Emerging' },
+      { name: 'Hemi', description: 'Bitcoin-Ethereum bridge', icon: 'https://images.octav.fi/chains/hemi_icon.png', category: 'Emerging' },
+      { name: 'GOAT', description: 'Community-driven', icon: 'goat', category: 'Emerging' },
+      { name: 'DBK', description: 'Gaming chain', icon: 'd', category: 'Emerging' }
+    ];
 
     // Search functionality
     function performSearch() {
@@ -109,38 +224,83 @@
       // Show/hide clear button
       clearButton.style.display = searchValue ? 'flex' : 'none';
 
-      // Get all cards within the tabs section only (not Major Blockchains)
-      const tabsContainer = targetHeading.nextElementSibling;
-      if (!tabsContainer) {
+      if (!searchValue) {
+        // Hide results container
+        resultsContainer.style.display = 'none';
+        resultsContainer.innerHTML = '';
+        resultMessage.style.display = 'none';
         return;
       }
 
-      const tabCards = tabsContainer.querySelectorAll('a[class*="Card"], div[class*="card-"]');
-      let visibleCount = 0;
-
-      // Filter cards within tabs
-      tabCards.forEach(card => {
-        const cardText = card.textContent.toLowerCase();
-        const shouldShow = searchValue === '' || cardText.includes(searchValue);
-
-        if (shouldShow) {
-          card.style.display = '';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
+      // Search through blockchain database
+      const matches = blockchains.filter(chain => {
+        return chain.name.toLowerCase().includes(searchValue) ||
+               chain.description.toLowerCase().includes(searchValue) ||
+               chain.category.toLowerCase().includes(searchValue);
       });
 
-      // Show/hide result message
-      if (searchValue) {
-        resultMessage.style.display = 'block';
-        if (visibleCount > 0) {
-          resultMessage.innerHTML = `Found <strong>${visibleCount}</strong> blockchain${visibleCount !== 1 ? 's' : ''} matching "<strong>${searchValue}</strong>"`;
-        } else {
-          resultMessage.innerHTML = `No blockchains found matching "<strong>${searchValue}</strong>"`;
-        }
+      // Update result message
+      resultMessage.style.display = 'block';
+      if (matches.length > 0) {
+        resultMessage.innerHTML = `Found <strong>${matches.length}</strong> blockchain${matches.length !== 1 ? 's' : ''} matching "<strong>${searchValue}</strong>"`;
       } else {
-        resultMessage.style.display = 'none';
+        resultMessage.innerHTML = `No blockchains found matching "<strong>${searchValue}</strong>"`;
+      }
+
+      // Clear and populate results container
+      resultsContainer.innerHTML = '';
+
+      if (matches.length > 0) {
+        // Create grid container
+        const gridContainer = document.createElement('div');
+        gridContainer.style.display = 'grid';
+        gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
+        gridContainer.style.gap = '16px';
+        gridContainer.style.marginTop = '16px';
+
+        // Create cards for matches
+        matches.forEach(chain => {
+          const card = document.createElement('div');
+          card.style.border = '1px solid #e5e7eb';
+          card.style.borderRadius = '8px';
+          card.style.padding = '16px';
+          card.style.backgroundColor = '#ffffff';
+          card.style.transition = 'all 0.2s';
+          card.style.cursor = 'default';
+
+          // Card hover effect
+          card.addEventListener('mouseenter', () => {
+            card.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            card.style.transform = 'translateY(-2px)';
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.boxShadow = 'none';
+            card.style.transform = 'translateY(0)';
+          });
+
+          // Card content
+          const title = document.createElement('h4');
+          title.textContent = chain.name;
+          title.style.margin = '0 0 8px 0';
+          title.style.fontSize = '16px';
+          title.style.fontWeight = '600';
+          title.style.color = '#111827';
+
+          const description = document.createElement('p');
+          description.textContent = chain.description;
+          description.style.margin = '0';
+          description.style.fontSize = '14px';
+          description.style.color = '#6b7280';
+
+          card.appendChild(title);
+          card.appendChild(description);
+          gridContainer.appendChild(card);
+        });
+
+        resultsContainer.appendChild(gridContainer);
+        resultsContainer.style.display = 'block';
+      } else {
+        resultsContainer.style.display = 'none';
       }
     }
 
