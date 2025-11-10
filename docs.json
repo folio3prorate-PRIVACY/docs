@@ -42,6 +42,10 @@
   "customCSS": [
     "/custom.css"
   ],
+  "customScripts": [
+    "/tab-aware-button.js",
+    "/chain-search.js"
+  ],
   "metadata": {
     "og:image": "https://octav.fi/og-image.png"
   },
