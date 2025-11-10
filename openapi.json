@@ -256,7 +256,7 @@
             "name": "txTypes",
             "in": "query",
             "required": false,
-            "description": "Filter by transaction types (comma-separated: SEND, RECEIVE, SWAP, DEPOSIT, WITHDRAW, STAKE, CLAIM, APPROVE)",
+            "description": "Filter by transaction types (comma-separated)\n\nSee [Transaction Types](https://octav-0131e508.mintlify.app/api/reference/transaction-types)",
             "schema": {
               "type": "string"
             }
@@ -265,7 +265,7 @@
             "name": "protocols",
             "in": "query",
             "required": false,
-            "description": "Filter by protocol keys (comma-separated)",
+            "description": "Filter by protocol keys (comma-separated)\n\nSee [Protocol Keys](https://protocols.octav.fi/)",
             "schema": {
               "type": "string"
             }
