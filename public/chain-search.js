@@ -11,19 +11,19 @@
       return;
     }
 
-    // Find the "All Supported Chains" heading - be very specific
-    const headings = document.querySelectorAll('h2');
-    let targetHeading = null;
+    // Find the first paragraph in the main content
+    // This is right after the page title/description
+    const paragraphs = document.querySelectorAll('p');
+    let targetParagraph = null;
 
-    // Find the heading with "All Supported Chains" text
-    // Use forEach to get the LAST match (main content), not first (which might be TOC/nav)
-    headings.forEach(heading => {
-      if (heading.textContent.includes('All Supported Chains')) {
-        targetHeading = heading;
+    // Find the paragraph that contains "Octav provides comprehensive support"
+    paragraphs.forEach(p => {
+      if (p.textContent.includes('Octav provides comprehensive support')) {
+        targetParagraph = p;
       }
     });
 
-    if (!targetHeading) {
+    if (!targetParagraph) {
       return;
     }
 
@@ -105,9 +105,9 @@
     resultsContainer.style.marginTop = '24px';
     resultsContainer.style.marginBottom = '24px';
 
-    // Insert after the heading
-    targetHeading.parentNode.insertBefore(searchContainer, targetHeading.nextSibling);
-    targetHeading.parentNode.insertBefore(resultsContainer, targetHeading.nextSibling.nextSibling);
+    // Insert before the first paragraph (search bar, then results below it)
+    targetParagraph.parentNode.insertBefore(searchContainer, targetParagraph);
+    targetParagraph.parentNode.insertBefore(resultsContainer, targetParagraph);
 
     // Hidden blockchain database
     const blockchains = [
@@ -383,17 +383,17 @@
 
   function tryInitWithRetry() {
     if (window.location.pathname.includes('supported-blockchains')) {
-      const headings = document.querySelectorAll('h2');
-      let hasTargetHeading = false;
+      const paragraphs = document.querySelectorAll('p');
+      let hasTargetParagraph = false;
 
-      // Check for heading match (use forEach to find last match like main function)
-      headings.forEach(h => {
-        if (h.textContent.includes('All Supported Chains')) {
-          hasTargetHeading = true;
+      // Check for target paragraph
+      paragraphs.forEach(p => {
+        if (p.textContent.includes('Octav provides comprehensive support')) {
+          hasTargetParagraph = true;
         }
       });
 
-      if (hasTargetHeading && !document.getElementById('chain-search-container')) {
+      if (hasTargetParagraph && !document.getElementById('chain-search-container')) {
         initChainSearch();
         retryCount = 0;
       } else if (!document.getElementById('chain-search-container') && retryCount < maxRetries) {
