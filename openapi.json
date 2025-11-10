@@ -259,10 +259,10 @@
         }
       }
     },
-    "/historical-portfolio": {
+    "/historical": {
       "get": {
         "summary": "Historical Portfolio",
-        "description": "View portfolio value at specific dates.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
+        "description": "Retrieve portfolio snapshots from specific dates.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
         "operationId": "getHistoricalPortfolio",
         "tags": ["Portfolio"],
         "parameters": [
