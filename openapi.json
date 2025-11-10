@@ -157,13 +157,14 @@
         "tags": ["Wallet"],
         "parameters": [
           {
-            "name": "address",
+            "name": "addresses",
             "in": "query",
             "required": true,
-            "description": "Wallet address to retrieve information for",
+            "description": "Comma-separated list of EVM or Solana wallet addresses",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "0xddda947f31da53d8f9b05ab5a0bb07713c256e35"
           }
         ],
         "responses": {
@@ -205,13 +206,25 @@
         "tags": ["Tokens"],
         "parameters": [
           {
-            "name": "address",
+            "name": "addresses",
             "in": "query",
             "required": true,
-            "description": "Wallet address",
+            "description": "EVM or SOL blockchain address",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "0x6426af179aabebe47666f345d69fd9079673f6cd"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "description": "Portfolio snapshot date in YYYY-MM-DD format",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "example": "2024-11-01"
           }
         ],
         "responses": {
@@ -229,13 +242,14 @@
         "tags": ["Airdrops"],
         "parameters": [
           {
-            "name": "address",
+            "name": "addresses",
             "in": "query",
             "required": true,
-            "description": "Solana wallet address",
+            "description": "Solana wallet address to check for airdrops",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "J8fo6fHGTD4egvuFE4RRQaBipfcHy5F5YVCcZmmZG6gR"
           }
         ],
         "responses": {
@@ -253,10 +267,10 @@
         "tags": ["Portfolio"],
         "parameters": [
           {
-            "name": "address",
+            "name": "addresses",
             "in": "query",
             "required": true,
-            "description": "Wallet address",
+            "description": "EVM or SOL wallet address",
             "schema": {
               "type": "string"
             }
@@ -264,12 +278,13 @@
           {
             "name": "date",
             "in": "query",
-            "required": false,
-            "description": "Date for historical snapshot",
+            "required": true,
+            "description": "Date in YYYY-MM-DD format (e.g., 2024-11-01)",
             "schema": {
               "type": "string",
               "format": "date"
-            }
+            },
+            "example": "2024-11-01"
           }
         ],
         "responses": {
@@ -281,8 +296,8 @@
     },
     "/sync-transactions": {
       "post": {
-        "summary": "Sync",
-        "description": "Trigger a sync for wallet data.\n\n**Cost:** 1 credit per call\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
+        "summary": "Sync Transactions",
+        "description": "Manually trigger transaction synchronization for an address.\n\n**Cost:** 1 credit + 1 credit per 250 transactions indexed\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
         "operationId": "syncWallet",
         "tags": ["Sync"],
         "requestBody": {
@@ -292,19 +307,33 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "address": {
-                    "type": "string",
-                    "description": "Wallet address to sync"
+                  "addresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Array of addresses to sync (currently supports 1 address)"
                   }
                 },
-                "required": ["address"]
+                "required": ["addresses"],
+                "example": {
+                  "addresses": ["0x6426af179aabebe47666f345d69fd9079673f6cd"]
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Sync initiated successfully"
+            "description": "Sync initiated successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Address is syncing"
+                }
+              }
+            }
           }
         }
       }
@@ -312,18 +341,19 @@
     "/status": {
       "get": {
         "summary": "Status",
-        "description": "Check when portfolio was last synced.\n\n**Cost:** Free (0 credits)\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
+        "description": "Check synchronization status and data freshness for addresses.\n\n**Cost:** Free (0 credits)\n\n**Get your API key:** [Dev Portal](https://data.octav.fi)",
         "operationId": "getStatus",
         "tags": ["Status"],
         "parameters": [
           {
-            "name": "address",
+            "name": "addresses",
             "in": "query",
             "required": true,
-            "description": "Wallet address",
+            "description": "Comma-separated list of addresses",
             "schema": {
               "type": "string"
-            }
+            },
+            "example": "0x6426af179aabebe47666f345d69fd9079673f6cd"
           }
         ],
         "responses": {
