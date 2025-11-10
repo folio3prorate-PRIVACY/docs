@@ -6,22 +6,29 @@
       return;
     }
 
-    // Find the "All Supported Chains" heading
-    const headings = document.querySelectorAll('h2');
-    let targetHeading = null;
-
-    headings.forEach(heading => {
-      if (heading.textContent.includes('All Supported Chains')) {
-        targetHeading = heading;
-      }
-    });
-
-    if (!targetHeading) {
+    // Check if search already exists
+    if (document.getElementById('chain-search-container')) {
       return;
     }
 
-    // Check if search already exists
-    if (document.getElementById('chain-search-container')) {
+    // Find the "All Supported Chains" heading - be very specific
+    const headings = document.querySelectorAll('h2');
+    let targetHeading = null;
+
+    // Find the exact heading with "All Supported Chains" text
+    for (const heading of headings) {
+      const text = heading.textContent.trim();
+      if (text === 'All Supported Chains' || text.startsWith('All Supported Chains')) {
+        // Verify this is in the main content area, not navigation
+        const parentSection = heading.closest('article, main, [class*="content"]');
+        if (parentSection) {
+          targetHeading = heading;
+          break; // Take the first match only
+        }
+      }
+    }
+
+    if (!targetHeading) {
       return;
     }
 
@@ -382,7 +389,19 @@
   function tryInitWithRetry() {
     if (window.location.pathname.includes('supported-blockchains')) {
       const headings = document.querySelectorAll('h2');
-      const hasTargetHeading = Array.from(headings).some(h => h.textContent.includes('All Supported Chains'));
+      let hasTargetHeading = false;
+
+      // Check for exact heading match in main content area
+      for (const h of headings) {
+        const text = h.textContent.trim();
+        if (text === 'All Supported Chains' || text.startsWith('All Supported Chains')) {
+          const parentSection = h.closest('article, main, [class*="content"]');
+          if (parentSection) {
+            hasTargetHeading = true;
+            break;
+          }
+        }
+      }
 
       if (hasTargetHeading && !document.getElementById('chain-search-container')) {
         initChainSearch();
